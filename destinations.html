@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Điểm Đến - 50cntt1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-slate-800 font-body pt-24 pb-20">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
+                <a class="text-primary font-bold transition-colors border-b-2 border-primary pb-1" href="destinations.html">Điểm đến</a>
+                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="tours.html">Tour du lịch</a>
+                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="#">Trải nghiệm</a>
+                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="#">Giới thiệu</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 hover:bg-slate-50 rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
+                </button>
+                <a href="register.html" class="bg-primary text-white px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md">Đăng ký</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 md:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h1 class="text-4xl md:text-5xl font-headline font-black text-primary mb-6 leading-tight">Khám Phá Việt Nam<br/><span class="text-secondary">Tuyệt Đẹp</span></h1>
+            <p class="text-slate-600 text-lg leading-relaxed">Từ những đỉnh núi mờ sương ở Tây Bắc đến những bãi biển cát trắng trải dài ở phương Nam. Hãy chọn điểm đến tiếp theo cho hành trình của bạn.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-[250px]">
+            <a href="tours.html" class="group relative overflow-hidden rounded-2xl md:col-span-2 md:row-span-2 shadow-lg">
+                <img src="https://images.unsplash.com/photo-1528127269322-539801943592" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-8 left-8">
+                    <span class="bg-secondary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3 inline-block">Tây Bắc</span>
+                    <h2 class="text-4xl font-headline font-bold text-white mb-2">Sapa</h2>
+                    <p class="text-white/80 flex items-center gap-2"><span class="material-symbols-outlined text-sm">explore</span> Khám phá 12+ Tours</p>
+                </div>
+            </a>
+
+            <a href="tours.html" class="group relative overflow-hidden rounded-2xl md:col-span-2 shadow-lg">
+                <img src="https://images.unsplash.com/photo-1599708153386-62bf2ef79133" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <span class="bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Di sản Thế giới</span>
+                    <h2 class="text-2xl font-headline font-bold text-white mb-1">Vịnh Hạ Long</h2>
+                    <p class="text-white/80 text-sm">8+ Tours</p>
+                </div>
+            </a>
+
+            <a href="tours.html" class="group relative overflow-hidden rounded-2xl shadow-lg">
+                <img src="https://images.unsplash.com/photo-1559592442-741eaf7db5a0" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <h2 class="text-xl font-headline font-bold text-white mb-1">Đà Nẵng</h2>
+                    <p class="text-white/80 text-sm">15+ Tours</p>
+                </div>
+            </a>
+
+            <a href="tours.html" class="group relative overflow-hidden rounded-2xl shadow-lg">
+                <img src="https://images.unsplash.com/photo-1589136142558-94675c60247b" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <h2 class="text-xl font-headline font-bold text-white mb-1">Phú Quốc</h2>
+                    <p class="text-white/80 text-sm">20+ Tours</p>
+                </div>
+            </a>
+
+            <a href="tours.html" class="group relative overflow-hidden rounded-2xl md:col-span-2 shadow-lg">
+                <img src="https://images.unsplash.com/photo-1599507591512-c28786931754" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <span class="bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Cố đô</span>
+                    <h2 class="text-2xl font-headline font-bold text-white mb-1">Huế</h2>
+                    <p class="text-white/80 text-sm">10+ Tours</p>
+                </div>
+            </a>
+
+            <a href="tours.html" class="group relative overflow-hidden rounded-2xl md:col-span-2 shadow-lg">
+                <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-6 left-6">
+                    <span class="bg-secondary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Cao nguyên</span>
+                    <h2 class="text-2xl font-headline font-bold text-white mb-1">Đà Lạt</h2>
+                    <p class="text-white/80 text-sm">25+ Tours</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-slate-50 border-t border-slate-200/50 w-full py-12 px-8 mt-20">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
+            <div class="text-xl font-black text-primary">50cntt1</div>
+            <nav class="flex flex-wrap justify-center gap-8 text-sm uppercase tracking-widest">
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Chính sách bảo mật</a>
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Điều khoản dịch vụ</a>
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Liên hệ</a>
+                <a class="text-slate-500 hover:text-primary transition-colors" href="#">Sơ đồ trang</a>
+            </nav>
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 text-center">
+                © 2026 50cntt1 Vietnam Editorial. Bảo lưu mọi quyền.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
