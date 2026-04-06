@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Giỏ Hàng - 50cntt1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-body pt-24 pb-20 antialiased">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
+                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="destinations.html">Điểm đến</a>
+                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="tours.html">Tour du lịch</a>
+                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="#">Trải nghiệm</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="login.html" class="p-2 hover:bg-slate-50 rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-slate-600">account_circle</span>
+                </a>
+                <a href="register.html" class="bg-primary text-white px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md">Đăng ký</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 md:px-12">
+        <header class="mb-10">
+            <h1 class="text-4xl font-headline font-black text-primary mb-2">Giỏ hàng của bạn</h1>
+            <p class="text-slate-500">Xem lại các hành trình bạn đã lưu trước khi thanh toán.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <section class="lg:col-span-8 space-y-6">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center relative group">
+                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592" class="w-full md:w-40 h-32 object-cover rounded-2xl"/>
+                    <div class="flex-1">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Tây Bắc</span>
+                        <h3 class="text-xl font-headline font-bold text-slate-800 mb-1">Khám phá Sapa mùa lúa chín</h3>
+                        <p class="text-sm text-slate-500 mb-3"><span class="material-symbols-outlined text-[14px] align-middle">schedule</span> 3 Ngày 2 Đêm</p>
+                        <div class="text-2xl font-black text-secondary">11.200.000đ</div>
+                    </div>
+                    <button class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center relative group">
+                    <img src="https://images.unsplash.com/photo-1599708153386-62bf2ef79133" class="w-full md:w-40 h-32 object-cover rounded-2xl"/>
+                    <div class="flex-1">
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Di sản</span>
+                        <h3 class="text-xl font-headline font-bold text-slate-800 mb-1">Du thuyền Vịnh Hạ Long</h3>
+                        <p class="text-sm text-slate-500 mb-3"><span class="material-symbols-outlined text-[14px] align-middle">schedule</span> 2 Ngày 1 Đêm</p>
+                        <div class="text-2xl font-black text-secondary">8.500.000đ</div>
+                    </div>
+                    <button class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+                
+                <div class="pt-4">
+                    <a href="tours.html" class="text-primary font-bold hover:underline flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">arrow_back</span> Tiếp tục tìm tour
+                    </a>
+                </div>
+            </section>
+
+            <aside class="lg:col-span-4">
+                <div class="sticky top-28 bg-white p-8 rounded-3xl shadow-xl shadow-primary/5 border border-slate-100">
+                    <h3 class="text-xl font-headline font-bold mb-6 border-b pb-4">Tóm tắt chi phí</h3>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between text-slate-600">
+                            <span>Tạm tính (2 Tour)</span>
+                            <span class="font-bold">19.700.000đ</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>Thuế & Phí dịch vụ</span>
+                            <span class="font-bold">0đ</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-100 mb-8">
+                        <div class="flex justify-between items-end">
+                            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Tổng cộng</p>
+                            <p class="text-3xl font-headline font-black text-secondary tracking-tight">19.700.000đ</p>
+                        </div>
+                    </div>
+
+                    <button onclick="location.href='checkout.html'" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95">
+                        Tiến hành thanh toán
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </main>
+</body>
+</html>
