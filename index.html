@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>50cntt1</title>
+    <title>50cntt1 - Trang Chủ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -17,24 +17,44 @@
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <a href="index.html" class="text-2xl font-bold text-primary">50cntt1</a>
             
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
+                <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
+                <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
+                <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
+            </div>
+
             <div class="flex items-center gap-4">
                 <a href="cart.html" class="p-2"><span class="material-symbols-outlined text-slate-600">shopping_cart</span></a>
                 
                 <div id="guest-menu" class="flex items-center gap-2">
                     <a href="login.html" class="p-2"><span class="material-symbols-outlined text-slate-600">account_circle</span></a>
-                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold">Đăng ký</a>
+                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold shadow-md active:scale-95 transition-transform">Đăng ký</a>
                 </div>
 
                 <div id="user-menu" class="hidden items-center gap-3">
                     <span id="user-email" class="text-sm font-bold text-primary border-r pr-3 border-slate-200"></span>
-                    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">Thoát</button>
+                    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest bg-red-50 px-3 py-1.5 rounded-full hover:bg-red-100 transition-colors">Thoát</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="pt-32 px-6 max-w-7xl mx-auto">
-        <div id="tour-list" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+    <main class="pt-24">
+        <section class="relative h-[500px] flex items-center justify-center text-center px-6 mb-16">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592" class="absolute inset-0 w-full h-full object-cover -z-10">
+            <div class="absolute inset-0 bg-black/40 -z-10"></div>
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-headline font-black text-white mb-6">Khởi nguồn Tâm hồn Việt</h1>
+                <p class="text-white/90 text-lg md:text-xl">Trải nghiệm Việt Nam như một tác phẩm nghệ thuật sống động.</p>
+            </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-6 mb-20">
+            <h2 class="text-3xl font-headline font-black text-primary mb-10">Hành trình nổi bật</h2>
+            <div id="tour-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <p class="col-span-full text-center py-20 text-slate-400 animate-pulse font-bold">Đang tải dữ liệu từ Firebase...</p>
+            </div>
+        </div>
     </main>
 
     <script type="module">
@@ -62,11 +82,11 @@
 
             if (user) {
                 if(guest) guest.style.display = 'none';
-                if(userBox) userBox.style.display = 'flex';
-                if(emailTxt) emailTxt.innerText = user.email.split('@')[0];
+                if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
+                if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
             } else {
                 if(guest) guest.style.display = 'flex';
-                if(userBox) userBox.style.display = 'none';
+                if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
             }
         });
 
@@ -79,19 +99,38 @@
             try {
                 const snap = await getDocs(collection(db, "tours"));
                 container.innerHTML = "";
+                if (snap.empty) {
+                    container.innerHTML = "<p class='col-span-full text-center text-slate-500'>Chưa có tour nào trong hệ thống.</p>";
+                    return;
+                }
                 snap.forEach((doc) => {
                     const data = doc.data();
                     container.innerHTML += `
-                        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-                            <img src="${data.imageUrl}" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <h3 class="font-bold text-xl mb-2 text-primary">${data.tenTour}</h3>
-                                <p class="text-secondary font-black text-2xl">${data.giaTour}</p>
-                                <a href="tour-detail.html?id=${doc.id}" class="block text-center mt-4 bg-slate-100 py-2 rounded-xl font-bold text-primary">Chi tiết</a>
-                            </div>
-                        </div>`;
+                        <article class="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500">
+                            <a href="tour-detail.html?id=${doc.id}" class="block">
+                                <div class="relative h-64 overflow-hidden">
+                                    <img src="${data.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase text-primary">${data.loaiTour || 'Khám phá'}</div>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="font-headline font-bold text-xl text-primary group-hover:text-secondary transition-colors">${data.tenTour}</h3>
+                                        <div class="flex items-center text-secondary font-bold text-sm"><span class="material-symbols-outlined text-sm mr-1">star</span>4.9</div>
+                                    </div>
+                                    <p class="text-slate-500 text-sm line-clamp-2 mb-6">${data.moTa || 'Mô tả hành trình đang được cập nhật...'}</p>
+                                    <div class="flex justify-between items-center pt-4 border-t border-slate-50">
+                                        <div class="text-xs font-bold text-slate-400 flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-sm">schedule</span> ${data.thoiGian || '3 Ngày'}
+                                        </div>
+                                        <div class="text-xl font-black text-primary">${data.giaTour}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>`;
                 });
-            } catch (e) { console.error(e); }
+            } catch (e) {
+                container.innerHTML = "<p class='col-span-full text-center text-red-500'>Lỗi kết nối Database!</p>";
+            }
         }
         getTours();
     </script>
