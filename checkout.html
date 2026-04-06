@@ -8,73 +8,162 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { "primary": "#004471", "surface": "#f3faff", "on-surface": "#141d21" },
-                    fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
 </head>
-<body class="bg-surface text-on-surface font-body pt-24 pb-20">
+<body class="bg-surface text-slate-800 font-body pt-24 pb-20 antialiased">
     <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
         <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-bold tracking-tight text-blue-900">50cntt1</a>
-            <a href="dashboard.html" class="material-symbols-outlined text-slate-600 p-2 hover:bg-slate-100 rounded-full">account_circle</a>
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+            <div class="flex items-center gap-4">
+                <a href="register.html" class="bg-primary text-white px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md">Đăng ký</a>
+            </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-8">
-        <h1 class="text-4xl font-headline font-bold text-primary mb-10">Thanh toán & Đặt chỗ</h1>
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-            <div class="md:col-span-7 space-y-8">
-                <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                    <h2 class="text-xl font-headline font-bold mb-6 border-b pb-4">Thông tin liên hệ</h2>
-                    <div class="space-y-4">
-                        <input type="text" placeholder="Họ và tên" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary/20"/>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="email" placeholder="Email" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary/20"/>
-                            <input type="tel" placeholder="Số điện thoại" class="w-full bg-slate-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary/20"/>
+    <main class="max-w-7xl mx-auto px-6 md:px-12">
+        <header class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-headline font-black text-primary mb-6 tracking-tight">Hoàn tất hành trình</h1>
+            <nav class="flex items-center justify-start gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">1</span>
+                    <span class="text-primary font-bold whitespace-nowrap text-sm uppercase tracking-widest">Chi tiết</span>
+                </div>
+                <div class="w-12 h-[2px] bg-primary/20"></div>
+                <div class="flex items-center gap-3">
+                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2</span>
+                    <span class="text-primary font-bold whitespace-nowrap text-sm uppercase tracking-widest">Thanh toán</span>
+                </div>
+            </nav>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <section class="lg:col-span-7 space-y-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-2xl font-headline font-bold text-primary mb-8 flex items-center gap-2">
+                        <span class="material-symbols-outlined">person</span> Thông tin khách hàng
+                    </h2>
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-500 uppercase tracking-widest">Họ và tên</label>
+                            <input type="text" placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-slate-500 uppercase tracking-widest">Email</label>
+                            <input type="email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
+                        </div>
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="block text-sm font-bold text-slate-500 uppercase tracking-widest">Số điện thoại</label>
+                            <div class="flex gap-2">
+                                <div class="bg-slate-50 px-4 py-3 rounded-xl flex items-center gap-2 font-bold text-slate-600">
+                                    <span class="material-symbols-outlined text-sm">flag</span> +84
+                                </div>
+                                <input type="tel" placeholder="090 123 4567" class="flex-1 bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h2 class="text-2xl font-headline font-bold text-primary mb-8 flex items-center gap-2">
+                        <span class="material-symbols-outlined">payments</span> Phương thức thanh toán
+                    </h2>
+                    <div class="grid grid-cols-1 gap-4">
+                        <label class="relative cursor-pointer group">
+                            <input type="radio" name="payment" checked class="peer sr-only"/>
+                            <div class="border-2 border-slate-100 bg-white p-6 rounded-xl peer-checked:border-primary peer-checked:bg-blue-50 transition-all">
+                                <span class="material-symbols-outlined text-primary mb-2 text-3xl">qr_code_scanner</span>
+                                <p class="font-bold text-primary text-lg">Chuyển khoản (QR Code)</p>
+                                <p class="text-sm text-slate-500 mt-1">Quét mã QR qua ứng dụng ngân hàng</p>
+                            </div>
+                        </label>
+                        <label class="relative cursor-pointer group">
+                            <input type="radio" name="payment" class="peer sr-only"/>
+                            <div class="border-2 border-slate-100 bg-white p-6 rounded-xl peer-checked:border-primary peer-checked:bg-blue-50 transition-all">
+                                <span class="material-symbols-outlined text-primary mb-2 text-3xl">credit_card</span>
+                                <p class="font-bold text-primary text-lg">Thẻ tín dụng / Ghi nợ</p>
+                                <p class="text-sm text-slate-500 mt-1">Visa, Mastercard, JCB</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
+                <div class="bg-white p-8 rounded-2xl shadow-xl shadow-primary/5 border border-slate-100 overflow-hidden">
+                    <h3 class="text-xl font-headline font-bold mb-6 border-b pb-4">Tóm tắt đơn hàng</h3>
+                    <div class="relative h-48 -mx-8 -mt-2 mb-6">
+                        <img id="checkout-img" src="" class="w-full h-full object-cover bg-slate-100"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 pr-6">
+                            <h3 id="checkout-title" class="text-white font-headline font-bold text-2xl leading-tight">Đang tải dữ liệu...</h3>
                         </div>
                     </div>
-                </section>
-                <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                    <h2 class="text-xl font-headline font-bold mb-6 border-b pb-4">Phương thức thanh toán</h2>
-                    <div class="space-y-4">
-                        <label class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-slate-50">
-                            <input type="radio" name="payment" class="w-5 h-5 text-primary" checked/>
-                            <span class="font-semibold">Chuyển khoản ngân hàng (QR Code)</span>
-                        </label>
-                        <label class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-slate-50">
-                            <input type="radio" name="payment" class="w-5 h-5 text-primary"/>
-                            <span class="font-semibold">Thẻ tín dụng / Ghi nợ</span>
-                        </label>
-                    </div>
-                </section>
-            </div>
-            <aside class="md:col-span-5">
-                <div class="sticky top-28 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
-                    <h3 class="font-headline font-bold text-xl mb-6">Tóm tắt đơn hàng</h3>
-                    <div class="flex gap-4 mb-6">
-                        <img src="https://images.unsplash.com/photo-1599708153386-62bf2ef79133" class="w-24 h-24 object-cover rounded-lg" alt="Tour"/>
-                        <div>
-                            <h4 class="font-bold text-primary">Khám Phá Vịnh Hạ Long</h4>
-                            <p class="text-sm text-slate-500 mt-1">25 Tháng 12, 2026</p>
-                            <p class="text-sm text-slate-500">2 Người lớn</p>
+
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-start border-b border-slate-100 pb-4">
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Thời lượng</p>
+                                <p id="checkout-duration" class="font-bold text-primary">---</p>
+                            </div>
                         </div>
+
+                        <div class="pt-2">
+                            <div class="flex justify-between items-end">
+                                <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Tổng cộng</p>
+                                <p id="checkout-price" class="text-3xl font-headline font-black text-secondary tracking-tight">---</p>
+                            </div>
+                        </div>
+
+                        <button onclick="location.href='index.html'" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95">
+                            Hoàn tất đặt vé
+                        </button>
                     </div>
-                    <div class="space-y-3 border-t pt-6 mb-6">
-                        <div class="flex justify-between text-sm"><span class="text-slate-500">Giá tour x2</span><span class="font-semibold">8.500.000đ</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-slate-500">Thuế & Phí</span><span class="font-semibold">0đ</span></div>
-                        <div class="flex justify-between text-xl font-bold mt-4 pt-4 border-t"><span class="text-primary">Tổng cộng</span><span class="text-primary">8.500.000đ</span></div>
-                    </div>
-                    <a href="dashboard.html" class="block w-full text-center bg-primary text-white py-4 rounded-full font-bold text-lg hover:bg-blue-800 transition">Hoàn tất đặt vé</a>
                 </div>
             </aside>
         </div>
     </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadCheckoutData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tourId = urlParams.get('id');
+            if (!tourId) return;
+
+            try {
+                const docRef = doc(db, "tours", tourId);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('checkout-title').innerText = data.tenTour;
+                    document.getElementById('checkout-img').src = data.imageUrl;
+                    document.getElementById('checkout-duration').innerText = data.thoiGian;
+                    document.getElementById('checkout-price').innerText = data.giaTour;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        loadCheckoutData();
+    </script>
 </body>
 </html>
-
