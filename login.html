@@ -6,7 +6,6 @@
     <title>Đăng Nhập - 50cntt1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
         tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
@@ -17,34 +16,63 @@
             <div class="text-center mb-10">
                 <a href="index.html" class="text-3xl font-black text-primary mb-2 block">50cntt1</a>
                 <h1 class="text-2xl font-headline font-bold text-slate-800">Chào mừng trở lại!</h1>
-                <p class="text-slate-500 mt-2 text-sm">Đăng nhập để tiếp tục hành trình của bạn</p>
             </div>
 
             <form class="space-y-5">
                 <div>
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Địa chỉ Email</label>
-                    <input type="email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 transition-all"/>
+                    <input type="email" id="login-email" placeholder="daica@email.com" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
                 </div>
                 <div>
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">Mật khẩu</label>
-                        <a href="#" class="text-xs font-bold text-primary hover:underline">Quên mật khẩu?</a>
-                    </div>
-                    <input type="password" placeholder="••••••••" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 transition-all"/>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Mật khẩu</label>
+                    <input type="password" id="login-pass" placeholder="••••••••" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
                 </div>
                 
-                <button type="button" onclick="location.href='index.html'" class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-blue-800 transition-all active:scale-[0.98] mt-4">
+                <button type="button" id="btn-login" class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-blue-800 transition-all active:scale-[0.98] mt-4">
                     Đăng nhập
                 </button>
             </form>
 
             <div class="mt-8 pt-8 border-t border-slate-100 text-center">
                 <p class="text-sm text-slate-500">
-                    Chưa có tài khoản? 
-                    <a href="register.html" class="text-primary font-bold hover:underline">Đăng ký ngay</a>
+                    Chưa có tài khoản? <a href="register.html" class="text-primary font-bold hover:underline">Đăng ký ngay</a>
                 </p>
             </div>
         </div>
     </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        const app = initializeApp({
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        });
+        const auth = getAuth(app);
+
+        document.getElementById('btn-login').addEventListener('click', () => {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
+
+            if(!email || !pass) {
+                alert("Vui lòng điền đầy đủ Email và Mật khẩu!");
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, email, pass)
+                .then((userCredential) => {
+                    alert("Đăng nhập thành công! Chào mừng trở lại.");
+                    window.location.href = "index.html"; // Nhảy về trang chủ
+                })
+                .catch((error) => {
+                    alert("Sai email hoặc mật khẩu! (Hoặc đại ca chưa đăng ký)");
+                });
+        });
+    </script>
 </body>
 </html>
