@@ -367,5 +367,52 @@
 
   renderTours();
 </script>
+      <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+      
+        onAuthStateChanged(auth, (user) => {
+            const guestMenu = document.getElementById('guest-menu');
+            const userMenu = document.getElementById('user-menu');
+            const userEmail = document.getElementById('user-email');
+
+            if (user) {
+               
+                guestMenu.classList.add('hidden');
+                userMenu.classList.remove('hidden');
+                userMenu.classList.add('flex');
+                
+               
+                userEmail.innerText = "Chào, " + user.email.split('@')[0]; 
+            } else {
+                guestMenu.classList.remove('hidden');
+                userMenu.classList.add('hidden');
+                userMenu.classList.remove('flex');
+            }
+        });
+
+ 
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            signOut(auth).then(() => {
+                window.location.reload(); // Đăng xuất xong tự làm mới trang
+            }).catch((error) => {
+                console.error("Lỗi đăng xuất: ", error);
+            });
+        });
+    </script>
+      
 </body>
 </html>
