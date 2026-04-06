@@ -39,67 +39,68 @@
     </main>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+        authDomain: "doantn50cntt.firebaseapp.com",
+        projectId: "doantn50cntt",
+        storageBucket: "doantn50cntt.firebasestorage.app",
+        messagingSenderId: "705512357448",
+        appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        async function renderTours() {
-            const container = document.getElementById("all-tours-list");
-            try {
-                const querySnapshot = await getDocs(collection(db, "tours"));
-                container.innerHTML = "";
+    function renderToursRealtime() {
+        const container = document.getElementById("all-tours-list");
+        if (!container) return;
 
-                if (querySnapshot.empty) {
-                    container.innerHTML = "<p class='col-span-full text-center py-20'>Chưa có tour nào được cập nhật.</p>";
-                    return;
-                }
+        onSnapshot(collection(db, "tours"), (querySnapshot) => {
+            container.innerHTML = ""; 
 
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const id = doc.id;
-                    container.innerHTML += `
-                        <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 group">
-                            <a href="tour-detail.html?id=${id}">
-                                <div class="relative h-64 overflow-hidden">
-                                    <img src="${data.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">${data.loaiTour}</div>
-                                </div>
-                                <div class="p-8">
-                                    <h3 class="text-2xl font-headline font-bold text-primary mb-3">${data.tenTour}</h3>
-                                    <div class="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">
-                                        <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> ${data.thoiGian}</span>
-                                    </div>
-                                    <div class="flex justify-between items-end">
-                                        <div>
-                                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Giá từ</p>
-                                            <p class="text-2xl font-black text-secondary">${data.giaTour}</p>
-                                        </div>
-                                        <span class="bg-primary/10 text-primary p-3 rounded-full group-hover:bg-primary group-hover:text-white transition-colors">
-                                            <span class="material-symbols-outlined">arrow_forward</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </article>
-                    `;
-                });
-            } catch (error) {
-                console.error(error);
-                container.innerHTML = "<p class='col-span-full text-center text-red-500'>Lỗi kết nối Firebase!</p>";
+            if (querySnapshot.empty) {
+                container.innerHTML = "<p class='col-span-full text-center py-20'>Chưa có tour nào được cập nhật.</p>";
+                return;
             }
-        }
-        renderTours();
-    </script>
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const id = doc.id;
+                
+                container.innerHTML += `
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 group">
+                        <a href="tour-detail.html?id=${id}">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="${data.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-primary">${data.loaiTour}</div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-2xl font-headline font-bold text-primary mb-3">${data.tenTour}</h3>
+                                <div class="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">
+                                    <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> ${data.thoiGian}</span>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Giá từ</p>
+                                        <p class="text-2xl font-black text-secondary">${data.giaTour}</p>
+                                    </div>
+                                    <span class="bg-primary/10 text-primary p-3 rounded-full group-hover:bg-primary group-hover:text-white transition-colors">
+                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                `;
+            });
+        });
+    }
+
+    renderToursRealtime();
+</script>
+
 </body>
 </html>
