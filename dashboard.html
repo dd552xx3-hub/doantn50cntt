@@ -1,1 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tài Khoản Của Tôi - 50cntt1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+    </script>
+</head>
+<body class="bg-surface text-slate-800 font-body pt-24 pb-20">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-blue-900">50cntt1</a>
+            <div class="flex gap-4">
+                <a href="index.html" class="text-sm font-semibold text-slate-500 hover:text-primary mt-1">Về trang chủ</a>
+            </div>
+        </div>
+    </nav>
 
+    <main class="max-w-5xl mx-auto px-8">
+        <div class="bg-primary text-white rounded-3xl p-10 mb-8 flex items-center justify-between shadow-xl">
+            <div class="flex items-center gap-6">
+                <div class="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center text-3xl font-bold">Đ</div>
+                <div>
+                    <h1 class="text-3xl font-headline font-bold mb-1">Xin chào, Đại ca!</h1>
+                    <p class="text-white/70">daica@50cntt1.com | Thành viên Vàng</p>
+                </div>
+            </div>
+            <button class="bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full font-semibold transition">Chỉnh sửa hồ sơ</button>
+        </div>
+
+        <h2 class="text-2xl font-headline font-bold text-primary mb-6">Chuyến đi của tôi</h2>
+        <div class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center">
+                <img src="https://images.unsplash.com/photo-1599708153386-62bf2ef79133" class="w-full md:w-48 h-32 object-cover rounded-xl" alt="Tour Hạ Long"/>
+                <div class="flex-1 w-full">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-xl font-bold text-primary">Khám Phá Vịnh Hạ Long</h3>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Đã xác nhận</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-sm text-slate-500 mt-4">
+                        <p><span class="material-symbols-outlined text-[16px] align-middle mr-1">calendar_month</span> Ngày đi: 25/12/2026</p>
+                        <p><span class="material-symbols-outlined text-[16px] align-middle mr-1">group</span> Số lượng: 02 Khách</p>
+                        <p><span class="material-symbols-outlined text-[16px] align-middle mr-1">payments</span> Tổng tiền: 8.500.000đ</p>
+                        <p><span class="material-symbols-outlined text-[16px] align-middle mr-1">confirmation_number</span> Mã vé: #HL50CNTT1</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-auto mt-4 md:mt-0">
+                    <a href="tour-detail.html" class="block text-center border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-2 rounded-full font-bold transition">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
