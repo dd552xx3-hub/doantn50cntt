@@ -13,24 +13,37 @@
 </head>
 <body class="bg-surface text-slate-800 font-body pb-20 antialiased">
     <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide">
-                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="destinations.html">Điểm đến</a>
-                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="tours.html">Tour du lịch</a>
-                <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="#">Trải nghiệm</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="cart.html" aria-label="Giỏ hàng" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block">
-                    <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
-                </a>
+    <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+        <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+        
+        <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
+            <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
+            <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
+            <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <a href="cart.html" aria-label="Giỏ hàng" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block">
+                <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
+            </a>
+            
+            <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
                 <a href="login.html" aria-label="Đăng nhập" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block text-slate-600 font-bold hover:text-primary">
                     <span class="material-symbols-outlined">account_circle</span>
                 </a>
-                <a href="register.html" class="bg-primary text-white px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md">Đăng ký</a>
+                <a href="register.html" class="bg-primary text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md whitespace-nowrap">
+                    Đăng ký
+                </a>
+            </div>
+
+            <div id="user-menu" class="hidden items-center gap-3 bg-blue-50/50 px-3 py-1 rounded-full border border-blue-100">
+                <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[120px]"></span>
+                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <div class="w-full h-[60vh] relative mt-16">
         <img id="detail-image" src="" class="w-full h-full object-cover bg-slate-200"/>
@@ -72,54 +85,68 @@
     </main>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+        authDomain: "doantn50cntt.firebaseapp.com",
+        projectId: "doantn50cntt",
+        storageBucket: "doantn50cntt.firebasestorage.app",
+        messagingSenderId: "705512357448",
+        appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+    const db = getFirestore(app);
+    const auth = getAuth(app);
 
-        async function loadTourDetail() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const tourId = urlParams.get('id');
-
-            if (!tourId) {
-                document.getElementById('detail-title').innerText = "Lỗi: Không tìm thấy Tour!";
-                document.getElementById('detail-desc').innerText = "Vui lòng quay lại trang Chủ hoặc trang Danh sách Tour để chọn lại.";
-                document.getElementById('detail-desc').classList.remove('italic', 'animate-pulse');
-                document.getElementById('detail-desc').classList.add('text-red-500', 'font-bold');
-                return;
-            }
-
-            document.getElementById('book-btn').href = `checkout.html?id=${tourId}`;
-
-            try {
-                const docSnap = await getDoc(doc(db, "tours", tourId));
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    document.getElementById('detail-title').innerText = data.tenTour;
-                    document.getElementById('detail-price').innerText = data.giaTour;
-                    document.getElementById('detail-time').innerText = data.thoiGian;
-                    document.getElementById('detail-desc').innerText = data.moTa;
-                    document.getElementById('detail-desc').classList.remove('italic', 'animate-pulse');
-                    document.getElementById('detail-type').innerText = data.loaiTour;
-                    document.getElementById('detail-image').src = data.imageUrl;
-                } else {
-                    document.getElementById('detail-title').innerText = "Tour không tồn tại!";
-                }
-            } catch (error) {
-                document.getElementById('detail-title').innerText = "Lỗi kết nối máy chủ!";
-            }
+    onAuthStateChanged(auth, (user) => {
+        const guest = document.getElementById('guest-menu');
+        const userBox = document.getElementById('user-menu');
+        const emailTxt = document.getElementById('user-email');
+        if (user) {
+            if(guest) guest.style.display = 'none';
+            if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
+            if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
+        } else {
+            if(guest) guest.style.display = 'flex';
+            if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
         }
-        loadTourDetail();
-    </script>
+    });
+
+    const btnLogout = document.getElementById('btn-logout');
+    if(btnLogout) {
+        btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
+    }
+
+    async function loadTourDetail() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tourId = urlParams.get('id');
+        if (!tourId) return;
+
+        const bookBtn = document.getElementById('book-btn');
+        if(bookBtn) bookBtn.href = `checkout.html?id=${tourId}`;
+
+        try {
+            const docSnap = await getDoc(doc(db, "tours", tourId));
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('detail-title').innerText = data.tenTour;
+                document.getElementById('detail-price').innerText = data.giaTour;
+                document.getElementById('detail-time').innerText = data.thoiGian;
+                document.getElementById('detail-desc').innerText = data.moTa;
+                document.getElementById('detail-desc').classList.remove('italic', 'animate-pulse');
+                document.getElementById('detail-type').innerText = data.loaiTour;
+                document.getElementById('detail-image').src = data.imageUrl;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    loadTourDetail();
+</script>
+
 </body>
 </html>
