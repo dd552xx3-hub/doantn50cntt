@@ -1,326 +1,100 @@
 <!DOCTYPE html>
-
-<html lang="vi"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Khám Phá Vịnh Hạ Long - 50cntt1</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-surface": "#141d21",
-              "secondary-container": "#a0f399",
-              "surface-container-lowest": "#ffffff",
-              "primary-container": "#005c97",
-              "on-primary": "#ffffff",
-              "primary": "#004471",
-              "secondary-fixed-dim": "#88d982",
-              "on-tertiary": "#ffffff",
-              "surface-tint": "#11629d",
-              "inverse-on-surface": "#e9f2f7",
-              "on-error": "#ffffff",
-              "on-primary-fixed-variant": "#00497a",
-              "surface-container-high": "#e0eaef",
-              "surface-variant": "#dae4e9",
-              "on-secondary-container": "#217128",
-              "on-primary-container": "#add3ff",
-              "on-primary-fixed": "#001d35",
-              "on-secondary": "#ffffff",
-              "secondary-fixed": "#a3f69c",
-              "tertiary": "#663400",
-              "on-surface-variant": "#414750",
-              "inverse-surface": "#293236",
-              "outline": "#717881",
-              "surface-container-highest": "#dae4e9",
-              "surface-dim": "#d2dbe1",
-              "on-secondary-fixed-variant": "#005312",
-              "on-background": "#141d21",
-              "surface-container": "#e6eff5",
-              "on-tertiary-container": "#ffc395",
-              "surface-container-low": "#ecf5fa",
-              "inverse-primary": "#9bcaff",
-              "error-container": "#ffdad6",
-              "tertiary-fixed": "#ffdcc3",
-              "outline-variant": "#c1c7d1",
-              "surface-bright": "#f3faff",
-              "secondary": "#1b6d24",
-              "tertiary-fixed-dim": "#ffb77d",
-              "on-secondary-fixed": "#002204",
-              "on-error-container": "#93000a",
-              "on-tertiary-fixed-variant": "#6e3900",
-              "surface": "#f3faff",
-              "error": "#ba1a1a",
-              "primary-fixed-dim": "#9bcaff",
-              "tertiary-container": "#884800",
-              "primary-fixed": "#d0e4ff",
-              "on-tertiary-fixed": "#2f1500",
-              "background": "#f3faff"
-            },
-            borderRadius: {
-              "DEFAULT": "0.25rem",
-              "lg": "0.5rem",
-              "xl": "0.75rem",
-              "full": "9999px"
-            },
-            fontFamily: {
-              "headline": ["Plus Jakarta Sans"],
-              "body": ["Be Vietnam Pro"],
-              "label": ["Be Vietnam Pro"]
-            }
-          },
-        }
-      }
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chi Tiết Tour - 50cntt1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .fill-icon {
-            font-variation-settings: 'FILL' 1;
-        }
-        .editorial-shadow {
-            box-shadow: 0 20px 40px -15px rgba(0, 68, 113, 0.06);
-        }
-    </style>
 </head>
-<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
-<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md shadow-xl shadow-blue-900/5">
-<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto w-full">
-<a href="index.html" class="text-2xl font-bold tracking-tight text-blue-900">50cntt1</a>
-<div class="hidden md:flex gap-8 items-center font-headline font-medium text-sm tracking-wide">
-<a class="text-slate-600 hover:text-blue-800 transition-colors" href="#">Điểm đến</a>
-<a class="text-blue-900 border-b-2 border-blue-900 font-bold pb-1" href="#">Tour du lịch</a>
-<a class="text-slate-600 hover:text-blue-800 transition-colors" href="#">Trải nghiệm</a>
-<a class="text-slate-600 hover:text-blue-800 transition-colors" href="#">Giới thiệu</a>
-</div>
-<div class="flex items-center gap-4">
-<button aria-label="Giỏ hàng" class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-50 p-2 rounded-full transition-all">shopping_cart</button>
-<button aria-label="Tài khoản" class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-50 p-2 rounded-full transition-all">account_circle</button>
-<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-headline font-semibold text-sm hover:scale-95 transition-all">Đăng nhập</button>
-</div>
-</div>
-</nav>
-<main class="pt-24 pb-20 max-w-7xl mx-auto px-8">
-<header class="mb-12">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
-<div>
-<nav class="flex items-center gap-2 text-xs uppercase tracking-widest text-outline mb-4 font-label">
-<span>Việt Nam</span>
-<span class="material-symbols-outlined text-[10px]">chevron_right</span>
-<span>Quảng Ninh</span>
-<span class="material-symbols-outlined text-[10px]">chevron_right</span>
-<span class="text-primary font-bold">Vịnh Hạ Long</span>
-</nav>
-<h1 class="text-5xl md:text-6xl font-headline font-extrabold text-primary tracking-tight leading-tight">
-                        Khám Phá Vịnh Hạ Long
-                    </h1>
-</div>
-<div class="flex gap-4">
-<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-low text-primary font-headline text-sm font-semibold hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-sm">share</span> Chia sẻ
-                    </button>
-<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-low text-primary font-headline text-sm font-semibold hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined text-sm">favorite</span> Lưu lại
-                    </button>
-</div>
-</div>
-</header>
-<section aria-label="Bộ sưu tập ảnh" class="grid grid-cols-12 gap-4 mb-16 h-[500px]">
-<div class="col-span-12 md:col-span-8 overflow-hidden rounded-xl">
-<img alt="Toàn cảnh Vịnh Hạ Long với những đảo đá vôi kỳ vĩ lúc bình minh" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIsdJzkC4lJ82vyVEJsk2nLiKBzuQNVhWxkvGL9ixm9o4gyZS620SDea99EsPhR7BzXS7Gi_hm1ERAsZ9h7fSFbBi6MDgTHiWfT7wxkDrZewqM9Fy-FCw3Tn--J1fXQW1He84kfMtilbpWqVKP6EZ6ExTyGTp2AVSPbevHKFnc5esF7Pv7QuuN7Fu9Eh-23ce6AjSElPArSTAmtr1SYvfsZvSTWHUc5IOraJ0Zviyvjq7dlyC8-3fXRgv9wxB3pOIv_49FE0c"/>
-</div>
-<div class="hidden md:flex md:col-span-4 flex-col gap-4">
-<div class="h-1/2 overflow-hidden rounded-xl">
-<img alt="Du thuyền truyền thống lênh đênh trên vịnh" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxPW844hm7NJ992-M02zg55O-6ABOwG93N03tQz09sCxEkfD2U2v8fCpmjxqwqPlK-hOKbL5ikGJqdwy3rKPVFFGS3xI1H8PBsUV4HWJ2Vr970CxRqlfjSn2mnr5_TehgWyygO5szvaiRyENTK7xd_POcHHqY-NmoTqOHRca6Ft1nmgjG7kvhjCeFfMjq6InRhftWLpl2_P2c5sqC1RD8aVuq2C9a7LvXlfH-f5N64IxvN7-ffM-9_bplVkU1pBvTnYBD62n0"/>
-</div>
-<div class="h-1/2 relative overflow-hidden rounded-xl">
-<img alt="Làng chài nổi trên Vịnh Hạ Long" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDE5ExivffDNxAF4w-6DbgoX0H-LwA-Lv-TGsRctoe4tMcFa01U5lNZDzZy0lJ8xrmQ7qEEPGZ9MVDJpA10rjSdorlLyyeLoCqL0n-35HeAnml-C8TnQ5u7RgDRf22U8I6HY7Sf62esPTnTUF6EIHvTDj36aljuIq1RoFgEgBL7z96OxzuubujJBq3ysbqQclklKV8jSMJZbXjplLzwKvJwZ6WfGFxAv5uP28r4OECBf7kPtxC6GmhhGjgM8ZvtK5oMgNtVReo"/>
-<div class="absolute inset-0 bg-primary/40 flex items-center justify-center cursor-pointer hover:bg-primary/50 transition-colors">
-<span class="text-white font-headline font-bold text-lg">+ 12 Ảnh</span>
-</div>
-</div>
-</div>
-</section>
-<div class="grid grid-cols-1 md:grid-cols-12 gap-12">
-<div class="md:col-span-8">
-<div class="flex items-center gap-8 py-8 mb-12 border-y border-outline-variant/15 font-label overflow-x-auto whitespace-nowrap">
-<div class="flex flex-col">
-<span class="text-[10px] uppercase tracking-widest text-outline">Thời gian</span>
-<span class="text-on-surface font-semibold">3 Ngày / 2 Đêm</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[10px] uppercase tracking-widest text-outline">Quy mô đoàn</span>
-<span class="text-on-surface font-semibold">Tối đa 12 người</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[10px] uppercase tracking-widest text-outline">Ngôn ngữ</span>
-<span class="text-on-surface font-semibold">Tiếng Việt, Tiếng Anh</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[10px] uppercase tracking-widest text-outline">Đánh giá</span>
-<div class="flex items-center gap-1">
-<span class="material-symbols-outlined text-orange-500 text-sm fill-icon">star</span>
-<span class="text-on-surface font-semibold">4.9 (128 đánh giá)</span>
-</div>
-</div>
-</div>
-<div class="space-y-12">
-<section>
-<h2 class="text-3xl font-headline font-bold text-primary mb-6">Mô tả hành trình</h2>
-<p class="text-lg text-on-surface-variant leading-relaxed mb-6">
-                            Đến với Vịnh Hạ Long, di sản thiên nhiên thế giới, bạn sẽ được đắm mình trong không gian kỳ vĩ của hàng nghìn đảo đá vôi nhô lên từ làn nước xanh ngọc lục bảo. Tour "Khám Phá Vịnh Hạ Long" được thiết kế tỉ mỉ để mang lại trải nghiệm sang trọng và riêng tư nhất, đưa bạn đến những hang động ít người biết đến và thưởng thức ẩm thực tinh túy trên du thuyền đạt chuẩn quốc tế.
-                        </p>
-<div class="flex flex-wrap gap-3">
-<span class="px-4 py-2 rounded-full bg-secondary-container/30 text-secondary font-semibold text-xs uppercase tracking-wide">Du lịch xanh</span>
-<span class="px-4 py-2 rounded-full bg-primary-container/10 text-primary font-semibold text-xs uppercase tracking-wide">Du thuyền hạng sang</span>
-<span class="px-4 py-2 rounded-full bg-tertiary-container/10 text-tertiary font-semibold text-xs uppercase tracking-wide">Trọn gói</span>
-</div>
-</section>
-<section>
-<h2 class="text-3xl font-headline font-bold text-primary mb-8">Lịch trình chi tiết</h2>
-<div class="space-y-0">
-<article class="relative pl-10 pb-12 group">
-<div class="absolute left-[11px] top-2 w-[2px] h-full bg-surface-container-high group-last:bg-transparent"></div>
-<div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-white bg-primary shadow-sm z-10"></div>
-<div class="bg-surface-container-low p-8 rounded-xl editorial-shadow">
-<span class="text-xs font-label uppercase tracking-widest text-primary font-bold mb-2 block">Ngày 01</span>
-<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Hà Nội – Hạ Long – Vịnh Lan Hạ</h3>
-<p class="text-on-surface-variant leading-relaxed">Khởi hành từ Hà Nội bằng xe Limousine sang trọng. Đến bến cảng, quý khách lên du thuyền, nhận phòng và thưởng thức bữa trưa với hải sản tươi sống trong khi tàu len lỏi giữa các hòn đảo kỳ vĩ.</p>
-</div>
-</article>
-<article class="relative pl-10 pb-12 group">
-<div class="absolute left-[11px] top-2 w-[2px] h-full bg-surface-container-high group-last:bg-transparent"></div>
-<div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-white bg-primary shadow-sm z-10"></div>
-<div class="bg-surface-container-low p-8 rounded-xl editorial-shadow">
-<span class="text-xs font-label uppercase tracking-widest text-primary font-bold mb-2 block">Ngày 02</span>
-<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Hang Sáng Tối – Chèo Kayak &amp; Tắm Biển</h3>
-<p class="text-on-surface-variant leading-relaxed">Khám phá vẻ đẹp huyền bí của Hang Sáng Tối bằng thuyền nan hoặc kayak tự chọn. Buổi chiều quý khách tự do tắm biển và tham gia lớp học nấu món ăn Việt Nam trên boong tàu.</p>
-</div>
-</article>
-<article class="relative pl-10 group">
-<div class="absolute left-0 top-1 w-6 h-6 rounded-full border-4 border-white bg-primary shadow-sm z-10"></div>
-<div class="bg-surface-container-low p-8 rounded-xl editorial-shadow">
-<span class="text-xs font-label uppercase tracking-widest text-primary font-bold mb-2 block">Ngày 03</span>
-<h3 class="text-xl font-headline font-bold text-on-surface mb-3">Thăm Hang Sửng Sốt – Trở về Hà Nội</h3>
-<p class="text-on-surface-variant leading-relaxed">Đón bình minh với bài tập Thái Cực Quyền, sau đó khám phá Hang Sửng Sốt – hang động lớn nhất Vịnh Hạ Long. Làm thủ tục trả phòng và dùng bữa trưa nhẹ trước khi cập bến.</p>
-</div>
-</article>
-</div>
-</section>
-<section>
-<div class="flex items-center justify-between mb-8">
-<h2 class="text-3xl font-headline font-bold text-primary">Đánh giá khách hàng</h2>
-<button class="text-primary font-headline font-bold text-sm underline decoration-2 underline-offset-4">Xem tất cả</button>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="p-6 rounded-xl bg-surface-container-lowest editorial-shadow border border-outline-variant/10">
-<div class="flex items-center gap-4 mb-4">
-<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
-<img alt="Chân dung khách hàng Minh Anh Lê" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm3j798TT1RSk-fftGnLcvQMqzLYWq9DO2jOOqXl1WKsII6q_R7PgM8E6lXK_GVwwfY6GGQBfcx4xZo0efLIPuwbJRZ5Rmo21zqMqce_4gHCQ5IypDeFPRm4EXfF7lzB_a_Il6MGlhVOfBqUY1JZcYpcx40zEb4pX_-RmdM9Kb9Dw64qY2iftH1iiw1tv5G4LRkcUEKWCp5-oVfr1Pv1dw2ZV-eAeaJUQJyT5-o__dGTj5HIBB25bpiPXJhElHtvFmrostMIk"/>
-</div>
-<div>
-<h4 class="font-bold text-on-surface">Minh Anh Lê</h4>
-<div class="flex gap-0.5 text-orange-500">
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-</div>
-</div>
-</div>
-<p class="text-on-surface-variant text-sm italic">"Một chuyến đi tuyệt vời! Du thuyền rất sạch sẽ, đồ ăn ngon và nhân viên vô cùng nhiệt tình. Vịnh Hạ Long buổi sáng sớm thật sự rất yên bình."</p>
-</div>
-<div class="p-6 rounded-xl bg-surface-container-lowest editorial-shadow border border-outline-variant/10">
-<div class="flex items-center gap-4 mb-4">
-<div class="w-12 h-12 rounded-full bg-slate-200 overflow-hidden">
-<img alt="Chân dung khách hàng Quốc Huy" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPlLKQGPBGKhQWHqDgFfP_v2HOAXUoLkZmr7Jfhkf1reVwMEJrMw4OMDO_5JGdnEoetwI-s0LHnbvEyD1b9paxksLsGfjUrGhD8W6mavxrlGqfSRv5tpr1ZJEK_MyFhggXObWiZYNpqCw3rUXNblw8GfpMjj7nXGV200MYKT5_zLTd0u4jp7nHrOX-cDXSiq51tSP385jJate8_v3ATTs2kVPYMQGXFASkrddJYnpONKdDgd0wxQWMdsU8aQ-WDI8XKv-6o40"/>
-</div>
-<div>
-<h4 class="font-bold text-on-surface">Quốc Huy</h4>
-<div class="flex gap-0.5 text-orange-500">
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-<span class="material-symbols-outlined text-[14px] fill-icon">star</span>
-</div>
-</div>
-</div>
-<p class="text-on-surface-variant text-sm italic">"Rất hài lòng với dịch vụ chèo Kayak tại Hang Sáng Tối. Không gian riêng tư, lịch trình không quá dồn dập, rất thích hợp để nghỉ dưỡng."</p>
-</div>
-</div>
-</section>
-</div>
-</div>
-<aside class="md:col-span-4">
-<div class="sticky top-28 bg-white p-8 rounded-2xl editorial-shadow border border-outline-variant/10">
-<div class="flex items-baseline gap-2 mb-8">
-<span class="text-3xl font-headline font-extrabold text-primary">4.250.000đ</span>
-<span class="text-on-surface-variant text-sm">/ khách</span>
-</div>
-<div class="space-y-6">
-<div>
-<label class="block text-[10px] font-label uppercase tracking-widest text-outline mb-2">Ngày khởi hành</label>
-<div class="relative">
-<input class="w-full bg-surface-container-low border-none rounded-xl py-4 px-5 text-on-surface font-semibold focus:ring-2 focus:ring-primary/20 cursor-pointer" readonly="" type="text" value="25 Tháng 12, 2024"/>
-<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-primary">calendar_month</span>
-</div>
-</div>
-<div>
-<label class="block text-[10px] font-label uppercase tracking-widest text-outline mb-2">Số lượng khách</label>
-<div class="flex items-center justify-between bg-surface-container-low rounded-xl p-4">
-<button aria-label="Giảm khách" class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined text-lg">remove</span>
-</button>
-<span class="font-headline font-bold text-lg">02</span>
-<button aria-label="Thêm khách" class="w-10 h-10 rounded-lg bg-white flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all">
-<span class="material-symbols-outlined text-lg">add</span>
-</button>
-</div>
-</div>
-<div class="py-4 border-t border-outline-variant/10">
-<div class="flex justify-between mb-2 text-sm">
-<span class="text-on-surface-variant">Người lớn x 2</span>
-<span class="font-semibold text-on-surface">8.500.000đ</span>
-</div>
-<div class="flex justify-between mb-2 text-sm">
-<span class="text-on-surface-variant">Phí dịch vụ</span>
-<span class="font-semibold text-on-surface">Miễn phí</span>
-</div>
-<div class="flex justify-between mt-4 pt-4 border-t border-outline-variant/10">
-<span class="font-bold text-on-surface">Tổng cộng</span>
-<span class="text-2xl font-headline font-extrabold text-primary">8.500.000đ</span>
-</div>
-</div>
-<button class="w-full bg-primary text-on-primary py-4 rounded-full font-headline font-bold text-lg hover:scale-[0.98] transition-transform shadow-lg shadow-primary/20">
-                            Đặt ngay
-                        </button>
-<p class="text-center text-[10px] text-outline font-label uppercase tracking-wider">
-                            Chưa thu phí ngay lập tức
-                        </p>
-</div>
-</div>
-</aside>
-</div>
-</main>
-<footer class="bg-slate-50 border-t border-slate-200/50 py-12 px-8">
-<div class="flex flex-col md:flex-row justify-between items-center gap-8 w-full max-w-7xl mx-auto">
-<div class="text-xl font-black text-blue-900">50cntt1</div>
-<nav class="flex flex-wrap justify-center gap-8 font-body text-xs uppercase tracking-widest">
-<a class="text-slate-500 hover:text-primary transition-colors" href="#">Chính sách bảo mật</a>
-<a class="text-slate-500 hover:text-primary transition-colors" href="#">Điều khoản dịch vụ</a>
-<a class="text-slate-500 hover:text-primary transition-colors" href="#">Liên hệ</a>
-<a class="text-slate-500 hover:text-primary transition-colors" href="#">Sơ đồ trang web</a>
-</nav>
-<div class="text-slate-500 text-[10px] tracking-widest font-label text-center md:text-right">
-                © 2026 50CNTT1 VIETNAM EDITORIAL. TẤT CẢ QUYỀN ĐƯỢC BẢO LƯU.
+<body class="bg-surface text-slate-800 font-body pb-20">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-blue-900">50cntt1</a>
+            <a href="dashboard.html" class="material-symbols-outlined text-slate-600 p-2 hover:bg-slate-100 rounded-full">account_circle</a>
+        </div>
+    </nav>
+
+    <div class="w-full h-[50vh] relative mt-16">
+        <img id="detail-image" src="" alt="" class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+        <div class="absolute bottom-10 left-8 right-8 max-w-7xl mx-auto">
+            <span id="detail-type" class="bg-primary text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 inline-block"></span>
+            <h1 id="detail-title" class="text-4xl md:text-5xl font-headline font-bold text-white leading-tight">...</h1>
+        </div>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-8 mt-10 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="md:col-span-2 space-y-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                <h2 class="text-2xl font-headline font-bold text-primary mb-4">Tổng quan hành trình</h2>
+                <p id="detail-desc" class="text-slate-600 leading-relaxed italic">Đang tải dữ liệu...</p>
             </div>
-</div>
-</footer>
-</body></html>
+        </div>
+
+        <div class="md:col-span-1">
+            <div class="sticky top-28 bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                <div class="flex items-center gap-2 text-slate-500 mb-4 font-semibold uppercase tracking-wider text-sm">
+                    <span class="material-symbols-outlined">schedule</span>
+                    <span id="detail-time">---</span>
+                </div>
+                <div class="mb-8">
+                    <p class="text-sm text-slate-500 mb-1">Giá trọn gói</p>
+                    <div class="text-3xl font-headline font-black text-secondary">
+                        <span id="detail-price">---</span><span class="text-xs font-normal text-slate-400 ml-1">/ khách</span>
+                    </div>
+                </div>
+                <a href="checkout.html" class="block w-full text-center bg-primary text-white py-4 rounded-full font-bold text-lg hover:bg-blue-800 transition">Đặt Tour Ngay</a>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadTourDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tourId = urlParams.get('id');
+
+            if (!tourId) return;
+
+            try {
+                const docRef = doc(db, "tours", tourId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('detail-title').innerText = data.tenTour;
+                    document.getElementById('detail-price').innerText = data.giaTour;
+                    document.getElementById('detail-time').innerText = data.thoiGian;
+                    document.getElementById('detail-desc').innerText = data.moTa;
+                    document.getElementById('detail-desc').classList.remove('italic');
+                    document.getElementById('detail-type').innerText = data.loaiTour;
+                    document.getElementById('detail-image').src = data.imageUrl;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        loadTourDetail();
+    </script>
+</body>
+</html>
