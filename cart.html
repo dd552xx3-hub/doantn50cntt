@@ -11,150 +11,154 @@
         tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
 </head>
-<body class="bg-surface text-slate-800 font-body pt-24 pb-20 antialiased">
+<body class="bg-surface font-body antialiased pt-24 min-h-screen flex flex-col">
+
     <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-    <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-        <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
-        
-        <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
-            <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
-            <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-            <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <a href="cart.html" aria-label="Giỏ hàng" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block">
-                <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
-            </a>
-            
-            <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                <a href="login.html" aria-label="Đăng nhập" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block text-slate-600 font-bold hover:text-primary">
-                    <span class="material-symbols-outlined">account_circle</span>
-                </a>
-                <a href="register.html" class="bg-primary text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md whitespace-nowrap">
-                    Đăng ký
-                </a>
-            </div>
-
-            <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
-    <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform">
-        <span class="material-symbols-outlined text-base md:text-lg">admin_panel_settings</span>
-    </a>
-    <span class="w-[1px] h-4 bg-blue-200"></span>
-    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
-    <span class="w-[1px] h-4 bg-blue-200"></span>
-    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
-</div>
-
-        </div>
-    </div>
-</nav>
-
-    <main class="max-w-7xl mx-auto px-6 md:px-12">
-        <header class="mb-10">
-            <h1 class="text-4xl font-headline font-black text-primary mb-2">Giỏ hàng của bạn</h1>
-            <p class="text-slate-500">Xem lại các hành trình bạn đã lưu trước khi thanh toán.</p>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <section class="lg:col-span-8 space-y-6">
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center relative group">
-                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592" class="w-full md:w-40 h-32 object-cover rounded-2xl"/>
-                    <div class="flex-1">
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Tây Bắc</span>
-                        <h3 class="text-xl font-headline font-bold text-slate-800 mb-1">Khám phá Sapa mùa lúa chín</h3>
-                        <p class="text-sm text-slate-500 mb-3"><span class="material-symbols-outlined text-[14px] align-middle">schedule</span> 3 Ngày 2 Đêm</p>
-                        <div class="text-2xl font-black text-secondary">11.200.000đ</div>
-                    </div>
-                    <button class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
+        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+            <div class="flex items-center gap-4">
+                <a href="cart.html" class="p-2 text-primary"><span class="material-symbols-outlined">shopping_cart</span></a>
+                <div id="guest-menu" class="flex items-center gap-2">
+                    <a href="login.html" class="p-2"><span class="material-symbols-outlined text-slate-600">account_circle</span></a>
+                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold shadow-md">Đăng ký</a>
                 </div>
-
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center relative group">
-                    <img src="https://images.unsplash.com/photo-1599708153386-62bf2ef79133" class="w-full md:w-40 h-32 object-cover rounded-2xl"/>
-                    <div class="flex-1">
-                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2 inline-block">Di sản</span>
-                        <h3 class="text-xl font-headline font-bold text-slate-800 mb-1">Du thuyền Vịnh Hạ Long</h3>
-                        <p class="text-sm text-slate-500 mb-3"><span class="material-symbols-outlined text-[14px] align-middle">schedule</span> 2 Ngày 1 Đêm</p>
-                        <div class="text-2xl font-black text-secondary">8.500.000đ</div>
-                    </div>
-                    <button class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-                
-                <div class="pt-4">
-                    <a href="tours.html" class="text-primary font-bold hover:underline flex items-center gap-1">
-                        <span class="material-symbols-outlined text-sm">arrow_back</span> Tiếp tục tìm tour
+                <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
+                    <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
+                    <span class="w-[1px] h-4 bg-blue-200"></span>
+                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[120px]"></span>
+                    <span class="w-[1px] h-4 bg-blue-200"></span>
+                    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
                 </div>
-            </section>
-
-            <aside class="lg:col-span-4">
-                <div class="sticky top-28 bg-white p-8 rounded-3xl shadow-xl shadow-primary/5 border border-slate-100">
-                    <h3 class="text-xl font-headline font-bold mb-6 border-b pb-4">Tóm tắt chi phí</h3>
-                    
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between text-slate-600">
-                            <span>Tạm tính (2 Tour)</span>
-                            <span class="font-bold">19.700.000đ</span>
-                        </div>
-                        <div class="flex justify-between text-slate-600">
-                            <span>Thuế & Phí dịch vụ</span>
-                            <span class="font-bold">0đ</span>
-                        </div>
-                    </div>
-
-                    <div class="pt-6 border-t border-slate-100 mb-8">
-                        <div class="flex justify-between items-end">
-                            <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Tổng cộng</p>
-                            <p class="text-3xl font-headline font-black text-secondary tracking-tight">19.700.000đ</p>
-                        </div>
-                    </div>
-
-                    <button onclick="location.href='checkout.html'" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95">
-                        Tiến hành thanh toán
-                    </button>
-                </div>
-            </aside>
+            </div>
         </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 mb-24 w-full mt-8">
+        
+        <div id="empty-cart-box" class="hidden bg-white p-12 md:p-20 rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-100 text-center max-w-2xl mx-auto">
+            <span class="material-symbols-outlined text-7xl text-slate-200 mb-6 block">remove_shopping_cart</span>
+            <h1 class="text-3xl md:text-4xl font-headline font-black text-primary mb-4">Giỏ hàng trống</h1>
+            <p class="text-slate-500 mb-10 text-lg">Bạn chưa chọn hành trình nào. Hãy khám phá các điểm đến tuyệt vời nhé!</p>
+            <a href="tours.html" class="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-blue-800 transition-all text-lg active:scale-95">Khám phá Tour ngay</a>
+        </div>
+
+        <div id="full-cart-box" class="hidden">
+            <h1 class="text-3xl md:text-4xl font-headline font-black text-primary mb-2">Giỏ hàng của bạn</h1>
+            <p class="text-slate-500 mb-10">Xem lại các hành trình bạn đã lưu trước khi thanh toán.</p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div id="cart-items-container" class="lg:col-span-8 space-y-6">
+                </div>
+
+                <aside class="lg:col-span-4 lg:sticky lg:top-28">
+                    <div class="bg-white p-8 rounded-3xl shadow-2xl shadow-primary/5 border border-slate-100">
+                        <h3 class="text-xl font-headline font-bold mb-6 border-b border-slate-100 pb-4">Tóm tắt đơn hàng</h3>
+                        <div class="flex justify-between items-end mb-8 pt-2">
+                            <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Tổng cộng</p>
+                            <p id="cart-total" class="text-3xl font-headline font-black text-secondary tracking-tight">0đ</p>
+                        </div>
+                        <button onclick="checkoutCart()" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95">
+                            Tiến hành thanh toán
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
     </main>
+
     <script type="module">
-    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-        authDomain: "doantn50cntt.firebaseapp.com",
-        projectId: "doantn50cntt",
-        storageBucket: "doantn50cntt.firebasestorage.app",
-        messagingSenderId: "705512357448",
-        appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
 
-    const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    const auth = getAuth(app);
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const auth = getAuth(app);
 
-    onAuthStateChanged(auth, (user) => {
-        const guest = document.getElementById('guest-menu');
-        const userBox = document.getElementById('user-menu');
-        const emailTxt = document.getElementById('user-email');
-        if (user) {
-            if(guest) guest.style.display = 'none';
-            if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
-            if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
-        } else {
-            if(guest) guest.style.display = 'flex';
-            if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
+        onAuthStateChanged(auth, (user) => {
+            const guest = document.getElementById('guest-menu');
+            const userBox = document.getElementById('user-menu');
+            const emailTxt = document.getElementById('user-email');
+            if (user) {
+                if(guest) guest.style.display = 'none';
+                if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
+                if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
+            } else {
+                if(guest) guest.style.display = 'flex';
+                if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
+            }
+        });
+
+        document.getElementById('btn-logout').onclick = () => {
+            signOut(auth).then(() => { window.location.reload(); });
+        };
+
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            const emptyBox = document.getElementById('empty-cart-box');
+            const fullBox = document.getElementById('full-cart-box');
+            const container = document.getElementById('cart-items-container');
+            const totalEl = document.getElementById('cart-total');
+
+            if(cart.length === 0) {
+                emptyBox.classList.remove('hidden');
+                fullBox.classList.add('hidden');
+                return;
+            }
+
+            emptyBox.classList.add('hidden');
+            fullBox.classList.remove('hidden');
+            container.innerHTML = '';
+            let totalAmount = 0;
+
+            cart.forEach(item => {
+                let priceNum = parseInt(item.giaTour.replace(/\D/g, ''));
+                if(!isNaN(priceNum)) totalAmount += priceNum;
+
+                container.innerHTML += `
+                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center relative group">
+                        <img src="${item.imageUrl}" class="w-full md:w-48 h-32 object-cover rounded-2xl">
+                        <div class="flex-1 w-full pr-12">
+                            <span class="bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-2 inline-block">${item.loaiTour}</span>
+                            <h3 class="font-headline font-bold text-xl text-primary mb-2">${item.tenTour}</h3>
+                            <p class="text-sm font-bold text-slate-400 flex items-center gap-1 mb-3"><span class="material-symbols-outlined text-sm">schedule</span> ${item.thoiGian}</p>
+                            <p class="text-2xl font-black text-secondary">${item.giaTour}</p>
+                        </div>
+                        <button onclick="removeFromCart('${item.id}')" class="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors p-2 bg-slate-50 hover:bg-red-50 rounded-full" title="Xóa Tour">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                    </div>
+                `;
+            });
+
+            totalEl.innerText = totalAmount.toLocaleString('vi-VN') + 'đ';
         }
-    });
 
-    const btnLogout = document.getElementById('btn-logout');
-    if(btnLogout) {
-        btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
-    }
-</script>
+        window.removeFromCart = function(id) {
+            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('cart50cntt1', JSON.stringify(cart));
+            renderCart();
+        };
 
+        window.checkoutCart = function() {
+            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            if(cart.length > 0) {
+                window.location.href = `checkout.html?id=${cart[0].id}`;
+            }
+        };
+
+        renderCart();
+    </script>
 </body>
 </html>
