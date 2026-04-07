@@ -227,5 +227,118 @@
         }
         getTours();
     </script>
+        <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
+        
+        <button id="chatbot-toggle" class="bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95">
+            <span class="material-symbols-outlined text-3xl">support_agent</span>
+        </button>
+
+        <div id="chatbot-window" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col h-[450px] transition-all">
+            
+            <div class="bg-primary text-white p-4 flex justify-between items-center shadow-md z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm">Lễ Tân 50CNTT1</h3>
+                        <p class="text-[10px] text-blue-200 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span> Đang trực tuyến</p>
+                    </div>
+                </div>
+                <button id="chatbot-close" class="hover:text-red-300 transition-colors p-1"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4 text-sm scroll-smooth">
+                <div class="flex gap-2">
+                    <div class="bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm">
+                        Kính chào quý khách! Em là Bot tư vấn của 50CNTT1. Quý khách muốn tìm hiểu về <b>Giá tour</b>, <b>Cách thanh toán</b> hay <b>Điểm đến</b> nào ạ?
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 bg-white border-t border-slate-100 flex gap-2">
+                <input type="text" id="chat-input" placeholder="Nhập câu hỏi của bạn..." class="flex-1 bg-slate-50 border border-slate-100 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all">
+                <button id="chat-send" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors active:scale-90 shadow-md">
+                    <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatToggle = document.getElementById('chatbot-toggle');
+        const chatWindow = document.getElementById('chatbot-window');
+        const chatClose = document.getElementById('chatbot-close');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.remove('hidden');
+            chatToggle.classList.add('hidden');
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            chatToggle.classList.remove('hidden');
+        });
+
+        function appendMessage(sender, text) {
+            const div = document.createElement('div');
+            div.className = sender === 'user' ? 'flex gap-2 justify-end' : 'flex gap-2';
+            
+            const msgClass = sender === 'user' 
+                ? 'bg-secondary text-white p-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm' 
+                : 'bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm';
+            
+            div.innerHTML = `<div class="${msgClass}">${text}</div>`;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function botReply(text) {
+            const lowerText = text.toLowerCase();
+            let reply = "Dạ, em chưa hiểu ý của quý khách lắm. Quý khách có thể hỏi về <b>Giá tour</b>, <b>Lịch trình</b>, hoặc <b>Thanh toán</b> được không ạ?";
+
+            if (lowerText.includes('giá') || lowerText.includes('bao nhiêu')) {
+                reply = "Giá tour bên em dao động từ 850.000đ (Tour trong ngày) đến 69.800.000đ (Tour thám hiểm). Quý khách truy cập mục <b>Tour du lịch</b> trên Menu để xem giá chi tiết từng gói nhé!";
+            } else if (lowerText.includes('thanh toán') || lowerText.includes('chuyển khoản')) {
+                reply = "Bên em hỗ trợ 2 hình thức: Thanh toán chuyển khoản qua mã QR và Quẹt thẻ tín dụng/ghi nợ. Mọi giao dịch đều được bảo mật 100% ạ.";
+            } else if (lowerText.includes('sapa') || lowerText.includes('tây bắc')) {
+                reply = "Tuyệt vời! Tây Bắc đang mùa lúa chín rất đẹp. Bên em có Tour Săn Mây Tà Xùa - Mộc Châu giá chỉ 2.450.000đ. Quý khách hãy vào danh sách tour để xem ngay nhé!";
+            } else if (lowerText.includes('chào') || lowerText.includes('hello')) {
+                reply = "Dạ em chào quý khách! Chúc quý khách một ngày tốt lành. Em có thể giúp gì cho chuyến đi sắp tới của mình ạ?";
+            } else if (lowerText.includes('liên hệ') || lowerText.includes('sđt') || lowerText.includes('điện thoại')) {
+                reply = "Quý khách có thể liên hệ tổng đài 50CNTT1 qua số điện thoại: <b>1900 xxxx</b> hoặc email <b>hotro@50cntt1.com</b> ạ.";
+            }
+
+            setTimeout(() => { appendMessage('bot', reply); }, 600);
+        }
+
+        function handleSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            appendMessage('user', text);
+            chatInput.value = '';
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'bot-typing';
+            typingDiv.className = 'flex gap-2';
+            typingDiv.innerHTML = `<div class="bg-white border border-slate-100 text-slate-400 px-4 py-2 rounded-2xl rounded-tl-sm text-xs italic shadow-sm">Bot đang gõ...</div>`;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            setTimeout(() => {
+                document.getElementById('bot-typing').remove();
+                botReply(text);
+            }, 1000);
+        }
+
+        chatSend.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+    </script>
+
 </body>
 </html>
