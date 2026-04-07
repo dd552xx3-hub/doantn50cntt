@@ -11,148 +11,145 @@
         tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
 </head>
-<body class="bg-surface text-slate-800 font-body pb-20 antialiased">
+<body class="bg-surface font-body antialiased pt-24">
+
     <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-    <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-        <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
-        
-        <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
-            <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
-            <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-            <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <a href="cart.html" aria-label="Giỏ hàng" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block">
-                <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
-            </a>
-            
-            <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                <a href="login.html" aria-label="Đăng nhập" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block text-slate-600 font-bold hover:text-primary">
-                    <span class="material-symbols-outlined">account_circle</span>
-                </a>
-                <a href="register.html" class="bg-primary text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md whitespace-nowrap">
-                    Đăng ký
-                </a>
-            </div>
-
-            <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
-    <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform">
-        <span class="material-symbols-outlined text-base md:text-lg">admin_panel_settings</span>
-    </a>
-    <span class="w-[1px] h-4 bg-blue-200"></span>
-    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
-    <span class="w-[1px] h-4 bg-blue-200"></span>
-    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
-</div>
-
-        </div>
-    </div>
-</nav>
-
-
-    <div class="w-full h-[60vh] relative mt-16">
-        <img id="detail-image" src="" class="w-full h-full object-cover bg-slate-200"/>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-        <div class="absolute bottom-12 left-6 md:left-12 right-6 max-w-7xl mx-auto">
-            <span id="detail-type" class="bg-secondary text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block shadow-lg"></span>
-            <h1 id="detail-title" class="text-4xl md:text-6xl font-headline font-black text-white leading-tight drop-shadow-lg">Đang tải dữ liệu...</h1>
-        </div>
-    </div>
-
-    <main class="max-w-7xl mx-auto px-6 md:px-12 mt-12 grid grid-cols-1 md:grid-cols-12 gap-12">
-        <div class="md:col-span-8 space-y-8">
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                <h2 class="text-2xl font-headline font-bold text-primary mb-6 flex items-center gap-2">
-                    <span class="material-symbols-outlined text-3xl">info</span> Tổng quan hành trình
-                </h2>
-                <p id="detail-desc" class="text-slate-600 leading-relaxed text-lg italic animate-pulse">Vui lòng chờ một chút, hệ thống đang kết nối dữ liệu từ Firebase...</p>
-            </div>
-        </div>
-
-        <div class="md:col-span-4">
-            <div class="sticky top-28 bg-white p-8 rounded-3xl shadow-xl shadow-primary/5 border border-slate-100">
-                <div class="flex items-center gap-3 text-slate-500 mb-6 font-bold uppercase tracking-widest text-sm border-b border-slate-100 pb-4">
-                    <span class="material-symbols-outlined text-primary">schedule</span>
-                    <span id="detail-time">---</span>
+        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+            <div class="flex items-center gap-4">
+                <a href="cart.html" class="p-2"><span class="material-symbols-outlined text-slate-600">shopping_cart</span></a>
+                <div id="guest-menu" class="flex items-center gap-2">
+                    <a href="login.html" class="p-2"><span class="material-symbols-outlined text-slate-600">account_circle</span></a>
+                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold shadow-md">Đăng ký</a>
                 </div>
-                <div class="mb-8">
-                    <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Giá trọn gói</p>
-                    <div class="text-4xl font-headline font-black text-secondary tracking-tight">
-                        <span id="detail-price">---</span>
+                <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
+                    <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+                    </a>
+                    <span class="w-[1px] h-4 bg-blue-200"></span>
+                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[120px]"></span>
+                    <span class="w-[1px] h-4 bg-blue-200"></span>
+                    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 mb-24">
+        <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-slate-100">
+            <img id="detail-image" src="" class="w-full h-[300px] md:h-[500px] object-cover bg-slate-100">
+            <div class="p-8 md:p-12">
+                <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-6">
+                    <div>
+                        <span id="detail-type" class="bg-blue-50 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block"></span>
+                        <h1 id="detail-title" class="text-3xl md:text-5xl font-headline font-black text-primary">Đang tải dữ liệu...</h1>
                     </div>
-                    <p class="text-sm text-slate-500 mt-2">/ khách</p>
+                    <div class="text-left md:text-right">
+                        <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Giá trọn gói</p>
+                        <p id="detail-price" class="text-3xl md:text-4xl font-black text-secondary mt-1">---</p>
+                    </div>
                 </div>
-                <a id="book-btn" href="#" class="flex items-center justify-center gap-2 w-full text-center bg-primary text-white py-4 rounded-full font-bold text-lg hover:bg-blue-800 transition-all active:scale-95 shadow-lg shadow-primary/30">
-                    Đặt Tour Ngay <span class="material-symbols-outlined">arrow_forward</span>
-                </a>
+                
+                <div class="flex items-center gap-4 text-sm font-bold text-slate-500 mb-8 pb-8 border-b border-slate-100">
+                    <span class="flex items-center gap-1"><span class="material-symbols-outlined">schedule</span> <span id="detail-time">---</span></span>
+                </div>
+                <p id="detail-desc" class="text-slate-600 leading-relaxed mb-10 text-lg whitespace-pre-line"></p>
+                
+                <div class="flex flex-col md:flex-row gap-4">
+                    <button onclick="addToCart()" class="flex-1 bg-slate-100 text-primary px-12 py-4 rounded-full font-bold hover:bg-slate-200 transition-all text-lg active:scale-95 flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">add_shopping_cart</span> Thêm vào Giỏ
+                    </button>
+                    <a id="book-btn" href="#" class="flex-1 text-center bg-primary text-white px-12 py-4 rounded-full font-bold shadow-xl hover:bg-blue-800 transition-all text-lg active:scale-95">Đặt Tour Ngay</a>
+                </div>
             </div>
         </div>
     </main>
 
     <script type="module">
-    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-        authDomain: "doantn50cntt.firebaseapp.com",
-        projectId: "doantn50cntt",
-        storageBucket: "doantn50cntt.firebasestorage.app",
-        messagingSenderId: "705512357448",
-        appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
 
-    const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    const db = getFirestore(app);
-    const auth = getAuth(app);
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const db = getFirestore(app);
+        const auth = getAuth(app);
 
-    onAuthStateChanged(auth, (user) => {
-        const guest = document.getElementById('guest-menu');
-        const userBox = document.getElementById('user-menu');
-        const emailTxt = document.getElementById('user-email');
-        if (user) {
-            if(guest) guest.style.display = 'none';
-            if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
-            if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
-        } else {
-            if(guest) guest.style.display = 'flex';
-            if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
-        }
-    });
-
-    const btnLogout = document.getElementById('btn-logout');
-    if(btnLogout) {
-        btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
-    }
-
-    async function loadTourDetail() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const tourId = urlParams.get('id');
-        if (!tourId) return;
-
-        const bookBtn = document.getElementById('book-btn');
-        if(bookBtn) bookBtn.href = `checkout.html?id=${tourId}`;
-
-        try {
-            const docSnap = await getDoc(doc(db, "tours", tourId));
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('detail-title').innerText = data.tenTour;
-                document.getElementById('detail-price').innerText = data.giaTour;
-                document.getElementById('detail-time').innerText = data.thoiGian;
-                document.getElementById('detail-desc').innerText = data.moTa;
-                document.getElementById('detail-desc').classList.remove('italic', 'animate-pulse');
-                document.getElementById('detail-type').innerText = data.loaiTour;
-                document.getElementById('detail-image').src = data.imageUrl;
+        onAuthStateChanged(auth, (user) => {
+            const guest = document.getElementById('guest-menu');
+            const userBox = document.getElementById('user-menu');
+            const emailTxt = document.getElementById('user-email');
+            if (user) {
+                if(guest) guest.style.display = 'none';
+                if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
+                if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
+            } else {
+                if(guest) guest.style.display = 'flex';
+                if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
             }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    loadTourDetail();
-</script>
+        });
 
+        const btnLogout = document.getElementById('btn-logout');
+        if(btnLogout) {
+            btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
+        }
+
+        async function loadTourDetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tourId = urlParams.get('id');
+            if (!tourId) return;
+
+            const bookBtn = document.getElementById('book-btn');
+            if(bookBtn) bookBtn.href = `checkout.html?id=${tourId}`;
+
+            try {
+                const docSnap = await getDoc(doc(db, "tours", tourId));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('detail-title').innerText = data.tenTour;
+                    document.getElementById('detail-price').innerText = data.giaTour;
+                    document.getElementById('detail-time').innerText = data.thoiGian;
+                    document.getElementById('detail-desc').innerText = data.moTa;
+                    document.getElementById('detail-type').innerText = data.loaiTour;
+                    document.getElementById('detail-image').src = data.imageUrl;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        loadTourDetail();
+
+        window.addToCart = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if(!id) return;
+
+            const tour = {
+                id: id,
+                tenTour: document.getElementById('detail-title').innerText,
+                giaTour: document.getElementById('detail-price').innerText,
+                thoiGian: document.getElementById('detail-time').innerText,
+                loaiTour: document.getElementById('detail-type').innerText,
+                imageUrl: document.getElementById('detail-image').src
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            if(!cart.find(item => item.id === id)) {
+                cart.push(tour);
+                localStorage.setItem('cart50cntt1', JSON.stringify(cart));
+                alert('Đã thêm tour vào giỏ hàng thành công!');
+            } else {
+                alert('Tour này đã có trong giỏ hàng rồi đại ca!');
+            }
+        };
+    </script>
 </body>
 </html>
