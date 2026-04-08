@@ -7,8 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script id="tailwind-config">
-        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04", "success": "#10b981", "warning": "#f59e0b" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
     <style>
         .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -23,24 +24,59 @@
             <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1 Admin</a>
             <div id="user-menu" class="flex items-center gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
                 <span id="user-email" class="text-xs font-bold text-primary"></span>
-                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700">Thoát</button>
+                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 md:px-8 mb-24">
-        <div class="flex gap-2 mb-8 bg-white p-1.5 rounded-full shadow-sm w-max border border-slate-100 overflow-x-auto">
-            <button onclick="switchTab('tours')" id="btn-tab-tours" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all tab-active whitespace-nowrap">Quản lý Tour</button>
+        <div class="flex gap-2 mb-8 bg-white p-1.5 rounded-full shadow-sm w-max border border-slate-100 overflow-x-auto max-w-full scrollbar-hide">
+            <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all tab-active whitespace-nowrap">Dashboard</button>
+            <button onclick="switchTab('tours')" id="btn-tab-tours" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Quản lý Tour</button>
             <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Đơn Đặt Hàng</button>
             <button onclick="switchTab('users')" id="btn-tab-users" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Khách hàng</button>
         </div>
 
-        <div id="section-tours">
-            <div class="flex justify-between items-center mb-6">
+        <div id="section-dashboard">
+            <h1 class="text-2xl font-headline font-black text-primary mb-6">Tổng quan hệ thống</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tổng số Tour</p>
+                        <h3 id="stat-tours" class="text-3xl font-black text-primary">0</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><span class="material-symbols-outlined">map</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Đơn đặt hàng</p>
+                        <h3 id="stat-bookings" class="text-3xl font-black text-secondary">0</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined">shopping_cart</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Khách hàng</p>
+                        <h3 id="stat-users" class="text-3xl font-black text-success">0</h3>
+                    </div>
+                    <div class="w-12 h-12 rounded-full bg-green-50 text-green-500 flex items-center justify-center"><span class="material-symbols-outlined">group</span></div>
+                </div>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 w-full md:w-1/2">
+                <h3 class="text-lg font-bold text-primary mb-6">Tỉ lệ trạng thái đơn hàng</h3>
+                <div class="h-64"><canvas id="orderChart"></canvas></div>
+            </div>
+        </div>
+
+        <div id="section-tours" class="hidden">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                 <h1 class="text-2xl font-headline font-black text-primary">Danh sách Tour</h1>
-                <button onclick="openModal('add')" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
-                    <span class="material-symbols-outlined text-sm">add</span> Thêm mới
-                </button>
+                <div class="flex gap-2 w-full md:w-auto">
+                    <input type="text" id="search-tour" onkeyup="searchTable('search-tour', 'admin-tour-list')" placeholder="Tìm tên tour..." class="flex-1 md:w-64 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none">
+                    <button onclick="openModal('add')" class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow-md flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">add</span> Thêm
+                    </button>
+                </div>
             </div>
             <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
                 <div class="overflow-x-auto scrollbar-hide">
@@ -61,16 +97,20 @@
         </div>
 
         <div id="section-bookings" class="hidden">
-            <h1 class="text-2xl font-headline font-black text-primary mb-6">Lịch sử Đặt Tour</h1>
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <h1 class="text-2xl font-headline font-black text-primary">Lịch sử Đặt Tour</h1>
+                <input type="text" id="search-booking" onkeyup="searchTable('search-booking', 'admin-booking-list')" placeholder="Tìm khách/SĐT..." class="w-full md:w-64 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none">
+            </div>
             <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
                 <div class="overflow-x-auto scrollbar-hide">
-                    <table class="w-full text-left min-w-[900px]">
+                    <table class="w-full text-left min-w-[1000px]">
                         <thead>
                             <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
                                 <th class="p-6">Khách hàng</th>
                                 <th class="p-6">Liên hệ</th>
-                                <th class="p-6">Tour đã đặt</th>
-                                <th class="p-6 text-center">Xử lý</th>
+                                <th class="p-6 w-64">Tour đã đặt</th>
+                                <th class="p-6">Trạng thái</th>
+                                <th class="p-6 text-center">Cập nhật</th>
                             </tr>
                         </thead>
                         <tbody id="admin-booking-list"></tbody>
@@ -137,28 +177,69 @@
         const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
         const db = getFirestore(app);
         const auth = getAuth(app);
+        let orderChartInstance = null; 
 
         onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById('user-email').innerText = user.email.split('@')[0];
-            } else {
-                window.location.href = "login.html";
-            }
+            if (user) { document.getElementById('user-email').innerText = user.email.split('@')[0]; } 
+            else { window.location.href = "login.html"; }
         });
 
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
+        window.searchTable = (inputId, tableId) => {
+            let input = document.getElementById(inputId).value.toLowerCase();
+            let trs = document.getElementById(tableId).getElementsByTagName("tr");
+            for (let i = 0; i < trs.length; i++) {
+                let text = trs[i].innerText.toLowerCase();
+                trs[i].style.display = text.indexOf(input) > -1 ? "" : "none";
+            }
+        };
+
         window.switchTab = (tab) => {
-            const sections = ['tours', 'bookings', 'users'];
+            const sections = ['dashboard', 'tours', 'bookings', 'users'];
             sections.forEach(s => {
                 document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
                 const btn = document.getElementById(`btn-tab-${s}`);
                 btn.classList.toggle('tab-active', s === tab);
                 btn.classList.toggle('text-slate-500', s !== tab);
             });
+            if(tab === 'dashboard') loadDashboard();
+            if(tab === 'tours') loadAdminTours();
             if(tab === 'bookings') loadBookings();
             if(tab === 'users') loadUsers();
         };
+
+        async function loadDashboard() {
+            const toursSnap = await getDocs(collection(db, "tours"));
+            const usersSnap = await getDocs(collection(db, "users"));
+            const bookingsSnap = await getDocs(collection(db, "bookings"));
+
+            document.getElementById('stat-tours').innerText = toursSnap.size;
+            document.getElementById('stat-users').innerText = usersSnap.size;
+            document.getElementById('stat-bookings').innerText = bookingsSnap.size;
+
+            let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
+            bookingsSnap.forEach(d => {
+                let status = d.data().trangThai || "Chờ xử lý";
+                if(statusCount[status] !== undefined) statusCount[status]++;
+            });
+
+            const ctx = document.getElementById('orderChart').getContext('2d');
+            if(orderChartInstance) orderChartInstance.destroy(); 
+            
+            orderChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Chờ xử lý', 'Đã thanh toán', 'Hoàn thành', 'Đã hủy'],
+                    datasets: [{
+                        data: [statusCount["Chờ xử lý"], statusCount["Đã thanh toán"], statusCount["Hoàn thành"], statusCount["Đã hủy"]],
+                        backgroundColor: ['#f59e0b', '#3b82f6', '#10b981', '#ef4444'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
 
         async function loadAdminTours() {
             const tbody = document.getElementById('admin-tour-list');
@@ -187,20 +268,45 @@
             tbody.innerHTML = "";
             snap.forEach(d => {
                 const data = d.data();
+                const currentStatus = data.trangThai || "Chờ xử lý";
+                
+                let badgeClass = "bg-orange-50 text-orange-500";
+                if(currentStatus === "Đã thanh toán") badgeClass = "bg-blue-50 text-blue-500";
+                if(currentStatus === "Hoàn thành") badgeClass = "bg-green-50 text-green-500";
+                if(currentStatus === "Đã hủy") badgeClass = "bg-red-50 text-red-500";
+
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-50">
                         <td class="p-6 font-bold text-primary">${data.khachHang}</td>
                         <td class="p-6 text-sm text-slate-500">${data.email}<br>${data.sdt}</td>
-                        <td class="p-6 font-bold text-slate-700">${data.tenTour}</td>
+                        <td class="p-6 font-bold text-slate-700 truncate max-w-xs" title="${data.tenTour}">${data.tenTour}</td>
+                        <td class="p-6">
+                            <span class="${badgeClass} px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">${currentStatus}</span>
+                        </td>
                         <td class="p-6 text-center">
-                            <button onclick="deleteBooking('${d.id}')" class="text-xs font-black uppercase text-red-400 hover:text-red-600">Hủy đơn</button>
+                            <select onchange="updateBookingStatus('${d.id}', this.value)" class="text-xs font-bold border border-slate-200 rounded-lg px-2 py-1 outline-none focus:ring-1 focus:ring-primary cursor-pointer text-slate-600">
+                                <option value="">Đổi trạng thái</option>
+                                <option value="Chờ xử lý">Chờ xử lý</option>
+                                <option value="Đã thanh toán">Đã thanh toán</option>
+                                <option value="Hoàn thành">Hoàn thành</option>
+                                <option value="Đã hủy">Đã hủy</option>
+                            </select>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        // HÀM TẢI DANH SÁCH NGƯỜI DÙNG
+        window.updateBookingStatus = async (id, newStatus) => {
+            if(!newStatus) return;
+            try {
+                await updateDoc(doc(db, "bookings", id), { trangThai: newStatus });
+                loadBookings();
+            } catch (e) {
+                alert("Lỗi cập nhật trạng thái!");
+            }
+        };
+
         async function loadUsers() {
             const tbody = document.getElementById('admin-user-list');
             const snap = await getDocs(collection(db, "users"));
@@ -266,9 +372,8 @@
         };
 
         window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
-        window.deleteBooking = async (id) => { if(confirm("Hủy đơn hàng này?")) { await deleteDoc(doc(db, "bookings", id)); loadBookings(); } };
 
-        loadAdminTours();
+        switchTab('dashboard');
     </script>
 </body>
 </html>
