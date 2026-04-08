@@ -171,9 +171,10 @@
         </div>
     </main>
 
-    <script type="module">
+        <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        // Đã bổ sung thêm collection và addDoc vào dòng này:
+        import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -235,7 +236,39 @@
                 console.error(error);
             }
         }
+        
         loadCheckout();
+
+        // ĐÂY LÀ HÀM BẮN ĐƠN HÀNG LÊN FIREBASE ADMIN
+        window.confirmBooking = async () => {
+            const tourId = new URLSearchParams(window.location.search).get('id');
+            const name = document.querySelector('input[placeholder="Nguyễn Văn A"]').value;
+            const email = document.querySelector('input[placeholder="email@vi-du.com"]').value;
+            const phone = document.querySelector('input[placeholder="090 123 4567"]').value;
+            const tourTitle = document.getElementById('check-title').innerText;
+
+            if(!name || !phone) { 
+                alert(" nhập đủ thông tin khách hàng nhé!"); 
+                return; 
+            }
+
+            try {
+                await addDoc(collection(db, "bookings"), {
+                    khachHang: name,
+                    email: email,
+                    sdt: phone,
+                    tenTour: tourTitle,
+                    tourId: tourId,
+                    ngayDat: new Date().toLocaleString('vi-VN')
+                });
+                alert("Chúc mừng! Đơn hàng đã được gửi tới Admin thành công.");
+                window.location.href = "index.html";
+            } catch (e) {
+                console.error(e);
+                alert("Lỗi rồi bạn ơi!");
+            }
+        };
     </script>
+
 </body>
 </html>
