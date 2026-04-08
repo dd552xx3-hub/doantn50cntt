@@ -11,7 +11,6 @@
         tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
     <style>
-        /* Thêm hiệu ứng cuộn mượt cho trang web */
         html { scroll-behavior: smooth; }
     </style>
 </head>
@@ -63,6 +62,16 @@
                 <div class="flex flex-col md:flex-row gap-4 justify-center">
                     <a href="tours.html" class="bg-primary text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-blue-800 transition-all">Khám phá ngay</a>
                     <a href="#trai-nghiem" class="bg-white/10 backdrop-blur text-white border border-white/30 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition-all">Về chúng tôi</a>
+                </div>
+                
+                <div class="mt-8 flex justify-center">
+                    <div class="flex items-center gap-4 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full border border-white/30 text-white shadow-xl hover:bg-white/30 transition-all cursor-pointer" title="Thời tiết hiện tại">
+                        <span id="w-icon" class="material-symbols-outlined text-4xl text-yellow-300">partly_cloudy_day</span>
+                        <div class="text-left">
+                            <p id="w-city" class="text-[10px] font-bold uppercase tracking-widest opacity-80">Đang kết nối vệ tinh...</p>
+                            <p id="w-temp" class="text-xl font-black leading-tight">--°C</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -256,7 +265,6 @@
             signOut(auth).then(() => { window.location.reload(); });
         };
 
-     
         async function getTours() {
             const container = document.getElementById('tour-list');
             try {
@@ -294,7 +302,8 @@
         }
         getTours();
     </script>
-        <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
+    
+    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
         
         <button id="chatbot-toggle" class="bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95">
             <span class="material-symbols-outlined text-3xl">support_agent</span>
@@ -405,6 +414,53 @@
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') handleSend();
         });
+    </script>
+    
+    <script>
+        async function getRealtimeWeather(city) {
+            const API_KEY = "270bfbc9d3b4320983649d0367ec5201"; 
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=vi&appid=${API_KEY}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if(data.cod === 200) {
+                    const weatherBox = document.getElementById('w-city').parentElement;
+                    weatherBox.style.opacity = '0.5';
+                    
+                    setTimeout(() => {
+                        document.getElementById('w-city').innerText = `Thời tiết ${data.name} lúc này`;
+                        document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C - ${data.weather[0].description}`;
+                        
+                        const weatherCondition = data.weather[0].main.toLowerCase();
+                        const iconEl = document.getElementById('w-icon');
+                        
+                        if (weatherCondition.includes('cloud')) {
+                            iconEl.innerText = 'cloud'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-200';
+                        } else if (weatherCondition.includes('rain')) {
+                            iconEl.innerText = 'rainy'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-400';
+                        } else if (weatherCondition.includes('clear')) {
+                            iconEl.innerText = 'sunny'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-400';
+                        }
+                        weatherBox.style.opacity = '1';
+                    }, 300);
+                }
+            } catch(e) {}
+        }
+
+        const cities = ["Sapa", "Hanoi", "Da Nang", "Da Lat", "Phu Quoc"];
+        let currentCityIndex = 0;
+
+        getRealtimeWeather(cities[currentCityIndex]);
+
+        setInterval(() => {
+            currentCityIndex++;
+            if (currentCityIndex >= cities.length) {
+                currentCityIndex = 0;
+            }
+            getRealtimeWeather(cities[currentCityIndex]);
+        }, 5000);
     </script>
 
 </body>
