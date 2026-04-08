@@ -3,173 +3,227 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Quản Trị Hệ Thống - 50cntt1</title>
+    <title>Quản Trị Cao Cấp - 50cntt1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
+    <style>
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .tab-active { background-color: #004471; color: white; }
+    </style>
 </head>
-<body class="bg-surface text-slate-800 font-body flex flex-col md:flex-row min-h-screen">
+<body class="bg-surface font-body antialiased pt-24 min-h-screen">
     
-    <aside class="w-full md:w-64 bg-primary text-white flex flex-col shadow-2xl z-20">
-        <div class="p-6 border-b border-white/10 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold tracking-tight text-white hover:text-blue-200 transition">50cntt1</a>
-            <span class="bg-white/20 text-xs px-2 py-1 rounded-md uppercase font-bold tracking-wider">Admin</span>
-        </div>
-        <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-    <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-        <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
-        
-        <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
-            <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
-            <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-            <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
-        </div>
-
-        <div class="flex items-center gap-4">
-            <a href="cart.html" aria-label="Giỏ hàng" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block">
-                <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
-            </a>
-            
-            <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                <a href="login.html" aria-label="Đăng nhập" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block text-slate-600 font-bold hover:text-primary">
-                    <span class="material-symbols-outlined">account_circle</span>
-                </a>
-                <a href="register.html" class="bg-primary text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md whitespace-nowrap">
-                    Đăng ký
-                </a>
-            </div>
-
-            <div id="user-menu" class="hidden items-center gap-3 bg-blue-50/50 px-3 py-1 rounded-full border border-blue-100">
-                <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[120px]"></span>
-                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
+            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1 Admin</a>
+            <div id="user-menu" class="flex items-center gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
+                <span id="user-email" class="text-xs font-bold text-primary"></span>
+                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest">Thoát</button>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-        <div class="p-4 border-t border-white/10">
-            <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-red-300 hover:bg-red-500/20 hover:text-red-100 transition"><span class="material-symbols-outlined">logout</span> Đăng xuất</a>
+    <main class="max-w-7xl mx-auto px-4 md:px-8 mb-24">
+        <div class="flex gap-2 mb-8 bg-white p-1.5 rounded-full shadow-sm w-max border border-slate-100">
+            <button onclick="switchTab('tours')" id="btn-tab-tours" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all tab-active">Quản lý Tour</button>
+            <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50">Đơn Đặt Hàng</button>
         </div>
-    </aside>
 
-    <main class="flex-1 p-8 md:p-12 overflow-y-auto">
-        <header class="flex justify-between items-center mb-10">
-            <div>
-                <h1 class="text-3xl font-headline font-bold text-primary mb-1">Bảng điều khiển</h1>
-                <p class="text-slate-500">Hôm nay là một ngày tuyệt vời để tăng trưởng!</p>
+        <div id="section-tours">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-headline font-black text-primary">Danh sách Tour</h1>
+                <button onclick="openModal('add')" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-sm">add</span> Thêm mới
+                </button>
             </div>
-            <button class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow-lg shadow-primary/30 flex items-center gap-2 hover:bg-blue-800 transition">
-                <span class="material-symbols-outlined text-sm">add</span> Thêm Tour Mới
-            </button>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-blue-100 text-primary flex items-center justify-center"><span class="material-symbols-outlined text-2xl">account_balance_wallet</span></div>
-                <div>
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Doanh thu tháng</p>
-                    <h3 class="text-2xl font-headline font-bold text-primary">125.500.000đ</h3>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-green-100 text-green-700 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">confirmation_number</span></div>
-                <div>
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Lượt đặt vé</p>
-                    <h3 class="text-2xl font-headline font-bold text-green-700">48 Lượt</h3>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                <div class="w-14 h-14 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">map</span></div>
-                <div>
-                    <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Tour đang mở</p>
-                    <h3 class="text-2xl font-headline font-bold text-orange-600">12 Tour</h3>
+            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto scrollbar-hide">
+                    <table class="w-full text-left min-w-[900px]">
+                        <thead>
+                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                <th class="p-6">Ảnh</th>
+                                <th class="p-6">Tên Tour</th>
+                                <th class="p-6">Giá</th>
+                                <th class="p-6">Thời gian</th>
+                                <th class="p-6 text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-tour-list"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                <h2 class="text-xl font-headline font-bold text-primary">Danh sách Tour gần đây</h2>
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
-                    <input type="text" placeholder="Tìm kiếm tour..." class="pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 bg-white"/>
+        <div id="section-bookings" class="hidden">
+            <h1 class="text-2xl font-headline font-black text-primary mb-6">Lịch sử Đặt Tour</h1>
+            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto scrollbar-hide">
+                    <table class="w-full text-left min-w-[900px]">
+                        <thead>
+                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                <th class="p-6">Khách hàng</th>
+                                <th class="p-6">Liên hệ</th>
+                                <th class="p-6">Tour đã đặt</th>
+                                <th class="p-6 text-center">Xử lý</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-booking-list"></tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-50 text-xs uppercase tracking-wider text-slate-500 font-semibold border-b border-slate-100">
-                            <th class="p-4">Tên Tour</th>
-                            <th class="p-4">Loại hình</th>
-                            <th class="p-4">Thời gian</th>
-                            <th class="p-4">Giá bán</th>
-                            <th class="p-4 text-center">Thao tác</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition">
-                            <td class="p-4 font-bold text-primary flex items-center gap-3"><img src="https://images.unsplash.com/photo-1599708153386-62bf2ef79133" class="w-10 h-10 rounded-md object-cover"/> Khám Phá Vịnh Hạ Long</td>
-                            <td class="p-4 text-slate-600"><span class="bg-blue-50 text-blue-700 px-2 py-1 rounded-md text-xs font-bold">Biển đảo</span></td>
-                            <td class="p-4 text-slate-600">3 Ngày 2 Đêm</td>
-                            <td class="p-4 font-bold">4.250.000đ</td>
-                            <td class="p-4 text-center">
-                                <button class="text-slate-400 hover:text-primary mx-1 transition"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                                <button class="text-slate-400 hover:text-red-500 mx-1 transition"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-                            </td>
-                        </tr>
-                        <tr class="border-b border-slate-50 hover:bg-slate-50 transition">
-                            <td class="p-4 font-bold text-primary flex items-center gap-3"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz9EeggGcp_60asEkEzGFLs4Qb1qvgJqLboFYUmZSF5YgEpMAriWcyK5FfJhoTXfsFW1Kt5-n3Rgxy1BuWq8Kc6iNCmn5eS3DZahvA7jLyTRSVlg72XqlnJhvk-CJTQ9LUvnMPASA2fZjARkxzSzPgGK2dsYyV1jSSsGkLdGppcX7YL4I7IiObGQqbU9OWCQ0CT_RGK9g01jv3RdUj10eVT4TexRsncAGYO9R2SLZQ_1ysz1qVWq60kLDm4HB6oGAk18h7Dmw" class="w-10 h-10 rounded-md object-cover"/> Vang vọng Phố Hội</td>
-                            <td class="p-4 text-slate-600"><span class="bg-orange-50 text-orange-700 px-2 py-1 rounded-md text-xs font-bold">Di sản</span></td>
-                            <td class="p-4 text-slate-600">3 Ngày 2 Đêm</td>
-                            <td class="p-4 font-bold">7.500.000đ</td>
-                            <td class="p-4 text-center">
-                                <button class="text-slate-400 hover:text-primary mx-1 transition"><span class="material-symbols-outlined text-[18px]">edit</span></button>
-                                <button class="text-slate-400 hover:text-red-500 mx-1 transition"><span class="material-symbols-outlined text-[18px]">delete</span></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </main>
+
+    <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[60] flex items-center justify-center backdrop-blur-sm px-4">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl">
+            <h2 id="modal-title" class="text-2xl font-headline font-black text-primary mb-6">Thêm Tour Mới</h2>
+            <form id="tour-form" class="space-y-4">
+                <input type="hidden" id="edit-id">
+                <input type="text" id="t-name" placeholder="Tên Tour" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" id="t-price" placeholder="Giá" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
+                    <input type="text" id="t-time" placeholder="Thời gian" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
+                </div>
+                <input type="text" id="t-type" placeholder="Loại hình" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
+                <input type="text" id="t-img" placeholder="URL Hình ảnh" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
+                <textarea id="t-desc" placeholder="Mô tả chi tiết" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 h-32 resize-none focus:ring-2 focus:ring-primary/20" required></textarea>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
+                    <button type="submit" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script type="module">
-    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, deleteDoc, doc, addDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-        authDomain: "doantn50cntt.firebaseapp.com",
-        projectId: "doantn50cntt",
-        storageBucket: "doantn50cntt.firebasestorage.app",
-        messagingSenderId: "705512357448",
-        appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-    };
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
 
-    const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    const auth = getAuth(app);
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const db = getFirestore(app);
+        const auth = getAuth(app);
 
-    onAuthStateChanged(auth, (user) => {
-        const guest = document.getElementById('guest-menu');
-        const userBox = document.getElementById('user-menu');
-        const emailTxt = document.getElementById('user-email');
-        if (user) {
-            if(guest) guest.style.display = 'none';
-            if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
-            if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
-        } else {
-            if(guest) guest.style.display = 'flex';
-            if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-email').innerText = user.email.split('@')[0];
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
+
+        window.switchTab = (tab) => {
+            const sections = ['tours', 'bookings'];
+            sections.forEach(s => {
+                document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
+                const btn = document.getElementById(`btn-tab-${s}`);
+                btn.classList.toggle('tab-active', s === tab);
+                btn.classList.toggle('text-slate-500', s !== tab);
+            });
+            if(tab === 'bookings') loadBookings();
+        };
+
+        async function loadAdminTours() {
+            const tbody = document.getElementById('admin-tour-list');
+            const snap = await getDocs(collection(db, "tours"));
+            tbody.innerHTML = "";
+            snap.forEach(d => {
+                const data = d.data();
+                tbody.innerHTML += `
+                    <tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
+                        <td class="p-6"><img src="${data.imageUrl}" class="w-14 h-14 rounded-2xl object-cover"></td>
+                        <td class="p-6 font-bold text-primary">${data.tenTour}</td>
+                        <td class="p-6 font-black text-secondary">${data.giaTour}</td>
+                        <td class="p-6 text-sm font-bold text-slate-400">${data.thoiGian}</td>
+                        <td class="p-6 flex justify-center gap-2">
+                            <button onclick="openModal('edit', '${d.id}')" class="p-2.5 bg-blue-50 text-blue-500 rounded-xl hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
+                            <button onclick="deleteTour('${d.id}')" class="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">delete</span></button>
+                        </td>
+                    </tr>
+                `;
+            });
         }
-    });
 
-    const btnLogout = document.getElementById('btn-logout');
-    if(btnLogout) {
-        btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
-    }
-</script>
+        async function loadBookings() {
+            const tbody = document.getElementById('admin-booking-list');
+            const snap = await getDocs(collection(db, "bookings"));
+            tbody.innerHTML = "";
+            snap.forEach(d => {
+                const data = d.data();
+                tbody.innerHTML += `
+                    <tr class="border-b border-slate-50">
+                        <td class="p-6 font-bold text-primary">${data.khachHang}</td>
+                        <td class="p-6 text-sm text-slate-500">${data.email}<br>${data.sdt}</td>
+                        <td class="p-6 font-bold text-slate-700">${data.tenTour}</td>
+                        <td class="p-6 text-center">
+                            <button onclick="deleteBooking('${d.id}')" class="text-xs font-black uppercase text-red-400 hover:text-red-600">Hủy đơn</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
 
+        window.openModal = async (type, id = null) => {
+            const modal = document.getElementById('tour-modal');
+            const form = document.getElementById('tour-form');
+            modal.classList.remove('hidden');
+            if(type === 'edit') {
+                document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
+                const d = await getDoc(doc(db, "tours", id));
+                const data = d.data();
+                document.getElementById('edit-id').value = id;
+                document.getElementById('t-name').value = data.tenTour;
+                document.getElementById('t-price').value = data.giaTour;
+                document.getElementById('t-time').value = data.thoiGian;
+                document.getElementById('t-type').value = data.loaiTour;
+                document.getElementById('t-img').value = data.imageUrl;
+                document.getElementById('t-desc').value = data.moTa;
+            } else {
+                document.getElementById('modal-title').innerText = "Thêm Tour Mới";
+                form.reset();
+                document.getElementById('edit-id').value = "";
+            }
+        };
+
+        window.closeModal = () => document.getElementById('tour-modal').classList.add('hidden');
+
+        document.getElementById('tour-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('edit-id').value;
+            const data = {
+                tenTour: document.getElementById('t-name').value,
+                giaTour: document.getElementById('t-price').value,
+                thoiGian: document.getElementById('t-time').value,
+                loaiTour: document.getElementById('t-type').value,
+                imageUrl: document.getElementById('t-img').value,
+                moTa: document.getElementById('t-desc').value
+            };
+            if(id) await updateDoc(doc(db, "tours", id), data);
+            else await addDoc(collection(db, "tours"), data);
+            closeModal();
+            loadAdminTours();
+        };
+
+        window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
+        window.deleteBooking = async (id) => { if(confirm("Hủy đơn hàng này?")) { await deleteDoc(doc(db, "bookings", id)); loadBookings(); } };
+
+        loadAdminTours();
+    </script>
 </body>
 </html>
