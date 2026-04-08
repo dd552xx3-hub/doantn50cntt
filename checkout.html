@@ -160,11 +160,10 @@
                                 <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Tổng cộng</p>
                                 <p id="check-price" class="text-3xl font-headline font-black text-secondary tracking-tight">---</p>
                             </div>
-                        </div>
+                        </<button onclick="confirmBooking()" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95 mt-4">
+    Hoàn tất đặt vé
+</button>
 
-                        <button onclick="alert('Mô phỏng: Đặt vé thành công!'); location.href='index.html'" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95 mt-4">
-                            Hoàn tất đặt vé
-                        </button>
                     </div>
                 </div>
             </aside>
@@ -173,7 +172,7 @@
 
         <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        // Đã bổ sung thêm collection và addDoc vào dòng này:
+       
         import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
@@ -239,7 +238,7 @@
         
         loadCheckout();
 
-        // ĐÂY LÀ HÀM BẮN ĐƠN HÀNG LÊN FIREBASE ADMIN
+      
         window.confirmBooking = async () => {
             const tourId = new URLSearchParams(window.location.search).get('id');
             const name = document.querySelector('input[placeholder="Nguyễn Văn A"]').value;
