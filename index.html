@@ -10,6 +10,10 @@
     <script id="tailwind-config">
         tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
+    <style>
+        /* Thêm hiệu ứng cuộn mượt cho trang web */
+        html { scroll-behavior: smooth; }
+    </style>
 </head>
 <body class="bg-surface font-body antialiased">
 
@@ -20,7 +24,7 @@
             <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
+                <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
             </div>
 
             <div class="flex items-center gap-4">
@@ -35,7 +39,7 @@
                     <a href="register.html" class="bg-primary text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md whitespace-nowrap">Đăng ký</a>
                 </div>
 
-                <                <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
+                <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
                     <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform" title="Trang Quản Trị">
                         <span class="material-symbols-outlined text-base md:text-lg">admin_panel_settings</span>
                     </a>
@@ -51,14 +55,14 @@
 
     <main class="pt-20">
         <section class="relative h-[600px] flex items-center justify-center text-center px-6 mb-20 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1528127269322-539801943592" class="absolute inset-0 w-full h-full object-cover -z-10 scale-105">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=1600&q=80" class="absolute inset-0 w-full h-full object-cover -z-10 scale-105">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-surface -z-10"></div>
             <div class="max-w-4xl">
                 <h1 class="text-5xl md:text-7xl font-headline font-black text-white mb-6 leading-tight">Khởi nguồn <br><span class="text-blue-300 italic">Tâm hồn Việt</span></h1>
                 <p class="text-white/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">Vượt xa những hành trình thông thường, chúng tôi kể lại những câu chuyện chưa kể về dải đất hình chữ S.</p>
                 <div class="flex flex-col md:flex-row gap-4 justify-center">
                     <a href="tours.html" class="bg-primary text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-blue-800 transition-all">Khám phá ngay</a>
-                    <a href="#" class="bg-white/10 backdrop-blur text-white border border-white/30 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition-all">Về chúng tôi</a>
+                    <a href="#trai-nghiem" class="bg-white/10 backdrop-blur text-white border border-white/30 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition-all">Về chúng tôi</a>
                 </div>
             </div>
         </section>
@@ -97,6 +101,69 @@
                 <div class="col-span-full text-center py-24 text-slate-400 animate-pulse">
                     <span class="material-symbols-outlined text-5xl mb-4">cloud_download</span>
                     <p class="font-bold uppercase tracking-widest text-sm">Đang tải dữ liệu 50cntt1...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="trai-nghiem" class="max-w-7xl mx-auto px-6 mb-24">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-headline font-black text-primary mb-4">Khách Hàng Nói Gì Về <span class="text-secondary">50cntt1</span></h2>
+                <p class="text-slate-600 text-lg leading-relaxed">Những khoảnh khắc tuyệt vời và đánh giá chân thực nhất từ hàng ngàn du khách đã đồng hành cùng chúng tôi.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+                    <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20">
+                        <div>
+                            <h4 class="font-bold text-primary">Trần Mai Anh</h4>
+                            <div class="flex text-warning text-sm mt-0.5">
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10">"Tour đi Sapa thực sự trên cả tuyệt vời! Hướng dẫn viên siêu nhiệt tình, khách sạn view thung lũng quá đẹp. Chắc chắn sẽ tiếp tục ủng hộ 50cntt1 trong các kỳ nghỉ tới."</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+                    <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20">
+                        <div>
+                            <h4 class="font-bold text-primary">Hoàng Văn Nam</h4>
+                            <div class="flex text-warning text-sm mt-0.5">
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10">"Tôi đã đặt tour Vịnh Hạ Long cho cả gia đình. Mọi thứ từ xe đưa đón đến bữa ăn trên du thuyền đều được chuẩn bị rất chu đáo. Giao diện web đặt tour cũng rất dễ dùng!"</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+                    <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
+                    <div class="flex items-center gap-4 mb-6 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20">
+                        <div>
+                            <h4 class="font-bold text-primary">Lê Ngọc Diệp</h4>
+                            <div class="flex text-warning text-sm mt-0.5">
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10">"Quá trình thanh toán bằng mã QR rất tiện lợi và nhanh chóng. Bộ phận chăm sóc khách hàng gọi điện xác nhận đơn hàng ngay lập tức. Đánh giá 5 sao cho chất lượng dịch vụ."</p>
                 </div>
             </div>
         </section>
@@ -170,7 +237,7 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Radar tài khoản
+
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
             const userBox = document.getElementById('user-menu');
@@ -189,7 +256,7 @@
             signOut(auth).then(() => { window.location.reload(); });
         };
 
-        // Đổ Tour động
+     
         async function getTours() {
             const container = document.getElementById('tour-list');
             try {
