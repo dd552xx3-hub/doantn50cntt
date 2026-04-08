@@ -23,15 +23,16 @@
             <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1 Admin</a>
             <div id="user-menu" class="flex items-center gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
                 <span id="user-email" class="text-xs font-bold text-primary"></span>
-                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest">Thoát</button>
+                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700">Thoát</button>
             </div>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 md:px-8 mb-24">
-        <div class="flex gap-2 mb-8 bg-white p-1.5 rounded-full shadow-sm w-max border border-slate-100">
-            <button onclick="switchTab('tours')" id="btn-tab-tours" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all tab-active">Quản lý Tour</button>
-            <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50">Đơn Đặt Hàng</button>
+        <div class="flex gap-2 mb-8 bg-white p-1.5 rounded-full shadow-sm w-max border border-slate-100 overflow-x-auto">
+            <button onclick="switchTab('tours')" id="btn-tab-tours" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all tab-active whitespace-nowrap">Quản lý Tour</button>
+            <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Đơn Đặt Hàng</button>
+            <button onclick="switchTab('users')" id="btn-tab-users" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Khách hàng</button>
         </div>
 
         <div id="section-tours">
@@ -73,6 +74,25 @@
                             </tr>
                         </thead>
                         <tbody id="admin-booking-list"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-users" class="hidden">
+            <h1 class="text-2xl font-headline font-black text-primary mb-6">Danh sách Khách hàng</h1>
+            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto scrollbar-hide">
+                    <table class="w-full text-left min-w-[800px]">
+                        <thead>
+                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                <th class="p-6">Họ và Tên</th>
+                                <th class="p-6">Email</th>
+                                <th class="p-6">Ngày đăng ký</th>
+                                <th class="p-6 text-center">Vai trò</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-user-list"></tbody>
                     </table>
                 </div>
             </div>
@@ -129,7 +149,7 @@
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
         window.switchTab = (tab) => {
-            const sections = ['tours', 'bookings'];
+            const sections = ['tours', 'bookings', 'users'];
             sections.forEach(s => {
                 document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
                 const btn = document.getElementById(`btn-tab-${s}`);
@@ -137,6 +157,7 @@
                 btn.classList.toggle('text-slate-500', s !== tab);
             });
             if(tab === 'bookings') loadBookings();
+            if(tab === 'users') loadUsers();
         };
 
         async function loadAdminTours() {
@@ -173,6 +194,30 @@
                         <td class="p-6 font-bold text-slate-700">${data.tenTour}</td>
                         <td class="p-6 text-center">
                             <button onclick="deleteBooking('${d.id}')" class="text-xs font-black uppercase text-red-400 hover:text-red-600">Hủy đơn</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // HÀM TẢI DANH SÁCH NGƯỜI DÙNG
+        async function loadUsers() {
+            const tbody = document.getElementById('admin-user-list');
+            const snap = await getDocs(collection(db, "users"));
+            tbody.innerHTML = "";
+            if (snap.empty) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-500">Chưa có tài khoản nào được đăng ký.</td></tr>`;
+                return;
+            }
+            snap.forEach(d => {
+                const data = d.data();
+                tbody.innerHTML += `
+                    <tr class="border-b border-slate-50">
+                        <td class="p-6 font-bold text-primary">${data.hoTen || 'Chưa cập nhật'}</td>
+                        <td class="p-6 text-sm text-slate-500">${data.email}</td>
+                        <td class="p-6 text-sm text-slate-500">${data.ngayTao || '---'}</td>
+                        <td class="p-6 text-center">
+                            <span class="bg-blue-50 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${data.vaiTro || 'Thành viên'}</span>
                         </td>
                     </tr>
                 `;
