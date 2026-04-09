@@ -12,6 +12,11 @@
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
     </style>
 </head>
 <body class="bg-surface text-slate-800 font-body pt-24 pb-20">
@@ -25,6 +30,9 @@
                 <a class="text-slate-600 hover:text-primary transition-colors pb-1" href="#">Giới thiệu</a>
             </div>
             <div class="flex items-center gap-4">
+                
+                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
+
                 <a href="cart.html" class="p-2 hover:bg-slate-50 rounded-full transition-colors">
                     <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
                 </a>
@@ -114,5 +122,17 @@
             </p>
         </div>
     </footer>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi', 
+                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
