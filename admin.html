@@ -30,7 +30,7 @@
     <style>
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .nav-item-active { background-color: #004471; color: white; box-shadow: 0 4px 12px rgba(0, 68, 113, 0.3); }
+        .nav-item-active { background-color: #004471 !important; color: white !important; box-shadow: 0 4px 12px rgba(0, 68, 113, 0.3); }
     </style>
 </head>
 <body class="bg-surface font-body antialiased min-h-screen flex">
@@ -38,7 +38,7 @@
     <!-- SIDEBAR NAVIGATION -->
     <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
         <div class="p-6">
-            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span> Admin</a>
+            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter block">50cntt1<span class="text-accent">.</span> Admin</a>
         </div>
 
         <nav class="flex-1 px-4 space-y-2 mt-4">
@@ -295,6 +295,7 @@
 
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
+        // QUAN TRỌNG: Gán các hàm vào đối tượng window để HTML có thể gọi được
         window.searchTable = (inputId, tableId) => {
             let input = document.getElementById(inputId).value.toLowerCase();
             let trs = document.getElementById(tableId).getElementsByTagName("tr");
