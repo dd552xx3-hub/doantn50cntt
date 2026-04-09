@@ -7,36 +7,110 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#004471", 
+                        "primary-light": "#005da3",
+                        "surface": "#f8fafc", 
+                        "accent": "#fbbf24"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Plus Jakarta Sans"], 
+                        "body": ["Be Vietnam Pro"] 
+                    } 
+                } 
+            } 
+        }
     </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .bg-gradient-brand {
+            background: linear-gradient(135deg, #004471 0%, #002a47 100%);
+        }
+    </style>
 </head>
-<body class="bg-surface font-body min-h-screen flex items-center justify-center p-6">
-    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl shadow-primary/5 overflow-hidden border border-slate-100">
-        <div class="p-8 md:p-10">
-            <div class="text-center mb-10">
-                <a href="index.html" class="text-3xl font-black text-primary mb-2 block">50cntt1</a>
-                <h1 class="text-2xl font-headline font-bold text-slate-800">Chào mừng trở lại!</h1>
+<body class="bg-surface font-body min-h-screen flex items-center justify-center p-0 m-0">
+    <div class="flex w-full min-h-screen overflow-hidden">
+        <div class="hidden lg:flex lg:w-1/2 bg-gradient-brand relative p-12 flex-col justify-between text-white">
+            <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-primary-light/20 rounded-full blur-3xl"></div>
+
+            <div class="relative z-10">
+                <a href="index.html" class="text-4xl font-black tracking-tighter mb-4 block">50cntt1<span class="text-accent">.</span></a>
+                <p class="text-blue-100 text-lg max-w-md leading-relaxed">
+                    Hệ thống quản lý sinh viên hiện đại, tối ưu hóa quy trình vận hành và lưu trữ dữ liệu tập trung.
+                </p>
             </div>
 
-            <form class="space-y-5">
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Địa chỉ Email</label>
-                    <input type="email" id="login-email" placeholder="daica@email.com" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
+            <div class="relative z-10">
+                <div class="bg-white/10 glass-effect p-6 rounded-2xl border border-white/20 max-w-sm">
+                    <p class="italic text-blue-50 text-sm">
+                        "Công nghệ không chỉ là công cụ, mà là cách chúng ta thay đổi tương lai của giáo dục."
+                    </p>
                 </div>
-                <div>
-                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Mật khẩu</label>
-                    <input type="password" id="login-pass" placeholder="••••••••" class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20"/>
-                </div>
-                
-                <button type="button" id="btn-login" class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-blue-800 transition-all active:scale-[0.98] mt-4">
-                    Đăng nhập
-                </button>
-            </form>
+            </div>
+        </div>
 
-            <div class="mt-8 pt-8 border-t border-slate-100 text-center">
-                <p class="text-sm text-slate-500">
-                    Chưa có tài khoản? <a href="register.html" class="text-primary font-bold hover:underline">Đăng ký ngay</a>
-                </p>
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 md:p-16 bg-white">
+            <div class="max-w-md w-full">
+                <div class="lg:hidden text-center mb-8">
+                    <a href="index.html" class="text-3xl font-black text-primary mb-2 block">50cntt1<span class="text-accent">.</span></a>
+                </div>
+
+                <div class="mb-10">
+                    <h1 class="text-3xl font-headline font-extrabold text-slate-900 mb-2">Chào mừng trở lại!</h1>
+                    <p class="text-slate-500">Vui lòng nhập thông tin để truy cập hệ thống</p>
+                </div>
+
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Địa chỉ Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.2v-//9" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </span>
+                            <input type="email" id="login-email" placeholder="name@company.com" 
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all"/>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-semibold text-slate-700">Mật khẩu</label>
+                            <a href="#" class="text-xs text-primary font-medium hover:underline">Quên mật khẩu?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </span>
+                            <input type="password" id="login-pass" placeholder="••••••••" 
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-11 pr-4 py-3 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all"/>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="btn-login" 
+                        class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/30 hover:bg-primary-light hover:-translate-y-0.5 transition-all active:scale-[0.98] mt-4">
+                        Đăng nhập ngay
+                    </button>
+                </form>
+
+                <div class="mt-10 text-center">
+                    <p class="text-sm text-slate-500">
+                        Bạn chưa có tài khoản? 
+                        <a href="register.html" class="text-primary font-bold hover:text-primary-light transition-colors underline underline-offset-4">Đăng ký tài khoản</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -67,10 +141,10 @@
             signInWithEmailAndPassword(auth, email, pass)
                 .then((userCredential) => {
                     alert("Đăng nhập thành công! Chào mừng trở lại.");
-                    window.location.href = "index.html"; // Nhảy về trang chủ
+                    window.location.href = "index.html";
                 })
                 .catch((error) => {
-                    alert("Sai email hoặc mật khẩu! (Hoặc đại ca chưa đăng ký)");
+                    alert("Sai email hoặc mật khẩu! (Hoặc chưa đăng ký)");
                 });
         });
     </script>
