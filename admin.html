@@ -8,6 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- FIREBASE COMPAT SDKS (Không dùng module để tránh lỗi scope) -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+
     <script id="tailwind-config">
         tailwind.config = { 
             theme: { 
@@ -93,7 +99,7 @@
                     <div class="bg-primary p-8 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden">
                         <div class="relative z-10">
                             <h3 class="text-2xl font-bold mb-4">Chào mừng Admin!</h3>
-                            <p class="text-blue-100 font-light mb-6">Hệ thống ổn định. Hãy vào "Quản lý Tour" để thêm hành trình mới.</p>
+                            <p class="text-blue-100 font-light mb-6">Hệ thống hoạt động ổn định. Hãy vào "Quản lý Tour" để thêm hành trình mới.</p>
                             <button onclick="switchTab('tours')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm">Quản lý Tour ngay</button>
                         </div>
                     </div>
@@ -186,14 +192,44 @@
         </div>
     </div>
 
-    <!-- SCRIPT GIAO DIỆN (KHÔNG MODULE) -->
     <script>
+        // 1. CẤU HÌNH FIREBASE (COMPAT)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        let orderChartInstance = null;
+
+        // 2. LÍNH GÁC PHÂN QUYỀN
+        auth.onAuthStateChanged(async (user) => {
+            if (user) {
+                try {
+                    const userDoc = await db.collection("users").doc(user.uid).get();
+                    if (userDoc.exists && userDoc.data().role === "admin") {
+                        document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
+                    } else {
+                        alert("Bạn không có quyền Admin!");
+                        window.location.href = "index.html";
+                    }
+                } catch (e) { window.location.href = "login.html"; }
+            } else { window.location.href = "login.html"; }
+        });
+
+        document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
+
+        // 3. HÀM ĐIỀU HƯỚNG GIAO DIỆN
         function switchTab(tab) {
             const sections = ['dashboard', 'tours', 'bookings', 'users'];
             const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
             sections.forEach(s => {
-                const el = document.getElementById(`section-${s}`);
-                if(el) el.classList.toggle('hidden', s !== tab);
+                document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
                 const btn = document.getElementById(`btn-tab-${s}`);
                 if(btn) {
                     btn.classList.toggle('nav-item-active', s === tab);
@@ -201,8 +237,10 @@
                 }
             });
             document.getElementById('current-tab-title').innerText = titles[tab];
-            // Gọi hàm load dữ liệu từ module
-            if(window.loadData) window.loadData(tab);
+            if(tab === 'dashboard') loadDashboard();
+            if(tab === 'tours') loadAdminTours();
+            if(tab === 'bookings') loadBookings();
+            if(tab === 'users') loadUsers();
         }
 
         function openModal(type, id = null) {
@@ -210,7 +248,16 @@
             modal.classList.remove('hidden');
             if(type === 'edit') {
                 document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
-                if(window.fetchTourData) window.fetchTourData(id);
+                db.collection("tours").doc(id).get().then(doc => {
+                    const data = doc.data();
+                    document.getElementById('edit-id').value = id;
+                    document.getElementById('t-name').value = data.tenTour;
+                    document.getElementById('t-price').value = data.giaTour;
+                    document.getElementById('t-time').value = data.thoiGian;
+                    document.getElementById('t-type').value = data.loaiTour;
+                    document.getElementById('t-img').value = data.imageUrl;
+                    document.getElementById('t-desc').value = data.moTa;
+                });
             } else {
                 document.getElementById('modal-title').innerText = "Thêm Tour Mới";
                 document.getElementById('tour-form').reset();
@@ -230,74 +277,16 @@
                 trs[i].style.display = text.indexOf(input) > -1 ? "" : "none";
             }
         }
-    </script>
 
-    <!-- SCRIPT FIREBASE (MODULE) -->
-    <script type="module">
-        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, getDocs, deleteDoc, doc, addDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-        };
-
-        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        let orderChartInstance = null; 
-
-        // Phân quyền Admin
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                try {
-                    const userDoc = await getDoc(doc(db, "users", user.uid));
-                    if (userDoc.exists() && userDoc.data().role === "admin") {
-                        document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
-                    } else {
-                        alert("Bạn không có quyền Admin!");
-                        window.location.href = "index.html";
-                    }
-                } catch (e) { window.location.href = "login.html"; }
-            } else { window.location.href = "login.html"; }
-        });
-
-        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
-
-        // Gán hàm vào window để script thường gọi được
-        window.loadData = async (tab) => {
-            if(tab === 'dashboard') loadDashboard();
-            if(tab === 'tours') loadAdminTours();
-            if(tab === 'bookings') loadBookings();
-            if(tab === 'users') loadUsers();
-        };
-
-        window.fetchTourData = async (id) => {
-            const d = await getDoc(doc(db, "tours", id));
-            const data = d.data();
-            document.getElementById('edit-id').value = id;
-            document.getElementById('t-name').value = data.tenTour;
-            document.getElementById('t-price').value = data.giaTour;
-            document.getElementById('t-time').value = data.thoiGian;
-            document.getElementById('t-type').value = data.loaiTour;
-            document.getElementById('t-img').value = data.imageUrl;
-            document.getElementById('t-desc').value = data.moTa;
-        };
-
-        window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
-
+        // 4. LOAD DỮ LIỆU TỪ FIREBASE
         async function loadDashboard() {
-            const toursSnap = await getDocs(collection(db, "tours"));
-            const usersSnap = await getDocs(collection(db, "users"));
-            const bookingsSnap = await getDocs(collection(db, "bookings"));
+            const toursSnap = await db.collection("tours").get();
+            const usersSnap = await db.collection("users").get();
+            const bookingsSnap = await db.collection("bookings").get();
             document.getElementById('stat-tours').innerText = toursSnap.size;
             document.getElementById('stat-users').innerText = usersSnap.size;
             document.getElementById('stat-bookings').innerText = bookingsSnap.size;
+            
             let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
             bookingsSnap.forEach(d => {
                 let s = d.data().trangThai || "Chờ xử lý";
@@ -314,7 +303,7 @@
 
         async function loadAdminTours() {
             const tbody = document.getElementById('admin-tour-list');
-            const snap = await getDocs(collection(db, "tours"));
+            const snap = await db.collection("tours").get();
             tbody.innerHTML = "";
             snap.forEach(d => {
                 const data = d.data();
@@ -332,7 +321,7 @@
 
         async function loadBookings() {
             const tbody = document.getElementById('admin-booking-list');
-            const snap = await getDocs(collection(db, "bookings"));
+            const snap = await db.collection("bookings").get();
             tbody.innerHTML = "";
             snap.forEach(d => {
                 const data = d.data();
@@ -352,13 +341,13 @@
 
         window.updateBookingStatus = async (id, newStatus) => {
             if(!newStatus) return;
-            await updateDoc(doc(db, "bookings", id), { trangThai: newStatus });
+            await db.collection("bookings").doc(id).update({ trangThai: newStatus });
             loadBookings();
         };
 
         async function loadUsers() {
             const tbody = document.getElementById('admin-user-list');
-            const snap = await getDocs(collection(db, "users"));
+            const snap = await db.collection("users").get();
             tbody.innerHTML = "";
             snap.forEach(d => {
                 const data = d.data();
@@ -382,13 +371,15 @@
                 imageUrl: document.getElementById('t-img').value,
                 moTa: document.getElementById('t-desc').value
             };
-            if(id) await updateDoc(doc(db, "tours", id), data);
-            else await addDoc(collection(db, "tours"), data);
+            if(id) await db.collection("tours").doc(id).update(data);
+            else await db.collection("tours").add(data);
             btn.innerText = "Xác nhận";
             btn.disabled = false;
             closeModal();
             loadAdminTours();
         };
+
+        window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await db.collection("tours").doc(id).delete(); loadAdminTours(); } };
 
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         switchTab('dashboard');
