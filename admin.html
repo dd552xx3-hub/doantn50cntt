@@ -188,8 +188,8 @@
                     if (userDoc.exists()) {
                         const userData = userDoc.data();
                         
-                        // Nếu chức vụ không phải Admin thì đá văng ra ngoài
-                        if (userData.vaiTro !== "Admin") {
+                        // Nếu chức vụ không phải admin thì đá văng ra ngoài
+                        if (userData.role !== "admin") {
                             alert("Cảnh báo: Bạn không có quyền truy cập khu vực Quản trị!");
                             window.location.href = "index.html"; 
                             return;
@@ -349,7 +349,7 @@
                         <td class="p-6 text-sm text-slate-500">${data.email}</td>
                         <td class="p-6 text-sm text-slate-500">${data.ngayTao || '---'}</td>
                         <td class="p-6 text-center">
-                            <span class="bg-blue-50 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${data.vaiTro || 'Thành viên'}</span>
+                            <span class="${data.role === 'admin' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-primary'} px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${data.role === 'admin' ? 'Quản trị viên' : 'Khách hàng'}</span>
                         </td>
                     </tr>
                 `;
