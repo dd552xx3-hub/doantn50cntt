@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
-    <!-- FIREBASE COMPAT SDKS (Không dùng module để tránh lỗi scope) -->
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
@@ -32,7 +31,7 @@
 </head>
 <body class="bg-surface font-body antialiased min-h-screen flex">
     
-    <!-- SIDEBAR -->
+
     <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
         <div class="p-6">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter block">50cntt1<span class="text-accent">.</span> Admin</a>
@@ -75,7 +74,7 @@
         </header>
 
         <div class="p-6 md:p-10">
-            <!-- Dashboard -->
+            
             <div id="section-dashboard" class="space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
@@ -106,7 +105,7 @@
                 </div>
             </div>
 
-            <!-- Tours -->
+        
             <div id="section-tours" class="hidden space-y-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <h1 class="text-2xl font-headline font-black text-primary">Quản lý Danh mục Tour</h1>
@@ -131,7 +130,7 @@
                 </div>
             </div>
 
-            <!-- Bookings -->
+            
             <div id="section-bookings" class="hidden space-y-6">
                 <h1 class="text-2xl font-headline font-black text-primary">Quản lý Đơn đặt Tour</h1>
                 <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
@@ -148,7 +147,7 @@
                 </div>
             </div>
 
-            <!-- Users -->
+          
             <div id="section-users" class="hidden space-y-6">
                 <h1 class="text-2xl font-headline font-black text-primary">Danh sách Thành viên</h1>
                 <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
@@ -167,7 +166,7 @@
         </div>
     </main>
 
-    <!-- MODAL -->
+
     <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl">
             <div class="flex justify-between items-center mb-6">
@@ -207,7 +206,7 @@
         const auth = firebase.auth();
         let orderChartInstance = null;
 
-        // 2. LÍNH GÁC PHÂN QUYỀN
+     
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 try {
