@@ -8,74 +8,95 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#004471", 
+                        "primary-light": "#005da3",
+                        "surface": "#f8fafc", 
+                        "secondary": "#e85d04",
+                        "accent": "#fbbf24"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Plus Jakarta Sans"], 
+                        "body": ["Be Vietnam Pro"] 
+                    } 
+                } 
+            } 
+        }
     </script>
     <style>
         html { scroll-behavior: smooth; }
         .goog-te-banner-frame.skiptranslate { display: none !important; }
-body { top: 0px !important; }
-.goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-.goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; }
-
+        body { top: 0px !important; }
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .text-gradient { background: linear-gradient(to right, #004471, #005da3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="bg-surface font-body antialiased">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-bold text-primary">50cntt1</a>
+            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
             
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
+            <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
                 <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
             </div>
 
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
                 <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
 
-                <a href="cart.html" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block">
-                    <span class="material-symbols-outlined text-slate-600">shopping_cart</span>
+                <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
+                    <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
                 </a>
                 
                 <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                    <a href="login.html" class="p-2 hover:bg-slate-50 rounded-full transition-colors inline-block text-slate-600 font-bold hover:text-primary">
+                    <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
                         <span class="material-symbols-outlined">account_circle</span>
                     </a>
-                    <a href="register.html" class="bg-primary text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm transition-transform active:scale-95 shadow-md whitespace-nowrap">Đăng ký</a>
+                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
                 </div>
 
-                <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
-                    <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform" title="Trang Quản Trị">
-                        <span class="material-symbols-outlined text-base md:text-lg">admin_panel_settings</span>
+                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
+                    <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
+                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
                     <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
                 </div>
-
             </div>
         </div>
     </nav>
 
     <main class="pt-20">
-        <section class="relative h-[600px] flex items-center justify-center text-center px-6 mb-20 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=1600&q=80" class="absolute inset-0 w-full h-full object-cover -z-10 scale-105">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-surface -z-10"></div>
-            <div class="max-w-4xl">
-                <h1 class="text-5xl md:text-7xl font-headline font-black text-white mb-6 leading-tight">Khởi nguồn <br><span class="text-blue-300 italic">Tâm hồn Việt</span></h1>
-                <p class="text-white/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">Vượt xa những hành trình thông thường, chúng tôi kể lại những câu chuyện chưa kể về dải đất hình chữ S.</p>
-                <div class="flex flex-col md:flex-row gap-4 justify-center">
-                    <a href="tours.html" class="bg-primary text-white px-10 py-4 rounded-full font-bold shadow-xl hover:bg-blue-800 transition-all">Khám phá ngay</a>
-                    <a href="#trai-nghiem" class="bg-white/10 backdrop-blur text-white border border-white/30 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition-all">Về chúng tôi</a>
+        <section class="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=1600&q=80" class="absolute inset-0 w-full h-full object-cover -z-10 scale-105 animate-pulse-slow">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-surface -z-10"></div>
+            
+            <div class="max-w-4xl relative z-10">
+                <h1 class="text-6xl md:text-8xl font-headline font-black text-white mb-6 leading-tight tracking-tighter">
+                    Khởi nguồn <br><span class="text-blue-300 italic">Tâm hồn Việt</span>
+                </h1>
+                <p class="text-white/80 text-lg md:text-2xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    Vượt xa những hành trình thông thường, chúng tôi kể lại những câu chuyện chưa kể về dải đất hình chữ S.
+                </p>
+                <div class="flex flex-col md:flex-row gap-5 justify-center">
+                    <a href="tours.html" class="bg-primary text-white px-12 py-4 rounded-full font-bold shadow-2xl hover:bg-primary-light transition-all hover:-translate-y-1">Khám phá ngay</a>
+                    <a href="#trai-nghiem" class="bg-white/10 backdrop-blur-md text-white border border-white/30 px-12 py-4 rounded-full font-bold hover:bg-white/20 transition-all">Về chúng tôi</a>
                 </div>
                 
-                <div class="mt-8 flex justify-center">
-                    <div class="flex items-center gap-4 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full border border-white/30 text-white shadow-xl hover:bg-white/30 transition-all cursor-pointer" title="Thời tiết hiện tại">
-                        <span id="w-icon" class="material-symbols-outlined text-4xl text-yellow-300">partly_cloudy_day</span>
+                <div class="mt-12 flex justify-center">
+                    <div class="flex items-center gap-4 bg-white/10 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20 text-white shadow-2xl hover:bg-white/20 transition-all cursor-pointer group">
+                        <span id="w-icon" class="material-symbols-outlined text-4xl text-yellow-300 group-hover:scale-110 transition-transform">partly_cloudy_day</span>
                         <div class="text-left">
-                            <p id="w-city" class="text-[10px] font-bold uppercase tracking-widest opacity-80">Đang kết nối vệ tinh...</p>
+                            <p id="w-city" class="text-[10px] font-bold uppercase tracking-widest opacity-70">Đang kết nối...</p>
                             <p id="w-temp" class="text-xl font-black leading-tight">--°C</p>
                         </div>
                     </div>
@@ -83,23 +104,23 @@ body { top: 0px !important; }
             </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-6 mb-24">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 bg-white p-12 rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-50">
-                <div class="text-center">
-                    <div class="text-4xl font-black text-primary mb-2">150+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Điểm đến</div>
+        <section class="max-w-7xl mx-auto px-6 -mt-20 relative z-20 mb-24">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
+                <div class="text-center group">
+                    <div class="text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">150+</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Điểm đến</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-4xl font-black text-primary mb-2">12k+</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Khách hàng</div>
+                <div class="text-center group">
+                    <div class="text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">12k+</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Khách hàng</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-4xl font-black text-primary mb-2">4.9</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Đánh giá</div>
+                <div class="text-center group">
+                    <div class="text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">4.9</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Đánh giá</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-4xl font-black text-primary mb-2">24/7</div>
-                    <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Hỗ trợ</div>
+                <div class="text-center group">
+                    <div class="text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">24/7</div>
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Hỗ trợ</div>
                 </div>
             </div>
         </section>
@@ -107,10 +128,10 @@ body { top: 0px !important; }
         <section class="max-w-7xl mx-auto px-6 mb-24">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
                 <div>
-                    <h2 class="text-4xl font-headline font-black text-primary mb-4 tracking-tight">Hành trình nổi bật</h2>
-                    <p class="text-slate-500 max-w-md leading-relaxed text-lg">Những trải nghiệm độc bản được thiết kế riêng cho bạn để khám phá vẻ đẹp bất tận của Việt Nam.</p>
+                    <h2 class="text-4xl md:text-5xl font-headline font-black text-primary mb-4 tracking-tight">Hành trình <span class="text-gradient">nổi bật</span></h2>
+                    <p class="text-slate-500 max-w-md leading-relaxed text-lg font-light">Những trải nghiệm độc bản được thiết kế riêng cho bạn để khám phá vẻ đẹp bất tận của Việt Nam.</p>
                 </div>
-                <a href="tours.html" class="text-primary font-bold hover:underline flex items-center gap-2 mb-2">Tất cả tour <span class="material-symbols-outlined">east</span></a>
+                <a href="tours.html" class="text-primary font-bold hover:underline flex items-center gap-2 mb-2 group">Tất cả tour <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">east</span></a>
             </div>
             
             <div id="tour-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -123,18 +144,18 @@ body { top: 0px !important; }
 
         <section id="trai-nghiem" class="max-w-7xl mx-auto px-6 mb-24">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-5xl font-headline font-black text-primary mb-4">Khách Hàng Nói Gì Về <span class="text-secondary">50cntt1</span></h2>
-                <p class="text-slate-600 text-lg leading-relaxed">Những khoảnh khắc tuyệt vời và đánh giá chân thực nhất từ hàng ngàn du khách đã đồng hành cùng chúng tôi.</p>
+                <h2 class="text-4xl md:text-6xl font-headline font-black text-primary mb-4 tracking-tighter">Khách Hàng Nói Gì Về <span class="text-secondary">50cntt1</span></h2>
+                <p class="text-slate-500 text-lg leading-relaxed font-light">Những khoảnh khắc tuyệt vời và đánh giá chân thực nhất từ hàng ngàn du khách đã đồng hành cùng chúng tôi.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative group">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
                     <div class="flex items-center gap-4 mb-6 relative z-10">
                         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20">
                         <div>
                             <h4 class="font-bold text-primary">Trần Mai Anh</h4>
-                            <div class="flex text-warning text-sm mt-0.5">
+                            <div class="flex text-accent text-sm mt-0.5">
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -143,34 +164,34 @@ body { top: 0px !important; }
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-600 leading-relaxed italic relative z-10">"Tour đi Sapa thực sự trên cả tuyệt vời! Hướng dẫn viên siêu nhiệt tình, khách sạn view thung lũng quá đẹp. Chắc chắn sẽ tiếp tục ủng hộ 50cntt1 trong các kỳ nghỉ tới."</p>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10 font-light">"Tour đi Sapa thực sự trên cả tuyệt vời! Hướng dẫn viên siêu nhiệt tình, khách sạn view thung lũng quá đẹp."</p>
                 </div>
                 
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative group">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
                     <div class="flex items-center gap-4 mb-6 relative z-10">
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&q=80" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20">
                         <div>
                             <h4 class="font-bold text-primary">Hoàng Văn Nam</h4>
-                            <div class="flex text-warning text-sm mt-0.5">
+                            <div class="flex text-accent text-sm mt-0.5">
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+                                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-600 leading-relaxed italic relative z-10">"Tôi đã đặt tour Vịnh Hạ Long cho cả gia đình. Mọi thứ từ xe đưa đón đến bữa ăn trên du thuyền đều được chuẩn bị rất chu đáo. Giao diện web đặt tour cũng rất dễ dùng!"</p>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10 font-light">"Tôi đã đặt tour Vịnh Hạ Long cho cả gia đình. Mọi thứ từ xe đưa đón đến bữa ăn đều được chuẩn bị rất chu đáo."</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative group">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative group">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
                     <div class="flex items-center gap-4 mb-6 relative z-10">
                         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&q=80" class="w-14 h-14 rounded-full object-cover border-2 border-primary/20">
                         <div>
                             <h4 class="font-bold text-primary">Lê Ngọc Diệp</h4>
-                            <div class="flex text-warning text-sm mt-0.5">
+                            <div class="flex text-accent text-sm mt-0.5">
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
                                 <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -179,314 +200,16 @@ body { top: 0px !important; }
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-600 leading-relaxed italic relative z-10">"Quá trình thanh toán bằng mã QR rất tiện lợi và nhanh chóng. Bộ phận chăm sóc khách hàng gọi điện xác nhận đơn hàng ngay lập tức. Đánh giá 5 sao cho chất lượng dịch vụ."</p>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10 font-light">"Quá trình thanh toán bằng mã QR rất tiện lợi. Bộ phận chăm sóc khách hàng phản hồi ngay lập tức. Rất hài lòng!"</p>
                 </div>
             </div>
         </section>
 
         <section class="max-w-7xl mx-auto px-6 mb-24">
-            <div class="bg-primary rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
+            <div class="bg-primary rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary/40">
                 <div class="relative z-10 max-w-2xl mx-auto">
                     <h2 class="text-3xl md:text-5xl font-headline font-bold text-white mb-6 leading-tight">Nhận ưu đãi sớm nhất</h2>
-                    <p class="text-blue-100/80 mb-10">Để lại email để không bỏ lỡ những chuyến đi tuyệt vời nhất cùng 50cntt1.</p>
+                    <p class="text-blue-100/80 mb-10 font-light">Để lại email để không bỏ lỡ những chuyến đi tuyệt vời nhất cùng 50cntt1.</p>
                     <div class="flex flex-col md:flex-row gap-3">
-                        <input type="email" placeholder="Email của bạn..." class="flex-1 px-8 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50">
-                        <button class="bg-secondary text-white px-10 py-4 rounded-full font-bold shadow-lg active:scale-95 transition-transform">Gửi ngay</button>
-                    </div>
-                </div>
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -ml-32 -mb-32"></div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-white pt-20 pb-10 border-t border-slate-100 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="md:col-span-2">
-                <a href="index.html" class="text-3xl font-black text-primary mb-6 block">50cntt1</a>
-                <p class="text-slate-500 max-w-sm mb-8 leading-relaxed">Đơn vị lữ hành tiên phong trong việc kiến tạo những trải nghiệm du lịch di sản và văn hóa đích thực tại Việt Nam.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">facebook</span></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
-                </div>
-            </div>
-            <div>
-                <h4 class="font-bold text-primary mb-6 uppercase text-sm tracking-widest">Khám phá</h4>
-                <ul class="space-y-4 text-slate-500 text-sm">
-                    <li><a href="#" class="hover:text-primary">Miền Bắc</a></li>
-                    <li><a href="#" class="hover:text-primary">Miền Trung</a></li>
-                    <li><a href="#" class="hover:text-primary">Miền Nam</a></li>
-                    <li><a href="#" class="hover:text-primary">Ưu đãi</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-primary mb-6 uppercase text-sm tracking-widest">Hỗ trợ</h4>
-                <ul class="space-y-4 text-slate-500 text-sm">
-                    <li><a href="#" class="hover:text-primary">Trung tâm trợ giúp</a></li>
-                    <li><a href="#" class="hover:text-primary">Chính sách bảo mật</a></li>
-                    <li><a href="#" class="hover:text-primary">Điều khoản dịch vụ</a></li>
-                    <li><a href="#" class="hover:text-primary">Liên hệ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
-            <p>© 2026 50CNTT1 TRAVEL. ALL RIGHTS RESERVED.</p>
-            <p>DESIGNED BY 50CNTT1 ĐTĐL 🚀</p>
-        </div>
-    </footer>
-
-    <script type="module">
-        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-        };
-
-        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-
-        onAuthStateChanged(auth, (user) => {
-            const guest = document.getElementById('guest-menu');
-            const userBox = document.getElementById('user-menu');
-            const emailTxt = document.getElementById('user-email');
-            if (user) {
-                if(guest) guest.style.display = 'none';
-                if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
-                if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
-            } else {
-                if(guest) guest.style.display = 'flex';
-                if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
-            }
-        });
-
-        document.getElementById('btn-logout').onclick = () => {
-            signOut(auth).then(() => { window.location.reload(); });
-        };
-
-        async function getTours() {
-            const container = document.getElementById('tour-list');
-            try {
-                const snap = await getDocs(collection(db, "tours"));
-                container.innerHTML = "";
-                if (snap.empty) {
-                    container.innerHTML = "<p class='col-span-full text-center py-20 text-slate-500'>Dữ liệu tour hiện đang trống.</p>";
-                    return;
-                }
-                snap.forEach((doc) => {
-                    const data = doc.data();
-                    container.innerHTML += `
-                        <article class="group bg-white rounded-[2rem] overflow-hidden border border-slate-50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                            <a href="tour-detail.html?id=${doc.id}" class="block">
-                                <div class="relative h-72 overflow-hidden">
-                                    <img src="${data.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
-                                    <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary shadow-lg">${data.loaiTour || 'Khám phá'}</div>
-                                </div>
-                                <div class="p-8">
-                                    <h3 class="font-headline font-black text-2xl text-primary mb-3 group-hover:text-secondary transition-colors leading-tight">${data.tenTour}</h3>
-                                    <p class="text-slate-500 text-sm line-clamp-2 mb-8 font-light">${data.moTa || 'Mô tả hành trình đang được cập nhật...'}</p>
-                                    <div class="flex justify-between items-center pt-6 border-t border-slate-50">
-                                        <div class="text-[10px] font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
-                                            <span class="material-symbols-outlined text-sm text-secondary">schedule</span> ${data.thoiGian || '3 Ngày'}
-                                        </div>
-                                        <div class="text-2xl font-black text-primary tracking-tight">${data.giaTour}</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </article>`;
-                });
-            } catch (e) {
-                container.innerHTML = "<p class='col-span-full text-center text-red-500 py-20 font-bold'>Mất kết nối với Firebase!</p>";
-            }
-        }
-        getTours();
-    </script>
-    
-    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
-        
-        <button id="chatbot-toggle" class="bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95">
-            <span class="material-symbols-outlined text-3xl">support_agent</span>
-        </button>
-
-        <div id="chatbot-window" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col h-[450px] transition-all">
-            
-            <div class="bg-primary text-white p-4 flex justify-between items-center shadow-md z-10">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                        <span class="material-symbols-outlined">smart_toy</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-sm">Lễ Tân 50CNTT1</h3>
-                        <p class="text-[10px] text-blue-200 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span> Đang trực tuyến</p>
-                    </div>
-                </div>
-                <button id="chatbot-close" class="hover:text-red-300 transition-colors p-1"><span class="material-symbols-outlined">close</span></button>
-            </div>
-            
-            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4 text-sm scroll-smooth">
-                <div class="flex gap-2">
-                    <div class="bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm">
-                        Kính chào quý khách! Em là Bot tư vấn của 50CNTT1. Quý khách muốn tìm hiểu về <b>Giá tour</b>, <b>Cách thanh toán</b> hay <b>Điểm đến</b> nào ạ?
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-3 bg-white border-t border-slate-100 flex gap-2">
-                <input type="text" id="chat-input" placeholder="Nhập câu hỏi của bạn..." class="flex-1 bg-slate-50 border border-slate-100 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all">
-                <button id="chat-send" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors active:scale-90 shadow-md">
-                    <span class="material-symbols-outlined text-sm">send</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const chatToggle = document.getElementById('chatbot-toggle');
-        const chatWindow = document.getElementById('chatbot-window');
-        const chatClose = document.getElementById('chatbot-close');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-        const chatMessages = document.getElementById('chat-messages');
-
-        chatToggle.addEventListener('click', () => {
-            chatWindow.classList.remove('hidden');
-            chatToggle.classList.add('hidden');
-        });
-
-        chatClose.addEventListener('click', () => {
-            chatWindow.classList.add('hidden');
-            chatToggle.classList.remove('hidden');
-        });
-
-        function appendMessage(sender, text) {
-            const div = document.createElement('div');
-            div.className = sender === 'user' ? 'flex gap-2 justify-end' : 'flex gap-2';
-            
-            const msgClass = sender === 'user' 
-                ? 'bg-secondary text-white p-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm' 
-                : 'bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm';
-            
-            div.innerHTML = `<div class="${msgClass}">${text}</div>`;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function botReply(text) {
-            const lowerText = text.toLowerCase();
-            let reply = "Dạ, em chưa hiểu ý của quý khách lắm. Quý khách có thể hỏi về <b>Giá tour</b>, <b>Lịch trình</b>, hoặc <b>Thanh toán</b> được không ạ?";
-
-            if (lowerText.includes('giá') || lowerText.includes('bao nhiêu')) {
-                reply = "Giá tour bên em dao động từ 850.000đ (Tour trong ngày) đến 69.800.000đ (Tour thám hiểm). Quý khách truy cập mục <b>Tour du lịch</b> trên Menu để xem giá chi tiết từng gói nhé!";
-            } else if (lowerText.includes('thanh toán') || lowerText.includes('chuyển khoản')) {
-                reply = "Bên em hỗ trợ 2 hình thức: Thanh toán chuyển khoản qua mã QR và Quẹt thẻ tín dụng/ghi nợ. Mọi giao dịch đều được bảo mật 100% ạ.";
-            } else if (lowerText.includes('sapa') || lowerText.includes('tây bắc')) {
-                reply = "Tuyệt vời! Tây Bắc đang mùa lúa chín rất đẹp. Bên em có Tour Săn Mây Tà Xùa - Mộc Châu giá chỉ 2.450.000đ. Quý khách hãy vào danh sách tour để xem ngay nhé!";
-            } else if (lowerText.includes('chào') || lowerText.includes('hello')) {
-                reply = "Dạ em chào quý khách! Chúc quý khách một ngày tốt lành. Em có thể giúp gì cho chuyến đi sắp tới của mình ạ?";
-            } else if (lowerText.includes('liên hệ') || lowerText.includes('sđt') || lowerText.includes('điện thoại')) {
-                reply = "Quý khách có thể liên hệ tổng đài 50CNTT1 qua số điện thoại: <b>1900 xxxx</b> hoặc email <b>hotro@50cntt1.com</b> ạ.";
-            }
-
-            setTimeout(() => { appendMessage('bot', reply); }, 600);
-        }
-
-        function handleSend() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            appendMessage('user', text);
-            chatInput.value = '';
-            
-            const typingDiv = document.createElement('div');
-            typingDiv.id = 'bot-typing';
-            typingDiv.className = 'flex gap-2';
-            typingDiv.innerHTML = `<div class="bg-white border border-slate-100 text-slate-400 px-4 py-2 rounded-2xl rounded-tl-sm text-xs italic shadow-sm">Bot đang gõ...</div>`;
-            chatMessages.appendChild(typingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            setTimeout(() => {
-                document.getElementById('bot-typing').remove();
-                botReply(text);
-            }, 1000);
-        }
-
-        chatSend.addEventListener('click', handleSend);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSend();
-        });
-    </script>
-    
-    <script>
-        async function getRealtimeWeather(city) {
-            const API_KEY = "270bfbc9d3b4320983649d0367ec5201"; 
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=vi&appid=${API_KEY}`;
-            
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if(data.cod === 200) {
-                    const weatherBox = document.getElementById('w-city').parentElement;
-                    weatherBox.style.opacity = '0.5';
-                    
-                    setTimeout(() => {
-                        document.getElementById('w-city').innerText = `Thời tiết ${data.name} lúc này`;
-                        document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C - ${data.weather[0].description}`;
-                        
-                        const weatherCondition = data.weather[0].main.toLowerCase();
-                        const iconEl = document.getElementById('w-icon');
-                        
-                        if (weatherCondition.includes('cloud')) {
-                            iconEl.innerText = 'cloud'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-200';
-                        } else if (weatherCondition.includes('rain')) {
-                            iconEl.innerText = 'rainy'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-400';
-                        } else if (weatherCondition.includes('clear')) {
-                            iconEl.innerText = 'sunny'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-400';
-                        }
-                        weatherBox.style.opacity = '1';
-                    }, 300);
-                }
-            } catch(e) {}
-        }
-
-        const cities = ["Sapa", "Hanoi", "Da Nang", "Da Lat", "Phu Quoc"];
-        let currentCityIndex = 0;
-
-        getRealtimeWeather(cities[currentCityIndex]);
-
-        setInterval(() => {
-            currentCityIndex++;
-            if (currentCityIndex >= cities.length) {
-                currentCityIndex = 0;
-            }
-            getRealtimeWeather(cities[currentCityIndex]);
-        }, 5000);
-    </script>
-            getRealtimeWeather(cities[currentCityIndex]);
-    }, 5000);
-</script>
-
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'vi', 
-            includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-    }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-</body>
-</html>
-
-
-</body>
-</html>
+                        <input type="email" placeholder="Email của bạn..." class="flex-1 px-8 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all">
+                        <button class="bg-secondary text-white px-10 py-4 rounded-full font-bold shadow-lg active:scale-95
