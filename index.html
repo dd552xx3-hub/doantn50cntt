@@ -212,4 +212,233 @@
                     <p class="text-blue-100/80 mb-10 font-light">Để lại email để không bỏ lỡ những chuyến đi tuyệt vời nhất cùng 50cntt1.</p>
                     <div class="flex flex-col md:flex-row gap-3">
                         <input type="email" placeholder="Email của bạn..." class="flex-1 px-8 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all">
-                        <button class="bg-secondary text-white px-10 py-4 rounded-full font-bold shadow-lg active:scale-95
+                        <button class="bg-secondary text-white px-10 py-4 rounded-full font-bold shadow-lg active:scale-95 transition-all hover:bg-orange-600">Gửi ngay</button>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl -ml-32 -mb-32"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white pt-20 pb-10 border-t border-slate-100 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="md:col-span-2">
+                <a href="index.html" class="text-3xl font-black text-primary mb-6 block tracking-tighter">50cntt1<span class="text-accent">.</span></a>
+                <p class="text-slate-500 max-w-sm mb-8 leading-relaxed font-light">Đơn vị lữ hành tiên phong trong việc kiến tạo những trải nghiệm du lịch di sản và văn hóa đích thực tại Việt Nam.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"><span class="material-symbols-outlined text-sm">facebook</span></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm"><span class="material-symbols-outlined text-sm">photo_camera</span></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-primary mb-6 uppercase text-xs tracking-[0.2em]">Khám phá</h4>
+                <ul class="space-y-4 text-slate-500 text-sm font-medium">
+                    <li><a href="#" class="hover:text-primary transition-colors">Miền Bắc</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Miền Trung</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Miền Nam</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Ưu đãi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-primary mb-6 uppercase text-xs tracking-[0.2em]">Hỗ trợ</h4>
+                <ul class="space-y-4 text-slate-500 text-sm font-medium">
+                    <li><a href="#" class="hover:text-primary transition-colors">Trung tâm trợ giúp</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Điều khoản dịch vụ</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <p>© 2026 50CNTT1 TRAVEL. ALL RIGHTS RESERVED.</p>
+            <p>DESIGNED BY 50CNTT1 ĐTĐL 🚀</p>
+        </div>
+    </footer>
+
+    <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
+        <button id="chatbot-toggle" class="bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95">
+            <span class="material-symbols-outlined text-3xl">support_agent</span>
+        </button>
+
+        <div id="chatbot-window" class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden flex flex-col h-[450px] transition-all">
+            <div class="bg-primary text-white p-4 flex justify-between items-center shadow-md z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm">Lễ Tân 50CNTT1</h3>
+                        <p class="text-[10px] text-blue-200 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span> Đang trực tuyến</p>
+                    </div>
+                </div>
+                <button id="chatbot-close" class="hover:text-red-300 transition-colors p-1"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4 text-sm scroll-smooth">
+                <div class="flex gap-2">
+                    <div class="bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm">
+                        Kính chào quý khách! Em là Bot tư vấn của 50CNTT1. Quý khách muốn tìm hiểu về <b>Giá tour</b>, <b>Cách thanh toán</b> hay <b>Điểm đến</b> nào ạ?
+                    </div>
+                </div>
+            </div>
+            <div class="p-3 bg-white border-t border-slate-100 flex gap-2">
+                <input type="text" id="chat-input" placeholder="Nhập câu hỏi của bạn..." class="flex-1 bg-slate-50 border border-slate-100 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all">
+                <button id="chat-send" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors active:scale-90 shadow-md">
+                    <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+        };
+
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            const guest = document.getElementById('guest-menu');
+            const userBox = document.getElementById('user-menu');
+            const emailTxt = document.getElementById('user-email');
+            if (user) {
+                if(guest) guest.style.display = 'none';
+                if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
+                if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
+            } else {
+                if(guest) guest.style.display = 'flex';
+                if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
+            }
+        });
+
+        document.getElementById('btn-logout').onclick = () => {
+            signOut(auth).then(() => { window.location.reload(); });
+        };
+
+        async function getTours() {
+            const container = document.getElementById('tour-list');
+            try {
+                const snap = await getDocs(collection(db, "tours"));
+                container.innerHTML = "";
+                if (snap.empty) {
+                    container.innerHTML = "<p class='col-span-full text-center py-20 text-slate-500 font-bold uppercase tracking-widest'>Dữ liệu tour hiện đang trống.</p>";
+                    return;
+                }
+                snap.forEach((doc) => {
+                    const data = doc.data();
+                    container.innerHTML += `
+                        <article class="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+                            <a href="tour-detail.html?id=${doc.id}" class="block">
+                                <div class="relative h-72 overflow-hidden">
+                                    <img src="${data.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                                    <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary shadow-lg">${data.loaiTour || 'Khám phá'}</div>
+                                </div>
+                                <div class="p-8">
+                                    <h3 class="font-headline font-black text-2xl text-primary mb-3 group-hover:text-secondary transition-colors leading-tight">${data.tenTour}</h3>
+                                    <p class="text-slate-500 text-sm line-clamp-2 mb-8 font-light">${data.moTa || 'Mô tả hành trình đang được cập nhật...'}</p>
+                                    <div class="flex justify-between items-center pt-6 border-t border-slate-50">
+                                        <div class="text-[10px] font-bold text-slate-400 flex items-center gap-2 uppercase tracking-widest">
+                                            <span class="material-symbols-outlined text-sm text-secondary">schedule</span> ${data.thoiGian || '3 Ngày'}
+                                        </div>
+                                        <div class="text-2xl font-black text-primary tracking-tight">${data.giaTour}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>`;
+                });
+            } catch (e) {
+                container.innerHTML = "<p class='col-span-full text-center text-red-500 py-20 font-bold uppercase'>Mất kết nối với Firebase!</p>";
+            }
+        }
+        getTours();
+    </script>
+    
+    <script>
+        const chatToggle = document.getElementById('chatbot-toggle');
+        const chatWindow = document.getElementById('chatbot-window');
+        const chatClose = document.getElementById('chatbot-close');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.remove('hidden');
+            chatToggle.classList.add('hidden');
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            chatToggle.classList.remove('hidden');
+        });
+
+        function appendMessage(sender, text) {
+            const div = document.createElement('div');
+            div.className = sender === 'user' ? 'flex gap-2 justify-end' : 'flex gap-2';
+            const msgClass = sender === 'user' 
+                ? 'bg-secondary text-white p-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm' 
+                : 'bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm';
+            div.innerHTML = `<div class="${msgClass}">${text}</div>`;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function botReply(text) {
+            const lowerText = text.toLowerCase();
+            let reply = "Dạ, em chưa hiểu ý của quý khách lắm. Quý khách có thể hỏi về <b>Giá tour</b>, <b>Lịch trình</b>, hoặc <b>Thanh toán</b> được không ạ?";
+            if (lowerText.includes('giá') || lowerText.includes('bao nhiêu')) {
+                reply = "Giá tour bên em dao động từ 850.000đ đến 69.800.000đ. Quý khách truy cập mục <b>Tour du lịch</b> để xem giá chi tiết ạ!";
+            } else if (lowerText.includes('thanh toán') || lowerText.includes('chuyển khoản')) {
+                reply = "Bên em hỗ trợ: Chuyển khoản QR và Quẹt thẻ tín dụng. Mọi giao dịch đều bảo mật 100% ạ.";
+            } else if (lowerText.includes('sapa') || lowerText.includes('tây bắc')) {
+                reply = "Tây Bắc đang mùa lúa chín! Tour Săn Mây Tà Xùa - Mộc Châu giá chỉ 2.450.000đ. Mời quý khách xem tại danh sách tour!";
+            } else if (lowerText.includes('chào') || lowerText.includes('hello')) {
+                reply = "Dạ em chào quý khách! Chúc quý khách một ngày tốt lành. Em có thể giúp gì cho chuyến đi sắp tới ạ?";
+            } else if (lowerText.includes('liên hệ') || lowerText.includes('sđt')) {
+                reply = "Quý khách liên hệ tổng đài 50CNTT1 qua số: <b>1900 xxxx</b> hoặc email <b>hotro@50cntt1.com</b> ạ.";
+            }
+            setTimeout(() => { appendMessage('bot', reply); }, 600);
+        }
+
+        function handleSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            appendMessage('user', text);
+            chatInput.value = '';
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'bot-typing';
+            typingDiv.className = 'flex gap-2';
+            typingDiv.innerHTML = `<div class="bg-white border border-slate-100 text-slate-400 px-4 py-2 rounded-2xl rounded-tl-sm text-xs italic shadow-sm">Bot đang gõ...</div>`;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setTimeout(() => {
+                if(document.getElementById('bot-typing')) document.getElementById('bot-typing').remove();
+                botReply(text);
+            }, 1000);
+        }
+
+        chatSend.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+    </script>
+    
+    <script>
+        async function getRealtimeWeather(city) {
+            const API_KEY = "270bfbc9d3b4320983649d0367ec5201"; 
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=vi&appid=${API_KEY}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if(data.cod === 200) {
+                    const weatherBox = document.getElementById('w-city').parentElement;
+                    weatherBox.style.opacity = '0.5';
+                    setTimeout(()
