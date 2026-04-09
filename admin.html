@@ -9,152 +9,239 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script id="tailwind-config">
-        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#004471", 
+                        "primary-light": "#005da3",
+                        "surface": "#f8fafc", 
+                        "secondary": "#e85d04",
+                        "accent": "#fbbf24"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Plus Jakarta Sans"], 
+                        "body": ["Be Vietnam Pro"] 
+                    } 
+                } 
+            } 
+        }
     </script>
     <style>
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .tab-active { background-color: #004471; color: white; }
+        .nav-item-active { background-color: #004471; color: white; shadow: 0 4px 12px rgba(0, 68, 113, 0.3); }
     </style>
 </head>
-<body class="bg-surface font-body antialiased pt-24 min-h-screen">
+<body class="bg-surface font-body antialiased min-h-screen flex">
     
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1 Admin</a>
-            <div id="user-menu" class="flex items-center gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
-                <span id="user-email" class="text-xs font-bold text-primary"></span>
-                <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
+  
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
+        <div class="p-6">
+            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span> Admin</a>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+            <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="nav-item-active w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all hover:bg-blue-50 hover:text-primary">
+                <span class="material-symbols-outlined text-lg">dashboard</span> Tổng quan
+            </button>
+            <button onclick="switchTab('tours')" id="btn-tab-tours" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
+                <span class="material-symbols-outlined text-lg">map</span> Quản lý Tour
+            </button>
+            <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
+                <span class="material-symbols-outlined text-lg">shopping_cart</span> Đơn Đặt Hàng
+            </button>
+            <button onclick="switchTab('users')" id="btn-tab-users" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
+                <span class="material-symbols-outlined text-lg">group</span> Khách hàng
+            </button>
+        </nav>
+
+        <div class="p-4 border-t border-slate-100">
+            <div class="bg-slate-50 p-4 rounded-2xl flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">AD</div>
+                <div class="overflow-hidden">
+                    <p id="sidebar-user-email" class="text-[10px] font-bold text-primary truncate"></p>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Đăng xuất</button>
+                </div>
             </div>
         </div>
-    </nav>
+    </aside>
 
-    <main class="max-w-7xl mx-auto px-4 md:px-8 mb-24">
-        <div class="flex gap-2 mb-8 bg-white p-1.5 rounded-full shadow-sm w-max border border-slate-100 overflow-x-auto max-w-full scrollbar-hide">
-            <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all tab-active whitespace-nowrap">Dashboard</button>
-            <button onclick="switchTab('tours')" id="btn-tab-tours" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Quản lý Tour</button>
-            <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Đơn Đặt Hàng</button>
-            <button onclick="switchTab('users')" id="btn-tab-users" class="px-6 py-2.5 rounded-full text-sm font-bold transition-all text-slate-500 hover:bg-slate-50 whitespace-nowrap">Khách hàng</button>
-        </div>
 
-        <div id="section-dashboard">
-            <h1 class="text-2xl font-headline font-black text-primary mb-6">Tổng quan hệ thống</h1>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tổng số Tour</p>
-                        <h3 id="stat-tours" class="text-3xl font-black text-primary">0</h3>
+    <main class="flex-1 md:ml-64 min-h-screen">
+    
+        <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+            <h2 id="current-tab-title" class="text-xl font-headline font-bold text-slate-800">Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest" id="current-date"></span>
+                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center font-bold">Admin</div>
+            </div>
+        </header>
+
+        <div class="p-6 md:p-10">
+         
+            <div id="section-dashboard" class="space-y-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-all">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Tổng số Tour</p>
+                            <h3 id="stat-tours" class="text-4xl font-black text-primary">0</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center"><span class="material-symbols-outlined text-3xl">map</span></div>
                     </div>
-                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><span class="material-symbols-outlined">map</span></div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Đơn đặt hàng</p>
-                        <h3 id="stat-bookings" class="text-3xl font-black text-secondary">0</h3>
+                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-all">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Đơn đặt hàng</p>
+                            <h3 id="stat-bookings" class="text-4xl font-black text-secondary">0</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined text-3xl">shopping_cart</span></div>
                     </div>
-                    <div class="w-12 h-12 rounded-full bg-orange-50 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined">shopping_cart</span></div>
-                </div>
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-between">
-                    <div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Khách hàng</p>
-                        <h3 id="stat-users" class="text-3xl font-black text-green-500">0</h3>
+                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-all">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Khách hàng</p>
+                            <h3 id="stat-users" class="text-4xl font-black text-green-500">0</h3>
+                        </div>
+                        <div class="w-14 h-14 rounded-2xl bg-green-50 text-green-500 flex items-center justify-center"><span class="material-symbols-outlined text-3xl">group</span></div>
                     </div>
-                    <div class="w-12 h-12 rounded-full bg-green-50 text-green-500 flex items-center justify-center"><span class="material-symbols-outlined">group</span></div>
                 </div>
-            </div>
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 w-full md:w-1/2">
-                <h3 class="text-lg font-bold text-primary mb-6">Tỉ lệ trạng thái đơn hàng</h3>
-                <div class="h-64"><canvas id="orderChart"></canvas></div>
-            </div>
-        </div>
 
-        <div id="section-tours" class="hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <h1 class="text-2xl font-headline font-black text-primary">Danh sách Tour</h1>
-                <div class="flex gap-2 w-full md:w-auto">
-                    <input type="text" id="search-tour" onkeyup="searchTable('search-tour', 'admin-tour-list')" placeholder="Tìm tên tour..." class="flex-1 md:w-64 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none">
-                    <button onclick="openModal('add')" class="bg-primary text-white px-6 py-2.5 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
-                        <span class="material-symbols-outlined text-sm">add</span> Thêm mới
-                    </button>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
+                        <h3 class="text-lg font-bold text-primary mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined">pie_chart</span> Tỉ lệ trạng thái đơn hàng
+                        </h3>
+                        <div class="h-64"><canvas id="orderChart"></canvas></div>
+                    </div>
+                    <div class="bg-primary p-8 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold mb-4">Chào mừng trở lại, Admin!</h3>
+                            <p class="text-blue-100 font-light leading-relaxed mb-6">Hệ thống đang hoạt động ổn định. Bạn có 5 đơn hàng mới cần xử lý trong ngày hôm nay.</p>
+                            <button onclick="switchTab('bookings')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-50 transition-all">Quản lý đơn hàng ngay</button>
+                        </div>
+                        <span class="material-symbols-outlined absolute bottom-[-20px] right-[-20px] text-[150px] text-white/10 rotate-12">admin_panel_settings</span>
+                    </div>
                 </div>
             </div>
-            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div class="overflow-x-auto scrollbar-hide">
-                    <table class="w-full text-left min-w-[900px]">
-                        <thead>
-                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                <th class="p-6">Ảnh</th>
-                                <th class="p-6">Tên Tour</th>
-                                <th class="p-6">Giá</th>
-                                <th class="p-6">Thời gian</th>
-                                <th class="p-6 text-center">Thao tác</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-tour-list"></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-        <div id="section-bookings" class="hidden">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <h1 class="text-2xl font-headline font-black text-primary">Lịch sử Đặt Tour</h1>
-                <input type="text" id="search-booking" onkeyup="searchTable('search-booking', 'admin-booking-list')" placeholder="Tìm khách/SĐT..." class="w-full md:w-64 bg-white border border-slate-200 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 outline-none">
-            </div>
-            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div class="overflow-x-auto scrollbar-hide">
-                    <table class="w-full text-left min-w-[1000px]">
-                        <thead>
-                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                <th class="p-6">Khách hàng</th>
-                                <th class="p-6">Liên hệ</th>
-                                <th class="p-6 w-64">Tour đã đặt</th>
-                                <th class="p-6">Trạng thái</th>
-                                <th class="p-6 text-center">Cập nhật</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-booking-list"></tbody>
-                    </table>
+            <!-- SECTION: TOURS -->
+            <div id="section-tours" class="hidden space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <h1 class="text-2xl font-headline font-black text-primary">Quản lý Danh mục Tour</h1>
+                    <div class="flex gap-3 w-full md:w-auto">
+                        <div class="relative flex-1 md:w-72">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><span class="material-symbols-outlined text-sm">search</span></span>
+                            <input type="text" id="search-tour" onkeyup="searchTable('search-tour', 'admin-tour-list')" placeholder="Tìm tên tour..." class="w-full bg-white border border-slate-200 rounded-full pl-10 pr-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20">
+                        </div>
+                        <button onclick="openModal('add')" class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">add</span> Thêm tour
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto scrollbar-hide">
+                        <table class="w-full text-left min-w-[900px]">
+                            <thead>
+                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                    <th class="p-6">Hình ảnh</th>
+                                    <th class="p-6">Tên Tour</th>
+                                    <th class="p-6">Giá</th>
+                                    <th class="p-6">Thời gian</th>
+                                    <th class="p-6 text-center">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-tour-list"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div id="section-users" class="hidden">
-            <h1 class="text-2xl font-headline font-black text-primary mb-6">Danh sách Khách hàng</h1>
-            <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                <div class="overflow-x-auto scrollbar-hide">
-                    <table class="w-full text-left min-w-[800px]">
-                        <thead>
-                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                <th class="p-6">Họ và Tên</th>
-                                <th class="p-6">Email</th>
-                                <th class="p-6">Ngày đăng ký</th>
-                                <th class="p-6 text-center">Vai trò</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin-user-list"></tbody>
-                    </table>
+          
+            <div id="section-bookings" class="hidden space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <h1 class="text-2xl font-headline font-black text-primary">Quản lý Đơn đặt Tour</h1>
+                    <div class="relative w-full md:w-72">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><span class="material-symbols-outlined text-sm">search</span></span>
+                        <input type="text" id="search-booking" onkeyup="searchTable('search-booking', 'admin-booking-list')" placeholder="Tìm khách hàng/SĐT..." class="w-full bg-white border border-slate-200 rounded-full pl-10 pr-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20">
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto scrollbar-hide">
+                        <table class="w-full text-left min-w-[1000px]">
+                            <thead>
+                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                    <th class="p-6">Khách hàng</th>
+                                    <th class="p-6">Liên hệ</th>
+                                    <th class="p-6 w-64">Tour đã chọn</th>
+                                    <th class="p-6">Trạng thái</th>
+                                    <th class="p-6 text-center">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-booking-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: USERS -->
+            <div id="section-users" class="hidden space-y-6">
+                <h1 class="text-2xl font-headline font-black text-primary">Danh sách Thành viên</h1>
+                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto scrollbar-hide">
+                        <table class="w-full text-left min-w-[800px]">
+                            <thead>
+                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                    <th class="p-6">Họ và Tên</th>
+                                    <th class="p-6">Email</th>
+                                    <th class="p-6">Ngày tham gia</th>
+                                    <th class="p-6 text-center">Vai trò</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-user-list"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- MODAL: ADD/EDIT TOUR -->
     <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[60] flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl">
-            <h2 id="modal-title" class="text-2xl font-headline font-black text-primary mb-6">Thêm Tour Mới</h2>
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modal-title" class="text-2xl font-headline font-black text-primary">Thêm Tour Mới</h2>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
+            </div>
             <form id="tour-form" class="space-y-4">
                 <input type="hidden" id="edit-id">
-                <input type="text" id="t-name" placeholder="Tên Tour" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="t-price" placeholder="Giá" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
-                    <input type="text" id="t-time" placeholder="Thời gian" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
+                <div>
+                    <label class="text-xs font-bold text-slate-400 uppercase ml-2 mb-1 block">Tên Tour</label>
+                    <input type="text" id="t-name" placeholder="Nhập tên tour..." class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
                 </div>
-                <input type="text" id="t-type" placeholder="Loại hình" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
-                <input type="text" id="t-img" placeholder="URL Hình ảnh" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 focus:ring-2 focus:ring-primary/20" required>
-                <textarea id="t-desc" placeholder="Mô tả chi tiết" class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 h-32 resize-none focus:ring-2 focus:ring-primary/20" required></textarea>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs font-bold text-slate-400 uppercase ml-2 mb-1 block">Giá Tour</label>
+                        <input type="text" id="t-price" placeholder="Ví dụ: 2.500.000đ" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-400 uppercase ml-2 mb-1 block">Thời gian</label>
+                        <input type="text" id="t-time" placeholder="Ví dụ: 3 Ngày 2 Đêm" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-400 uppercase ml-2 mb-1 block">Loại hình</label>
+                    <input type="text" id="t-type" placeholder="Ví dụ: Nghỉ dưỡng, Khám phá..." class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-400 uppercase ml-2 mb-1 block">URL Hình ảnh</label>
+                    <input type="text" id="t-img" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-slate-400 uppercase ml-2 mb-1 block">Mô tả chi tiết</label>
+                    <textarea id="t-desc" placeholder="Nhập nội dung chi tiết về hành trình..." class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-32 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
+                </div>
                 <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
-                    <button type="submit" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Xác nhận</button>
+                    <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold hover:bg-slate-200 transition-all">Hủy bỏ</button>
+                    <button type="submit" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg hover:bg-primary-light transition-all active:scale-95">Xác nhận lưu</button>
                 </div>
             </form>
         </div>
@@ -179,24 +266,19 @@
         const auth = getAuth(app);
         let orderChartInstance = null; 
 
-        // ===== ĐÂY LÀ ĐOẠN LÍNH GÁC BẢO VỆ ADMIN =====
+   
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
-                    // Chạy vào kho dữ liệu tìm xem ông này là ai
                     const userDoc = await getDoc(doc(db, "users", user.uid));
                     if (userDoc.exists()) {
                         const userData = userDoc.data();
-                        
-                        // Nếu chức vụ không phải admin thì đá văng ra ngoài
                         if (userData.role !== "admin") {
-                            alert("Cảnh báo: Bạn không có quyền truy cập khu vực Quản trị!");
+                            alert("Bạn không có quyền truy cập khu vực quản trị!");
                             window.location.href = "index.html"; 
                             return;
                         }
-                        
-                        // Nếu qua ải thì cho hiện email
-                        document.getElementById('user-email').innerText = user.email.split('@')[0];
+                        document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
                     } else {
                         alert("Tài khoản chưa được đồng bộ dữ liệu!");
                         window.location.href = "index.html";
@@ -208,7 +290,6 @@
                 window.location.href = "login.html";
             }
         });
-        // =============================================
 
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
@@ -223,12 +304,17 @@
 
         window.switchTab = (tab) => {
             const sections = ['dashboard', 'tours', 'bookings', 'users'];
+            const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
+            
             sections.forEach(s => {
                 document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
                 const btn = document.getElementById(`btn-tab-${s}`);
-                btn.classList.toggle('tab-active', s === tab);
-                btn.classList.toggle('text-slate-500', s !== tab);
+                if(btn) {
+                    btn.classList.toggle('nav-item-active', s === tab);
+                    btn.classList.toggle('text-slate-500', s !== tab);
+                }
             });
+            document.getElementById('current-tab-title').innerText = titles[tab];
             if(tab === 'dashboard') loadDashboard();
             if(tab === 'tours') loadAdminTours();
             if(tab === 'bookings') loadBookings();
@@ -275,7 +361,7 @@
                 const data = d.data();
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
-                        <td class="p-6"><img src="${data.imageUrl}" class="w-14 h-14 rounded-2xl object-cover"></td>
+                        <td class="p-6"><img src="${data.imageUrl}" class="w-14 h-14 rounded-2xl object-cover shadow-sm"></td>
                         <td class="p-6 font-bold text-primary">${data.tenTour}</td>
                         <td class="p-6 font-black text-secondary">${data.giaTour}</td>
                         <td class="p-6 text-sm font-bold text-slate-400">${data.thoiGian}</td>
@@ -302,7 +388,7 @@
                 if(currentStatus === "Đã hủy") badgeClass = "bg-red-50 text-red-500";
 
                 tbody.innerHTML += `
-                    <tr class="border-b border-slate-50">
+                    <tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
                         <td class="p-6 font-bold text-primary">${data.khachHang}</td>
                         <td class="p-6 text-sm text-slate-500">${data.email}<br>${data.sdt}</td>
                         <td class="p-6 font-bold text-slate-700 truncate max-w-xs" title="${data.tenTour}">${data.tenTour}</td>
@@ -344,7 +430,7 @@
             snap.forEach(d => {
                 const data = d.data();
                 tbody.innerHTML += `
-                    <tr class="border-b border-slate-50">
+                    <tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
                         <td class="p-6 font-bold text-primary">${data.hoTen || 'Chưa cập nhật'}</td>
                         <td class="p-6 text-sm text-slate-500">${data.email}</td>
                         <td class="p-6 text-sm text-slate-500">${data.ngayTao || '---'}</td>
@@ -398,6 +484,9 @@
         };
 
         window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
+
+        
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
         switchTab('dashboard');
     </script>
