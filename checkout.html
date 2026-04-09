@@ -8,170 +8,230 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#004471", 
+                        "primary-light": "#005da3",
+                        "surface": "#f8fafc", 
+                        "secondary": "#e85d04",
+                        "accent": "#fbbf24"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Plus Jakarta Sans"], 
+                        "body": ["Be Vietnam Pro"] 
+                    } 
+                } 
+            } 
+        }
     </script>
     <style>
+        html { scroll-behavior: smooth; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-surface text-slate-800 font-body pt-24 pb-20 antialiased">
+<body class="bg-surface text-slate-800 font-body antialiased pt-20 pb-20">
     
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
+            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
             
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm tracking-wide text-slate-600">
+            <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="#">Trải nghiệm</a>
+                <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
             </div>
 
-            <div class="flex items-center gap-4">
-                <a href="cart.html" class="p-2"><span class="material-symbols-outlined text-slate-600">shopping_cart</span></a>
-                
-                                <div id="guest-menu" class="flex items-center gap-2">
-                    <a href="login.html" class="p-2"><span class="material-symbols-outlined text-slate-600">account_circle</span></a>
-                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold shadow-md">Đăng ký</a>
-                </div> <div id="user-menu" class="hidden items-center gap-2 md:gap-3 bg-blue-50/50 px-3 py-1.5 rounded-full border border-blue-100">
-                    <a href="admin.html" class="text-primary flex items-center hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-base md:text-lg">admin_panel_settings</span>
+            <div class="flex items-center gap-3">
+                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
+                <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
+                    <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
+                </a>
+                <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
+                    <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
+                        <span class="material-symbols-outlined">account_circle</span>
+                    </a>
+                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
+                </div>
+                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
+                    <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
+                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
                     <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <button id="btn-logout" class="text-[10px] font-bold text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Thoát</button>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
                 </div>
-
+            </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 md:px-12 mt-4">
+    <main class="max-w-7xl mx-auto px-6 md:px-12 mt-8">
         <header class="mb-12">
-            <h1 class="text-4xl md:text-5xl font-headline font-black text-primary mb-6 tracking-tight">Hoàn tất hành trình</h1>
-            <nav class="flex items-center justify-start gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            <h1 class="text-4xl md:text-6xl font-headline font-black text-primary mb-8 tracking-tighter">Hoàn tất hành trình</h1>
+            
+            <div class="flex items-center justify-start gap-4 overflow-x-auto pb-6 scrollbar-hide">
                 <div class="flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">1</span>
-                    <span class="text-primary font-bold whitespace-nowrap text-sm uppercase tracking-widest">Chi tiết</span>
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg">1</div>
+                    <span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Chi tiết Tour</span>
                 </div>
-                <div class="w-12 h-[2px] bg-primary/20"></div>
+                <div class="w-12 h-[2px] bg-primary/30"></div>
                 <div class="flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">2</span>
-                    <span class="text-primary font-bold whitespace-nowrap text-sm uppercase tracking-widest">Thanh toán</span>
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-primary/20">2</div>
+                    <span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Thanh toán</span>
                 </div>
-                <div class="w-12 h-[2px] bg-slate-300"></div>
+                <div class="w-12 h-[2px] bg-slate-200"></div>
                 <div class="flex items-center gap-3">
-                    <span class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold text-sm">3</span>
-                    <span class="text-slate-500 font-bold whitespace-nowrap text-sm uppercase tracking-widest">Xác nhận</span>
+                    <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold">3</div>
+                    <span class="text-slate-400 font-bold whitespace-nowrap text-xs uppercase tracking-widest">Xác nhận</span>
                 </div>
-            </nav>
+            </div>
         </header>
 
-        <div id="error-box" class="hidden bg-red-100 text-red-600 p-4 rounded-xl mb-6 font-bold text-center border border-red-200">
-            Cảnh báo: Không tìm thấy dữ liệu Tour. Vui lòng quay lại Trang chủ và chọn lại!
+        <div id="error-box" class="hidden bg-red-50 text-red-600 p-6 rounded-3xl mb-10 font-bold text-center border border-red-100 flex items-center justify-center gap-3">
+            <span class="material-symbols-outlined">error</span> Cảnh báo: Không tìm thấy dữ liệu Tour. Vui lòng chọn lại!
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <section class="lg:col-span-8 space-y-8">
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-slate-100">
-                    <h2 class="text-2xl font-headline font-bold text-primary mb-8 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-3xl">person</span> Thông tin khách hàng
+            <!-- Left Section: Forms -->
+            <section class="lg:col-span-8 space-y-10">
+                <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-100">
+                    <h2 class="text-2xl font-headline font-bold text-primary mb-10 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl p-2 bg-blue-50 rounded-xl">person</span> Thông tin khách hàng
                     </h2>
-                    <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">Họ và tên</label>
-                            <input type="text" placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/20 transition-all"/>
+                    <form class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-3">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Họ và tên</label>
+                            <div class="relative group">
+                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-sm">badge</span>
+                                </span>
+                                <input type="text" placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"/>
+                            </div>
                         </div>
-                        <div class="space-y-2">
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">Địa chỉ Email</label>
-                            <input type="email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/20 transition-all"/>
+                        <div class="space-y-3">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Địa chỉ Email</label>
+                            <div class="relative group">
+                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-sm">mail</span>
+                                </span>
+                                <input type="email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"/>
+                            </div>
                         </div>
-                        <div class="space-y-2 md:col-span-2">
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">Số điện thoại</label>
-                            <div class="flex gap-2">
-                                <div class="bg-slate-50 px-4 py-4 rounded-xl flex items-center gap-2 font-bold text-slate-600">
+                        <div class="space-y-3 md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Số điện thoại</label>
+                            <div class="flex gap-3">
+                                <div class="bg-slate-100 px-5 py-4 rounded-2xl flex items-center gap-2 font-bold text-slate-600 border border-slate-200">
                                     <span class="material-symbols-outlined text-sm">flag</span> +84
                                 </div>
-                                <input type="tel" placeholder="090 123 4567" class="flex-1 bg-slate-50 border-none rounded-xl px-4 py-4 focus:ring-2 focus:ring-primary/20 transition-all"/>
+                                <div class="relative group flex-1">
+                                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-sm">call</span>
+                                    </span>
+                                    <input type="tel" placeholder="090 123 4567" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"/>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
 
-                <div class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-slate-100">
-                    <h2 class="text-2xl font-headline font-bold text-primary mb-8 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-3xl">payments</span> Phương thức thanh toán
+                <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-100">
+                    <h2 class="text-2xl font-headline font-bold text-primary mb-10 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-3xl p-2 bg-blue-50 rounded-xl">payments</span> Phương thức thanh toán
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <label class="relative cursor-pointer group">
                             <input type="radio" name="payment" checked class="peer sr-only"/>
-                            <div class="h-full border-2 border-slate-100 bg-white p-6 rounded-2xl peer-checked:border-primary peer-checked:bg-blue-50 transition-all">
-                                <span class="material-symbols-outlined text-primary mb-3 text-3xl">qr_code_scanner</span>
-                                <p class="font-bold text-primary text-lg">Chuyển khoản (QR)</p>
-                                <p class="text-xs text-slate-500 mt-1">Quét mã qua ứng dụng</p>
+                            <div class="h-full border-2 border-slate-100 bg-white p-8 rounded-[2rem] peer-checked:border-primary peer-checked:bg-blue-50 transition-all duration-300 group-hover:border-blue-200">
+                                <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-all group-hover:scale-110">
+                                    <span class="material-symbols-outlined text-3xl">qr_code_scanner</span>
+                                </div>
+                                <p class="font-bold text-primary text-xl mb-2">Chuyển khoản (QR)</p>
+                                <p class="text-sm text-slate-500 leading-relaxed">Thanh toán nhanh chóng và an toàn qua mã QR ngân hàng.</p>
                             </div>
                         </label>
                         <label class="relative cursor-pointer group">
                             <input type="radio" name="payment" class="peer sr-only"/>
-                            <div class="h-full border-2 border-slate-100 bg-white p-6 rounded-2xl peer-checked:border-primary peer-checked:bg-blue-50 transition-all">
-                                <span class="material-symbols-outlined text-primary mb-3 text-3xl">credit_card</span>
-                                <p class="font-bold text-primary text-lg">Thẻ tín dụng / Ghi nợ</p>
-                                <p class="text-xs text-slate-500 mt-1">Visa, Mastercard, JCB</p>
+                            <div class="h-full border-2 border-slate-100 bg-white p-8 rounded-[2rem] peer-checked:border-primary peer-checked:bg-blue-50 transition-all duration-300 group-hover:border-blue-200">
+                                <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-all group-hover:scale-110">
+                                    <span class="material-symbols-outlined text-3xl">credit_card</span>
+                                </div>
+                                <p class="font-bold text-primary text-xl mb-2">Thẻ tín dụng / Ghi nợ</p>
+                                <p class="text-sm text-slate-500 leading-relaxed">Hỗ trợ Visa, Mastercard và các loại thẻ nội địa.</p>
                             </div>
                         </label>
                     </div>
                 </div>
             </section>
 
+            <!-- Right Section: Summary -->
             <aside class="lg:col-span-4 lg:sticky lg:top-28">
-                <div class="bg-white p-8 rounded-3xl shadow-2xl shadow-primary/5 border border-slate-100 overflow-hidden">
-                    <h3 class="text-xl font-headline font-bold mb-6 border-b border-slate-100 pb-4">Tóm tắt đơn hàng</h3>
+                <div class="bg-white p-8 rounded-[3rem] shadow-2xl shadow-primary/10 border border-slate-100 overflow-hidden relative">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
                     
-                    <div class="relative h-48 -mx-8 -mt-2 mb-6 group overflow-hidden">
-                        <img id="check-img" src="" class="w-full h-full object-cover bg-slate-100 group-hover:scale-105 transition-transform duration-500"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 pr-6">
-                            <h4 id="check-title" class="text-white font-headline font-bold text-2xl leading-tight">Đang tải dữ liệu...</h4>
+                    <h3 class="text-xl font-headline font-bold text-primary mb-8 border-b border-slate-100 pb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined">receipt</span> Tóm tắt đơn hàng
+                    </h3>
+                    
+                    <div class="relative h-56 -mx-8 -mt-8 mb-8 group overflow-hidden">
+                        <img id="check-img" src="" class="w-full h-full object-cover bg-slate-100 group-hover:scale-110 transition-transform duration-700"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute bottom-6 left-8 pr-6">
+                            <h4 id="check-title" class="text-white font-headline font-bold text-3xl leading-tight">Đang tải...</h4>
                         </div>
                     </div>
 
-                    <div class="space-y-6">
-                        <div class="flex justify-between items-start border-b border-slate-100 pb-4">
-                            <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Thời lượng</p>
-                                <p id="check-time" class="font-bold text-primary mt-1">---</p>
+                    <div class="space-y-6 relative z-10">
+                        <div class="flex justify-between items-center p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-slate-400 text-sm">schedule</span>
+                                <span class="text-sm font-medium text-slate-600">Thời lượng</span>
                             </div>
+                            <p id="check-time" class="font-bold text-primary text-sm">---</p>
                         </div>
 
-                        <div class="space-y-3 pb-4 border-b border-slate-100">
+                        <div class="space-y-3 py-4 border-t border-slate-100">
                             <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Người lớn (x1)</span>
+                                <span class="text-slate-500">Chi phí gói Tour (x1)</span>
                                 <span id="check-price-small" class="font-bold text-slate-700">---</span>
                             </div>
                             <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Thuế (VAT) & Phí</span>
-                                <span class="font-bold text-slate-700">0đ</span>
+                                <span class="text-slate-500">Thuế (VAT) & Phí dịch vụ</span>
+                                <span class="font-bold text-green-500">Miễn phí</span>
                             </div>
                         </div>
 
-                        <div class="pt-2">
+                        <div class="pt-4 border-t border-slate-100">
                             <div class="flex justify-between items-end">
-                                <p class="text-sm font-bold text-slate-500 uppercase tracking-widest">Tổng cộng</p>
-                                <p id="check-price" class="text-3xl font-headline font-black text-secondary tracking-tight">---</p>
+                                <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Tổng thanh toán</p>
+                                <p id="check-price" class="text-4xl font-headline font-black text-secondary tracking-tight">---</p>
                             </div>
-                        </<button onclick="confirmBooking()" class="w-full bg-primary text-white py-4 rounded-full font-bold text-lg shadow-lg hover:bg-blue-800 transition active:scale-95 mt-4">
-    Hoàn tất đặt vé
-</button>
+                        </div>
 
+                        <button onclick="confirmBooking()" class="w-full bg-primary text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:bg-primary-light transition-all active:scale-95 flex items-center justify-center gap-3 group">
+                            Hoàn tất đặt vé
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </button>
+                        
+                        <div class="flex justify-center items-center gap-4 mt-6 opacity-50">
+                            <span class="material-symbols-outlined text-xs">shield</span>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Secure SSL Encryption</span>
+                        </div>
                     </div>
                 </div>
             </aside>
         </div>
     </main>
 
-        <script type="module">
+    <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-       
         import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
@@ -234,10 +294,8 @@
                 console.error(error);
             }
         }
-        
         loadCheckout();
 
-      
         window.confirmBooking = async () => {
             const tourId = new URLSearchParams(window.location.search).get('id');
             const name = document.querySelector('input[placeholder="Nguyễn Văn A"]').value;
@@ -246,7 +304,7 @@
             const tourTitle = document.getElementById('check-title').innerText;
 
             if(!name || !phone) { 
-                alert(" nhập đủ thông tin khách hàng nhé!"); 
+                alert("Vui lòng nhập đầy đủ thông tin khách hàng!"); 
                 return; 
             }
 
@@ -259,14 +317,23 @@
                     tourId: tourId,
                     ngayDat: new Date().toLocaleString('vi-VN')
                 });
-                alert("Chúc mừng! Đơn hàng đã được gửi tới Admin thành công.");
+                alert("Chúc mừng! Đơn hàng của bạn đã được gửi thành công. Chúng tôi sẽ liên hệ sớm nhất!");
                 window.location.href = "index.html";
             } catch (e) {
                 console.error(e);
-                alert("Lỗi rồi bạn ơi!");
+                alert("Có lỗi xảy ra, vui lòng thử lại!");
             }
         };
     </script>
-
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi', 
+                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
