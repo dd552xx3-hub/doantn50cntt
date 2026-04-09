@@ -59,7 +59,6 @@
         </div>
     </aside>
 
-    <!-- MAIN -->
     <main class="flex-1 md:ml-64 min-h-screen">
         <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex justify-between items-center">
             <h2 id="current-tab-title" class="text-xl font-headline font-bold text-slate-800">Dashboard</h2>
@@ -94,8 +93,8 @@
                     <div class="bg-primary p-8 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden">
                         <div class="relative z-10">
                             <h3 class="text-2xl font-bold mb-4">Chào mừng Admin!</h3>
-                            <p class="text-blue-100 font-light mb-6">Hệ thống hoạt động ổn định. Hãy vào mục "Quản lý Tour" để thêm hoặc sửa hành trình mới.</p>
-                            <button onclick="switchTab('tours')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-50 transition-all">Quản lý Tour ngay</button>
+                            <p class="text-blue-100 font-light mb-6">Hệ thống ổn định. Hãy vào "Quản lý Tour" để thêm hành trình mới.</p>
+                            <button onclick="switchTab('tours')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm">Quản lý Tour ngay</button>
                         </div>
                     </div>
                 </div>
@@ -187,6 +186,53 @@
         </div>
     </div>
 
+    <!-- SCRIPT GIAO DIỆN (KHÔNG MODULE) -->
+    <script>
+        function switchTab(tab) {
+            const sections = ['dashboard', 'tours', 'bookings', 'users'];
+            const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
+            sections.forEach(s => {
+                const el = document.getElementById(`section-${s}`);
+                if(el) el.classList.toggle('hidden', s !== tab);
+                const btn = document.getElementById(`btn-tab-${s}`);
+                if(btn) {
+                    btn.classList.toggle('nav-item-active', s === tab);
+                    btn.classList.toggle('text-slate-500', s !== tab);
+                }
+            });
+            document.getElementById('current-tab-title').innerText = titles[tab];
+            // Gọi hàm load dữ liệu từ module
+            if(window.loadData) window.loadData(tab);
+        }
+
+        function openModal(type, id = null) {
+            const modal = document.getElementById('tour-modal');
+            modal.classList.remove('hidden');
+            if(type === 'edit') {
+                document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
+                if(window.fetchTourData) window.fetchTourData(id);
+            } else {
+                document.getElementById('modal-title').innerText = "Thêm Tour Mới";
+                document.getElementById('tour-form').reset();
+                document.getElementById('edit-id').value = "";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('tour-modal').classList.add('hidden');
+        }
+
+        function searchTable(inputId, tableId) {
+            let input = document.getElementById(inputId).value.toLowerCase();
+            let trs = document.getElementById(tableId).getElementsByTagName("tr");
+            for (let i = 0; i < trs.length; i++) {
+                let text = trs[i].innerText.toLowerCase();
+                trs[i].style.display = text.indexOf(input) > -1 ? "" : "none";
+            }
+        }
+    </script>
+
+    <!-- SCRIPT FIREBASE (MODULE) -->
     <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getFirestore, collection, getDocs, deleteDoc, doc, addDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
@@ -206,58 +252,7 @@
         const auth = getAuth(app);
         let orderChartInstance = null; 
 
-        // GÁN HÀM VÀO WINDOW ĐỂ HTML GỌI ĐƯỢC
-        window.switchTab = (tab) => {
-            const sections = ['dashboard', 'tours', 'bookings', 'users'];
-            const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
-            sections.forEach(s => {
-                document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
-                const btn = document.getElementById(`btn-tab-${s}`);
-                if(btn) {
-                    btn.classList.toggle('nav-item-active', s === tab);
-                    btn.classList.toggle('text-slate-500', s !== tab);
-                }
-            });
-            document.getElementById('current-tab-title').innerText = titles[tab];
-            if(tab === 'dashboard') loadDashboard();
-            if(tab === 'tours') loadAdminTours();
-            if(tab === 'bookings') loadBookings();
-            if(tab === 'users') loadUsers();
-        };
-
-        window.openModal = async (type, id = null) => {
-            const modal = document.getElementById('tour-modal');
-            modal.classList.remove('hidden');
-            if(type === 'edit') {
-                document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
-                const d = await getDoc(doc(db, "tours", id));
-                const data = d.data();
-                document.getElementById('edit-id').value = id;
-                document.getElementById('t-name').value = data.tenTour;
-                document.getElementById('t-price').value = data.giaTour;
-                document.getElementById('t-time').value = data.thoiGian;
-                document.getElementById('t-type').value = data.loaiTour;
-                document.getElementById('t-img').value = data.imageUrl;
-                document.getElementById('t-desc').value = data.moTa;
-            } else {
-                document.getElementById('modal-title').innerText = "Thêm Tour Mới";
-                document.getElementById('tour-form').reset();
-                document.getElementById('edit-id').value = "";
-            }
-        };
-
-        window.closeModal = () => document.getElementById('tour-modal').classList.add('hidden');
-
-        window.searchTable = (inputId, tableId) => {
-            let input = document.getElementById(inputId).value.toLowerCase();
-            let trs = document.getElementById(tableId).getElementsByTagName("tr");
-            for (let i = 0; i < trs.length; i++) {
-                let text = trs[i].innerText.toLowerCase();
-                trs[i].style.display = text.indexOf(input) > -1 ? "" : "none";
-            }
-        };
-
-        // LÍNH GÁC ADMIN
+        // Phân quyền Admin
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
@@ -274,6 +269,28 @@
 
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
+        // Gán hàm vào window để script thường gọi được
+        window.loadData = async (tab) => {
+            if(tab === 'dashboard') loadDashboard();
+            if(tab === 'tours') loadAdminTours();
+            if(tab === 'bookings') loadBookings();
+            if(tab === 'users') loadUsers();
+        };
+
+        window.fetchTourData = async (id) => {
+            const d = await getDoc(doc(db, "tours", id));
+            const data = d.data();
+            document.getElementById('edit-id').value = id;
+            document.getElementById('t-name').value = data.tenTour;
+            document.getElementById('t-price').value = data.giaTour;
+            document.getElementById('t-time').value = data.thoiGian;
+            document.getElementById('t-type').value = data.loaiTour;
+            document.getElementById('t-img').value = data.imageUrl;
+            document.getElementById('t-desc').value = data.moTa;
+        };
+
+        window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
+
         async function loadDashboard() {
             const toursSnap = await getDocs(collection(db, "tours"));
             const usersSnap = await getDocs(collection(db, "users"));
@@ -281,7 +298,6 @@
             document.getElementById('stat-tours').innerText = toursSnap.size;
             document.getElementById('stat-users').innerText = usersSnap.size;
             document.getElementById('stat-bookings').innerText = bookingsSnap.size;
-            
             let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
             bookingsSnap.forEach(d => {
                 let s = d.data().trangThai || "Chờ xử lý";
@@ -291,10 +307,7 @@
             if(orderChartInstance) orderChartInstance.destroy();
             orderChartInstance = new Chart(ctx, {
                 type: 'doughnut',
-                data: {
-                    labels: Object.keys(statusCount),
-                    datasets: [{ data: Object.values(statusCount), backgroundColor: ['#f59e0b', '#3b82f6', '#10b981', '#ef4444'], borderWidth: 0 }]
-                },
+                data: { labels: Object.keys(statusCount), datasets: [{ data: Object.values(statusCount), backgroundColor: ['#f59e0b', '#3b82f6', '#10b981', '#ef4444'], borderWidth: 0 }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
             });
         }
@@ -376,8 +389,6 @@
             closeModal();
             loadAdminTours();
         };
-
-        window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
 
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         switchTab('dashboard');
