@@ -10,6 +10,13 @@
     <script id="tailwind-config">
         tailwind.config = { theme: { extend: { colors: { "primary": "#004471", "surface": "#f3faff", "secondary": "#e85d04" }, fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } } } }
     </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
+    </style>
 </head>
 <body class="bg-surface font-body antialiased pt-24">
 
@@ -17,6 +24,9 @@
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <a href="index.html" class="text-2xl font-bold tracking-tight text-primary">50cntt1</a>
             <div class="flex items-center gap-4">
+                
+                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
+
                 <a href="cart.html" class="p-2"><span class="material-symbols-outlined text-slate-600">shopping_cart</span></a>
                 <div id="guest-menu" class="flex items-center gap-2">
                     <a href="login.html" class="p-2"><span class="material-symbols-outlined text-slate-600">account_circle</span></a>
@@ -121,9 +131,7 @@
                     document.getElementById('detail-type').innerText = data.loaiTour;
                     document.getElementById('detail-image').src = data.imageUrl;
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            } catch (error) {}
         }
         loadTourDetail();
 
@@ -147,9 +155,19 @@
                 localStorage.setItem('cart50cntt1', JSON.stringify(cart));
                 alert('Đã thêm tour vào giỏ hàng thành công!');
             } else {
-                alert('Tour này đã có trong giỏ hàng rồi đại ca!');
+                alert('Tour này đã có trong giỏ hàng rồi!');
             }
         };
     </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi', 
+                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
