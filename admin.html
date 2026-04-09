@@ -30,18 +30,21 @@
     <style>
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .nav-item-active { background-color: #004471; color: white; shadow: 0 4px 12px rgba(0, 68, 113, 0.3); }
+        .nav-item-active { background-color: #004471; color: white; box-shadow: 0 4px 12px rgba(0, 68, 113, 0.3); }
     </style>
 </head>
 <body class="bg-surface font-body antialiased min-h-screen flex">
     
-  
+    <!-- SIDEBAR NAVIGATION -->
     <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
         <div class="p-6">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span> Admin</a>
         </div>
 
         <nav class="flex-1 px-4 space-y-2 mt-4">
+            <a href="index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
+                <span class="material-symbols-outlined text-lg">home</span> Trang chủ
+            </a>
             <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="nav-item-active w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all hover:bg-blue-50 hover:text-primary">
                 <span class="material-symbols-outlined text-lg">dashboard</span> Tổng quan
             </button>
@@ -67,9 +70,8 @@
         </div>
     </aside>
 
-
+    <!-- MAIN CONTENT AREA -->
     <main class="flex-1 md:ml-64 min-h-screen">
-    
         <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex justify-between items-center">
             <h2 id="current-tab-title" class="text-xl font-headline font-bold text-slate-800">Dashboard</h2>
             <div class="flex items-center gap-4">
@@ -79,7 +81,7 @@
         </header>
 
         <div class="p-6 md:p-10">
-         
+            <!-- SECTION: DASHBOARD -->
             <div id="section-dashboard" class="space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between hover:shadow-md transition-all">
@@ -115,7 +117,7 @@
                     <div class="bg-primary p-8 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden">
                         <div class="relative z-10">
                             <h3 class="text-2xl font-bold mb-4">Chào mừng trở lại, Admin!</h3>
-                            <p class="text-blue-100 font-light leading-relaxed mb-6">Hệ thống đang hoạt động ổn định. Bạn có 5 đơn hàng mới cần xử lý trong ngày hôm nay.</p>
+                            <p class="text-blue-100 font-light leading-relaxed mb-6">Hệ thống đang hoạt động ổn định. Bạn có thể quản lý Tour, Đơn hàng và Khách hàng dễ dàng từ thanh menu bên trái.</p>
                             <button onclick="switchTab('bookings')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm hover:bg-blue-50 transition-all">Quản lý đơn hàng ngay</button>
                         </div>
                         <span class="material-symbols-outlined absolute bottom-[-20px] right-[-20px] text-[150px] text-white/10 rotate-12">admin_panel_settings</span>
@@ -155,7 +157,7 @@
                 </div>
             </div>
 
-          
+            <!-- SECTION: BOOKINGS -->
             <div id="section-bookings" class="hidden space-y-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <h1 class="text-2xl font-headline font-black text-primary">Quản lý Đơn đặt Tour</h1>
@@ -266,7 +268,7 @@
         const auth = getAuth(app);
         let orderChartInstance = null; 
 
-   
+        // LÍNH GÁC PHÂN QUYỀN ADMIN
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
@@ -485,7 +487,6 @@
 
         window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await deleteDoc(doc(db, "tours", id)); loadAdminTours(); } };
 
-        
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
         switchTab('dashboard');
