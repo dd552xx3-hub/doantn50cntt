@@ -8,11 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-
     <script id="tailwind-config">
         tailwind.config = { 
             theme: { 
@@ -30,8 +28,6 @@
     </style>
 </head>
 <body class="bg-surface font-body antialiased min-h-screen flex">
-    
-
     <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
         <div class="p-6">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter block">50cntt1<span class="text-accent">.</span> Admin</a>
@@ -74,7 +70,6 @@
         </header>
 
         <div class="p-6 md:p-10">
-            
             <div id="section-dashboard" class="space-y-8">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
@@ -105,7 +100,6 @@
                 </div>
             </div>
 
-        
             <div id="section-tours" class="hidden space-y-6">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <h1 class="text-2xl font-headline font-black text-primary">Quản lý Danh mục Tour</h1>
@@ -130,7 +124,6 @@
                 </div>
             </div>
 
-            
             <div id="section-bookings" class="hidden space-y-6">
                 <h1 class="text-2xl font-headline font-black text-primary">Quản lý Đơn đặt Tour</h1>
                 <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
@@ -147,7 +140,6 @@
                 </div>
             </div>
 
-          
             <div id="section-users" class="hidden space-y-6">
                 <h1 class="text-2xl font-headline font-black text-primary">Danh sách Thành viên</h1>
                 <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
@@ -165,7 +157,6 @@
             </div>
         </div>
     </main>
-
 
     <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4">
         <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl">
@@ -192,7 +183,6 @@
     </div>
 
     <script>
-        // 1. CẤU HÌNH FIREBASE (COMPAT)
         const firebaseConfig = {
             apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
             authDomain: "doantn50cntt.firebaseapp.com",
@@ -206,7 +196,6 @@
         const auth = firebase.auth();
         let orderChartInstance = null;
 
-     
         auth.onAuthStateChanged(async (user) => {
             if (user) {
                 try {
@@ -223,7 +212,6 @@
 
         document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
 
-        // 3. HÀM ĐIỀU HƯỚNG GIAO DIỆN
         function switchTab(tab) {
             const sections = ['dashboard', 'tours', 'bookings', 'users'];
             const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
@@ -277,7 +265,6 @@
             }
         }
 
-        // 4. LOAD DỮ LIỆU TỪ FIREBASE
         async function loadDashboard() {
             const toursSnap = await db.collection("tours").get();
             const usersSnap = await db.collection("users").get();
@@ -285,7 +272,6 @@
             document.getElementById('stat-tours').innerText = toursSnap.size;
             document.getElementById('stat-users').innerText = usersSnap.size;
             document.getElementById('stat-bookings').innerText = bookingsSnap.size;
-            
             let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
             bookingsSnap.forEach(d => {
                 let s = d.data().trangThai || "Chờ xử lý";
