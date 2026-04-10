@@ -47,7 +47,7 @@
                 <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
             </div>
 
-            <div class="flex items-center gap-3">
+            <div class            class="flex items-center gap-3">
                 <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
                 <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
                     <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
@@ -74,7 +74,7 @@
     <main class="max-w-7xl mx-auto px-6 py-8 md:py-12">
         <div class="flex flex-col lg:flex-row gap-12">
             
-           
+            <!-- Left Column: Details -->
             <div class="flex-1">
                 <div class="relative mb-10">
                     <img id="detail-image" src="" class="w-full h-[300px] md:h-[550px] object-cover rounded-[3rem] shadow-2xl bg-slate-200 transition-all duration-700">
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            
+            <!-- Right Column: Booking Card -->
             <div class="lg:w-[400px]">
                 <div class="sticky top-28 bg-white p-8 rounded-[3rem] shadow-2xl border border-slate-100">
                     <div class="text-center mb-8">
@@ -203,7 +203,9 @@
                     document.getElementById('detail-type').innerText = data.loaiTour;
                     document.getElementById('detail-image').src = data.imageUrl;
                 }
-            } catch (error) {}
+            } catch (error) {
+                console.error(error);
+            }
         }
         loadTourDetail();
 
