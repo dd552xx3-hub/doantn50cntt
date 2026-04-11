@@ -31,7 +31,7 @@
         .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
         .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; }
+        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         .text-gradient { background: linear-gradient(to right, #004471, #005da3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
@@ -65,7 +65,7 @@
                         <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <a href="profile.html" id="user-email" class="text-xs font-bold text-primary hover:text-secondary transition-colors truncate max-w-[80px] md:max-w-[120px]" title="Hồ sơ cá nhân"></a>
+                    <a href="profile.html" id="user-email" class="text-xs font-bold text-primary hover:text-secondary transition-colors truncate max-w-[80px] md:max-w-[120px]"></a>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
                     <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
                 </div>
@@ -175,7 +175,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="text-slate-600 leading-relaxed italic relative z-10 font-light">"Tôi đã đặt tour Vịnh Hạ Long cho cả gia đình. Mọi thứ từ xe đưa đón đến bữa ăn đều được chuẩn bị rất chu đáo."</p>
+                    <p class="text-slate-600 leading-relaxed italic relative z-10 font-light">"Tôi đã đặt tour Vịnh Hạ Long cho cả gia đình. Mọi thứ từ xe đưa đón đến bữa ăn trên du thuyền đều được chuẩn bị rất chu đáo."</p>
                 </div>
                 <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative group">
                     <span class="material-symbols-outlined absolute top-6 right-6 text-6xl text-blue-50 opacity-50 group-hover:scale-110 transition-transform">format_quote</span>
@@ -350,7 +350,7 @@
         }
         getTours();
     </script>
-
+    
     <script>
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
@@ -363,6 +363,7 @@
             chatWindow.classList.remove('hidden');
             chatToggle.classList.add('hidden');
         });
+
         chatClose.addEventListener('click', () => {
             chatWindow.classList.add('hidden');
             chatToggle.classList.remove('hidden');
@@ -379,21 +380,36 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
 
-        function botReply(text) {
-            const lowerText = text.toLowerCase();
-            let reply = "Dạ, em chưa hiểu ý của quý khách lắm. Quý khách có thể hỏi về <b>Giá tour</b>, <b>Lịch trình</b>, hoặc <b>Thanh toán</b> được không ạ?";
-            if (lowerText.includes('giá') || lowerText.includes('bao nhiêu')) {
-                reply = "Giá tour bên em dao động từ 850.000đ đến 69.800.000đ. Quý khách truy cập mục <b>Tour du lịch</b> để xem giá chi tiết ạ!";
-            } else if (lowerText.includes('thanh toán') || lowerText.includes('chuyển khoản')) {
-                reply = "Bên em hỗ trợ: Chuyển khoản QR và Quẹt thẻ tín dụng. Mọi giao dịch đều bảo mật 100% ạ.";
-            } else if (lowerText.includes('sapa') || lowerText.includes('tây bắc')) {
-                reply = "Tây Bắc đang mùa lúa chín! Tour Săn Mây Tà Xùa - Mộc Châu giá chỉ 2.450.000đ. Mời quý khách xem tại danh sách tour!";
-            } else if (lowerText.includes('chào') || lowerText.includes('hello')) {
-                reply = "Dạ em chào quý khách! Chúc quý khách một ngày tốt lành. Em có thể giúp gì cho chuyến đi sắp tới ạ?";
-            } else if (lowerText.includes('liên hệ') || lowerText.includes('sđt')) {
-                reply = "Quý khách liên hệ tổng đài 50CNTT1 qua số: <b>1900 xxxx</b> hoặc email <b>hotro@50cntt1.com</b> ạ.";
+        async function botReply(text) {
+            const API_KEY = "AIzaSyA0eRZqeP3sqgcl84pJHB7lRrQ6pAei7Sc"; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+            const systemPrompt = `Bạn là nhân viên tư vấn nhiệt tình của công ty du lịch 50CNTT1. 
+            Nhiệm vụ của bạn là tư vấn tour, giá cả, và điểm đến.
+            Hãy trả lời thật ngắn gọn, thân thiện, xưng "em" và gọi người đang chat là "quý khách".
+            Không được trả lời quá dài (tối đa 3 câu).
+            Khách vừa hỏi câu này: "${text}"`;
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: systemPrompt }] }]
+                    })
+                });
+
+                const data = await response.json();
+                if (data.candidates && data.candidates.length > 0) {
+                    let aiText = data.candidates[0].content.parts[0].text;
+                    aiText = aiText.replace(/\*/g, ""); 
+                    setTimeout(() => { appendMessage('bot', aiText); }, 500);
+                } else {
+                    throw new Error("No reply");
+                }
+            } catch (error) {
+                setTimeout(() => { appendMessage('bot', "Dạ em đang bận một chút, quý khách vui lòng liên hệ Hotline 1900 xxxx nhé!"); }, 500);
             }
-            setTimeout(() => { appendMessage('bot', reply); }, 600);
         }
 
         function handleSend() {
@@ -448,15 +464,5 @@
             getRealtimeWeather(cities[currentCityIndex]);
         }, 5000);
     </script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'vi', 
-                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
