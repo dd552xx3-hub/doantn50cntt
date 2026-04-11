@@ -41,27 +41,22 @@
     <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            
             <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
                 <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
             </div>
-
             <div class="flex items-center gap-3">
                 <div id="google_translate_element" class="hidden md:flex overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity items-center"></div>
-                
                 <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
                     <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
                 </a>
-                
                 <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
                     <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
                         <span class="material-symbols-outlined">account_circle</span>
                     </a>
                     <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
                 </div>
-                
                 <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
                     <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
                         <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
@@ -250,7 +245,6 @@
         </div>
     </footer>
 
-    <!-- CHATBOT WIDGET -->
     <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
         <button id="chatbot-toggle" class="bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95">
             <span class="material-symbols-outlined text-3xl">support_agent</span>
@@ -266,7 +260,6 @@
                 </div>
                 <button id="chatbot-close" class="hover:text-red-300 transition-colors p-1"><span class="material-symbols-outlined">close</span></button>
             </div>
-            
             <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4 text-sm scroll-smooth">
                 <div class="flex gap-2">
                     <div class="bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm">
@@ -274,7 +267,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="p-3 bg-white border-t border-slate-100 flex gap-2">
                 <input type="text" id="chat-input" placeholder="Nhập câu hỏi của bạn..." class="flex-1 bg-slate-50 border border-slate-100 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all">
                 <button id="chat-send" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors active:scale-90 shadow-md">
@@ -284,7 +276,6 @@
         </div>
     </div>
 
-    <!-- SCRIPT FIREBASE -->
     <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
@@ -357,7 +348,6 @@
         getTours();
     </script>
 
-    <!-- SCRIPT CHATBOT (PROXY CORS) -->
     <script>
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
@@ -379,14 +369,10 @@
         function appendMessage(sender, text) {
             const div = document.createElement('div');
             div.className = sender === 'user' ? 'flex gap-2 justify-end' : 'flex gap-2';
-            
             const msgClass = sender === 'user' 
                 ? 'bg-secondary text-white p-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm' 
                 : 'bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm';
-            
-            const formattedText = text.replace(/\n/g, '<br>');
-            div.innerHTML = `<div class="${msgClass}">${formattedText}</div>`;
-            
+            div.innerHTML = `<div class="${msgClass}">${text.replace(/\n/g, '<br>')}</div>`;
             chatMessages.appendChild(div);
             chatMessages.scrollTop = chatMessages.scrollHeight; 
         }
@@ -398,10 +384,10 @@
 
             const systemPrompt = `Bạn là Trợ lý AI cao cấp của Công ty Du lịch 50CNTT1.
             Nhiệm vụ của bạn: Trả lời ngắn gọn, thân thiện, lễ phép (xưng "em", gọi là "quý khách").
-            Tuyệt đối không trả lời dài dòng văn tự (Tối đa 4 câu).
+            Tuyệt đối không trả lời dài dòng (Tối đa 4 câu).
             Bảng giá tham khảo: Tour Sapa (2.450.000đ), Vịnh Hạ Long (3.200.000đ), Phú Quốc (5.500.000đ).
             Nếu khách hỏi thanh toán: Báo là hỗ trợ chuyển khoản QR và Thẻ tín dụng.
-            Bây giờ, hãy trả lời câu hỏi sau của khách: "${text}"`;
+            Hãy trả lời câu hỏi sau: "${text}"`;
 
             try {
                 const response = await fetch(proxyUrl, {
@@ -414,21 +400,18 @@
                 });
 
                 if (!response.ok) throw new Error("HTTP Error");
-
                 const data = await response.json();
                 
                 if (data.candidates && data.candidates.length > 0) {
-                    let aiText = data.candidates[0].content.parts[0].text;
-                    aiText = aiText.replace(/\*/g, ""); 
+                    let aiText = data.candidates[0].content.parts[0].text.replace(/\*/g, ""); 
                     setTimeout(() => { appendMessage('bot', aiText); }, 500);
                 } else {
                     throw new Error("Dữ liệu rỗng");
                 }
-
             } catch (error) {
                 console.error("Lỗi AI:", error);
                 setTimeout(() => { 
-                    appendMessage('bot', "Dạ hiện tại mạng hơi yếu nên em phản hồi chậm. Quý khách vui lòng gọi Hotline 1900 xxxx nhé!"); 
+                    appendMessage('bot', "Dạ hiện tại mạng hơi yếu, quý khách vui lòng gọi Hotline 1900 xxxx nhé!"); 
                 }, 500);
             }
         }
@@ -436,17 +419,14 @@
         function handleSend() {
             const text = chatInput.value.trim();
             if (!text) return;
-            
             appendMessage('user', text);
             chatInput.value = '';
-            
             const typingDiv = document.createElement('div');
             typingDiv.id = 'bot-typing';
             typingDiv.className = 'flex gap-2';
             typingDiv.innerHTML = `<div class="bg-white border border-slate-100 text-slate-400 px-4 py-2 rounded-2xl rounded-tl-sm text-xs italic shadow-sm">AI đang suy nghĩ...</div>`;
             chatMessages.appendChild(typingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-
             setTimeout(() => {
                 const typingIndicator = document.getElementById('bot-typing');
                 if(typingIndicator) typingIndicator.remove(); 
@@ -455,12 +435,9 @@
         }
 
         chatSend.addEventListener('click', handleSend);
-        chatInput.addEventListener('keypress', (e) => { 
-            if (e.key === 'Enter') handleSend(); 
-        });
+        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
     </script>
 
-    <!-- SCRIPT THỜI TIẾT & GOOGLE DỊCH -->
     <script>
         async function getRealtimeWeather(city) {
             const API_KEY = "270bfbc9d3b4320983649d0367ec5201"; 
