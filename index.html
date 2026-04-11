@@ -363,6 +363,7 @@
 
         chatClose.addEventListener('click', () => {
             chatWindow.classList.add('hidden');
+            chatToggle.classList.add('hidden'); // a bit of a fix here, should be chatbot-toggle
             chatToggle.classList.remove('hidden');
         });
 
@@ -378,33 +379,18 @@
         }
 
         async function botReply(text) {
-            const API_KEY = "AIzaSyDUVh4DWolh3Rbm1ja9QfJWansjNgGI4PY"; 
-            const googleUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-            const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(googleUrl);
-
-            const systemPrompt = `Bạn là Trợ lý AI cao cấp của Công ty Du lịch 50CNTT1.
-            Nhiệm vụ của bạn: Trả lời ngắn gọn, thân thiện, lễ phép (xưng "em", gọi là "quý khách").
-            Tuyệt đối không trả lời dài dòng (Tối đa 4 câu).
-            Bảng giá tham khảo: Tour Sapa (2.450.000đ), Vịnh Hạ Long (3.200.000đ), Phú Quốc (5.500.000đ).
-            Nếu khách hỏi thanh toán: Báo là hỗ trợ chuyển khoản QR và Thẻ tín dụng.
-            Hãy trả lời câu hỏi sau: "${text}"`;
-
             try {
-                const response = await fetch(proxyUrl, {
+                const response = await fetch('https://87e29214-deda-48ab-a653-ea13dde11140-00-30t7xpbmawkfv.pike.replit.dev/api/chat', {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: systemPrompt }] }],
-                        generationConfig: { temperature: 0.7, maxOutputTokens: 150 }
-                    })
+                    body: JSON.stringify({ message: text })
                 });
 
                 if (!response.ok) throw new Error("HTTP Error");
                 const data = await response.json();
                 
-                if (data.candidates && data.candidates.length > 0) {
-                    let aiText = data.candidates[0].content.parts[0].text.replace(/\*/g, ""); 
-                    setTimeout(() => { appendMessage('bot', aiText); }, 500);
+                if (data.reply) {
+                    setTimeout(() => { appendMessage('bot', data.reply); }, 500);
                 } else {
                     throw new Error("Dữ liệu rỗng");
                 }
