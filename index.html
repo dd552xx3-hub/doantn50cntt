@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>50cntt1 - Hành Trình Di Sản</title>
@@ -33,7 +31,7 @@
         .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
         .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; }
+        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         .text-gradient { background: linear-gradient(to right, #004471, #005da3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
@@ -51,23 +49,25 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
+                <div id="google_translate_element" class="hidden md:flex overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity items-center"></div>
                 
                 <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
                     <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
                 </a>
+                
                 <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
                     <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
                         <span class="material-symbols-outlined">account_circle</span>
                     </a>
                     <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
                 </div>
+                
                 <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
                     <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
                         <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <a href="profile.html" id="user-email" class="text-xs font-bold text-primary hover:text-secondary transition-colors truncate max-w-[80px] md:max-w-[120px]"></a>
+                    <a href="profile.html" id="user-email" class="text-xs font-bold text-primary hover:text-secondary transition-colors truncate max-w-[80px] md:max-w-[120px]" title="Hồ sơ cá nhân"></a>
                     <span class="w-[1px] h-4 bg-blue-200"></span>
                     <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
                 </div>
@@ -76,7 +76,7 @@
     </nav>
 
     <main class="pt-20">
-        <section class="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden">
+        <section class="relative min-h-screen md:min-h-[85vh] flex items-center justify-center text-center px-6 py-32 md:py-0 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=1600&q=80" class="absolute inset-0 w-full h-full object-cover -z-10">
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-surface -z-10"></div>
             <div class="max-w-4xl relative z-10">
@@ -102,7 +102,7 @@
             </div>
         </section>
 
-        <section class="max-w-7xl mx-auto px-6 -mt-20 relative z-20 mb-24">
+        <section class="max-w-7xl mx-auto px-6 mt-8 md:-mt-24 relative z-20 mb-24">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 bg-white p-10 rounded-[3rem] shadow-2xl border border-slate-100">
                 <div class="text-center group">
                     <div class="text-4xl font-black text-primary mb-1 group-hover:scale-110 transition-transform">150+</div>
@@ -250,6 +250,7 @@
         </div>
     </footer>
 
+    <!-- CHATBOT WIDGET -->
     <div id="chatbot-widget" class="fixed bottom-6 right-6 z-[100] font-body">
         <button id="chatbot-toggle" class="bg-secondary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform active:scale-95">
             <span class="material-symbols-outlined text-3xl">support_agent</span>
@@ -259,19 +260,21 @@
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center"><span class="material-symbols-outlined">smart_toy</span></div>
                     <div>
-                        <h3 class="font-bold text-sm">Lễ Tân 50CNTT1</h3>
+                        <h3 class="font-bold text-sm">Trợ lý AI 50CNTT1</h3>
                         <p class="text-[10px] text-blue-200 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span> Đang trực tuyến</p>
                     </div>
                 </div>
                 <button id="chatbot-close" class="hover:text-red-300 transition-colors p-1"><span class="material-symbols-outlined">close</span></button>
             </div>
+            
             <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-4 text-sm scroll-smooth">
                 <div class="flex gap-2">
                     <div class="bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm">
-                        Kính chào quý khách! Em là Bot tư vấn của 50CNTT1. Quý khách muốn tìm hiểu về <b>Giá tour</b>, <b>Cách thanh toán</b> hay <b>Điểm đến</b> nào ạ?
+                        Dạ chào quý khách! Em là Trợ lý ảo AI của 50CNTT1. Quý khách cần hỏi bất cứ điều gì về du lịch, cứ nhắn tin cho em nhé!
                     </div>
                 </div>
             </div>
+
             <div class="p-3 bg-white border-t border-slate-100 flex gap-2">
                 <input type="text" id="chat-input" placeholder="Nhập câu hỏi của bạn..." class="flex-1 bg-slate-50 border border-slate-100 rounded-full px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 text-sm transition-all">
                 <button id="chat-send" class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors active:scale-90 shadow-md">
@@ -281,6 +284,7 @@
         </div>
     </div>
 
+    <!-- SCRIPT FIREBASE -->
     <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
@@ -352,7 +356,8 @@
         }
         getTours();
     </script>
-    
+
+    <!-- SCRIPT CHATBOT (PROXY CORS) -->
     <script>
         const chatToggle = document.getElementById('chatbot-toggle');
         const chatWindow = document.getElementById('chatbot-window');
@@ -365,6 +370,7 @@
             chatWindow.classList.remove('hidden');
             chatToggle.classList.add('hidden');
         });
+
         chatClose.addEventListener('click', () => {
             chatWindow.classList.add('hidden');
             chatToggle.classList.remove('hidden');
@@ -373,67 +379,88 @@
         function appendMessage(sender, text) {
             const div = document.createElement('div');
             div.className = sender === 'user' ? 'flex gap-2 justify-end' : 'flex gap-2';
+            
             const msgClass = sender === 'user' 
                 ? 'bg-secondary text-white p-3 rounded-2xl rounded-tr-sm max-w-[85%] shadow-sm' 
                 : 'bg-white border border-slate-100 text-slate-700 p-3 rounded-2xl rounded-tl-sm max-w-[85%] shadow-sm';
-            div.innerHTML = `<div class="${msgClass}">${text}</div>`;
+            
+            const formattedText = text.replace(/\n/g, '<br>');
+            div.innerHTML = `<div class="${msgClass}">${formattedText}</div>`;
+            
             chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            chatMessages.scrollTop = chatMessages.scrollHeight; 
         }
 
         async function botReply(text) {
             const API_KEY = "AIzaSyDUVh4DWolh3Rbm1ja9QfJWansjNgGI4PY"; 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+            const googleUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+            const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(googleUrl);
 
-            const systemPrompt = `Bạn là nhân viên tư vấn nhiệt tình của công ty du lịch 50CNTT1. 
-            Nhiệm vụ của bạn là tư vấn tour, giá cả, và điểm đến cho khách.
-            Hãy trả lời thật ngắn gọn, thân thiện, xưng "em" và gọi người đang chat là "quý khách".
-            Không được trả lời quá dài (tối đa 3 câu).
-            Khách vừa hỏi câu này: "${text}"`;
+            const systemPrompt = `Bạn là Trợ lý AI cao cấp của Công ty Du lịch 50CNTT1.
+            Nhiệm vụ của bạn: Trả lời ngắn gọn, thân thiện, lễ phép (xưng "em", gọi là "quý khách").
+            Tuyệt đối không trả lời dài dòng văn tự (Tối đa 4 câu).
+            Bảng giá tham khảo: Tour Sapa (2.450.000đ), Vịnh Hạ Long (3.200.000đ), Phú Quốc (5.500.000đ).
+            Nếu khách hỏi thanh toán: Báo là hỗ trợ chuyển khoản QR và Thẻ tín dụng.
+            Bây giờ, hãy trả lời câu hỏi sau của khách: "${text}"`;
 
             try {
-                const response = await fetch(url, {
+                const response = await fetch(proxyUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: systemPrompt }] }]
+                        contents: [{ parts: [{ text: systemPrompt }] }],
+                        generationConfig: { temperature: 0.7, maxOutputTokens: 150 }
                     })
                 });
 
+                if (!response.ok) throw new Error("HTTP Error");
+
                 const data = await response.json();
+                
                 if (data.candidates && data.candidates.length > 0) {
                     let aiText = data.candidates[0].content.parts[0].text;
                     aiText = aiText.replace(/\*/g, ""); 
                     setTimeout(() => { appendMessage('bot', aiText); }, 500);
                 } else {
-                    throw new Error("No response");
+                    throw new Error("Dữ liệu rỗng");
                 }
+
             } catch (error) {
-                setTimeout(() => { appendMessage('bot', "Dạ em đang bận một chút, quý khách vui lòng liên hệ Hotline 1900 xxxx nhé!"); }, 500);
+                console.error("Lỗi AI:", error);
+                setTimeout(() => { 
+                    appendMessage('bot', "Dạ hiện tại mạng hơi yếu nên em phản hồi chậm. Quý khách vui lòng gọi Hotline 1900 xxxx nhé!"); 
+                }, 500);
             }
         }
 
         function handleSend() {
             const text = chatInput.value.trim();
             if (!text) return;
+            
             appendMessage('user', text);
             chatInput.value = '';
+            
             const typingDiv = document.createElement('div');
             typingDiv.id = 'bot-typing';
             typingDiv.className = 'flex gap-2';
             typingDiv.innerHTML = `<div class="bg-white border border-slate-100 text-slate-400 px-4 py-2 rounded-2xl rounded-tl-sm text-xs italic shadow-sm">AI đang suy nghĩ...</div>`;
             chatMessages.appendChild(typingDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
+
             setTimeout(() => {
-                if(document.getElementById('bot-typing')) document.getElementById('bot-typing').remove();
-                botReply(text);
+                const typingIndicator = document.getElementById('bot-typing');
+                if(typingIndicator) typingIndicator.remove(); 
+                botReply(text); 
             }, 500);
         }
 
         chatSend.addEventListener('click', handleSend);
-        chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+        chatInput.addEventListener('keypress', (e) => { 
+            if (e.key === 'Enter') handleSend(); 
+        });
     </script>
-    
+
+    <!-- SCRIPT THỜI TIẾT & GOOGLE DỊCH -->
     <script>
         async function getRealtimeWeather(city) {
             const API_KEY = "270bfbc9d3b4320983649d0367ec5201"; 
@@ -442,17 +469,22 @@
                 const response = await fetch(url);
                 const data = await response.json();
                 if(data.cod === 200) {
-                    document.getElementById('w-city').innerText = `Thời tiết ${data.name} lúc này`;
-                    document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C - ${data.weather[0].description}`;
-                    const weatherCondition = data.weather[0].main.toLowerCase();
-                    const iconEl = document.getElementById('w-icon');
-                    if (weatherCondition.includes('cloud')) {
-                        iconEl.innerText = 'cloud'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-200';
-                    } else if (weatherCondition.includes('rain')) {
-                        iconEl.innerText = 'rainy'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-400';
-                    } else if (weatherCondition.includes('clear')) {
-                        iconEl.innerText = 'sunny'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-400';
-                    }
+                    const weatherBox = document.getElementById('w-city').parentElement;
+                    weatherBox.style.opacity = '0.5';
+                    setTimeout(() => {
+                        document.getElementById('w-city').innerText = `Thời tiết ${data.name} lúc này`;
+                        document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C - ${data.weather[0].description}`;
+                        const weatherCondition = data.weather[0].main.toLowerCase();
+                        const iconEl = document.getElementById('w-icon');
+                        if (weatherCondition.includes('cloud')) {
+                            iconEl.innerText = 'cloud'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-200';
+                        } else if (weatherCondition.includes('rain')) {
+                            iconEl.innerText = 'rainy'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-400';
+                        } else if (weatherCondition.includes('clear')) {
+                            iconEl.innerText = 'sunny'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-400';
+                        }
+                        weatherBox.style.opacity = '1';
+                    }, 300);
                 }
             } catch(e) {}
         }
