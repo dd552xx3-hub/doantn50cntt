@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Hồ Sơ Cá Nhân - 50cntt1</title>
+    <title>Hồ Sơ Của Tôi - 50cntt1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -19,7 +19,7 @@
                         "accent": "#fbbf24"
                     }, 
                     fontFamily: { 
-                        "headline":["Plus Jakarta Sans"], 
+                        "headline": ["Plus Jakarta Sans"], 
                         "body": ["Be Vietnam Pro"] 
                     } 
                 } 
@@ -33,139 +33,75 @@
         .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
         .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
         .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-surface font-body antialiased pt-20 flex flex-col min-h-screen">
-
+<body class="bg-surface font-body antialiased pt-20 min-h-screen">
+    
     <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            
             <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
+                <a class="hover:text-primary transition-colors" href="index.html#trai-nghiem">Trải nghiệm</a>
             </div>
-
             <div class="flex items-center gap-3">
-                <div id="google_translate_element" class="hidden md:flex overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity items-center"></div>
-                
+                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
                 <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
                     <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
                 </a>
-                
-                <div class="flex items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
-                    <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
-                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
-                    </a>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <span id="nav-user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]">Đang tải...</span>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <button id="btn-logout-nav" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
+                <div id="user-menu" class="flex items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
+                    <span id="user-email-nav" class="text-xs font-bold text-primary truncate max-w-[100px]"></span>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-1 w-full mt-4 pb-24">
-        
-        <div class="relative w-full h-[250px] md:h-[350px]">
-            <img src="https://images.unsplash.com/photo-1559586616-361e18714958?w=1600&q=80" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-surface"></div>
+    <main class="max-w-5xl mx-auto px-6 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-headline font-black text-primary mb-4 tracking-tight">Hồ Sơ Cá Nhân</h1>
+            <p class="text-slate-500 text-lg font-light">Quản lý thông tin và theo dõi lịch trình của bạn</p>
         </div>
 
-        <div class="max-w-5xl mx-auto px-6 relative z-10 -mt-24 md:-mt-32 mb-12">
-            <div class="bg-white/90 backdrop-blur-xl rounded-[3rem] shadow-2xl shadow-primary/5 border border-white p-8 md:p-12 flex flex-col md:flex-row items-center md:items-end gap-8 text-center md:text-left">
-                
-                <div class="relative">
-                    <div id="user-avatar" class="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-tr from-secondary to-orange-400 text-white rounded-[2rem] flex items-center justify-center text-5xl md:text-6xl font-headline font-black shadow-2xl border-4 border-white transform hover:scale-105 transition-transform duration-500">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Sidebar: Profile Info -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-primary/5 border border-slate-100 text-center">
+                    <div class="w-24 h-24 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-4xl font-black">
+                        <span id="user-initials">U</span>
                     </div>
-                    <div class="absolute -bottom-3 -right-3 bg-green-500 w-8 h-8 rounded-full border-4 border-white shadow-sm flex items-center justify-center" title="Đang hoạt động"></div>
-                </div>
-
-                <div class="flex-1">
-                    <div class="flex flex-col md:flex-row md:items-center gap-4 mb-2">
-                        <h1 id="user-fullname" class="text-3xl md:text-4xl font-headline font-black text-slate-800 tracking-tight">Đang tải dữ liệu...</h1>
-                        <span id="role-badge" class="bg-blue-50 text-primary px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-100 shadow-sm w-max mx-auto md:mx-0">Khách hàng</span>
+                    <h2 id="profile-name" class="text-xl font-bold text-primary mb-1">Người dùng</h2>
+                    <p id="profile-email" class="text-sm text-slate-400 truncate"></p>
+                    <div class="mt-6 pt-6 border-t border-slate-50">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4">Thành viên từ</p>
+                        <p id="member-since" class="text-sm font-medium text-slate-600">---</p>
                     </div>
-                    <p id="user-email-display" class="text-slate-500 font-medium text-lg flex items-center justify-center md:justify-start gap-2">
-                        <span class="material-symbols-outlined text-sm">mail</span> ...
-                    </p>
-                </div>
-
-                <div>
-                    <a href="tours.html" class="bg-primary text-white px-8 py-4 rounded-full font-bold shadow-xl hover:bg-primary-light transition-all active:scale-95 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sm">explore</span> Đặt Tour Mới
-                    </a>
                 </div>
             </div>
-        </div>
 
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-white rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-100 overflow-hidden">
-                
-                <div class="p-8 md:p-10 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <div>
-                        <h2 class="text-2xl font-headline font-black text-primary mb-1 flex items-center gap-2">
-                            <span class="material-symbols-outlined">luggage</span> Hành trình của tôi
-                        </h2>
-                        <p class="text-slate-500 text-sm">Quản lý và theo dõi các chuyến đi bạn đã đặt.</p>
+            <!-- Main Content: Booking History -->
+            <div class="md:col-span-2">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-headline font-black text-primary flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">history</span> Lịch sử đặt tour
+                    </h2>
+                    <span id="booking-count" class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">0 đơn hàng</span>
+                </div>
+
+                <div id="history-container" class="space-y-4">
+                    <div class="flex flex-col items-center justify-center py-20 text-slate-400">
+                        <span class="material-symbols-outlined text-6xl mb-4">event_busy</span>
+                        <p class="font-medium">Bạn chưa có chuyến đi nào.</p>
                     </div>
-                    <span id="booking-count" class="bg-slate-50 text-slate-600 px-4 py-2 rounded-2xl text-xs font-black uppercase tracking-widest border border-slate-200">
-                        0 Đơn hàng
-                    </span>
                 </div>
-                
-                <div class="overflow-x-auto scrollbar-hide">
-                    <table class="w-full text-left min-w-[800px]">
-                        <thead>
-                            <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50/50">
-                                <th class="p-8 pb-4">Chi tiết hành trình</th>
-                                <th class="p-8 pb-4">Ngày giao dịch</th>
-                                <th class="p-8 pb-4">Trạng thái</th>
-                                <th class="p-8 pb-4 text-right">Tổng thanh toán</th>
-                            </tr>
-                        </thead>
-                        <tbody id="my-bookings-list" class="divide-y divide-slate-100">
-                            <tr>
-                                <td colspan="4" class="p-20 text-center animate-pulse">
-                                    <span class="material-symbols-outlined text-5xl text-slate-200 block mb-4">hourglass_empty</span>
-                                    <p class="text-slate-400 font-bold tracking-widest uppercase text-xs">Đang đồng bộ dữ liệu từ hệ thống...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
             </div>
         </div>
     </main>
 
-    <footer class="bg-white pt-20 pb-10 border-t border-slate-100 px-6 mt-auto">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="md:col-span-2">
-                <a href="index.html" class="text-3xl font-black text-primary mb-6 block tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-                <p class="text-slate-500 max-w-sm mb-8 leading-relaxed font-light">Đơn vị lữ hành tiên phong trong việc kiến tạo những trải nghiệm du lịch di sản và văn hóa đích thực tại Việt Nam.</p>
-            </div>
-            <div>
-                <h4 class="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Hỗ trợ</h4>
-                <ul class="space-y-4 text-slate-500 text-sm font-medium">
-                    <li><a href="#" class="hover:text-primary transition-colors">Trung tâm trợ giúp</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Điều khoản dịch vụ</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-50 text-center md:text-left text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <p>© 2026 50CNTT1 TRAVEL. ALL RIGHTS RESERVED.</p>
-        </div>
-    </footer>
-
     <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getFirestore, collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -183,109 +119,81 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                document.getElementById('nav-user-email').innerText = user.email.split('@')[0];
-                await loadUserProfile(user.uid);
-                await loadMyBookings(user.email);
+                document.getElementById('user-email-nav').innerText = user.email.split('@')[0];
+                document.getElementById('profile-email').innerText = user.email;
+                const initials = user.email.split('@')[0].charAt(0).toUpperCase();
+                document.getElementById('user-initials').innerText = initials;
+                
+                // Lấy thông tin từ collection users
+                try {
+                    const userDoc = await getDocs(query(collection(db, "users"), where("email", "==", user.email)));
+                    if (!userDoc.empty) {
+                        const userData = userDoc.docs[0].data();
+                        document.getElementById('profile-name').innerText = userData.hoTen || "Khách hàng";
+                        document.getElementById('member-since').innerText = userData.ngayTao || "---";
+                    }
+                } catch (e) { console.error(e); }
+
+                loadBookingHistory(user.email);
             } else {
                 window.location.href = "login.html";
             }
         });
 
-        document.getElementById('btn-logout-nav').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
+        async function loadBookingHistory(userEmail) {
+            const container = document.getElementById('history-container');
+            const countEl = document.getElementById('booking-count');
 
-        async function loadUserProfile(uid) {
             try {
-                const userDoc = await getDoc(doc(db, "users", uid));
-                if (userDoc.exists()) {
-                    const data = userDoc.data();
-                    const name = data.hoTen || "Người dùng";
-                    document.getElementById('user-fullname').innerText = name;
-                    document.getElementById('user-email-display').innerHTML = `<span class="material-symbols-outlined text-sm">mail</span> ${data.email}`;
-                    document.getElementById('user-avatar').innerText = name.charAt(0).toUpperCase();
-                    
-                    if(data.role === 'admin') {
-                        const badge = document.getElementById('role-badge');
-                        badge.innerText = "Quản trị viên";
-                        badge.className = "bg-red-50 text-red-500 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-red-100 shadow-sm w-max mx-auto md:mx-0";
-                    }
-                }
-            } catch (error) {}
-        }
+                const q = query(collection(db, "bookings"), where("email", "==", userEmail), orderBy("ngayDat", "desc"));
+                const querySnapshot = await getDocs(q);
 
-        async function loadMyBookings(email) {
-            const tbody = document.getElementById('my-bookings-list');
-            try {
-                const q = query(collection(db, "bookings"), where("email", "==", email));
-                const snap = await getDocs(q);
-                tbody.innerHTML = "";
-                document.getElementById('booking-count').innerText = `${snap.size} Đơn hàng`;
-
-                if (snap.empty) {
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="p-20 text-center">
-                                <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <span class="material-symbols-outlined text-5xl text-slate-300">flight_takeoff</span>
-                                </div>
-                                <p class="text-slate-500 text-lg mb-2">Bạn chưa có chuyến đi nào.</p>
-                                <p class="text-slate-400 text-sm mb-6">Hãy bắt đầu hành trình khám phá thế giới cùng chúng tôi.</p>
-                            </td>
-                        </tr>`;
+                if (querySnapshot.empty) {
+                    container.innerHTML = `
+                        <div class="bg-white p-12 rounded-[2.5rem] text-center border border-slate-100 shadow-sm">
+                            <span class="material-symbols-outlined text-5xl text-slate-200 mb-4">event_busy</span>
+                            <p class="text-slate-500 font-medium">Chưa có lịch sử đặt tour nào.</p>
+                        </div>`;
+                    countEl.innerText = "0 đơn hàng";
                     return;
                 }
 
-                snap.forEach(d => {
-                    const b = d.data();
-                    const status = b.trangThai || "Chờ xử lý";
-                    
-                    let badgeColor = "bg-orange-50 text-orange-500 border-orange-100";
-                    let icon = "pending_actions";
-                    
-                    if(status === "Đã thanh toán") { badgeColor = "bg-blue-50 text-blue-500 border-blue-100"; icon = "check_circle"; }
-                    if(status === "Hoàn thành") { badgeColor = "bg-green-50 text-green-500 border-green-100"; icon = "verified"; }
-                    if(status === "Đã hủy") { badgeColor = "bg-red-50 text-red-500 border-red-100"; icon = "cancel"; }
+                container.innerHTML = "";
+                countEl.innerText = `${querySnapshot.size} đơn hàng`;
 
-                    tbody.innerHTML += `
-                        <tr class="hover:bg-slate-50/80 transition-colors group">
-                            <td class="p-8">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition-colors">
-                                        <span class="material-symbols-outlined">map</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-headline font-bold text-lg text-primary mb-1">${b.tenTour}</p>
-                                        <p class="text-[10px] text-slate-400 uppercase font-black tracking-widest">Mã đơn: #${d.id.substring(0,8)}</p>
-                                    </div>
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    let statusClass = "bg-orange-50 text-orange-500";
+                    if (data.trangThai === "Đã thanh toán") statusClass = "bg-blue-50 text-blue-500";
+                    if (data.trangThai === "Hoàn thành") statusClass = "bg-green-50 text-green-500";
+                    if (data.trangThai === "Đã hủy") statusClass = "bg-red-50 text-red-500";
+
+                    container.innerHTML += `
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex flex-col md:flex-row items-center gap-6 hover:shadow-md transition-all">
+                            <img src="${data.imageUrl || 'https://via.placeholder.com/150'}" class="w-24 h-24 rounded-2xl object-cover shadow-sm">
+                            <div class="flex-1 text-center md:text-left">
+                                <h3 class="font-bold text-lg text-primary mb-1">${data.tenTour}</h3>
+                                <p class="text-xs text-slate-400 mb-3 flex items-center justify-center md:justify-start gap-1">
+                                    <span class="material-symbols-outlined text-sm">calendar_month</span> ${data.ngayDat}
+                                </p>
+                                <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                                    <span class="text-sm font-black text-secondary">${data.giaTour}</span>
+                                    <span class="${statusClass} px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest">${data.trangThai}</span>
                                 </div>
-                            </td>
-                            <td class="p-8 text-sm font-bold text-slate-500 flex items-center gap-2 mt-3">
-                                <span class="material-symbols-outlined text-sm">calendar_today</span> ${b.ngayDat || 'Vừa xong'}
-                            </td>
-                            <td class="p-8">
-                                <span class="${badgeColor} border px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center w-max gap-1">
-                                    <span class="material-symbols-outlined text-sm">${icon}</span> ${status}
-                                </span>
-                            </td>
-                            <td class="p-8 text-right font-headline font-black text-2xl text-secondary">
-                                ${b.giaTour || b.tongTien || '---'}
-                            </td>
-                        </tr>
+                            </div>
+                            <a href="tour-detail.html?id=${data.tourId}" class="text-primary hover:text-secondary p-3 bg-blue-50 rounded-full transition-all">
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </a>
+                        </div>
                     `;
                 });
-            } catch (error) { 
-                tbody.innerHTML = `<tr><td colspan="4" class="p-10 text-center text-red-500 font-bold">Lỗi kết nối máy chủ!</td></tr>`;
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = "<p class='text-red-500 text-center'>Lỗi khi tải dữ liệu lịch sử.</p>";
             }
         }
+
+        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.reload());
     </script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'vi', 
-                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
