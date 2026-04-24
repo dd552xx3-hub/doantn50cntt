@@ -11,17 +11,8 @@
         tailwind.config = { 
             theme: { 
                 extend: { 
-                    colors: { 
-                        "primary": "#004471", 
-                        "primary-light": "#005da3",
-                        "surface": "#f8fafc", 
-                        "secondary": "#e85d04",
-                        "accent": "#fbbf24"
-                    }, 
-                    fontFamily: { 
-                        "headline": ["Plus Jakarta Sans"], 
-                        "body": ["Be Vietnam Pro"] 
-                    } 
+                    colors: { "primary": "#004471", "primary-light": "#005da3", "surface": "#f8fafc", "secondary": "#e85d04", "accent": "#fbbf24" }, 
+                    fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } 
                 } 
             } 
         }
@@ -42,13 +33,11 @@
     <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            
             <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
+                <a class="hover:text-primary transition-colors" href="index.html#trai-nghiem">Trải nghiệm</a>
             </div>
-
             <div class="flex items-center gap-3">
                 <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
                 <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
@@ -76,27 +65,17 @@
     <main class="max-w-7xl mx-auto px-6 md:px-12 mt-8">
         <header class="mb-12">
             <h1 class="text-4xl md:text-6xl font-headline font-black text-primary mb-8 tracking-tighter">Hoàn tất hành trình</h1>
-            
             <div class="flex items-center justify-start gap-4 overflow-x-auto pb-6 scrollbar-hide">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg">1</div>
-                    <span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Chi tiết Tour</span>
-                </div>
+                <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg">1</div><span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Chi tiết Tour</span></div>
                 <div class="w-12 h-[2px] bg-primary/30"></div>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-primary/20">2</div>
-                    <span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Thanh toán</span>
-                </div>
+                <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-primary/20">2</div><span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Thanh toán</span></div>
                 <div class="w-12 h-[2px] bg-slate-200"></div>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold">3</div>
-                    <span class="text-slate-400 font-bold whitespace-nowrap text-xs uppercase tracking-widest">Xác nhận</span>
-                </div>
+                <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold">3</div><span class="text-slate-400 font-bold whitespace-nowrap text-xs uppercase tracking-widest">Xác nhận</span></div>
             </div>
         </header>
 
         <div id="error-box" class="hidden bg-red-50 text-red-600 p-6 rounded-3xl mb-10 font-bold text-center border border-red-100 flex items-center justify-center gap-3">
-            <span class="material-symbols-outlined">error</span> Cảnh báo: Không tìm thấy dữ liệu Tour. Vui lòng chọn lại!
+            <span class="material-symbols-outlined">error</span> Cảnh báo: Giỏ hàng đang trống!
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -105,14 +84,14 @@
                     <h2 class="text-2xl font-headline font-bold text-primary mb-10 flex items-center gap-3">
                         <span class="material-symbols-outlined text-3xl p-2 bg-blue-50 rounded-xl">person</span> Thông tin khách hàng
                     </h2>
-                    <form class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <form id="checkout-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-3">
                             <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Họ và tên</label>
                             <div class="relative group">
                                 <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
                                     <span class="material-symbols-outlined text-sm">badge</span>
                                 </span>
-                                <input type="text" placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"/>
+                                <input type="text" id="input-name" placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium" required/>
                             </div>
                         </div>
                         <div class="space-y-3">
@@ -121,7 +100,7 @@
                                 <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
                                     <span class="material-symbols-outlined text-sm">mail</span>
                                 </span>
-                                <input type="email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"/>
+                                <input type="email" id="input-email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium" required/>
                             </div>
                         </div>
                         <div class="space-y-3 md:col-span-2">
@@ -134,7 +113,7 @@
                                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
                                         <span class="material-symbols-outlined text-sm">call</span>
                                     </span>
-                                    <input type="tel" placeholder="090 123 4567" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"/>
+                                    <input type="tel" id="input-phone" placeholder="090 123 4567" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium" required/>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +186,7 @@
                                 <p id="check-price" class="text-4xl font-headline font-black text-secondary tracking-tight">---</p>
                             </div>
                         </div>
-                        <button onclick="confirmBooking()" class="w-full bg-primary text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:bg-primary-light transition-all active:scale-95 flex items-center justify-center gap-3 group">
+                        <button onclick="confirmBooking()" id="btn-confirm" class="w-full bg-primary text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:bg-primary-light transition-all active:scale-95 flex items-center justify-center gap-3 group">
                             Hoàn tất đặt vé
                             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </button>
@@ -254,11 +233,21 @@
         async function loadCheckout() {
             const urlParams = new URLSearchParams(window.location.search);
             const tourId = urlParams.get('id');
-            if (!tourId) {
+
+            // KIỂM TRA GIỎ HÀNG TRỐNG
+            const cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            if (cart.length === 0) {
                 document.getElementById('error-box').classList.remove('hidden');
-                document.getElementById('check-title').innerText = "Lỗi dữ liệu";
+                document.getElementById('check-title').innerText = "Giỏ hàng trống";
                 return;
             }
+
+            if (!tourId) {
+                document.getElementById('error-box').classList.remove('hidden');
+                document.getElementById('check-title').innerText = "Không tìm thấy ID Tour!";
+                return;
+            }
+
             try {
                 const docSnap = await getDoc(doc(db, "tours", tourId));
                 if (docSnap.exists()) {
@@ -269,9 +258,12 @@
                     document.getElementById('check-time').innerText = data.thoiGian;
                     document.getElementById('check-img').src = data.imageUrl;
                 } else {
-                    document.getElementById('check-title').innerText = "Tour không tồn thấy";
+                    document.getElementById('check-title').innerText = "Tour không tồn tại!";
                 }
-            } catch (e) { console.error(e); }
+            } catch (e) { 
+                console.error(e);
+                document.getElementById('check-title').innerText = "Lỗi tải dữ liệu!";
+            }
         }
         loadCheckout();
 
@@ -289,16 +281,18 @@
                 return;
             }
 
-            const name = document.querySelector('input[placeholder="Nguyễn Văn A"]').value;
-            const phone = document.querySelector('input[placeholder="090 123 4567"]').value;
+            // Lấy dữ liệu bằng ID (an toàn hơn placeholder)
+            const name = document.getElementById('input-name').value.trim();
+            const phone = document.getElementById('input-phone').value.trim();
+            const email = document.getElementById('input-email').value.trim();
             const tourId = new URLSearchParams(window.location.search).get('id');
 
-            if(!name || !phone) {
+            if(!name || !phone || !email) {
                 alert("Vui lòng điền đầy đủ thông tin!");
                 return;
             }
 
-            const btn = document.querySelector('button[onclick="confirmBooking()"]');
+            const btn = document.getElementById('btn-confirm');
             btn.innerText = "Đang xử lý...";
             btn.disabled = true;
 
@@ -306,7 +300,7 @@
                 for (const item of cart) {
                     await addDoc(collection(db, "bookings"), {
                         khachHang: name,
-                        email: user.email,
+                        email: email,
                         sdt: phone,
                         tenTour: item.tenTour,
                         tourId: item.id,
@@ -316,11 +310,11 @@
                     });
                 }
                 localStorage.removeItem('cart50cntt1');
-                alert("Đặt vé thành công!");
+                alert("Chúc mừng! Đặt vé thành công!");
                 window.location.href = "index.html";
             } catch (e) {
                 console.error(e);
-                alert("Lỗi!");
+                alert("Có lỗi xảy ra, vui lòng thử lại!");
                 btn.innerText = "Hoàn tất đặt vé";
                 btn.disabled = false;
             }
