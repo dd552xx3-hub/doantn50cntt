@@ -11,17 +11,8 @@
         tailwind.config = { 
             theme: { 
                 extend: { 
-                    colors: { 
-                        "primary": "#004471", 
-                        "primary-light": "#005da3",
-                        "surface": "#f8fafc", 
-                        "secondary": "#e85d04",
-                        "accent": "#fbbf24"
-                    }, 
-                    fontFamily: { 
-                        "headline": ["Plus Jakarta Sans"], 
-                        "body": ["Be Vietnam Pro"] 
-                    } 
+                    colors: { "primary": "#004471", "primary-light": "#005da3", "surface": "#f8fafc", "secondary": "#e85d04", "accent": "#fbbf24" }, 
+                    fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } 
                 } 
             } 
         }
@@ -40,14 +31,12 @@
     <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
             <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            
             <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
                 <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
                 <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="#trai-nghiem">Trải nghiệm</a>
+                <a class="hover:text-primary transition-colors" href="index.html#trai-nghiem">Trải nghiệm</a>
             </div>
-
-            <div class            class="flex items-center gap-3">
+            <div class="flex items-center gap-3">
                 <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
                 <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
                     <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
@@ -72,9 +61,8 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-8 md:py-12">
-        <div class="flex flex-col lg:flex-row gap-12">
-            
-            <!-- Left Column: Details -->
+        <div id="tour-content" class="flex flex-col lg:flex-row gap-12">
+            <!-- Left Column -->
             <div class="flex-1">
                 <div class="relative mb-10">
                     <img id="detail-image" src="" class="w-full h-[300px] md:h-[550px] object-cover rounded-[3rem] shadow-2xl bg-slate-200 transition-all duration-700">
@@ -82,10 +70,8 @@
                         <span id="detail-type" class="bg-white/90 backdrop-blur-md text-primary px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg"></span>
                     </div>
                 </div>
-
                 <div class="mb-10">
                     <h1 id="detail-title" class="text-4xl md:text-6xl font-headline font-black text-primary mb-6 tracking-tighter leading-tight">Đang tải dữ liệu...</h1>
-                    
                     <div class="flex flex-wrap items-center gap-6 text-sm font-bold text-slate-500 mb-10">
                         <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm">
                             <span class="material-symbols-outlined text-primary">schedule</span>
@@ -95,12 +81,7 @@
                             <span class="material-symbols-outlined text-primary">location_on</span>
                             <span>Việt Nam</span>
                         </div>
-                        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm">
-                            <span class="material-symbols-outlined text-primary">star</span>
-                            <span>4.9/5.0</span>
-                        </div>
                     </div>
-
                     <div class="bg-white p-8 md:p-10 rounded-[3rem] shadow-sm border border-slate-100">
                         <h3 class="text-2xl font-headline font-bold text-primary mb-6 flex items-center gap-3">
                             <span class="material-symbols-outlined">description</span> Mô tả chi tiết
@@ -112,14 +93,13 @@
                 </div>
             </div>
 
-            <!-- Right Column: Booking Card -->
+            <!-- Right Column -->
             <div class="lg:w-[400px]">
                 <div class="sticky top-28 bg-white p-8 rounded-[3rem] shadow-2xl border border-slate-100">
                     <div class="text-center mb-8">
                         <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Giá trọn gói</p>
                         <p id="detail-price" class="text-4xl md:text-5xl font-black text-secondary tracking-tight">---</p>
                     </div>
-
                     <div class="space-y-4 mb-10">
                         <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium text-slate-600">
                             <span class="material-symbols-outlined text-primary">check_circle</span> Bao gồm khách sạn 4-5 sao
@@ -127,11 +107,7 @@
                         <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium text-slate-600">
                             <span class="material-symbols-outlined text-primary">check_circle</span> Hướng dẫn viên chuyên nghiệp
                         </div>
-                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium text-slate-600">
-                            <span class="material-symbols-outlined text-primary">check_circle</span> Bảo hiểm du lịch trọn gói
-                        </div>
                     </div>
-
                     <div class="flex flex-col gap-4">
                         <button onclick="addToCart()" class="w-full bg-slate-100 text-primary py-4 rounded-2xl font-bold hover:bg-slate-200 transition-all text-lg active:scale-95 flex items-center justify-center gap-2 shadow-sm">
                             <span class="material-symbols-outlined">add_shopping_cart</span> Thêm vào Giỏ
@@ -140,10 +116,8 @@
                             Đặt Tour Ngay
                         </a>
                     </div>
-                    <p class="text-center text-[10px] text-slate-400 mt-6 uppercase tracking-widest font-bold">Cam kết hoàn tiền nếu không hài lòng</p>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -187,7 +161,11 @@
         async function loadTourDetail() {
             const urlParams = new URLSearchParams(window.location.search);
             const tourId = urlParams.get('id');
-            if (!tourId) return;
+            
+            if (!tourId) {
+                document.getElementById('detail-title').innerText = "Lỗi: Không tìm thấy mã Tour!";
+                return;
+            }
 
             const bookBtn = document.getElementById('book-btn');
             if(bookBtn) bookBtn.href = `checkout.html?id=${tourId}`;
@@ -202,9 +180,12 @@
                     document.getElementById('detail-desc').innerText = data.moTa;
                     document.getElementById('detail-type').innerText = data.loaiTour;
                     document.getElementById('detail-image').src = data.imageUrl;
+                } else {
+                    document.getElementById('detail-title').innerText = "Tour này hiện không tồn tại!";
                 }
             } catch (error) {
                 console.error(error);
+                document.getElementById('detail-title').innerText = "Lỗi kết nối dữ liệu!";
             }
         }
         loadTourDetail();
@@ -227,9 +208,9 @@
             if(!cart.find(item => item.id === id)) {
                 cart.push(tour);
                 localStorage.setItem('cart50cntt1', JSON.stringify(cart));
-                alert('Đã thêm tour vào giỏ hàng thành công!');
+                alert('Đã thêm tour vào giỏ hàng!');
             } else {
-                alert('Tour này đã có trong giỏ hàng rồi!');
+                alert('Tour đã có trong giỏ!');
             }
         };
     </script>
