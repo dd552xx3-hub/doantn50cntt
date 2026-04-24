@@ -2,124 +2,274 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Chi Tiết Hành Trình - 50cntt1</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Chi Tiết Tour - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { 
-            theme: { 
-                extend: { 
-                    colors: { "primary": "#004471", "primary-light": "#005da3", "surface": "#f8fafc", "secondary": "#e85d04", "accent": "#fbbf24" }, 
-                    fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } 
-                } 
-            } 
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#001d35",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#541d00",
+                        "on-primary-fixed-variant": "#1a438e",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "on-tertiary-container": "#74a6dd",
+                        "surface-tint": "#375ca8",
+                        "on-tertiary-fixed-variant": "#03497a",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1e",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary": "#a23f00",
+                        "secondary-container": "#fd6600",
+                        "inverse-primary": "#b0c6ff",
+                        "on-primary-container": "#7fa1f2",
+                        "tertiary-fixed-dim": "#9ccaff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c4c6d3",
+                        "on-primary-fixed": "#001945",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f6",
+                        "outline": "#747782",
+                        "on-surface-variant": "#434651",
+                        "secondary-fixed-dim": "#ffb595",
+                        "on-surface": "#191c1e",
+                        "primary": "#002155",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary-container": "#003b64",
+                        "tertiary": "#002542",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "background": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "surface": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#351000",
+                        "primary-fixed": "#d9e2ff",
+                        "tertiary-fixed": "#d0e4ff",
+                        "primary-container": "#003580",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit-lg": "32px",
+                        "container-max": "1280px",
+                        "unit-xl": "64px",
+                        "unit-md": "16px",
+                        "margin": "32px",
+                        "gutter": "24px",
+                        "unit-xs": "4px",
+                        "unit-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Be Vietnam Pro"],
+                        "headline-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "headline-xl": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }]
+                    }
+                }
+            }
         }
     </script>
     <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         html { scroll-behavior: smooth; }
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
     </style>
 </head>
-<body class="bg-surface font-body antialiased pt-20">
-
-    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
-        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
-                <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
-                <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="index.html#trai-nghiem">Trải nghiệm</a>
+<body class="bg-background text-on-background font-body-md antialiased pt-20">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm transition-all duration-300">
+        <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
+            <a class="text-xl font-black tracking-tighter text-blue-900 font-headline-md" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
+            <div class="hidden md:flex gap-8 font-be-vietnam-pro text-sm font-medium">
+                <a class="text-slate-600 hover:text-blue-800 transition-all duration-300" href="index.html">Trang chủ</a>
+                <a class="text-blue-900 border-b-2 border-blue-900 pb-1 transition-all duration-300" href="tours.html">Tour</a>
+                <a class="text-slate-600 hover:text-blue-800 transition-all duration-300" href="destinations.html">Điểm đến</a>
+                <a class="text-slate-600 hover:text-blue-800 transition-all duration-300" href="#">Cảm hứng</a>
             </div>
-            <div class="flex items-center gap-3">
-                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
-                <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
-                    <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
-                </a>
-                <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                    <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
-                        <span class="material-symbols-outlined">account_circle</span>
-                    </a>
-                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
+            <div class="flex items-center gap-4">
+                <div id="google_translate_element" class="hidden lg:block overflow-hidden rounded-lg opacity-80"></div>
+                <div id="guest-menu" class="flex items-center gap-4">
+                    <a href="login.html" class="font-be-vietnam-pro text-sm font-medium text-slate-600 hover:text-blue-800 transition-all duration-300">Đăng nhập</a>
+                    <a href="register.html" class="font-be-vietnam-pro text-sm font-medium bg-primary-container text-on-primary px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-300">Đăng ký</a>
                 </div>
                 <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
                     <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
                         <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
+                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[100px]"></span>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase hover:text-red-700 transition-colors">Thoát</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-8 md:py-12">
-        <div id="tour-content" class="flex flex-col lg:flex-row gap-12">
-            <!-- Left Column -->
-            <div class="flex-1">
-                <div class="relative mb-10">
-                    <img id="detail-image" src="" class="w-full h-[300px] md:h-[550px] object-cover rounded-[3rem] shadow-2xl bg-slate-200 transition-all duration-700">
-                    <div class="absolute top-6 left-6">
-                        <span id="detail-type" class="bg-white/90 backdrop-blur-md text-primary px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest shadow-lg"></span>
-                    </div>
+    <main class="max-w-[1280px] mx-auto px-8 py-unit-lg">
+        <div class="mb-unit-md">
+            <div class="flex items-center gap-2 text-label-sm text-outline mb-4 font-label-sm">
+                <a class="hover:text-primary transition-colors" href="index.html">Trang chủ</a>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
+                <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                <span id="breadcrumb-title" class="text-on-surface">Chi tiết tour</span>
+            </div>
+            <h1 id="detail-title" class="text-headline-xl font-headline-xl text-primary mb-4">Đang tải thông tin...</h1>
+            <div class="flex flex-wrap items-center gap-6 text-body-md font-body-md text-on-surface-variant">
+                <div class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined text-secondary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+                    <span class="ml-1 font-medium text-on-surface">4.8</span>
+                    <span>(124 đánh giá)</span>
                 </div>
-                <div class="mb-10">
-                    <h1 id="detail-title" class="text-4xl md:text-6xl font-headline font-black text-primary mb-6 tracking-tighter leading-tight">Đang tải dữ liệu...</h1>
-                    <div class="flex flex-wrap items-center gap-6 text-sm font-bold text-slate-500 mb-10">
-                        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm">
-                            <span class="material-symbols-outlined text-primary">schedule</span>
-                            <span id="detail-time">---</span>
-                        </div>
-                        <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm">
-                            <span class="material-symbols-outlined text-primary">location_on</span>
-                            <span>Việt Nam</span>
-                        </div>
-                    </div>
-                    <div class="bg-white p-8 md:p-10 rounded-[3rem] shadow-sm border border-slate-100">
-                        <h3 class="text-2xl font-headline font-bold text-primary mb-6 flex items-center gap-3">
-                            <span class="material-symbols-outlined">description</span> Mô tả chi tiết
-                        </h3>
-                        <p id="detail-desc" class="text-slate-600 leading-relaxed text-lg whitespace-pre-line font-light">
-                            Đang tải thông tin hành trình...
-                        </p>
-                    </div>
+                <div class="flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[20px]">location_on</span>
+                    <span>Việt Nam</span>
                 </div>
             </div>
+        </div>
 
-            <!-- Right Column -->
-            <div class="lg:w-[400px]">
-                <div class="sticky top-28 bg-white p-8 rounded-[3rem] shadow-2xl border border-slate-100">
-                    <div class="text-center mb-8">
-                        <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Giá trọn gói</p>
-                        <p id="detail-price" class="text-4xl md:text-5xl font-black text-secondary tracking-tight">---</p>
+        <div class="grid grid-cols-4 grid-rows-2 gap-unit-xs h-[500px] mb-unit-xl rounded-xl overflow-hidden relative group">
+            <div class="col-span-2 row-span-2 relative">
+                <img id="detail-image" alt="Tour Image" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="https://via.placeholder.com/800x600"/>
+            </div>
+            <div class="col-span-1 row-span-1 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"/>
+            </div>
+            <div class="col-span-1 row-span-1 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"/>
+            </div>
+            <div class="col-span-1 row-span-1 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1559592442-7e182c9405db?w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"/>
+            </div>
+            <div class="col-span-1 row-span-1 relative overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1589782182703-2aad67281b22?w=800&q=80" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"/>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+            <div class="lg:col-span-2 space-y-unit-lg">
+                <div class="flex flex-wrap gap-3">
+                    <div class="bg-primary-fixed text-primary-container px-4 py-2 rounded-full font-label-sm text-label-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">schedule</span>
+                        <span id="detail-time">---</span>
                     </div>
-                    <div class="space-y-4 mb-10">
-                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium text-slate-600">
-                            <span class="material-symbols-outlined text-primary">check_circle</span> Bao gồm khách sạn 4-5 sao
-                        </div>
-                        <div class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium text-slate-600">
-                            <span class="material-symbols-outlined text-primary">check_circle</span> Hướng dẫn viên chuyên nghiệp
+                    <div class="bg-primary-fixed text-primary-container px-4 py-2 rounded-full font-label-sm text-label-sm flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">verified</span>
+                        <span id="detail-type">Luxury</span>
+                    </div>
+                </div>
+                <section>
+                    <h2 class="text-headline-lg font-headline-lg text-primary mb-4">Tổng quan tour</h2>
+                    <div id="detail-desc" class="text-body-lg font-body-lg text-on-surface-variant space-y-4">
+                        Đang tải thông tin chi tiết...
+                    </div>
+                </section>
+            </div>
+
+            <div class="lg:col-span-1 relative">
+                <div class="sticky top-[100px] bg-surface rounded-xl border border-surface-variant p-6 shadow-lg">
+                    <div class="mb-6">
+                        <div class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Giá chỉ từ</div>
+                        <div class="flex items-baseline gap-2">
+                            <span id="detail-price" class="text-headline-lg font-headline-lg text-secondary-container">---</span>
+                            <span class="text-body-md font-body-md text-on-surface-variant">/khách</span>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-4">
-                        <button onclick="addToCart()" class="w-full bg-slate-100 text-primary py-4 rounded-2xl font-bold hover:bg-slate-200 transition-all text-lg active:scale-95 flex items-center justify-center gap-2 shadow-sm">
-                            <span class="material-symbols-outlined">add_shopping_cart</span> Thêm vào Giỏ
+                    <form class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-label-md font-label-md text-on-surface mb-2">Ngày khởi hành</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="material-symbols-outlined text-outline">calendar_today</span>
+                                </div>
+                                <input class="w-full pl-10 pr-3 py-3 bg-white border border-outline-variant rounded-lg text-body-md font-body-md outline-none transition-all" type="date"/>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-label-md font-label-md text-on-surface mb-2">Số lượng khách</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="material-symbols-outlined text-outline">group</span>
+                                </div>
+                                <select class="w-full pl-10 pr-10 py-3 bg-white border border-outline-variant rounded-lg text-body-md font-body-md outline-none appearance-none transition-all">
+                                    <option>1 Người lớn</option>
+                                    <option>2 Người lớn</option>
+                                    <option>2 Người lớn, 1 Trẻ em</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <span class="material-symbols-outlined text-outline">expand_more</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="flex flex-col gap-3">
+                        <button onclick="confirmBooking()" class="w-full bg-secondary-container hover:bg-secondary text-white py-4 rounded-lg font-label-md text-label-md transition-colors duration-300 flex justify-center items-center gap-2 mb-2">
+                            Đặt ngay <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                         </button>
-                        <a id="book-btn" href="#" class="w-full text-center bg-primary text-white py-4 rounded-2xl font-bold shadow-xl hover:bg-primary-light transition-all text-lg active:scale-95 block">
-                            Đặt Tour Ngay
-                        </a>
+                        <button onclick="addToCart()" class="w-full bg-slate-100 text-primary py-3 rounded-lg font-label-md text-label-md hover:bg-slate-200 transition-all flex justify-center items-center gap-2">
+                            <span class="material-symbols-outlined text-[20px]">shopping_cart</span> Thêm vào giỏ
+                        </button>
+                    </div>
+                    <div class="text-center text-label-sm font-label-sm text-on-surface-variant mt-4">
+                        Không thu phí đặt chỗ • Xác nhận ngay tức thì
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <footer class="bg-slate-50 w-full py-12 mt-20 border-t border-slate-200">
+        <div class="max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-lg font-bold text-blue-900 mb-4">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</div>
+                <p class="text-slate-500 mb-6">© 2024 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-900 mb-4">Về Chúng Tôi</h4>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 hover:text-orange-500 transition-colors" href="#">Giới thiệu</a></li>
+                    <li><a class="text-slate-500 hover:text-orange-500 transition-colors" href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-900 mb-4">Hỗ Trợ</h4>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 hover:text-orange-500 transition-colors" href="#">Câu hỏi thường gặp</a></li>
+                    <li><a class="text-slate-500 hover:text-orange-500 transition-colors" href="#">Chính sách</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
@@ -132,7 +282,7 @@
             projectId: "doantn50cntt",
             storageBucket: "doantn50cntt.firebasestorage.app",
             messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+            appId: "1:705512357448:web:844e8f876c489ae27d"
         };
 
         const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
@@ -153,10 +303,7 @@
             }
         });
 
-        const btnLogout = document.getElementById('btn-logout');
-        if(btnLogout) {
-            btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
-        }
+        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
         async function loadTourDetail() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -167,25 +314,23 @@
                 return;
             }
 
-            const bookBtn = document.getElementById('book-btn');
-            if(bookBtn) bookBtn.href = `checkout.html?id=${tourId}`;
-
             try {
                 const docSnap = await getDoc(doc(db, "tours", tourId));
                 if (docSnap.exists()) {
                     const data = docSnap.data();
                     document.getElementById('detail-title').innerText = data.tenTour;
+                    document.getElementById('breadcrumb-title').innerText = data.tenTour;
                     document.getElementById('detail-price').innerText = data.giaTour;
                     document.getElementById('detail-time').innerText = data.thoiGian;
                     document.getElementById('detail-desc').innerText = data.moTa;
                     document.getElementById('detail-type').innerText = data.loaiTour;
                     document.getElementById('detail-image').src = data.imageUrl;
                 } else {
-                    document.getElementById('detail-title').innerText = "Tour này hiện không tồn tại!";
+                    document.getElementById('detail-title').innerText = "Tour này không tồn tại!";
                 }
-            } catch (error) {
-                console.error(error);
-                document.getElementById('detail-title').innerText = "Lỗi kết nối dữ liệu!";
+            } catch (e) { 
+                console.error(e);
+                document.getElementById('detail-title').innerText = "Lỗi tải dữ liệu!";
             }
         }
         loadTourDetail();
@@ -210,19 +355,19 @@
                 localStorage.setItem('cart50cntt1', JSON.stringify(cart));
                 alert('Đã thêm tour vào giỏ hàng!');
             } else {
-                alert('Tour đã có trong giỏ!');
+                alert('Tour này đã có trong giỏ hàng!');
+            }
+        };
+
+        window.confirmBooking = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if(id) {
+                window.location.href = `checkout.html?id=${id}`;
+            } else {
+                alert("Không tìm thấy mã tour để đặt chỗ!");
             }
         };
     </script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'vi', 
-                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
