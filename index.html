@@ -85,11 +85,18 @@
                     <a href="tours.html" class="bg-primary text-white px-12 py-4 rounded-full font-bold shadow-2xl hover:bg-primary-light transition-all hover:-translate-y-1">Khám phá ngay</a>
                     <a href="#trai-nghiem" class="bg-white/10 backdrop-blur-md text-white border border-white/30 px-12 py-4 rounded-full font-bold hover:bg-white/20 transition-all">Về chúng tôi</a>
                 </div>
-                <div class="mt-12 flex justify-center">
-                    <div class="flex items-center gap-4 bg-white/10 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20 text-white shadow-2xl hover:bg-white/20 transition-all cursor-pointer group">
+                <div class="mt-12 flex flex-col items-center gap-4">
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-xl transition-all focus-within:bg-white/20">
+                        <input type="text" id="weather-search" placeholder="Nhập tên thành phố..." 
+                               class="bg-transparent border-none outline-none text-white placeholder-white/50 text-sm px-2 w-40 md:w-64 font-light">
+                        <button id="weather-btn" class="bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-all active:scale-90">
+                            <span class="material-symbols-outlined text-sm">search</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/10 backdrop-blur-xl px-6 py-3 rounded-full border border-white/20 text-white shadow-2xl group">
                         <span id="w-icon" class="material-symbols-outlined text-4xl text-yellow-300 group-hover:scale-110 transition-transform">partly_cloudy_day</span>
                         <div class="text-left">
-                            <p id="w-city" class="text-[10px] font-bold uppercase tracking-widest opacity-70">Đang kết nối...</p>
+                            <p id="w-city" class="text-[10px] font-bold uppercase tracking-widest opacity-70">Nhập địa điểm để xem</p>
                             <p id="w-temp" class="text-xl font-black leading-tight">--°C</p>
                         </div>
                     </div>
@@ -225,7 +232,7 @@
                 <ul class="space-y-4 text-slate-500 text-sm font-medium">
                     <li><a href="#" class="hover:text-primary transition-colors">Miền Bắc</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Miền Trung</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Miền Nam</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">Miền Nam</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Ưu đãi</a></li>
                 </ul>
             </div>
@@ -233,9 +240,9 @@
                 <h4 class="font-bold text-primary mb-6 uppercase text-xs tracking-widest">Hỗ trợ</h4>
                 <ul class="space-y-4 text-slate-500 text-sm font-medium">
                     <li><a href="#" class="hover:text-primary transition-colors">Trung tâm trợ giúp</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">Chính sách bảo mật</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Điều khoản dịch vụ</a></li>
-                    <li><a href="#" class="hover:text-primary-colors">Liên hệ</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Liên hệ</a></li>
                 </ul>
             </div>
         </div>
@@ -360,7 +367,6 @@
             chatWindow.classList.remove('hidden');
             chatToggle.classList.add('hidden');
         });
-
         chatClose.addEventListener('click', () => {
             chatWindow.classList.add('hidden');
             chatToggle.classList.remove('hidden');
@@ -384,10 +390,8 @@
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ message: text })
                 });
-
                 if (!response.ok) throw new Error("HTTP Error");
                 const data = await response.json();
-                
                 if (data.reply) {
                     setTimeout(() => { 
                         appendMessage('bot', data.reply.replace(/\*/g, "")); 
@@ -396,7 +400,6 @@
                     throw new Error("Dữ liệu rỗng");
                 }
             } catch (error) {
-                console.error("Lỗi AI:", error);
                 setTimeout(() => { 
                     appendMessage('bot', "Dạ hiện tại mạng hơi yếu, quý khách vui lòng gọi Hotline 1900 xxxx nhé!"); 
                 }, 500);
@@ -430,36 +433,47 @@
             const API_KEY = "270bfbc9d3b4320983649d0367ec5201"; 
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=vi&appid=${API_KEY}`;
             try {
+                const weatherBox = document.getElementById('w-city').parentElement;
+                weatherBox.style.opacity = '0.5';
                 const response = await fetch(url);
                 const data = await response.json();
                 if(data.cod === 200) {
-                    const weatherBox = document.getElementById('w-city').parentElement;
-                    weatherBox.style.opacity = '0.5';
-                    setTimeout(() => {
-                        document.getElementById('w-city').innerText = `Thời tiết ${data.name} lúc này`;
-                        document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C - ${data.weather[0].description}`;
-                        const weatherCondition = data.weather[0].main.toLowerCase();
-                        const iconEl = document.getElementById('w-icon');
-                        if (weatherCondition.includes('cloud')) {
-                            iconEl.innerText = 'cloud'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-200';
-                        } else if (weatherCondition.includes('rain')) {
-                            iconEl.innerText = 'rainy'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-400';
-                        } else if (weatherCondition.includes('clear')) {
-                            iconEl.innerText = 'sunny'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-400';
-                        }
-                        weatherBox.style.opacity = '1';
-                    }, 300);
+                    document.getElementById('w-city').innerText = `Thời tiết ${data.name}, ${data.sys.country}`;
+                    document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C - ${data.weather[0].description}`;
+                    const weatherCondition = data.weather[0].main.toLowerCase();
+                    const iconEl = document.getElementById('w-icon');
+                    if (weatherCondition.includes('cloud')) {
+                        iconEl.innerText = 'cloud'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-200';
+                    } else if (weatherCondition.includes('rain') || weatherCondition.includes('drizzle')) {
+                        iconEl.innerText = 'rainy'; iconEl.className = 'material-symbols-outlined text-4xl text-blue-400';
+                    } else if (weatherCondition.includes('clear')) {
+                        iconEl.innerText = 'sunny'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-400';
+                    } else if (weatherCondition.includes('thunderstorm')) {
+                        iconEl.innerText = 'thunderstorm'; iconEl.className = 'material-symbols-outlined text-4xl text-purple-400';
+                    } else {
+                        iconEl.innerText = 'partly_cloudy_day'; iconEl.className = 'material-symbols-outlined text-4xl text-yellow-300';
+                    }
+                } else {
+                    alert("Không tìm thấy thành phố này, vui lòng thử lại!");
                 }
-            } catch(e) {}
+            } catch(e) {
+                alert("Có lỗi xảy ra khi kết nối API thời tiết!");
+            } finally {
+                document.getElementById('w-city').parentElement.style.opacity = '1';
+            }
         }
 
-        const cities = ["Sapa", "Hanoi", "Da Nang", "Da Lat", "Phu Quoc"];
-        let currentCityIndex = 0;
-        getRealtimeWeather(cities[currentCityIndex]);
-        setInterval(() => {
-            currentCityIndex = (currentCityIndex + 1) % cities.length;
-            getRealtimeWeather(cities[currentCityIndex]);
-        }, 5000);
+        document.getElementById('weather-btn').addEventListener('click', () => {
+            const city = document.getElementById('weather-search').value.trim();
+            if(city) getRealtimeWeather(city);
+            else alert("Vui lòng nhập tên thành phố!");
+        });
+
+        document.getElementById('weather-search').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') document.getElementById('weather-btn').click();
+        });
+
+        window.onload = () => { getRealtimeWeather('Hanoi'); };
     </script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
