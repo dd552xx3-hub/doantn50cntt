@@ -1,115 +1,249 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html class="light" lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Danh Sách Tour - 50cntt1</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Danh sách Tour - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { 
-            theme: { 
-                extend: { 
-                    colors: { 
-                        "primary": "#004471", 
-                        "primary-light": "#005da3",
-                        "surface": "#f8fafc", 
-                        "secondary": "#e85d04",
-                        "accent": "#fbbf24"
-                    }, 
-                    fontFamily: { 
-                        "headline": ["Plus Jakarta Sans"], 
-                        "body": ["Be Vietnam Pro"] 
-                    } 
-                } 
-            } 
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#fd6600",
+                        "tertiary-fixed-dim": "#9ccaff",
+                        "inverse-primary": "#b0c6ff",
+                        "on-secondary-container": "#541d00",
+                        "inverse-on-surface": "#eff1f3",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e6e8ea",
+                        "tertiary": "#002542",
+                        "on-primary-fixed": "#001945",
+                        "on-primary-fixed-variant": "#1a438e",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "on-tertiary-container": "#74a6dd",
+                        "primary-fixed": "#d9e2ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-tertiary-fixed-variant": "#03497a",
+                        "secondary": "#a23f00",
+                        "secondary-fixed": "#ffdbcd",
+                        "outline": "#747782",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#351000",
+                        "surface-dim": "#d8dadc",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "outline-variant": "#c4c6d3",
+                        "tertiary-fixed": "#d0e4ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed-dim": "#ffb595",
+                        "background": "#f7f9fb",
+                        "on-background": "#191c1e",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "primary": "#002155",
+                        "on-primary-container": "#7fa1f2",
+                        "surface-tint": "#375ca8",
+                        "primary-container": "#003580",
+                        "surface-variant": "#e0e3e5",
+                        "surface": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "on-tertiary-fixed": "#001d35",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#434651",
+                        "tertiary-container": "#003b64"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "unit-xl": "64px",
+                        "unit-xs": "4px",
+                        "unit-lg": "32px",
+                        "unit-sm": "8px",
+                        "margin": "32px",
+                        "gutter": "24px",
+                        "unit-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Be Vietnam Pro"],
+                        "headline-lg": ["Be Vietnam Pro"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Be Vietnam Pro"],
+                        "label-md": ["Be Vietnam Pro"],
+                        "label-sm": ["Be Vietnam Pro"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
         }
     </script>
-    <style>
-        html { scroll-behavior: smooth; }
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .tour-card:hover .tour-img { transform: scale(1.1); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
 </head>
-<body class="bg-surface text-slate-800 font-body antialiased">
-    
-    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
-        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
-                <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
-                <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="index.html#trai-nghiem">Trải nghiệm</a>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary">
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm font-be-vietnam-pro text-sm font-medium tracking-wide">
+        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+            <a class="text-2xl font-black tracking-tighter text-blue-900" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
+            <div class="hidden md:flex space-x-8">
+                <a class="text-slate-600 hover:text-blue-700 transition-colors duration-200" href="index.html">Home</a>
+                <a class="text-blue-900 border-b-2 border-orange-500 pb-1" href="tours.html">Tours</a>
+                <a class="text-slate-600 hover:text-blue-700 transition-colors duration-200" href="destinations.html">Experiences</a>
+                <a class="text-slate-600 hover:text-blue-700 transition-colors duration-200" href="#">Blog</a>
             </div>
-            <div class="flex items-center gap-3">
-                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
-                <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
-                    <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
-                </a>
-                <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                    <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
-                        <span class="material-symbols-outlined">account_circle</span>
-                    </a>
-                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
+            <div class="flex items-center space-x-4">
+                <div id="google_translate_element" class="hidden lg:block overflow-hidden rounded-lg opacity-80"></div>
+                <div id="guest-menu" class="flex items-center space-x-4">
+                    <a href="login.html" class="text-slate-600 hover:text-blue-700 transition-colors duration-200">Login</a>
+                    <a href="register.html" class="bg-primary-container text-on-primary px-6 py-2 rounded-DEFAULT hover:opacity-90 transition-opacity">Sign Up</a>
                 </div>
                 <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
                     <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
                         <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
+                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[100px]"></span>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase hover:text-red-700 transition-colors">Thoát</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="pt-20">
-        <section class="relative py-20 px-6 overflow-hidden bg-white border-b border-slate-100">
-            <div class="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-l-full -z-10"></div>
-            <div class="max-w-7xl mx-auto text-center">
-                <span class="text-primary font-bold text-xs uppercase tracking-[0.3em] mb-4 block">Explore the World</span>
-                <h1 class="text-4xl md:text-6xl font-headline font-black text-primary mb-6 tracking-tight">Tất cả hành trình</h1>
-                <p class="text-slate-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-                    Khám phá danh sách các tour du lịch được tuyển chọn kỹ lưỡng, mang đến cho bạn những trải nghiệm độc bản tại Việt Nam.
-                </p>
-            </div>
-        </section>
+    <header class="pt-unit-xl mt-unit-xl pb-unit-lg px-margin max-w-container-max mx-auto text-center">
+        <h1 class="font-headline-xl text-headline-xl text-primary mb-unit-sm">Khám Phá Các Chuyến Đi</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Lựa chọn những hành trình đẳng cấp, mang đậm dấu ấn văn hóa và thiên nhiên Việt Nam.</p>
+    </header>
 
-        <section class="max-w-7xl mx-auto px-6 md:px-8 py-12">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
-                <div class="w-full md:w-1/2 relative group">
-                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
-                        <span class="material-symbols-outlined">search</span>
-                    </span>
-                    <input type="text" id="search-tour" placeholder="Tìm kiếm điểm đến, tên tour..." 
-                           class="w-full bg-white border border-slate-200 rounded-full pl-12 pr-6 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all shadow-sm">
+    <main class="max-w-container-max mx-auto px-margin pb-unit-xl grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+        <aside class="lg:col-span-3 space-y-unit-lg">
+            <div class="bg-surface-container-lowest border border-surface-container-highest rounded-lg p-unit-md shadow-sm">
+                <div class="flex items-center justify-between mb-unit-md">
+                    <h2 class="font-headline-md text-headline-md text-primary">Bộ Lọc</h2>
+                    <button onclick="resetFilters()" class="text-secondary-container font-label-sm text-label-sm hover:underline">Xóa tất cả</button>
                 </div>
-                <div id="filter-container" class="flex items-center gap-3 overflow-x-auto pb-2 w-full md:w-auto no-scrollbar">
-                    <button class="filter-chip active bg-primary text-white px-6 py-2 rounded-full text-sm font-bold transition-all whitespace-nowrap shadow-md shadow-primary/20" data-filter="all">Tất cả</button>
-                    <button class="filter-chip bg-white text-slate-600 border border-slate-200 px-6 py-2 rounded-full text-sm font-bold hover:border-primary hover:text-primary transition-all whitespace-nowrap" data-filter="Nghỉ dưỡng">Nghỉ dưỡng</button>
-                    <button class="filter-chip bg-white text-slate-600 border border-slate-200 px-6 py-2 rounded-full text-sm font-bold hover:border-primary hover:text-primary transition-all whitespace-nowrap" data-filter="Khám phá">Khám phá</button>
-                    <button class="filter-chip bg-white text-slate-600 border border-slate-200 px-6 py-2 rounded-full text-sm font-bold hover:border-primary hover:text-primary transition-all whitespace-nowrap" data-filter="Văn hóa">Văn hóa</button>
+                <div class="mb-unit-md border-b border-surface-container-highest pb-unit-md">
+                    <h3 class="font-label-md text-label-md text-on-surface mb-unit-sm">Mức Giá</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="low"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">Dưới 5 triệu</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="mid"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">5 - 10 triệu</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="high"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">Trên 10 triệu</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-unit-md border-b border-surface-container-highest pb-unit-md">
+                    <h3 class="font-label-md text-label-md text-on-surface mb-unit-sm">Thời Gian</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="short"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">1 - 3 ngày</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="mid"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">4 - 7 ngày</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="long"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">Hơn 7 ngày</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-label-md text-label-md text-on-surface mb-unit-sm">Loại Hình Tour</h3>
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="Nghỉ dưỡng"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">Nghỉ dưỡng Luxury</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="Khám phá"/>
+                            <span class="font-body-md text-body-md text-on-surface-variant">Khám phá văn hóa</span>
+                        </label>
+                        <label class="flex items-center space-x-3 cursor-pointer">
+                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="Văn hóa"/>
+                            <span class="font-body-md text-body-md text-on-//surface-variant">Sinh thái & Thiên nhiên</span>
+                        </label>
+                    </div>
                 </div>
             </div>
+        </aside>
 
-            <div id="all-tours-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <section class="lg:col-span-9">
+            <div class="flex justify-between items-center mb-unit-md">
+                <span class="font-body-md text-body-md text-on-surface-variant">Kết quả tìm kiếm cho hành trình của bạn</span>
+                <div class="flex items-center space-x-unit-sm">
+                    <span class="font-label-sm text-label-sm text-on-surface-variant">Sắp xếp:</span>
+                    <select id="sort-tours" class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT py-1 px-3 font-body-md text-body-md text-on-surface focus:ring-primary-container focus:border-primary-container">
+                        <option value="default">Được đề xuất</option>
+                        <option value="low">Giá thấp - cao</option>
+                        <option value="high">Giá cao - thấp</option>
+                    </select>
+                </div>
+            </div>
+            <div id="all-tours-list" class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
                 <div class="col-span-full text-center py-24 text-slate-400 animate-pulse">
                     <span class="material-symbols-outlined text-5xl mb-4">cloud_download</span>
-                    <p class="font-bold uppercase tracking-widest text-sm">Đang kết nối dữ liệu 50cntt1...</p>
+                    <p class="font-bold uppercase tracking-widest text-sm">Đang tải dữ liệu tour từ Firebase...</p>
                 </div>
             </div>
         </section>
     </main>
-    
+
+    <footer class="w-full border-t border-slate-200 bg-slate-50 font-be-vietnam-pro text-sm leading-relaxed">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
+            <div>
+                <a class="text-xl font-bold text-blue-900 mb-4 block" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
+                <p class="text-slate-500 mb-6">Trải nghiệm đẳng cấp, nâng tầm chuyến đi của bạn tại Việt Nam.</p>
+                <p class="text-slate-500">© 2024 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-900 mb-4">Về Chúng Tôi</h4>
+                <ul class="space-y-2">
+                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">About Us</a></li>
+                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-900 mb-4">Pháp Lý</h4>
+                <ul class="space-y-2">
+                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">Privacy Policy</a></li>
+                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-blue-900 mb-4">Hỗ Trợ</h4>
+                <ul class="space-y-2">
+                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
     <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
@@ -121,7 +255,7 @@
             projectId: "doantn50cntt",
             storageBucket: "doantn50cntt.firebasestorage.app",
             messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+            appId: "1:705512357448:web:844e8f876c489ae27d"
         };
 
         const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
@@ -129,8 +263,7 @@
         const auth = getAuth(app);
 
         let allTours = [];
-        let currentFilter = "all";
-        let currentSearch = "";
+        let currentFilter = { types: [], price: '', duration: '' };
 
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
@@ -146,119 +279,98 @@
             }
         });
 
-        const btnLogout = document.getElementById('btn-logout');
-        if(btnLogout) {
-            btnLogout.onclick = () => { signOut(auth).then(() => { window.location.reload(); }); };
-        }
+        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.reload());
 
         function renderTours(toursToRender) {
             const container = document.getElementById("all-tours-list");
             container.innerHTML = ""; 
 
             if (toursToRender.length === 0) {
-                container.innerHTML = "<div class='col-span-full text-center py-20'><span class='material-symbols-outlined text-6xl text-slate-300 mb-4'>search_off</span><p class='text-slate-500 font-medium'>Không tìm thấy hành trình nào phù hợp.</p></div>";
+                container.innerHTML = "<div class='col-span-full text-center py-20'><span class='material-symbols-outlined text-6xl text-slate-300 mb-4'>search_off</span><p class='text-slate-500 font-medium'>Không tìm thấy hành trình nào phù hợp với bộ lọc.</p></div>";
                 return;
             }
 
             toursToRender.forEach((data) => {
-                const id = data.id;
                 container.innerHTML += `
-                    <article class="tour-card bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 group">
-                        <a href="tour-detail.html?id=${id}" class="block">
-                            <div class="relative h-72 overflow-hidden">
-                                <img src="${data.imageUrl}" class="tour-img w-full h-full object-cover transition-transform duration-1000">
-                                <div class="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary shadow-lg">
-                                    ${data.loaiTour || 'Khám phá'}
+                    <article class="bg-surface-container-lowest border border-surface-container-highest rounded-xl overflow-hidden shadow-sm group transition-all hover:shadow-lg">
+                        <div class="relative aspect-[4/3] overflow-hidden">
+                            <img src="${data.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${data.tenTour}"/>
+                            <div class="absolute top-4 left-4 bg-primary-container/90 backdrop-blur text-on-primary px-3 py-1 rounded-DEFAULT font-label-sm text-label-sm flex items-center space-x-1">
+                                <span class="material-symbols-outlined text-[16px]">sailing</span>
+                                <span>${data.loaiTour || 'Luxury'}</span>
+                            </div>
+                        </div>
+                        <div class="p-unit-md flex flex-col">
+                            <div class="flex items-center space-x-1 text-on-surface-variant mb-2">
+                                <span class="material-symbols-outlined text-[16px]">location_on</span>
+                                <span class="font-label-sm text-label-sm">Việt Nam</span>
+                            </div>
+                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-2">${data.tenTour}</h3>
+                            <div class="flex items-center space-x-4 mb-unit-md text-on-surface-variant">
+                                <div class="flex items-center space-x-1">
+                                    <span class="material-symbols-outlined text-[18px]">schedule</span>
+                                    <span class="font-label-sm text-label-sm">${data.thoiGian || '3 Ngày'}</span>
                                 </div>
-                                <div class="absolute top-6 right-6">
-                                    <button class="bg-white/20 backdrop-blur-md text-white p-2 rounded-full hover:bg-white hover:text-red-500 transition-all shadow-lg">
-                                        <span class="material-symbols-outlined text-sm">favorite</span>
-                                    </button>
+                                <div class="flex items-center text-secondary-container">
+                                    <span class="material-symbols-outlined text-[16px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
+                                    <span class="font-label-sm text-label-sm ml-1 text-on-surface-variant"><strong class="text-on-surface">4.9</strong></span>
                                 </div>
                             </div>
-                            <div class="p-8">
-                                <div class="flex items-center gap-2 text-accent mb-3">
-                                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                                    <span class="text-xs font-bold text-slate-400">4.9 (120+ đánh giá)</span>
+                            <div class="mt-auto flex justify-between items-end border-t border-surface-container-highest pt-unit-md">
+                                <div>
+                                    <span class="block font-label-sm text-label-sm text-on-surface-variant">Giá từ</span>
+                                    <span class="font-headline-md text-headline-md text-secondary-container">${data.giaTour}</span>
                                 </div>
-                                <h3 class="text-2xl font-headline font-black text-primary mb-3 group-hover:text-secondary transition-colors leading-tight">
-                                    ${data.tenTour}
-                                </h3>
-                                <div class="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-8">
-                                    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">schedule</span> ${data.thoiGian || '3 Ngày'}</span>
-                                    <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-primary">location_on</span> Việt Nam</span>
-                                </div>
-                                <div class="flex justify-between items-center pt-6 border-t border-slate-50">
-                                    <div>
-                                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider">Giá khởi điểm</p>
-                                        <p class="text-2xl font-black text-primary tracking-tight">${data.giaTour}</p>
-                                    </div>
-                                    <span class="bg-primary/10 text-primary p-4 rounded-2xl group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
-                                        <span class="material-symbols-outlined">arrow_forward</span>
-                                    </span>
-                                </div>
+                                <a href="tour-detail.html?id=${data.id}" class="bg-primary-container text-on-primary px-4 py-2 rounded-DEFAULT font-label-md text-label-md hover:bg-primary transition-colors">Xem chi tiết</a>
                             </div>
-                        </a>
+                        </div>
                     </article>
                 `;
             });
         }
 
-        function applyFiltersAndSearch() {
-            const filtered = allTours.filter(tour => {
-                const matchesFilter = currentFilter === "all" || tour.loaiTour === currentFilter;
-                const matchesSearch = tour.tenTour.toLowerCase().includes(currentSearch.toLowerCase()) || 
-                                     (tour.loaiTour && tour.loaiTour.toLowerCase().includes(currentSearch.toLowerCase()));
-                return matchesFilter && matchesSearch;
+        function applyFilters() {
+            const checkedTypes = Array.from(document.querySelectorAll('.filter-checkbox:checked')).map(el => el.value);
+            const sortValue = document.getElementById('sort-tours').value;
+
+            let filtered = allTours.filter(tour => {
+                if (checkedTypes.length === 0) return true;
+                
+                const typeMatch = checkedTypes.some(type => tour.loaiTour?.toLowerCase().includes(type.toLowerCase()));
+                
+                // Simple Price Filter Logic
+                let priceMatch = true;
+                const price = parseInt(tour.giaTour?.replace(/\D/g, '')) || 0;
+                if (checkedTypes.includes('low') && price > 5000000) priceMatch = false;
+                if (checkedTypes.includes('mid') && (price < 5000000 || price > 10000000)) priceMatch = false;
+                if (checkedTypes.includes('high') && price < 10000000) priceMatch = false;
+
+                return typeMatch || priceMatch; 
             });
+
+            if (sortValue === 'low') filtered.sort((a, b) => parseInt(a.giaTour.replace(/\D/g, '')) - parseInt(b.giaTour.replace(/\D/g, '')));
+            if (sortValue === 'high') filtered.sort((a, b) => parseInt(b.giaTour.replace(/\D/g, '')) - parseInt(a.giaTour.replace(/\D/g, '')));
+
             renderTours(filtered);
         }
 
-        function initEventListeners() {
-            document.getElementById('search-tour').addEventListener('input', (e) => {
-                currentSearch = e.target.value;
-                applyFiltersAndSearch();
-            });
+        window.resetFilters = () => {
+            document.querySelectorAll('.filter-checkbox').forEach(el => el.checked = false);
+            applyFilters();
+        };
 
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-                chip.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-chip').forEach(c => {
-                        c.classList.remove('active', 'bg-primary', 'text-white', 'shadow-md', 'shadow-primary/20');
-                        c.classList.add('bg-white', 'text-slate-600', 'border-slate-200');
-                    });
-                    chip.classList.add('active', 'bg-primary', 'text-white', 'shadow-md', 'shadow-primary/20');
-                    chip.classList.remove('bg-white', 'text-slate-600', 'border-slate-200');
-                    
-                    currentFilter = chip.getAttribute('data-filter');
-                    applyFiltersAndSearch();
-                });
-            });
-        }
+        document.querySelectorAll('.filter-checkbox').forEach(el => {
+            el.addEventListener('change', applyFilters);
+        });
+        document.getElementById('sort-tours').addEventListener('change', applyFilters);
 
-        function listenToTours() {
-            onSnapshot(collection(db, "tours"), (querySnapshot) => {
-                allTours = [];
-                querySnapshot.forEach((doc) => {
-                    allTours.push({ id: doc.id, ...doc.data() });
-                });
-                applyFiltersAndSearch();
+        onSnapshot(collection(db, "tours"), (querySnapshot) => {
+            allTours = [];
+            querySnapshot.forEach((doc) => {
+                allTours.push({ id: doc.id, ...doc.data() });
             });
-        }
-
-        initEventListeners();
-        listenToTours();
+            applyFilters();
+        });
     </script>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'vi', 
-                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 </html>
