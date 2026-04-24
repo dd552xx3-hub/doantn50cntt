@@ -189,25 +189,33 @@
             projectId: "doantn50cntt",
             storageBucket: "doantn50cntt.firebasestorage.app",
             messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
+            appId: "1:705512357448:web:844e8f876c489ae27d"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         const auth = firebase.auth();
         let orderChartInstance = null;
 
+        const ADMIN_EMAIL = "admin@50cntt1.com";
+
         auth.onAuthStateChanged(async (user) => {
             if (user) {
-                try {
+                let isAdmin = (user.email === ADMIN_EMAIL);
+                if (!isAdmin) {
                     const userDoc = await db.collection("users").doc(user.uid).get();
-                    if (userDoc.exists && userDoc.data().role === "admin") {
-                        document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
-                    } else {
-                        alert("Bạn không có quyền Admin!");
-                        window.location.href = "index.html";
-                    }
-                } catch (e) { window.location.href = "login.html"; }
-            } else { window.location.href = "login.html"; }
+                    if (userDoc.exists && userDoc.data().role === "admin") isAdmin = true;
+                }
+
+                if (isAdmin) {
+                    document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
+                    switchTab('dashboard');
+                } else {
+                    alert("⚠️ Bạn không có quyền truy cập!");
+                    window.location.href = "index.html";
+                }
+            } else { 
+                window.location.href = "login.html"; 
+            }
         });
 
         document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
@@ -367,7 +375,6 @@
         window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await db.collection("tours").doc(id).delete(); loadAdminTours(); } };
 
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        switchTab('dashboard');
     </script>
 </body>
 </html>
