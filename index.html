@@ -384,27 +384,35 @@
         }
 
         async function botReply(text) {
-            try {
-                const response = await fetch('https://travel-ai-backend-lovat.vercel.app/api/chat', {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ message: text })
-                });
-                if (!response.ok) throw new Error("HTTP Error");
-                const data = await response.json();
-                if (data.reply) {
-                    setTimeout(() => { 
-                        appendMessage('bot', data.reply.replace(/\*/g, "")); 
-                    }, 500);
-                } else {
-                    throw new Error("Dữ liệu rỗng");
-                }
-            } catch (error) {
-                setTimeout(() => { 
-                    appendMessage('bot', "Dạ hiện tại mạng hơi yếu, quý khách vui lòng gọi Hotline 1900 xxxx nhé!"); 
-                }, 500);
-            }
+    try {
+        const toursSnap = await getDocs(collection(db, "tours"));
+        let tourContext = "Thông tin các tour du lịch hiện có: \n";
+        toursSnap.forEach((doc) => {
+            const data = doc.data();
+            tourContext += `- ${data.tenTour}: Giá ${data.giaTour}, Thời gian ${data.thoiGian}. \n`;
+        });
+
+        const fullPrompt = `Bạn là trợ lý ảo của 50CNTT1 Travel. ${tourContext} Hãy dựa vào thông tin trên để trả lời khách hàng. Nếu khách hỏi giá hoặc tour không có trong danh sách, hãy lịch sự báo là hiện tại chưa có hoặc bảo khách liên hệ Hotline. Câu hỏi của khách: ${text}`;
+
+        const response = await fetch('https://travel-ai-backend-lovat.vercel.app/api/chat', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: fullPrompt })
+        });
+
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        if (data.reply) {
+            setTimeout(() => { 
+                appendMessage('bot', data.reply.replace(/\*/g, "")); 
+            }, 500);
         }
+    } catch (error) {
+        setTimeout(() => { 
+            appendMessage('bot', "Dạ hiện tại mạng hơi yếu, quý khách vui lòng gọi Hotline 1900 xxxx nhé!"); 
+        }, 500);
+    }
+}
 
         function handleSend() {
             const text = chatInput.value.trim();
