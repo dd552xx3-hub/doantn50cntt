@@ -87,13 +87,13 @@
                         "label-sm": ["Be Vietnam Pro"]
                     },
                     "fontSize": {
-                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
-                        "headline-xl": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "headline-lg": ["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                        "label-md":["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md":["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md":["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-xl":["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg":["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
+                        "body-lg":["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm":["12px", { "lineHeight": "1.4", "fontWeight": "500" }]
                     }
                 }
             }
@@ -210,7 +210,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        let allPosts = [];
+        let allPosts =[];
         let currentCategory = 'all';
         let searchTerm = '';
 
@@ -237,7 +237,7 @@
                             <img src="${post.imageUrl}" alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
                             <span class="absolute top-4 left-4 bg-white/90 text-primary-container font-label-sm px-3 py-1 rounded backdrop-blur-sm shadow-sm">${post.category}</span>
                         </div>
-                        <div class            class="p-unit-md flex flex-col flex-grow">
+                        <div class="p-unit-md flex flex-col flex-grow">
                             <h3 class="font-headline-md text-headline-md text-on-surface mb-unit-sm group-hover:text-primary-container transition-colors">
                                 <a href="blog-detail.html?id=${post.id}">${post.title}</a>
                             </h3>
