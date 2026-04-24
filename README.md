@@ -1,72 +1,95 @@
 
+✈️ 50CNTT1 TRAVEL - Hệ Thống Quản Lý & Đặt Tour Du Lịch
 
-🌊 50CNTT1 TRAVEL - Hệ Thống Quản Lý & Đặt Tour Du Lịch
+License: MIT Firebase Tailwind CSS
 
-![alt text](https://img.shields.io/badge/Firebase-Backend-FFCA28?logo=firebase&logoColor=white)
+50CNTT1 Travel là một ứng dụng web hiện đại dành cho các đơn vị lữ hành, cho
+phép người dùng khám phá các hành trình du lịch khắp Việt Nam, thực hiện đặt
+tour trực tuyến và quản lý hành trình một cách dễ dàng.
 
-![alt text](https://img.shields.io/badge/TailwindCSS-Styling-38B2AC?logo=tailwind-css&logoColor=white)
+🌟 Tính Năng Nổi Bật
 
-![alt text](https://img.shields.io/badge/Status-Completed-success?logo=checkmarx)
+👤 Dành cho Khách hàng
 
-50CNTT1 TRAVEL là một ứng dụng web hiện đại được thiết kế để kết nối khách du lịch với những hành trình di sản và văn hóa đặc sắc tại Việt Nam. Hệ thống cung cấp trải nghiệm đặt tour mượt mà cho người dùng và bộ công cụ quản trị mạnh mẽ cho nhà điều hành.
+  - Khám phá điểm đến: Giao diện đẹp mắt, hiển thị các điểm đến nổi bật theo
+    vùng miền.
+  - Tìm kiếm & Lọc thông minh: Tìm kiếm tour theo tên hoặc lọc nhanh theo loại
+    hình (Nghỉ dưỡng, Khám phá, Văn hóa).
+  - Giỏ hàng (Cart): Quản lý danh sách các tour đã chọn một cách trực quan.
+  - Quy trình thanh toán (Checkout): Quy trình 3 bước chuyên nghiệp (Thông tin
+    \rightarrow Thanh toán \rightarrow Xác nhận).
+  - Hệ thống tài khoản: Đăng ký, Đăng nhập và quản lý hồ sơ cá nhân.
+  - Đa ngôn ngữ: Tích hợp Google Translate API để hỗ trợ khách du lịch quốc tế.
+  - Thời tiết thời gian thực: Tích hợp OpenWeatherMap API để cập nhật thời tiết
+    tại các điểm đến.
 
-✨ Các Tính Năng Chính (Key Features)
-👤 Dành cho Khách hàng (User Interface)
-* 🔍 Khám phá Tour: Danh sách tour được cập nhật thời gian thực, phân loại theo vùng miền và loại hình du lịch.
-* 📄 Chi tiết hành trình: Xem thông tin chi tiết, hình ảnh, mô tả và giá cả của từng tour.
-* 🛒 Giỏ hàng thông minh: Thêm/Xóa tour vào giỏ hàng và quản lý số lượng dễ dàng qua localStorage.
-* 💳 Thanh toán trực tuyến: Quy trình thanh toán 3 bước (Chi tiết -> Thanh toán -> Xác nhận) với mô phỏng thanh toán qua QR/Thẻ.
-* ⛅ Tiện ích thời tiết: Tích hợp API thời tiết thực tế tại các địa điểm du lịch nổi tiếng.
-* 🤖 Chatbot hỗ trợ: Hỗ trợ khách hàng giải đáp nhanh các thắc mắc về giá và dịch vụ.
-* 🌐 Đa ngôn ngữ: Tích hợp Google Translate giúp người dùng quốc tế dễ dàng tiếp cận.
-* 👤 Quản lý tài khoản: Đăng ký, đăng nhập và theo dõi lịch sử đặt tour cá nhân.
-🛡️ Dành cho Quản trị viên (Admin Dashboard)
-* 📊 Dashboard trực quan: Biểu đồ thống kê tỉ lệ trạng thái đơn hàng (Chờ xử lý, Đã thanh toán, Hoàn thành, Đã hủy) qua Chart.js.
-* 🗺️ Quản lý Tour (CRUD): Thêm mới, chỉnh sửa và xóa các tour du lịch một cách nhanh chóng.
-* 📦 Quản lý Đơn hàng: Theo dõi danh sách khách hàng đã đặt tour và cập nhật trạng thái đơn hàng theo thời gian thực.
-* 👥 Quản lý Thành viên: Danh sách người dùng đăng ký trên hệ thống và phân quyền (Admin/User).
+🛡️ Dành cho Quản trị viên (Admin)
 
-🚀 Công Nghệ Sử Dụng (Tech Stack)
-Frontend
-* HTML5 & CSS3: Cấu trúc và giao diện.
-* Tailwind CSS: Framework CSS hiện đại giúp giao diện responsive và đẹp mắt.
-* JavaScript (ES6+): Xử lý logic ứng dụng và tương tác người dùng.
-* Chart.js: Trực quan hóa dữ liệu biểu đồ cho Admin.
-Backend & Database (BaaS)
-* Firebase Authentication: Quản lý xác thực người dùng (Đăng ký/Đăng nhập).
-* Cloud Firestore: Cơ sở dữ liệu NoSQL lưu trữ thông tin Tour, Bookings và Users theo thời gian thực.
-Third-party APIs
-* OpenWeatherMap API: Cung cấp dữ liệu thời tiết.
-* Google Translate API: Hỗ trợ đa ngôn ngữ.
-* Material Symbols: Hệ thống icon hiện đại.
+  - Dashboard Tổng quan: Biểu đồ thống kê (Chart.js) về tỉ lệ trạng thái đơn
+    hàng.
+  - Quản lý Tour (CRUD): Thêm, sửa, xóa và cập nhật danh mục tour một cách nhanh
+    chóng.
+  - Quản lý Đơn hàng: Theo dõi và thay đổi trạng thái các đơn đặt hàng của
+    khách.
+  - Quản lý Thành viên: Xem danh sách người dùng đã đăng ký trên hệ thống.
+  - Bảo mật: Phân quyền truy cập dựa trên Email và Role trong database.
 
-🛠️ Cài Đặt & Chạy Dự Án (Installation & Setup)
-1. Clone Repository: code Bashdownloadcontent_copy expand_less git clone https://github.com/dd552xx3-hub/doantn50cntt.git
-2. cd doantn50cntt    
-3. Cấu hình Firebase:
-    * Tạo một dự án trên Firebase Console.
-    * Bật Authentication (Email/Password) và Cloud Firestore.
-    * Lấy cấu hình firebaseConfig và dán vào các file .html trong dự án (tại các biến const firebaseConfig).
-4. Chạy ứng dụng:
-    * Bạn không cần cài đặt server phức tạp. Chỉ cần mở file index.html bằng trình duyệt (khuyên dùng extension Live Server trên VS Code để đảm bảo các module JS hoạt động tốt nhất).
+🛠 Công Nghệ Sử Dụng
 
-📂 Cấu Trúc Thư Mục (Project Structure)
-code Text
-downloadcontent_copy
-expand_less
-├── admin.html         # Giao diện quản trị hệ thống
-├── cart.html          # Trang quản lý giỏ hàng
-├── checkout.html      # Quy trình thanh toán
-├── destinations.html  # Trang khám phá điểm đến
-├── index.html         # Trang chủ (Landing Page)
-├── login.html         # Trang đăng nhập
-├── profile.html       # Trang hồ sơ cá nhân người dùng
-├── register.html      # Trang đăng ký tài khoản
-├── tours.html         # Danh sách tất cả các tour
-└── tour-detail.html   # Chi tiết từng tour du lịch
+🌐 Frontend
 
-👨‍💻 Tác Giả (Author)
-* Nhóm phát triển: 50CNTT1
-* Dự án: Đồ án môn học/Tốt nghiệp.
+  - HTML5 & CSS3: Xây dựng cấu trúc và giao diện.
+  - Tailwind CSS: Framework CSS để thiết kế giao diện hiện đại, responsive
+    (tương thích mọi thiết bị).
+  - JavaScript (ES6+): Xử lý logic phía client, tương tác DOM và gọi API.
+  - Chart.js: Vẽ biểu đồ thống kê trực quan cho Admin.
 
-© 2026 50CNTT1 TRAVEL. All rights reserved.
+☁️ Backend & Database (BaaS)
+
+  - Firebase Authentication: Quản lý đăng nhập/đăng ký người dùng.
+  - Cloud Firestore: Cơ sở dữ liệu NoSQL thời gian thực (Realtime Database).
+
+🔌 API bên thứ ba
+
+  - OpenWeatherMap API: Hiển thị thời tiết thực tế.
+  - Google Translate API: Hỗ trợ đa ngôn ngữ.
+
+🚀 Hướng Dẫn Cài Đặt & Chạy Dự Án
+
+1.  Clone dự án:
+
+    git clone https://github.com/dd552xx3-hub/doantn50cntt.git
+
+2.  Mở dự án:
+
+      - Bạn không cần cài đặt môi trường phức tạp. Chỉ cần mở file index.html
+        bằng trình duyệt (Chrome, Edge, Firefox) để bắt đầu trải nghiệm.
+      - Lưu ý: Để các tính năng Firebase hoạt động tốt nhất, nên sử dụng một
+        Local Server (như Live Server trong VS Code).
+
+3.  Cấu hình Firebase (Dành cho lập trình viên):
+
+      - Thay thế firebaseConfig trong các file HTML bằng thông tin dự án
+        Firebase của riêng bạn để quản lý dữ liệu riêng.
+
+📂 Cấu Trúc Thư Mục Chính
+
+├── assets/             # Chứa hình ảnh, icon (nếu có)
+├── index.html          # Trang chủ
+├── destinations.html   # Trang khám phá điểm đến
+├── tours.html          # Danh sách tất cả các tour
+├── tour-detail.html    # Chi tiết từng tour
+├── cart.html           # Giỏ hàng
+├── checkout.html       # Trang thanh toán
+├── admin.html          # Trang quản trị tổng quát
+├── login.html          # Trang đăng nhập
+├── register.html      # Trang đăng ký
+└── profile.html        # Trang hồ sơ cá nhân
+
+👤 Tác giả
+
+  - Sinh viên thực hiện: Nhóm 50CNTT1
+  - Đề tài: Đồ án môn học/tốt nghiệp - Hệ thống quản lý du lịch.
+
+Dự án được thực hiện với mục tiêu ứng dụng các công nghệ Web hiện đại để giải
+quyết bài toán thực tế trong ngành du lịch.
