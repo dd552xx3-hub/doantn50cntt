@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -203,12 +202,12 @@
                 <input type="hidden" id="edit-id">
                 <input type="text" id="t-name" placeholder="Tên Tour" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="t-price" placeholder="Giá" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                    <input type="text" id="t-time" placeholder="Thời gian" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                    <input type="text" id="t-price" placeholder="Giá (VD: 3.500.000đ)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                    <input type="text" id="t-time" placeholder="Thời gian (VD: 3 Ngày 2 Đêm)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
                 </div>
-                <input type="text" id="t-type" placeholder="Loại hình" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                <input type="text" id="t-img" placeholder="URL Hình ảnh" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                <textarea id="t-desc" placeholder="Mô tả chi tiết" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-32 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
+                <input type="text" id="t-type" placeholder="Loại hình (Nghỉ dưỡng/Khám phá...)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                <input type="text" id="t-img" placeholder="URL Hình ảnh bìa" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                <textarea id="t-desc" placeholder="Mô tả chi tiết tour" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-32 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
                 <div class="flex gap-4 pt-4">
                     <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
                     <button type="submit" id="submit-btn" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Xác nhận</button>
@@ -255,11 +254,11 @@
             messagingSenderId: "705512357448",
             appId: "1:705512357448:web:844e8f876c489ae27d"
         };
+        
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         const auth = firebase.auth();
         let orderChartInstance = null;
-
         const ADMIN_EMAIL = "admin@50cntt1.com";
 
         auth.onAuthStateChanged(async (user) => {
@@ -269,7 +268,6 @@
                     const userDoc = await db.collection("users").doc(user.uid).get();
                     if (userDoc.exists && userDoc.data().role === "admin") isAdmin = true;
                 }
-
                 if (isAdmin) {
                     document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
                     switchTab('dashboard');
@@ -285,8 +283,14 @@
         document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
 
         function switchTab(tab) {
-            const sections = ['dashboard', 'tours', 'blogs', 'bookings', 'users'];
-            const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'blogs': 'Quản lý Bài Viết Blog', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
+            const sections =['dashboard', 'tours', 'blogs', 'bookings', 'users'];
+            const titles = { 
+                'dashboard': 'Tổng quan hệ thống', 
+                'tours': 'Quản lý Tour', 
+                'blogs': 'Quản lý Bài Viết Blog', 
+                'bookings': 'Quản lý Đặt tour', 
+                'users': 'Danh sách Khách hàng' 
+            };
             sections.forEach(s => {
                 document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
                 const btn = document.getElementById(`btn-tab-${s}`);
@@ -461,21 +465,26 @@
             const btn = document.getElementById('submit-btn');
             btn.innerText = "Đang lưu...";
             btn.disabled = true;
-            const id = document.getElementById('edit-id').value;
-            const data = {
-                tenTour: document.getElementById('t-name').value,
-                giaTour: document.getElementById('t-price').value,
-                thoiGian: document.getElementById('t-time').value,
-                loaiTour: document.getElementById('t-type').value,
-                imageUrl: document.getElementById('t-img').value,
-                moTa: document.getElementById('t-desc').value
-            };
-            if(id) await db.collection("tours").doc(id).update(data);
-            else await db.collection("tours").add(data);
-            btn.innerText = "Xác nhận";
-            btn.disabled = false;
-            closeModal();
-            loadAdminTours();
+            try {
+                const id = document.getElementById('edit-id').value;
+                const data = {
+                    tenTour: document.getElementById('t-name').value,
+                    giaTour: document.getElementById('t-price').value,
+                    thoiGian: document.getElementById('t-time').value,
+                    loaiTour: document.getElementById('t-type').value,
+                    imageUrl: document.getElementById('t-img').value,
+                    moTa: document.getElementById('t-desc').value
+                };
+                if(id) await db.collection("tours").doc(id).update(data);
+                else await db.collection("tours").add(data);
+                closeModal();
+                loadAdminTours();
+            } catch(err) {
+                alert("Lỗi: " + err.message);
+            } finally {
+                btn.innerText = "Xác nhận";
+                btn.disabled = false;
+            }
         };
 
         document.getElementById('blog-form').onsubmit = async (e) => {
@@ -483,31 +492,47 @@
             const btn = document.getElementById('blog-submit-btn');
             btn.innerText = "Đang lưu...";
             btn.disabled = true;
-            const id = document.getElementById('blog-edit-id').value;
-            
-            const now = new Date();
-            const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
-
-            const data = {
-                title: document.getElementById('b-title').value,
-                category: document.getElementById('b-category').value,
-                imageUrl: document.getElementById('b-img').value,
-                description: document.getElementById('b-desc').value,
-                content: document.getElementById('b-content').value,
-            };
-            
-            if(!id) data.date = dateString; 
-
-            if(id) await db.collection("blog_posts").doc(id).update(data);
-            else await db.collection("blog_posts").add(data);
-            btn.innerText = "Lưu Bài Viết";
-            btn.disabled = false;
-            closeBlogModal();
-            loadAdminBlogs();
+            try {
+                const id = document.getElementById('blog-edit-id').value;
+                const now = new Date();
+                const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+                const data = {
+                    title: document.getElementById('b-title').value,
+                    category: document.getElementById('b-category').value,
+                    imageUrl: document.getElementById('b-img').value,
+                    description: document.getElementById('b-desc').value,
+                    content: document.getElementById('b-content').value,
+                };
+                if(!id) data.date = dateString; 
+                if(id) await db.collection("blog_posts").doc(id).update(data);
+                else await db.collection("blog_posts").add(data);
+                closeBlogModal();
+                loadAdminBlogs();
+            } catch(err) {
+                alert("Lỗi: " + err.message);
+            } finally {
+                btn.innerText = "Lưu Bài Viết";
+                btn.disabled = false;
+            }
         };
 
-        window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await db.collection("tours").doc(id).delete(); loadAdminTours(); } };
-        window.deleteBlog = async (id) => { if(confirm("Xóa bài viết này?")) { await db.collection("blog_posts").doc(id).delete(); loadAdminBlogs(); } };
+        window.deleteTour = async (id) => { 
+            if(confirm("Xóa tour này?")) { 
+                try {
+                    await db.collection("tours").doc(id).delete(); 
+                    loadAdminTours(); 
+                } catch(e) { alert(e.message); }
+            } 
+        };
+        
+        window.deleteBlog = async (id) => { 
+            if(confirm("Xóa bài viết này?")) { 
+                try {
+                    await db.collection("blog_posts").doc(id).delete(); 
+                    loadAdminBlogs(); 
+                } catch(e) { alert(e.message); }
+            } 
+        };
 
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     </script>
