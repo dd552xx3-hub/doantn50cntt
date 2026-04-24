@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Quản Trị Cao Cấp - 50cntt1</title>
+    <title>Quản Trị Cao Cấp - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -30,9 +31,9 @@
 <body class="bg-surface font-body antialiased min-h-screen flex">
     <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
         <div class="p-6">
-            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter block">50cntt1<span class="text-accent">.</span> Admin</a>
+            <a href="index.html" class="text-xl font-black text-primary tracking-tighter block">Đạt_Tùng_Đăng_Long<span class="text-accent">.</span> Admin</a>
         </div>
-        <nav class="flex-1 px-4 space-y-2 mt-4">
+        <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto scrollbar-hide">
             <a href="index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
                 <span class="material-symbols-outlined text-lg">home</span> Trang chủ
             </a>
@@ -41,6 +42,9 @@
             </button>
             <button onclick="switchTab('tours')" id="btn-tab-tours" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
                 <span class="material-symbols-outlined text-lg">map</span> Quản lý Tour
+            </button>
+            <button onclick="switchTab('blogs')" id="btn-tab-blogs" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
+                <span class="material-symbols-outlined text-lg">article</span> Quản lý Blog
             </button>
             <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
                 <span class="material-symbols-outlined text-lg">shopping_cart</span> Đơn Đặt Hàng
@@ -71,18 +75,22 @@
 
         <div class="p-6 md:p-10">
             <div id="section-dashboard" class="space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
                         <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Tổng số Tour</p><h3 id="stat-tours" class="text-4xl font-black text-primary">0</h3></div>
-                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center"><span class="material-symbols-outlined text-3xl">map</span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">map</span></div>
                     </div>
                     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
                         <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Đơn đặt hàng</p><h3 id="stat-bookings" class="text-4xl font-black text-secondary">0</h3></div>
-                        <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined text-3xl">shopping_cart</span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">shopping_cart</span></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
+                        <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Bài Blog</p><h3 id="stat-blogs" class="text-4xl font-black text-purple-500">0</h3></div>
+                        <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">article</span></div>
                     </div>
                     <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
                         <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Khách hàng</p><h3 id="stat-users" class="text-4xl font-black text-green-500">0</h3></div>
-                        <div class="w-14 h-14 rounded-2xl bg-green-50 text-green-500 flex items-center justify-center"><span class="material-symbols-outlined text-3xl">group</span></div>
+                        <div class="w-12 h-12 rounded-2xl bg-green-50 text-green-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">group</span></div>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -93,8 +101,11 @@
                     <div class="bg-primary p-8 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden">
                         <div class="relative z-10">
                             <h3 class="text-2xl font-bold mb-4">Chào mừng Admin!</h3>
-                            <p class="text-blue-100 font-light mb-6">Hệ thống hoạt động ổn định. Hãy vào "Quản lý Tour" để thêm hành trình mới.</p>
-                            <button onclick="switchTab('tours')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm">Quản lý Tour ngay</button>
+                            <p class="text-blue-100 font-light mb-6">Hệ thống của Công Ty Du Lịch Đạt_Tùng_Đăng_Long đang hoạt động ổn định. Hãy quản lý hệ thống ngay!</p>
+                            <div class="flex gap-4">
+                                <button onclick="switchTab('tours')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm shadow-lg">Quản lý Tour</button>
+                                <button onclick="switchTab('blogs')" class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-bold text-sm transition-all border border-white/20">Quản lý Blog</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,6 +130,30 @@
                                 </tr>
                             </thead>
                             <tbody id="admin-tour-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-blogs" class="hidden space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <h1 class="text-2xl font-headline font-black text-primary">Quản lý Blog & Cẩm Nang</h1>
+                    <div class="flex gap-3 w-full md:w-auto">
+                        <input type="text" id="search-blog" onkeyup="searchTable('search-blog', 'admin-blog-list')" placeholder="Tìm bài viết..." class="bg-white border border-slate-200 rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20">
+                        <button onclick="openBlogModal('add')" class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">add</span> Thêm bài viết
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
+                    <div class="overflow-x-auto scrollbar-hide">
+                        <table class="w-full text-left min-w-[900px]">
+                            <thead>
+                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
+                                    <th class="p-6">Hình ảnh</th><th class="p-6">Tiêu đề</th><th class="p-6">Danh mục</th><th class="p-6">Ngày đăng</th><th class="p-6 text-center">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-blog-list"></tbody>
                         </table>
                     </div>
                 </div>
@@ -158,8 +193,8 @@
         </div>
     </main>
 
-    <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4">
-        <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl">
+    <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl my-auto">
             <div class="flex justify-between items-center mb-6">
                 <h2 id="modal-title" class="text-2xl font-headline font-black text-primary">Thêm Tour Mới</h2>
                 <button onclick="closeModal()" class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
@@ -177,6 +212,35 @@
                 <div class="flex gap-4 pt-4">
                     <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
                     <button type="submit" id="submit-btn" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="blog-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-2xl p-8 md:p-10 shadow-2xl my-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="blog-modal-title" class="text-2xl font-headline font-black text-primary">Thêm Bài Viết Mới</h2>
+                <button onclick="closeBlogModal()" class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <form id="blog-form" class="space-y-4">
+                <input type="hidden" id="blog-edit-id">
+                <input type="text" id="b-title" placeholder="Tiêu đề bài viết" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                <div class="grid grid-cols-2 gap-4">
+                    <select id="b-category" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                        <option value="" disabled selected>Chọn danh mục</option>
+                        <option value="Điểm đến">Điểm đến</option>
+                        <option value="Cẩm nang">Cẩm nang</option>
+                        <option value="Ẩm thực">Ẩm thực</option>
+                        <option value="Văn hóa">Văn hóa</option>
+                    </select>
+                    <input type="text" id="b-img" placeholder="URL Hình ảnh bìa" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
+                </div>
+                <textarea id="b-desc" placeholder="Mô tả ngắn (Hiển thị ở trang danh sách)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-24 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
+                <textarea id="b-content" placeholder="Nội dung chi tiết bài viết (Hỗ trợ xuống dòng)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-48 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
+                <div class="flex gap-4 pt-4">
+                    <button type="button" onclick="closeBlogModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
+                    <button type="submit" id="blog-submit-btn" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Lưu Bài Viết</button>
                 </div>
             </form>
         </div>
@@ -221,8 +285,8 @@
         document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
 
         function switchTab(tab) {
-            const sections =['dashboard', 'tours', 'bookings', 'users'];
-            const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
+            const sections = ['dashboard', 'tours', 'blogs', 'bookings', 'users'];
+            const titles = { 'dashboard': 'Tổng quan hệ thống', 'tours': 'Quản lý Tour', 'blogs': 'Quản lý Bài Viết Blog', 'bookings': 'Quản lý Đặt tour', 'users': 'Danh sách Khách hàng' };
             sections.forEach(s => {
                 document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
                 const btn = document.getElementById(`btn-tab-${s}`);
@@ -234,6 +298,7 @@
             document.getElementById('current-tab-title').innerText = titles[tab];
             if(tab === 'dashboard') loadDashboard();
             if(tab === 'tours') loadAdminTours();
+            if(tab === 'blogs') loadAdminBlogs();
             if(tab === 'bookings') loadBookings();
             if(tab === 'users') loadUsers();
         }
@@ -259,10 +324,29 @@
                 document.getElementById('edit-id').value = "";
             }
         }
+        function closeModal() { document.getElementById('tour-modal').classList.add('hidden'); }
 
-        function closeModal() {
-            document.getElementById('tour-modal').classList.add('hidden');
+        function openBlogModal(type, id = null) {
+            const modal = document.getElementById('blog-modal');
+            modal.classList.remove('hidden');
+            if(type === 'edit') {
+                document.getElementById('blog-modal-title').innerText = "Chỉnh sửa Bài Viết";
+                db.collection("blog_posts").doc(id).get().then(doc => {
+                    const data = doc.data();
+                    document.getElementById('blog-edit-id').value = id;
+                    document.getElementById('b-title').value = data.title;
+                    document.getElementById('b-category').value = data.category;
+                    document.getElementById('b-img').value = data.imageUrl;
+                    document.getElementById('b-desc').value = data.description;
+                    document.getElementById('b-content').value = data.content || "";
+                });
+            } else {
+                document.getElementById('blog-modal-title').innerText = "Thêm Bài Viết Mới";
+                document.getElementById('blog-form').reset();
+                document.getElementById('blog-edit-id').value = "";
+            }
         }
+        function closeBlogModal() { document.getElementById('blog-modal').classList.add('hidden'); }
 
         function searchTable(inputId, tableId) {
             let input = document.getElementById(inputId).value.toLowerCase();
@@ -277,9 +361,13 @@
             const toursSnap = await db.collection("tours").get();
             const usersSnap = await db.collection("users").get();
             const bookingsSnap = await db.collection("bookings").get();
+            const blogsSnap = await db.collection("blog_posts").get();
+            
             document.getElementById('stat-tours').innerText = toursSnap.size;
             document.getElementById('stat-users').innerText = usersSnap.size;
             document.getElementById('stat-bookings').innerText = bookingsSnap.size;
+            document.getElementById('stat-blogs').innerText = blogsSnap.size;
+            
             let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
             bookingsSnap.forEach(d => {
                 let s = d.data().trangThai || "Chờ xử lý";
@@ -308,6 +396,24 @@
                     <td class="p-6 flex justify-center gap-2">
                         <button onclick="openModal('edit', '${d.id}')" class="p-2.5 bg-blue-50 text-blue-500 rounded-xl hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
                         <button onclick="deleteTour('${d.id}')" class="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">delete</span></button>
+                    </td></tr>`;
+            });
+        }
+
+        async function loadAdminBlogs() {
+            const tbody = document.getElementById('admin-blog-list');
+            const snap = await db.collection("blog_posts").get();
+            tbody.innerHTML = "";
+            snap.forEach(d => {
+                const data = d.data();
+                tbody.innerHTML += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
+                    <td class="p-6"><img src="${data.imageUrl}" class="w-14 h-14 rounded-2xl object-cover shadow-sm"></td>
+                    <td class="p-6 font-bold text-primary truncate max-w-[250px]">${data.title}</td>
+                    <td class="p-6 text-sm font-bold text-slate-500"><span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest">${data.category}</span></td>
+                    <td class="p-6 text-sm text-slate-400">${data.date || '---'}</td>
+                    <td class="p-6 flex justify-center gap-2">
+                        <button onclick="openBlogModal('edit', '${d.id}')" class="p-2.5 bg-purple-50 text-purple-500 rounded-xl hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
+                        <button onclick="deleteBlog('${d.id}')" class="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">delete</span></button>
                     </td></tr>`;
             });
         }
@@ -372,7 +478,36 @@
             loadAdminTours();
         };
 
+        document.getElementById('blog-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('blog-submit-btn');
+            btn.innerText = "Đang lưu...";
+            btn.disabled = true;
+            const id = document.getElementById('blog-edit-id').value;
+            
+            const now = new Date();
+            const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+
+            const data = {
+                title: document.getElementById('b-title').value,
+                category: document.getElementById('b-category').value,
+                imageUrl: document.getElementById('b-img').value,
+                description: document.getElementById('b-desc').value,
+                content: document.getElementById('b-content').value,
+            };
+            
+            if(!id) data.date = dateString; 
+
+            if(id) await db.collection("blog_posts").doc(id).update(data);
+            else await db.collection("blog_posts").add(data);
+            btn.innerText = "Lưu Bài Viết";
+            btn.disabled = false;
+            closeBlogModal();
+            loadAdminBlogs();
+        };
+
         window.deleteTour = async (id) => { if(confirm("Xóa tour này?")) { await db.collection("tours").doc(id).delete(); loadAdminTours(); } };
+        window.deleteBlog = async (id) => { if(confirm("Xóa bài viết này?")) { await db.collection("blog_posts").doc(id).delete(); loadAdminBlogs(); } };
 
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     </script>
