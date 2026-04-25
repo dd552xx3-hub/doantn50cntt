@@ -26,7 +26,7 @@
                     },
                     fontFamily: {
                         "headline": ["Be Vietnam Pro"],
-                        "body": ["Plus Jakarta Sans"]
+                        "body":["Plus Jakarta Sans"]
                     }
                 }
             }
@@ -61,7 +61,7 @@
                 </div>
                 <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
                     <a href="admin.html" class="text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-lg">admin_panel_settings</span></a>
-                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[100px]"></span>
+                    <a href="profile.html" id="user-email" class="text-xs font-bold text-primary truncate max-w-[100px] hover:underline cursor-pointer"></a>
                     <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase hover:text-red-700 transition-colors">Thoát</button>
                 </div>
             </div>
@@ -70,7 +70,8 @@
 
     <section class="relative h-[870px] min-h-[600px] w-full mt-[72px] flex items-center justify-center">
         <div class="absolute inset-0 z-0">
-            <img alt="Background" class="w-full h-full object-cover object-center" src="https://share.google/1N1DksuyuKlwshYn8"/>
+            <!-- Đã thay link ảnh nền mới của bạn vào thẻ img này -->
+            <img alt="Background" class="w-full h-full object-cover object-center" src="https://share.google/eq6Gg0Gho3jd4Yw0S"/>
             <div class="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/30 to-background/90 mix-blend-multiply"></div>
         </div>
         <div class="relative z-10 text-center px-4 md:px-8 w-full max-w-7xl mx-auto mt-[-5%]">
@@ -117,7 +118,7 @@
                         <span class="material-symbols-outlined text-sm">search</span>
                     </button>
                 </div>
-                <div class="flex items-center gap-4 bg-white/10 backdrop-blur-xl px-6 py-2 rounded-full border border-white/20 text-white shadow-xl group">
+                <div class="flex items-center gap-4 bg-white/10 backdrop-blur-xl px-6 py-2 rounded-full border border-white/20 text-white shadow-xl group group">
                     <span id="w-icon" class="material-symbols-outlined text-3xl text-yellow-300 group-hover:scale-110 transition-transform">partly_cloudy_day</span>
                     <div class="text-left">
                         <p id="w-city" class="text-[9px] font-bold uppercase tracking-widest opacity-70">Đang tải...</p>
