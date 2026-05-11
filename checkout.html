@@ -160,20 +160,20 @@
                         <img id="check-img" src="" class="w-full h-full object-cover bg-slate-100 group-hover:scale-110 transition-transform duration-700"/>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                         <div class="absolute bottom-6 left-8 pr-6">
-                            <h4 id="check-title" class="text-white font-headline font-bold text-3xl leading-tight">Đang tải...</h4>
+                            <h4 id="check-title" class="text-white font-headline font-bold text-2xl md:text-3xl leading-tight">Đang tải...</h4>
                         </div>
                     </div>
                     <div class="space-y-6 relative z-10">
                         <div class="flex justify-between items-center p-4 bg-slate-50 rounded-2xl border border-slate-100">
                             <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-slate-400 text-sm">schedule</span>
-                                <span class="text-sm font-medium text-slate-600">Thời lượng</span>
+                                <span class="material-symbols-outlined text-slate-400 text-sm">assignment</span>
+                                <span class="text-sm font-medium text-slate-600">Số lượng</span>
                             </div>
                             <p id="check-time" class="font-bold text-primary text-sm">---</p>
                         </div>
                         <div class="space-y-3 py-4 border-t border-slate-100">
                             <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Chi phí gói Tour (x1)</span>
+                                <span class="text-slate-500">Tạm tính giỏ hàng</span>
                                 <span id="check-price-small" class="font-bold text-slate-700">---</span>
                             </div>
                             <div class="flex justify-between text-sm">
@@ -202,7 +202,8 @@
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-        let currentTour = null;
+        let cartData = [];
+        let totalAmount = 0;
 
         onAuthStateChanged(auth, (user) => {
             const guestMenu = document.getElementById('guest-menu');
@@ -228,14 +229,29 @@
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
         function loadCheckoutData() {
-            const cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
-            if (cart.length > 0) {
-                currentTour = cart[0]; 
-                document.getElementById('check-img').src = currentTour.imageUrl;
-                document.getElementById('check-title').innerText = currentTour.tenTour;
-                document.getElementById('check-time').innerText = currentTour.thoiGian;
-                document.getElementById('check-price-small').innerText = currentTour.giaTour;
-                document.getElementById('check-price').innerText = currentTour.giaTour;
+            cartData = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            if (cartData.length > 0) {
+                // Lấy ảnh của tour đầu tiên làm ảnh minh họa
+                document.getElementById('check-img').src = cartData[0].imageUrl;
+                
+                // Gộp tên tất cả các tour lại
+                let allTitles = cartData.map(t => t.tenTour).join(' + ');
+                document.getElementById('check-title').innerText = allTitles.length > 50 ? allTitles.substring(0, 50) + '...' : allTitles;
+                
+                document.getElementById('check-time').innerText = cartData.length + " Gói Tour";
+                
+                // Tính tổng tiền của TẤT CẢ các tour trong giỏ
+                totalAmount = 0;
+                cartData.forEach(t => {
+                    let priceNum = parseInt(t.giaTour.replace(/\D/g, ''));
+                    if(!isNaN(priceNum)) {
+                        totalAmount += priceNum;
+                    }
+                });
+                
+                let formattedTotal = totalAmount.toLocaleString('vi-VN') + 'đ';
+                document.getElementById('check-price-small').innerText = formattedTotal;
+                document.getElementById('check-price').innerText = formattedTotal;
             } else {
                 const errBox = document.getElementById('error-box');
                 const btnConfirm = document.getElementById('btn-confirm');
@@ -249,7 +265,7 @@
         loadCheckoutData();
 
         window.confirmBooking = async function() {
-            if (!currentTour) return;
+            if (cartData.length === 0) return;
 
             const name = document.getElementById('input-name').value;
             const email = document.getElementById('input-email').value;
@@ -272,24 +288,30 @@
                 const now = new Date();
                 const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
 
+                // Gộp ID và Tên tour để lưu vào Firebase
+                let allTitles = cartData.map(t => t.tenTour).join(' + ');
+                let allIds = cartData.map(t => t.id).join(', ');
+
                 const bookingData = {
                     khachHang: name,
                     email: email,
                     sdt: phone,
-                    tourId: currentTour.id,
-                    tenTour: currentTour.tenTour,
-                    giaTour: currentTour.giaTour,
-                    imageUrl: currentTour.imageUrl || "",
+                    tourId: allIds, 
+                    tenTour: allTitles, 
+                    giaTour: totalAmount.toLocaleString('vi-VN') + 'đ', 
+                    imageUrl: cartData[0].imageUrl || "",
                     phuongThuc: selectedPayment,
                     ngayDat: dateString,
                     trangThai: "Chờ xử lý"
                 };
 
+                // Đẩy đơn hàng lên Database
                 await addDoc(collection(db, "bookings"), bookingData);
 
+                // Thanh toán xong thì xóa sạch giỏ hàng
                 localStorage.removeItem('cart50cntt1');
 
-                alert("🎉 Đặt tour thành công! Chúc bạn có một chuyến đi vui vẻ.");
+                alert("🎉 Đặt tour thành công! Chúc bạn có những chuyến đi vui vẻ.");
                 window.location.href = "profile.html"; 
             } catch (error) {
                 console.error("Lỗi đặt tour: ", error);
