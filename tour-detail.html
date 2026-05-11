@@ -297,7 +297,7 @@
             btnLogout.onclick = () => signOut(auth).then(() => window.location.reload());
         }
 
-        // Tải chi tiết Tour từ Database
+        
         async function loadTourDetail() {
             const urlParams = new URLSearchParams(window.location.search);
             const tourId = urlParams.get('id');
@@ -328,7 +328,7 @@
         }
         loadTourDetail();
 
-        // Hàm xử lý chung khi thêm vào giỏ
+        
         window.addToCart = function(isBuyNow = false) {
             const dateInput = document.getElementById('tour-date').value;
             const quantityInput = document.getElementById('tour-quantity').value;
@@ -370,7 +370,7 @@
             }
         };
 
-        // Hàm Đặt ngay (Nhảy thẳng sang Checkout)
+        
         window.confirmBooking = function() {
             const success = window.addToCart(true); // Gửi tham số true để không hiện thông báo alert
             if(success) {
