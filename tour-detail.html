@@ -335,20 +335,25 @@
         }
         loadTourDetail();
 
-        window.addToCart = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            if(!id) return;
+       window.addToCart = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    if(!id) return;
 
-            const tour = {
-                id: id,
-                tenTour: document.getElementById('detail-title').innerText,
-                giaTour: document.getElementById('detail-price').innerText,
-                thoiGian: document.getElementById('detail-time').innerText,
-                loaiTour: document.getElementById('detail-type').innerText,
-                imageUrl: document.getElementById('detail-image').src
-            };
+    const tour = {
+        id: id,
+        tenTour: document.getElementById('detail-title').innerText,
+        giaTour: document.getElementById('detail-price').innerText,
+        thoiGian: document.getElementById('detail-time').innerText,
+        loaiTour: document.getElementById('detail-type').innerText,
+        imageUrl: document.getElementById('detail-image').src
+    };
 
+    // Ghi đè giỏ hàng để chỉ giữ 1 tour mới nhất
+    localStorage.setItem('cart50cntt1', JSON.stringify([tour]));
+    alert('Đã thêm tour vào giỏ hàng! (Giỏ hàng chỉ lưu 1 tour cho mỗi lần đặt)');
+    window.location.href = "cart.html"; // Chuyển luôn sang giỏ hàng
+};
             let cart = JSON.parse(localStorage.getItem('cart50cntt1')) ||[];
             if(!cart.find(item => item.id === id)) {
                 cart.push(tour);
