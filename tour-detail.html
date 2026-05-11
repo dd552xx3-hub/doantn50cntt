@@ -322,7 +322,7 @@
         }
         loadTourDetail();
 
-        window.addToCart = function() {
+                window.addToCart = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
             if(!id) return;
@@ -334,6 +334,32 @@
                 alert("Vui lòng chọn Ngày khởi hành trước khi thêm vào giỏ!");
                 return;
             }
+
+            const tour = {
+                id: id,
+                tenTour: document.getElementById('detail-title').innerText,
+                giaTour: document.getElementById('detail-price').innerText,
+                thoiGian: document.getElementById('detail-time').innerText,
+                loaiTour: document.getElementById('detail-type').innerText,
+                imageUrl: document.getElementById('detail-image').src,
+                ngayDi: dateInput,
+                soLuong: quantityInput
+            };
+
+            
+            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            
+            
+            if(!cart.find(item => item.id === id)) {
+                cart.push(tour); 
+                localStorage.setItem('cart50cntt1', JSON.stringify(cart));
+                alert('Đã thêm tour vào giỏ hàng thành công!');
+                window.location.href = "cart.html";
+            } else {
+                alert('Tour này đã có trong giỏ hàng của bạn rồi!');
+            }
+        };
+
 
             const tour = {
                 id: id,
