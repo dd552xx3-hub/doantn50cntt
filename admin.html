@@ -245,17 +245,9 @@
         </div>
     </div>
 
+    <script src="config-obj.js"></script>
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c489ae27d"
-        };
-        
-        firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(globalFirebaseConfig);
         const db = firebase.firestore();
         const auth = firebase.auth();
         let orderChartInstance = null;
@@ -442,16 +434,10 @@
             });
         }
 
-       window.updateBookingStatus = async (id, newStatus) => {
+        window.updateBookingStatus = async (id, newStatus) => {
             if(!newStatus) return;
-            try {
-                await db.collection("bookings").doc(id).update({ trangThai: newStatus });
-                alert("Cập nhật trạng thái đơn hàng thành công!");
-                loadBookings();
-            } catch(e) {
-                console.error(e);
-                alert("Lỗi mạng: Không thể cập nhật trạng thái lúc này!");
-            }
+            await db.collection("bookings").doc(id).update({ trangThai: newStatus });
+            loadBookings();
         };
 
         async function loadUsers() {
