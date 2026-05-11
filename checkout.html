@@ -197,10 +197,111 @@
         </div>
     </main>
 
-    <script type="module">
+  <script type="module">
         import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9c
+            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
+            authDomain: "doantn50cntt.firebaseapp.com",
+            projectId: "doantn50cntt",
+            storageBucket: "doantn50cntt.firebasestorage.app",
+            messagingSenderId: "705512357448",
+            appId: "1:705512357448:web:844e8f876c489ae27d"
+        };
+
+        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentTour = null;
+
+        // Kiểm tra đăng nhập
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('guest-menu').style.display = 'none';
+                document.getElementById('user-menu').style.display = 'flex';
+                document.getElementById('user-email').innerText = "Chào, " + user.email.split('@')[0];
+                document.getElementById('input-email').value = user.email; // Tự động điền email
+            } else {
+                document.getElementById('guest-menu').style.display = 'flex';
+                document.getElementById('user-menu').style.display = 'none';
+            }
+        });
+
+        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
+
+        // Load dữ liệu giỏ hàng lên giao diện thanh toán
+        function loadCheckoutData() {
+            const cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            if (cart.length > 0) {
+                currentTour = cart[0]; 
+                document.getElementById('check-img').src = currentTour.imageUrl;
+                document.getElementById('check-title').innerText = currentTour.tenTour;
+                document.getElementById('check-time').innerText = currentTour.thoiGian;
+                document.getElementById('check-price-small').innerText = currentTour.giaTour;
+                document.getElementById('check-price').innerText = currentTour.giaTour;
+            } else {
+                document.getElementById('error-box').classList.remove('hidden');
+                document.getElementById('btn-confirm').disabled = true;
+                document.getElementById('btn-confirm').classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+        loadCheckoutData();
+
+      
+        window.confirmBooking = async function() {
+            if (!currentTour) return;
+
+            const name = document.getElementById('input-name').value;
+            const email = document.getElementById('input-email').value;
+            const phone = document.getElementById('input-phone').value;
+
+            if (!name || !email || !phone) {
+                alert("Vui lòng điền đầy đủ thông tin Khách hàng (Họ tên, Email, SĐT)!");
+                return;
+            }
+
+            const btn = document.getElementById('btn-confirm');
+            btn.innerHTML = `Đang xử lý... <span class="material-symbols-outlined animate-spin">sync</span>`;
+            btn.disabled = true;
+
+            try {
+            
+                const paymentMethods = document.getElementsByName('payment');
+                let selectedPayment = "Chuyển khoản (QR)";
+                if(paymentMethods[1].checked) selectedPayment = "Thẻ tín dụng / Ghi nợ";
+
+                const now = new Date();
+                const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+
+                const bookingData = {
+                    khachHang: name,
+                    email: email,
+                    sdt: phone,
+                    tourId: currentTour.id,
+                    tenTour: currentTour.tenTour,
+                    giaTour: currentTour.giaTour,
+                    imageUrl: currentTour.imageUrl,
+                    phuongThuc: selectedPayment,
+                    ngayDat: dateString,
+                    trangThai: "Chờ xử lý"
+                };
+
+               
+                await addDoc(collection(db, "bookings"), bookingData);
+
+               
+                localStorage.removeItem('cart50cntt1');
+
+                alert("🎉 Đặt tour thành công! Chúc bạn có một chuyến đi vui vẻ.");
+                window.location.href = "profile.html"; // Chuyển về trang hồ sơ để xem lịch sử
+            } catch (error) {
+                console.error("Lỗi đặt tour: ", error);
+                alert("Đã xảy ra lỗi hệ thống, vui lòng thử lại sau.");
+                btn.innerHTML = `Hoàn tất đặt vé <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>`;
+                btn.disabled = false;
+            }
+        };
+    </script>
