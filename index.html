@@ -70,7 +70,6 @@
 
     <section class="relative h-[870px] min-h-[600px] w-full mt-[72px] flex items-center justify-center">
         <div class="absolute inset-0 z-0">
-         
             <img alt="Background" class="w-full h-full object-cover object-center" src="https://sso.dtdl.edu.vn/logo.png"/>
             <div class="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/30 to-background/90 mix-blend-multiply"></div>
         </div>
@@ -298,21 +297,9 @@
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c489ae27d"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
+        import { db, auth } from './firebase-config.js';
+        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
