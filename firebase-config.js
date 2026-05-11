@@ -12,12 +12,10 @@ const firebaseConfig = {
     appId: "1:705512357448:web:844e8f876c489ae27d"
 };
 
-// Khởi tạo Firebase App
+
 const app = initializeApp(firebaseConfig);
 
-// Khởi tạo các dịch vụ
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Xuất các đối tượng ra để sử dụng ở file khác
-export { app, auth, db };
