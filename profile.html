@@ -62,11 +62,10 @@
     <main class="max-w-5xl mx-auto px-6 py-12">
         <div class="text-center mb-16">
             <h1 class="text-4xl md:text-5xl font-headline font-black text-primary mb-4 tracking-tight">Hồ Sơ Cá Nhân</h1>
-            <p class="text-slate-500 text-lg font-light">Quản lý thông tin và theo dõi lịch trình của bạn</p>
+            <p class="text-slate-500 text-lg font-light">Quản lý thông tự và theo dõi lịch trình của bạn</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Sidebar: Profile Info -->
             <div class="md:col-span-1 space-y-6">
                 <div class="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-primary/5 border border-slate-100 text-center">
                     <div class="w-24 h-24 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4 text-4xl font-black">
@@ -81,7 +80,6 @@
                 </div>
             </div>
 
-            <!-- Main Content: Booking History -->
             <div class="md:col-span-2">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-headline font-black text-primary flex items-center gap-2">
@@ -101,22 +99,9 @@
     </main>
 
     <script type="module">
-        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c4db1e89ae27d"
-        };
-
-        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-        const db = getFirestore(app);
-        const auth = getAuth(app);
+        import { db, auth } from './firebase-config.js';
+        import { collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -125,7 +110,6 @@
                 const initials = user.email.split('@')[0].charAt(0).toUpperCase();
                 document.getElementById('user-initials').innerText = initials;
                 
-                // Lấy thông tin từ collection users
                 try {
                     const userDoc = await getDocs(query(collection(db, "users"), where("email", "==", user.email)));
                     if (!userDoc.empty) {
