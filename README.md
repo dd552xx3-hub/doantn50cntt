@@ -42,7 +42,6 @@ Cloud Firestore: Cơ sở dữ liệu NoSQL thời gian thực, lưu trữ thôn
 Firebase Hosting: Nền tảng triển khai web tốc độ cao.
 
 📂 Cấu Trúc Dự Án
-Plaintext
 ├── admin.html          # Trang quản trị tổng hợp (Dashboard/Tours/Blogs/Bookings)
 ├── blog.html           # Danh sách bài viết cẩm nang du lịch
 ├── blog-detail.html    # Nội dung chi tiết bài viết
