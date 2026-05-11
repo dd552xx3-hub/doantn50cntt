@@ -1,5 +1,4 @@
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
@@ -12,10 +11,8 @@ const firebaseConfig = {
     appId: "1:705512357448:web:844e8f876c489ae27d"
 };
 
-
-const app = initializeApp(firebaseConfig);
-
-
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+export { app, auth, db };
