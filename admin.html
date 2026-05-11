@@ -442,10 +442,16 @@
             });
         }
 
-        window.updateBookingStatus = async (id, newStatus) => {
+       window.updateBookingStatus = async (id, newStatus) => {
             if(!newStatus) return;
-            await db.collection("bookings").doc(id).update({ trangThai: newStatus });
-            loadBookings();
+            try {
+                await db.collection("bookings").doc(id).update({ trangThai: newStatus });
+                alert("Cập nhật trạng thái đơn hàng thành công!");
+                loadBookings();
+            } catch(e) {
+                console.error(e);
+                alert("Lỗi mạng: Không thể cập nhật trạng thái lúc này!");
+            }
         };
 
         async function loadUsers() {
