@@ -153,10 +153,13 @@
             renderCart();
         };
 
-        window.checkoutCart = function() {
-            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) ||[];
-            if(cart.length > 0) window.location.href = `checkout.html?id=${cart[0].id}`;
+                window.checkoutCart = function() {
+            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+            if(cart.length > 0) {
+                window.location.href = `checkout.html`;
+            }
         };
+
 
         renderCart();
     </script>
