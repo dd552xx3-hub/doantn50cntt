@@ -212,7 +212,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined text-outline">calendar_today</span>
                                 </div>
-                                <input class="w-full pl-10 pr-3 py-3 bg-white border border-outline-variant rounded-lg text-body-md font-body-md outline-none transition-all" type="date"/>
+                                <input id="tour-date" class="w-full pl-10 pr-3 py-3 bg-white border border-outline-variant rounded-lg text-body-md font-body-md outline-none transition-all" type="date"/>
                             </div>
                         </div>
                         <div>
@@ -221,7 +221,7 @@
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <span class="material-symbols-outlined text-outline">group</span>
                                 </div>
-                                <select class="w-full pl-10 pr-10 py-3 bg-white border border-outline-variant rounded-lg text-body-md font-body-md outline-none appearance-none transition-all">
+                                <select id="tour-quantity" class="w-full pl-10 pr-10 py-3 bg-white border border-outline-variant rounded-lg text-body-md font-body-md outline-none appearance-none transition-all">
                                     <option>1 Người lớn</option>
                                     <option>2 Người lớn</option>
                                     <option>2 Người lớn, 1 Trẻ em</option>
@@ -252,7 +252,7 @@
         <div class="max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
             <div class="col-span-1 md:col-span-2">
                 <div class="text-lg font-bold text-blue-900 mb-4">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</div>
-                <p class="text-slate-500 mb-6">© 2024 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
+                <p class="text-slate-500 mb-6">© 2026 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
             </div>
             <div>
                 <h4 class="font-bold text-blue-900 mb-4">Về Chúng Tôi</h4>
@@ -272,22 +272,9 @@
     </footer>
 
     <script type="module">
-        import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c489ae27d"
-        };
-
-        const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-        const db = getFirestore(app);
-        const auth = getAuth(app);
+        import { db, auth } from './firebase-config.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
@@ -335,43 +322,45 @@
         }
         loadTourDetail();
 
-       window.addToCart = function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-    if(!id) return;
+        window.addToCart = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if(!id) return;
 
-    const tour = {
-        id: id,
-        tenTour: document.getElementById('detail-title').innerText,
-        giaTour: document.getElementById('detail-price').innerText,
-        thoiGian: document.getElementById('detail-time').innerText,
-        loaiTour: document.getElementById('detail-type').innerText,
-        imageUrl: document.getElementById('detail-image').src
-    };
+            const dateInput = document.getElementById('tour-date').value;
+            const quantityInput = document.getElementById('tour-quantity').value;
 
-    // Ghi đè giỏ hàng để chỉ giữ 1 tour mới nhất
-    localStorage.setItem('cart50cntt1', JSON.stringify([tour]));
-    alert('Đã thêm tour vào giỏ hàng! (Giỏ hàng chỉ lưu 1 tour cho mỗi lần đặt)');
-    window.location.href = "cart.html"; // Chuyển luôn sang giỏ hàng
-};
-            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) ||[];
-            if(!cart.find(item => item.id === id)) {
-                cart.push(tour);
-                localStorage.setItem('cart50cntt1', JSON.stringify(cart));
-                alert('Đã thêm tour vào giỏ hàng!');
-            } else {
-                alert('Tour này đã có trong giỏ hàng!');
+            if(!dateInput) {
+                alert("Vui lòng chọn Ngày khởi hành trước khi thêm vào giỏ!");
+                return;
             }
+
+            const tour = {
+                id: id,
+                tenTour: document.getElementById('detail-title').innerText,
+                giaTour: document.getElementById('detail-price').innerText,
+                thoiGian: document.getElementById('detail-time').innerText,
+                loaiTour: document.getElementById('detail-type').innerText,
+                imageUrl: document.getElementById('detail-image').src,
+                ngayDi: dateInput,
+                soLuong: quantityInput
+            };
+
+            // Lưu trực tiếp đè lên mảng (chỉ 1 tour/lần đặt)
+            localStorage.setItem('cart50cntt1', JSON.stringify([tour]));
+            alert('Đã thêm tour vào giỏ hàng! (Giỏ hàng tự động thiết lập lưu 1 tour/lần đặt)');
+            window.location.href = "cart.html";
         };
 
         window.confirmBooking = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            if(id) {
-                window.location.href = `checkout.html?id=${id}`;
-            } else {
-                alert("Không tìm thấy mã tour để đặt chỗ!");
+            const dateInput = document.getElementById('tour-date').value;
+            if(!dateInput) {
+                alert("Vui lòng chọn Ngày khởi hành để Đặt ngay!");
+                return;
             }
+            
+            // Gọi hàm addToCart để lưu vào localstorage trước khi chuyển hướng
+            addToCart();
         };
     </script>
 </body>
