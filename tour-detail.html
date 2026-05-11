@@ -236,7 +236,7 @@
                         <button onclick="confirmBooking()" class="w-full bg-secondary-container hover:bg-secondary text-white py-4 rounded-lg font-label-md text-label-md transition-colors duration-300 flex justify-center items-center gap-2 mb-2">
                             Đặt ngay <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                         </button>
-                        <button onclick="addToCart()" class="w-full bg-slate-100 text-primary py-3 rounded-lg font-label-md text-label-md hover:bg-slate-200 transition-all flex justify-center items-center gap-2">
+                        <button onclick="addToCart(false)" class="w-full bg-slate-100 text-primary py-3 rounded-lg font-label-md text-label-md hover:bg-slate-200 transition-all flex justify-center items-center gap-2">
                             <span class="material-symbols-outlined text-[20px]">shopping_cart</span> Thêm vào giỏ
                         </button>
                     </div>
@@ -272,10 +272,11 @@
     </footer>
 
     <script type="module">
-        import { db, auth } from './firebase-config.js';
+        import { auth, db } from './firebase-config.js';
         import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
+        // Kiểm tra trạng thái đăng nhập
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
             const userBox = document.getElementById('user-menu');
@@ -290,8 +291,13 @@
             }
         });
 
-        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
+        // Nút Đăng xuất
+        const btnLogout = document.getElementById('btn-logout');
+        if (btnLogout) {
+            btnLogout.onclick = () => signOut(auth).then(() => window.location.reload());
+        }
 
+        // Tải chi tiết Tour từ Database
         async function loadTourDetail() {
             const urlParams = new URLSearchParams(window.location.search);
             const tourId = urlParams.get('id');
@@ -316,24 +322,25 @@
                     document.getElementById('detail-title').innerText = "Tour này không tồn tại!";
                 }
             } catch (e) { 
-                console.error(e);
-                document.getElementById('detail-title').innerText = "Lỗi tải dữ liệu!";
+                console.error("Lỗi tải tour:", e);
+                document.getElementById('detail-title').innerText = "Lỗi hệ thống!";
             }
         }
         loadTourDetail();
 
-                window.addToCart = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-            if(!id) return;
-
+        // Hàm xử lý chung khi thêm vào giỏ
+        window.addToCart = function(isBuyNow = false) {
             const dateInput = document.getElementById('tour-date').value;
             const quantityInput = document.getElementById('tour-quantity').value;
 
             if(!dateInput) {
-                alert("Vui lòng chọn Ngày khởi hành trước khi thêm vào giỏ!");
-                return;
+                alert("Vui lòng chọn Ngày khởi hành!");
+                return false; // Báo lỗi
             }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if(!id) return false;
 
             const tour = {
                 id: id,
@@ -346,47 +353,29 @@
                 soLuong: quantityInput
             };
 
-            
             let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
             
-            
             if(!cart.find(item => item.id === id)) {
-                cart.push(tour); 
+                cart.push(tour);
                 localStorage.setItem('cart50cntt1', JSON.stringify(cart));
-                alert('Đã thêm tour vào giỏ hàng thành công!');
-                window.location.href = "cart.html";
+                if(!isBuyNow) {
+                    alert('🎉 Đã thêm tour vào giỏ hàng thành công!');
+                }
+                return true; // Thành công
             } else {
-                alert('Tour này đã có trong giỏ hàng của bạn rồi!');
+                if(!isBuyNow) {
+                    alert('Tour này đã có trong giỏ hàng của bạn.');
+                }
+                return true; // Dù đã có nhưng vẫn cho qua để tiếp tục checkout nếu bấm Đặt ngay
             }
         };
 
-
-            const tour = {
-                id: id,
-                tenTour: document.getElementById('detail-title').innerText,
-                giaTour: document.getElementById('detail-price').innerText,
-                thoiGian: document.getElementById('detail-time').innerText,
-                loaiTour: document.getElementById('detail-type').innerText,
-                imageUrl: document.getElementById('detail-image').src,
-                ngayDi: dateInput,
-                soLuong: quantityInput
-            };
-
-            // Lưu trực tiếp đè lên mảng (chỉ 1 tour/lần đặt)
-            localStorage.setItem('cart50cntt1', JSON.stringify([tour]));
-            alert('Đã thêm tour vào giỏ hàng! (Giỏ hàng tự động thiết lập lưu 1 tour/lần đặt)');
-            window.location.href = "cart.html";
-        };
-
+        // Hàm Đặt ngay (Nhảy thẳng sang Checkout)
         window.confirmBooking = function() {
-            const dateInput = document.getElementById('tour-date').value;
-            if(!dateInput) {
-                alert("Vui lòng chọn Ngày khởi hành để Đặt ngay!");
-                return;
+            const success = window.addToCart(true); // Gửi tham số true để không hiện thông báo alert
+            if(success) {
+                window.location.href = "checkout.html";
             }
-            
-            // Gọi hàm addToCart để lưu vào localstorage trước khi chuyển hướng
-            addToCart();
         };
     </script>
 </body>
