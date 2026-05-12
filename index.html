@@ -43,6 +43,15 @@
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .counter-val { font-variant-numeric: tabular-nums; }
+        
+        /* Tùy chỉnh hiển thị thẻ Google Translate cho gọn đẹp */
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
+        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
+        .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
     </style>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -136,7 +145,11 @@
                 <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="#trai-nghiem">Trải Nghiệm</a>
             </div>
             <div class="flex items-center space-x-2 md:space-x-4">
-                <div id="google_translate_element" class="hidden lg:block overflow-hidden rounded-lg opacity-80"></div>
+                
+                <div class="hidden md:flex items-center">
+                    <span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-[20px] mr-1">translate</span>
+                    <div id="google_translate_element"></div>
+                </div>
                 
                 <button id="theme-toggle" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
                     <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">dark_mode</span>
@@ -395,7 +408,6 @@
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Hiện đúng icon dựa vào class dark của document
         if (document.documentElement.classList.contains('dark')) {
             themeToggleLightIcon.classList.remove('hidden');
         } else {
@@ -541,7 +553,7 @@
                     document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C`;
                     document.getElementById('w-icon').innerText = data.weather[0].main.toLowerCase().includes('cloud') ? 'cloud' : 'sunny';
                 } else {
-                    // Không hiện alert để tránh phiền người dùng
+                    // Không alert
                 }
             } catch(e) {}
         }
@@ -551,6 +563,7 @@
         });
         window.onload = () => { getRealtimeWeather('Hanoi'); };
     </script>
+    
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
