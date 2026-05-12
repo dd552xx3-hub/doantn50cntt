@@ -20,16 +20,8 @@
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .vn-map path { fill: #e2e8f0; stroke: #fff; stroke-width: 1.5; transition: all 0.3s ease; cursor: pointer; }
-        .dark .vn-map path { fill: #1e293b; stroke: #334155; }
-        .vn-map path:hover { fill: #fd6600 !important; filter: drop-shadow(0 0 8px rgba(253, 102, 0, 0.5)); transform: translateY(-2px); }
-        .vn-map path.has-tour { fill: #002155; }
-        .dark .vn-map path.has-tour { fill: #3b82f6; }
-        
-        #map-tooltip { pointer-events: none; transition: opacity 0.2s ease; z-index: 100; }
-        
         .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
-        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; background: white; color: #1e293b; }
+        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
         .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
         .goog-logo-link, .goog-te-gadget span { display: none !important; }
         body { top: 0px !important; }
@@ -48,10 +40,10 @@
         <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
             <a class="text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">Đạt_Tùng_Đăng_Long<span class="text-secondary-container">.</span></a>
             <div class="hidden md:flex gap-8 font-headline text-sm font-medium">
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="index.html">Trang chủ</a>
-                <a class="text-primary dark:text-blue-400 border-b-2 border-primary" href="destinations.html">Điểm đến</a>
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="tours.html">Tour</a>
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary" href="blog.html">Cẩm nang</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="index.html">Trang chủ</a>
+                <a class="text-primary dark:text-blue-400 border-b-2 border-primary dark:border-blue-400 transition-colors" href="destinations.html">Điểm đến</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="tours.html">Tour</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="blog.html">Cẩm nang</a>
             </div>
             <div class="flex items-center gap-4">
                 <div class="hidden lg:block"><div id="google_translate_element"></div></div>
@@ -69,58 +61,26 @@
     <main class="max-w-7xl mx-auto px-6 py-12">
         <div class="text-center mb-16">
             <h1 class="text-4xl md:text-6xl font-black text-primary dark:text-white font-headline mb-4 tracking-tighter">Bản Đồ Hành Trình</h1>
-            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg">Rê chuột vào các tỉnh thành để xem giá tour ưu đãi nhất từ hệ thống của chúng tôi.</p>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg">Chạm vào các điểm sáng trên bản đồ để khám phá giá ưu đãi nhất từ hệ thống.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            <div class="lg:col-span-7 relative bg-white dark:bg-slate-900 p-8 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800">
-                
-                <div id="map-tooltip" class="absolute opacity-0 bg-white dark:bg-slate-800 shadow-2xl rounded-2xl p-4 border border-blue-50 dark:border-slate-700 min-w-[180px]">
-                    <h4 id="tooltip-city" class="font-black text-primary dark:text-white text-lg">...</h4>
-                    <p id="tooltip-count" class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">0 Tour</p>
-                    <div id="tooltip-price-box" class="pt-2 border-t border-slate-100 dark:border-slate-700">
-                        <span class="text-[10px] font-bold text-slate-400 block uppercase">Giá chỉ từ</span>
-                        <span id="tooltip-price" class="text-xl font-black text-secondary-container">---</span>
-                    </div>
+            <div class="lg:col-span-7 relative bg-white dark:bg-slate-900 p-8 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 flex justify-center items-center overflow-hidden h-[800px]">
+                <div id="map-container" class="relative w-[320px] h-[750px]">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Vietnam_blank_map.svg" class="w-full h-full object-contain opacity-20 dark:invert dark:opacity-40 pointer-events-none select-none">
                 </div>
-
-                <svg class="vn-map w-full h-auto max-h-[700px]" viewBox="0 0 400 800" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M120,50 L180,40 L200,80 L150,120 L100,100 Z" data-city="Sapa" data-keywords="Sapa, Lào Cai, Fansipan" />
-                    <path d="M180,40 L250,60 L230,120 L180,110 Z" data-city="Hà Giang" data-keywords="Hà Giang, Đồng Văn" />
-                    <path d="M200,130 Q220,150 250,140 T300,160 L280,180 L220,170 Z" data-city="Hạ Long" data-keywords="Hạ Long, Quảng Ninh, Cát Bà" />
-                    <path d="M170,120 L220,120 L220,160 L170,170 Z" data-city="Hà Nội" data-keywords="Hà Nội, Thủ đô" />
-                    
-                    <path d="M240,250 L280,240 L320,280 L290,320 L230,300 Z" data-city="Quảng Bình" data-keywords="Quảng Bình, Phong Nha" />
-                    <path d="M290,320 L330,310 L350,380 L300,400 Z" data-city="Huế" data-keywords="Huế, Cố đô" />
-                    <path d="M300,400 L360,420 L380,480 L320,490 Z" data-city="Đà Nẵng" data-keywords="Đà Nẵng, Hội An, Bà Nà" />
-                    <path d="M320,490 L380,510 L370,580 L310,570 Z" data-city="Quy Nhơn" data-keywords="Quy Nhơn, Phú Yên" />
-                    
-                    <path d="M250,550 L310,570 L300,650 L240,630 Z" data-city="Đà Lạt" data-keywords="Đà Lạt, Lâm Đồng, Tây Nguyên" />
-                    <path d="M300,650 L350,660 L340,720 L280,710 Z" data-city="Nha Trang" data-keywords="Nha Trang, Khánh Hòa" />
-                    <path d="M200,650 L250,660 L230,750 L180,740 Z" data-city="TP. Hồ Chí Minh" data-keywords="Hồ Chí Minh, Sài Gòn" />
-                    <path d="M150,730 L200,740 L180,820 L130,810 Z" data-city="Cần Thơ" data-keywords="Cần Thơ, Miền Tây, Bến Tre" />
-                    <path d="M100,780 Q80,800 60,820 T40,850 L80,870 Z" data-city="Phú Quốc" data-keywords="Phú Quốc, Kiên Giang" />
-
-                    <text x="110" y="80" class="text-[14px] font-bold fill-slate-400 pointer-events-none">Sapa</text>
-                    <text x="180" y="150" class="text-[14px] font-bold fill-slate-400 pointer-events-none">Hà Nội</text>
-                    <text x="250" y="170" class="text-[12px] font-bold fill-slate-400 pointer-events-none">Hạ Long</text>
-                    <text x="310" y="450" class="text-[14px] font-bold fill-slate-400 pointer-events-none">Đà Nẵng</text>
-                    <text x="250" y="600" class="text-[14px] font-bold fill-slate-400 pointer-events-none">Đà Lạt</text>
-                    <text x="140" y="710" class="text-[14px] font-bold fill-slate-400 pointer-events-none">TP.HCM</text>
-                    <text x="40" y="810" class="text-[12px] font-bold fill-slate-400 pointer-events-none">Phú Quốc</text>
-                </svg>
             </div>
 
             <div class="lg:col-span-5 space-y-6">
-                <div id="city-info-card" class="bg-primary dark:bg-blue-900 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group">
+                <div id="city-info-card" class="bg-primary dark:bg-blue-900 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group transition-all duration-300">
                     <div class="relative z-10">
                         <span class="material-symbols-outlined text-5xl mb-4 text-secondary-container animate-bounce">location_on</span>
                         <h2 id="selected-city" class="text-3xl font-black mb-2">Chọn một điểm đến</h2>
-                        <p id="city-description" class="text-blue-100 font-light mb-8">Hãy di chuyển chuột trên bản đồ để khám phá các hành trình di sản tại từng địa phương.</p>
+                        <p id="city-description" class="text-blue-100 font-light mb-8">Hệ thống sẽ tự động hiển thị các điểm sáng trên bản đồ nếu có tour du lịch tại địa phương đó.</p>
                         <div id="action-box" class="hidden">
                             <a id="view-tours-btn" href="#" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-secondary-container hover:text-white transition-all shadow-lg active:scale-95">
-                                Xem 0 tour tại đây <span class="material-symbols-outlined">arrow_forward</span>
+                                Xem tour tại đây <span class="material-symbols-outlined">arrow_forward</span>
                             </a>
                         </div>
                     </div>
@@ -129,16 +89,11 @@
 
                 <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm">
                     <h3 class="font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
-                        <span class="w-2 h-6 bg-secondary-container rounded-full"></span> Top điểm đến hot
+                        <span class="w-2 h-6 bg-secondary-container rounded-full"></span> Trạng thái dữ liệu
                     </h3>
-                    <div class="flex flex-wrap gap-2" id="top-destinations">
-                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-500">Đà Nẵng</span>
-                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-500">Sapa</span>
-                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-500">Phú Quốc</span>
-                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Hệ thống tìm thấy <span id="total-active-spots" class="font-bold text-secondary-container">0</span> địa phương đang mở bán tour.</p>
                 </div>
             </div>
-
         </div>
     </main>
 
@@ -167,72 +122,85 @@
             else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
         });
 
-        const tooltip = document.getElementById('map-tooltip');
-        const tooltipCity = document.getElementById('tooltip-city');
-        const tooltipCount = document.getElementById('tooltip-count');
-        const tooltipPrice = document.getElementById('tooltip-price');
-        const tooltipPriceBox = document.getElementById('tooltip-price-box');
+        const locationDB = [
+            { id: "Sapa", keywords: ["Sapa", "Lào Cai", "Fansipan"], top: 12, left: 32 },
+            { id: "Hà Giang", keywords: ["Hà Giang", "Đồng Văn"], top: 5, left: 38 },
+            { id: "Hà Nội", keywords: ["Hà Nội", "Thủ đô"], top: 18, left: 44 },
+            { id: "Hải Phòng", keywords: ["Hải Phòng", "Cát Bà", "Lan Hạ"], top: 18, left: 50 },
+            { id: "Hạ Long", keywords: ["Hạ Long", "Quảng Ninh"], top: 18, left: 56 },
+            { id: "Ninh Bình", keywords: ["Ninh Bình", "Tràng An", "Bái Đính"], top: 22, left: 42 },
+            { id: "Thanh Hóa", keywords: ["Thanh Hóa", "Sầm Sơn", "Pù Luông"], top: 28, left: 36 },
+            { id: "Quảng Bình", keywords: ["Quảng Bình", "Phong Nha", "Sơn Đoòng"], top: 35, left: 38 },
+            { id: "Huế", keywords: ["Huế", "Cố đô"], top: 43, left: 55 },
+            { id: "Đà Nẵng", keywords: ["Đà Nẵng", "Bà Nà", "Hội An", "Sơn Trà"], top: 46, left: 63 },
+            { id: "Quảng Nam", keywords: ["Quảng Nam", "Cù Lao Chàm"], top: 49, left: 65 },
+            { id: "Quy Nhơn", keywords: ["Quy Nhơn", "Bình Định", "Eo Gió"], top: 62, left: 82 },
+            { id: "Phú Yên", keywords: ["Phú Yên", "Tuy Hòa"], top: 66, left: 85 },
+            { id: "Nha Trang", keywords: ["Nha Trang", "Khánh Hòa", "Vinpearl"], top: 72, left: 86 },
+            { id: "Ninh Thuận", keywords: ["Mũi Né", "Phan Thiết", "Bình Thuận", "Ninh Thuận"], top: 78, left: 78 },
+            { id: "Đà Lạt", keywords: ["Đà Lạt", "Lâm Đồng", "Tây Nguyên"], top: 70, left: 70 },
+            { id: "Vũng Tàu", keywords: ["Vũng Tàu", "Bà Rịa", "Côn Đảo"], top: 83, left: 60 },
+            { id: "TP. Hồ Chí Minh", keywords: ["Hồ Chí Minh", "Sài Gòn", "TP HCM"], top: 82, left: 52 },
+            { id: "Cần Thơ", keywords: ["Cần Thơ", "Miền Tây", "Ninh Kiều"], top: 88, left: 42 },
+            { id: "Phú Quốc", keywords: ["Phú Quốc", "Kiên Giang", "Đảo ngọc"], top: 92, left: 15 }
+        ];
 
-        let allTours = [];
-
-        async function fetchTours() {
+        async function fetchToursAndSetupMap() {
             const snap = await db.collection("tours").get();
+            const allTours = [];
             snap.forEach(doc => allTours.push(doc.data()));
-            
-            document.querySelectorAll('.vn-map path').forEach(path => {
-                const city = path.getAttribute('data-city');
-                const keywords = path.getAttribute('data-keywords').split(', ');
-                const cityTours = allTours.filter(t => keywords.some(k => t.tenTour.includes(k)));
-                if(cityTours.length > 0) path.classList.add('has-tour');
+
+            const mapContainer = document.getElementById('map-container');
+            let activeSpotsCount = 0;
+
+            locationDB.forEach(loc => {
+                const cityTours = allTours.filter(t => loc.keywords.some(k => t.tenTour.toLowerCase().includes(k.toLowerCase())));
+                
+                if(cityTours.length > 0) {
+                    activeSpotsCount++;
+                    const minPrice = Math.min(...cityTours.map(t => parseInt(t.giaTour.replace(/\D/g, ''))));
+                    const priceStr = minPrice.toLocaleString('vi-VN') + 'đ';
+                    
+                    const pinHTML = `
+                    <div class="absolute map-pin group cursor-pointer z-10" style="top: ${loc.top}%; left: ${loc.left}%;">
+                        <span class="relative flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span><span class="inner-dot relative inline-flex rounded-full h-4 w-4 bg-secondary-container border-2 border-white shadow-md transition-colors"></span></span>
+                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-all bg-white dark:bg-slate-800 shadow-2xl rounded-2xl p-3 border border-slate-100 dark:border-slate-700 w-40 pointer-events-none transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <h4 class="font-bold text-primary dark:text-white text-sm mb-0.5 cityName">${loc.id}</h4>
+                            <p class="text-[10px] font-bold text-slate-400 mb-1 count-text">${cityTours.length} Tour khả dụng</p>
+                            <span class="text-[10px] font-bold text-slate-400 block uppercase">Giá chỉ từ</span>
+                            <p class="text-secondary-container font-black text-sm price-text">${priceStr}</p>
+                        </div>
+                    </div>`;
+                    
+                    mapContainer.insertAdjacentHTML('beforeend', pinHTML);
+                }
+            });
+
+            document.getElementById('total-active-spots').innerText = activeSpotsCount;
+
+            document.querySelectorAll('.map-pin').forEach(pin => {
+                pin.addEventListener('mouseenter', function() {
+                    const cityName = this.querySelector('.cityName').innerText;
+                    const countText = this.querySelector('.count-text').innerText;
+                    const count = countText.split(' ')[0];
+                    const price = this.querySelector('.price-text').innerText;
+                    
+                    document.querySelectorAll('.map-pin .inner-dot').forEach(d => d.classList.replace('bg-blue-600', 'bg-secondary-container'));
+                    this.querySelector('.inner-dot').classList.replace('bg-secondary-container', 'bg-blue-600');
+                    
+                    document.getElementById('selected-city').innerText = cityName;
+                    document.getElementById('city-description').innerText = `Hệ thống hiện đang có sẵn ${count} hành trình khám phá ${cityName} với mức giá siêu ưu đãi chỉ từ ${price}.`;
+                    
+                    const actionBox = document.getElementById('action-box');
+                    const viewBtn = document.getElementById('view-tours-btn');
+                    actionBox.classList.remove('hidden');
+                    viewBtn.innerText = `Xem các tour tại ${cityName}`;
+                    viewBtn.href = `tours.html?search=${encodeURIComponent(cityName)}`;
+                });
             });
         }
 
-        document.querySelectorAll('.vn-map path').forEach(path => {
-            path.addEventListener('mousemove', (e) => {
-                const city = path.getAttribute('data-city');
-                const keywords = path.getAttribute('data-keywords').split(', ');
-                const cityTours = allTours.filter(t => keywords.some(k => t.tenTour.includes(k)));
-
-                tooltipCity.innerText = city;
-                tooltipCount.innerText = cityTours.length + " Tour hiện có";
-                
-                if(cityTours.length > 0) {
-                    const minPrice = Math.min(...cityTours.map(t => parseInt(t.giaTour.replace(/\D/g, ''))));
-                    tooltipPrice.innerText = minPrice.toLocaleString('vi-VN') + 'đ';
-                    tooltipPriceBox.classList.remove('hidden');
-                } else {
-                    tooltipPriceBox.classList.add('hidden');
-                }
-
-                tooltip.style.opacity = "1";
-                tooltip.style.left = (e.pageX + 15) + "px";
-                tooltip.style.top = (e.pageY + 15) + "px";
-            });
-
-            path.addEventListener('mouseleave', () => { tooltip.style.opacity = "0"; });
-
-            path.addEventListener('click', () => {
-                const city = path.getAttribute('data-city');
-                const keywords = path.getAttribute('data-keywords').split(', ');
-                const cityTours = allTours.filter(t => keywords.some(k => t.tenTour.includes(k)));
-
-                document.getElementById('selected-city').innerText = city;
-                document.getElementById('city-description').innerText = `Khám phá các điểm đến tại ${city} với ${cityTours.length} hành trình hấp dẫn đang chờ đón bạn.`;
-                
-                const actionBox = document.getElementById('action-box');
-                const viewBtn = document.getElementById('view-tours-btn');
-                
-                if(cityTours.length > 0) {
-                    actionBox.classList.remove('hidden');
-                    viewBtn.innerText = `Xem ${cityTours.length} tour tại ${city}`;
-                    viewBtn.href = `tours.html?search=${city}`;
-                } else {
-                    actionBox.classList.add('hidden');
-                }
-            });
-        });
-
-        fetchTours();
+        fetchToursAndSetupMap();
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi'}, 'google_translate_element'); }</script>
