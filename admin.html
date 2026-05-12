@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Quản Trị Hệ Thống - Đạt_Tùng_Đăng_Long</title>
+    <title>Quản Trị Hệ Thống Toàn Diện - Đạt_Tùng_Đăng_Long</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -26,10 +26,12 @@
         .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
         .goog-logo-link, .goog-te-gadget span, .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
-        
         .toast-enter { transform: translateX(100%); opacity: 0; }
         .toast-active { transform: translateX(0); opacity: 1; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
         .row-removing { opacity: 0; transform: translateX(-20px); transition: all 0.4s ease; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -50,27 +52,38 @@
         <div class="absolute bottom-0 left-0 h-1 bg-green-500 rounded-b-2xl w-full" id="toast-progress"></div>
     </div>
 
-    <aside class="w-20 lg:w-64 fixed h-screen bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm flex flex-col transition-all z-40">
+    <aside class="w-20 lg:w-64 fixed h-screen bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm flex flex-col z-40">
         <div class="h-20 flex items-center justify-center lg:justify-start lg:px-6 border-b border-slate-100 dark:border-slate-800">
-            <span class="material-symbols-outlined text-primary dark:text-blue-400 text-3xl lg:hidden">explore</span>
             <a class="hidden lg:block text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">AdminPanel<span class="text-secondary-container">.</span></a>
+            <span class="material-symbols-outlined text-primary dark:text-blue-400 text-3xl lg:hidden">admin_panel_settings</span>
         </div>
-        <nav class="flex-1 py-6 flex flex-col gap-2 px-3">
-            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 bg-blue-50 dark:bg-slate-800 text-primary dark:text-blue-400 rounded-xl font-bold transition-all">
+        <nav class="flex-1 py-6 flex flex-col gap-1 px-3 overflow-y-auto">
+            <div class="mb-2 px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden lg:block">Quản trị</div>
+            <button onclick="switchTab('dashboard', this)" class="nav-link flex items-center gap-3 px-3 lg:px-4 py-3 bg-blue-50 dark:bg-slate-800 text-primary dark:text-blue-400 rounded-xl font-bold w-full transition-all">
                 <span class="material-symbols-outlined">dashboard</span>
                 <span class="hidden lg:block text-sm">Tổng quan</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium transition-all">
+            </button>
+            <button onclick="switchTab('tours', this)" class="nav-link flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium w-full transition-all">
                 <span class="material-symbols-outlined">tour</span>
                 <span class="hidden lg:block text-sm">Quản lý Tour</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium transition-all">
-                <span class="material-symbols-outlined">receipt_long</span>
-                <span class="hidden lg:block text-sm">Đơn đặt hàng</span>
-            </a>
-            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium transition-all">
+            </button>
+            <button onclick="switchTab('blogs', this)" class="nav-link flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium w-full transition-all">
+                <span class="material-symbols-outlined">article</span>
+                <span class="hidden lg:block text-sm">Quản lý Blog</span>
+            </button>
+            <button onclick="switchTab('users', this)" class="nav-link flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium w-full transition-all">
                 <span class="material-symbols-outlined">group</span>
                 <span class="hidden lg:block text-sm">Khách hàng</span>
+            </button>
+
+            <div class="mt-6 mb-2 px-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden lg:block">Trang người dùng</div>
+            <a href="index.html" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium">
+                <span class="material-symbols-outlined">home</span>
+                <span class="hidden lg:block text-sm">Trang chủ</span>
+            </a>
+            <a href="tours.html" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium">
+                <span class="material-symbols-outlined">explore</span>
+                <span class="hidden lg:block text-sm">Danh sách Tours</span>
             </a>
         </nav>
         <div class="p-4 border-t border-slate-100 dark:border-slate-800">
@@ -84,143 +97,123 @@
     <main class="flex-1 ml-20 lg:ml-64 p-6 lg:p-10 w-full min-h-screen">
         <header class="flex justify-between items-center mb-10">
             <div>
-                <h1 class="text-2xl lg:text-3xl font-black text-primary dark:text-white font-headline mb-1">Bảng Điều Khiển</h1>
-                <p class="text-sm text-slate-500 dark:text-slate-400">Chào mừng bạn quay lại hệ thống quản trị.</p>
+                <h1 id="page-title" class="text-2xl lg:text-3xl font-black text-primary dark:text-white font-headline">Bảng Điều Khiển</h1>
             </div>
             <div class="flex items-center gap-4">
                 <div class="hidden md:block"><div id="google_translate_element"></div></div>
-                <button id="theme-toggle" class="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md rounded-full transition-all flex items-center justify-center">
-                    <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400 text-[20px]">dark_mode</span>
-                    <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400 text-[20px]">light_mode</span>
+                <button id="theme-toggle" class="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm rounded-full flex items-center justify-center">
+                    <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">dark_mode</span>
+                    <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">light_mode</span>
                 </button>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">tour</span>
-                    </div>
-                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+12%</span>
+        <div id="tab-dashboard" class="tab-content active">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-slate-500 text-xs font-bold uppercase mb-1">Tổng Tour</h3>
+                    <p id="stat-tours" class="text-3xl font-black text-primary dark:text-white">0</p>
                 </div>
-                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Tổng số Tour</h3>
-                <p id="stat-tours" class="text-3xl font-black text-primary dark:text-white">0</p>
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-slate-500 text-xs font-bold uppercase mb-1">Đơn hàng</h3>
+                    <p class="text-3xl font-black text-primary dark:text-white">142</p>
+                </div>
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-slate-500 text-xs font-bold uppercase mb-1">Doanh thu</h3>
+                    <p class="text-3xl font-black text-primary dark:text-white">450M</p>
+                </div>
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-slate-500 text-xs font-bold uppercase mb-1">Thành viên</h3>
+                    <p class="text-3xl font-black text-primary dark:text-white">1,250</p>
+                </div>
             </div>
-            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">receipt_long</span>
-                    </div>
-                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+5%</span>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-lg font-bold mb-6">Phân tích doanh thu</h3>
+                    <div class="h-72"><canvas id="revenueChart"></canvas></div>
                 </div>
-                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Đơn đặt hàng</h3>
-                <p id="stat-bookings" class="text-3xl font-black text-primary dark:text-white">142</p>
-            </div>
-            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">payments</span>
-                    </div>
-                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+28%</span>
+                <div class="lg:col-span-1 bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-lg font-bold mb-6">Tỷ lệ Tour</h3>
+                    <div class="h-72 flex justify-center"><canvas id="categoryChart"></canvas></div>
                 </div>
-                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Doanh thu (Tháng)</h3>
-                <p id="stat-revenue" class="text-3xl font-black text-primary dark:text-white">450M</p>
-            </div>
-            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
-                <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined">group</span>
-                    </div>
-                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+18%</span>
-                </div>
-                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Khách hàng mới</h3>
-                <p id="stat-users" class="text-3xl font-black text-primary dark:text-white">1,250</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-            <div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
-                <h3 class="text-lg font-bold text-primary dark:text-white mb-6 font-headline">Biểu đồ Doanh Thu</h3>
-                <div class="relative h-72 w-full"><canvas id="revenueChart"></canvas></div>
-            </div>
-            <div class="lg:col-span-1 bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
-                <h3 class="text-lg font-bold text-primary dark:text-white mb-6 font-headline">Loại Tour Phổ Biến</h3>
-                <div class="relative h-72 w-full flex justify-center"><canvas id="categoryChart"></canvas></div>
+        <div id="tab-tours" class="tab-content">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+                <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                    <h2 class="text-xl font-bold text-primary dark:text-white">Danh sách Tour</h2>
+                    <button onclick="openModal('tour')" class="bg-primary dark:bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">add</span> Thêm Tour
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="bg-slate-50 dark:bg-slate-800/50 text-xs font-bold text-slate-500 uppercase">
+                                <th class="p-4 pl-6">Ảnh</th>
+                                <th class="p-4">Tên Tour</th>
+                                <th class="p-4">Giá</th>
+                                <th class="p-4 text-center">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-tour-list" class="divide-y divide-slate-100 dark:divide-slate-800"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
-            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <h2 class="text-xl font-bold text-primary dark:text-white font-headline">Danh sách Tour</h2>
-                <button onclick="openModal()" class="bg-primary dark:bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-blue-800 dark:hover:bg-blue-700 transition-all flex items-center gap-2 active:scale-95">
-                    <span class="material-symbols-outlined text-[18px]">add</span> Thêm Tour Mới
-                </button>
+        <div id="tab-blogs" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800">
+                    <h2 class="text-xl font-bold mb-6">Viết Blog Mới</h2>
+                    <form id="add-blog-form" class="space-y-4">
+                        <input type="text" id="b-title" placeholder="Tiêu đề bài viết" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                        <input type="url" id="b-img" placeholder="Link ảnh bìa URL" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                        <textarea id="b-content" rows="5" placeholder="Nội dung bài viết..." required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white"></textarea>
+                        <button type="submit" class="w-full bg-secondary-container text-white py-3 rounded-xl font-bold">Đăng bài ngay</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-2 space-y-4" id="admin-blog-list">
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-100 dark:border-slate-800 text-center text-slate-400 italic">Chưa có bài viết nào</div>
+                </div>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+        </div>
+
+        <div id="tab-users" class="tab-content">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+                <table class="w-full text-left">
                     <thead>
-                        <tr class="bg-slate-50 dark:bg-slate-800/50 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
-                            <th class="p-4 pl-6">Mã Tour</th>
-                            <th class="p-4">Hình ảnh</th>
-                            <th class="p-4">Tên Tour</th>
-                            <th class="p-4">Danh mục</th>
-                            <th class="p-4">Giá tiền</th>
-                            <th class="p-4 text-center pr-6">Thao tác</th>
-                        </tr>
+                        <tr class="bg-slate-50 dark:bg-slate-800/50 text-xs font-bold text-slate-500 uppercase"><th class="p-4 pl-6">Khách hàng</th><th class="p-4">Email</th><th class="p-4">Trạng thái</th></tr>
                     </thead>
-                    <tbody id="admin-tour-list" class="divide-y divide-slate-100 dark:divide-slate-800">
-                        <tr><td colspan="6" class="p-10 text-center text-slate-400"><span class="material-symbols-outlined animate-spin text-3xl">progress_activity</span></td></tr>
+                    <tbody>
+                        <tr class="border-t border-slate-100 dark:border-slate-800"><td class="p-4 pl-6 font-bold">Nguyễn Văn A</td><td class="p-4">vana@gmail.com</td><td class="p-4"><span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-bold">Đang hoạt động</span></td></tr>
+                        <tr class="border-t border-slate-100 dark:border-slate-800"><td class="p-4 pl-6 font-bold">Trần Thị B</td><td class="p-4">thib@gmail.com</td><td class="p-4"><span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-bold">Đang hoạt động</span></td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
 
-    <div id="tour-modal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center transition-opacity opacity-0">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300">
-            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
-                <h3 class="text-xl font-bold text-primary dark:text-white font-headline">Thêm Tour Du Lịch</h3>
-                <button onclick="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-300 hover:bg-red-500 hover:text-white transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">close</span>
-                </button>
+    <div id="modal-tour" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold dark:text-white">Thêm Tour Du Lịch</h3>
+                <button onclick="closeModal('tour')" class="material-symbols-outlined">close</button>
             </div>
-            <div class="p-6">
-                <form id="add-tour-form" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Tên Tour *</label>
-                            <input type="text" id="t-name" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Giá Tour *</label>
-                            <input type="text" id="t-price" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="VD: 5.000.000đ">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Loại Tour</label>
-                            <select id="t-type" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
-                                <option>Biển</option><option>Núi</option><option>Văn hóa</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Thời gian</label>
-                            <input type="text" id="t-time" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="VD: 3 Ngày 2 Đêm">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Đường dẫn Hình ảnh (URL) *</label>
-                        <input type="url" id="t-img" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Mô tả chi tiết</label>
-                        <textarea id="t-desc" rows="3" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white"></textarea>
-                    </div>
-                    <div class="pt-4 flex justify-end gap-3 border-t border-slate-100 dark:border-slate-800">
-                        <button type="button" onclick="closeModal()" class="px-6 py-2.5 rounded-xl font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Hủy</button>
-                        <button type="submit" id="btn-save-tour" class="px-6 py-2.5 rounded-xl font-bold text-white bg-primary dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 transition-all flex items-center gap-2 shadow-lg shadow-primary/20">Lưu dữ liệu</button>
-                    </div>
-                </form>
-            </div>
+            <form id="add-tour-form" class="p-6 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="t-name" placeholder="Tên Tour" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                    <input type="text" id="t-price" placeholder="Giá tiền (VD: 5M)" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                    <select id="t-type" class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                        <option>Biển</option><option>Núi</option><option>Văn hóa</option>
+                    </select>
+                    <input type="text" id="t-time" placeholder="Thời gian" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                </div>
+                <input type="url" id="t-img" placeholder="Link ảnh URL" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white">
+                <textarea id="t-desc" rows="3" placeholder="Mô tả ngắn" required class="w-full bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-700 rounded-xl p-3 dark:text-white"></textarea>
+                <button type="submit" class="w-full bg-primary dark:bg-blue-600 text-white py-4 rounded-xl font-bold">Lưu Tour</button>
+            </form>
         </div>
     </div>
 
@@ -230,164 +223,103 @@
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         if (document.documentElement.classList.contains('dark')) { themeToggleLightIcon.classList.remove('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); }
         themeToggleBtn.addEventListener('click', function() {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-            if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); updateChartsTheme(); } 
-            else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); updateChartsTheme(); }
+            themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden');
+            if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } 
+            else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
+            updateCharts();
         });
 
-        const modal = document.getElementById('tour-modal');
-        
-        // ĐÃ FIX: Toggle linh hoạt giữa display flex và hidden
-        function openModal() { 
-            modal.classList.remove('hidden'); 
-            modal.classList.add('flex');
-            setTimeout(() => { 
-                modal.classList.remove('opacity-0'); 
-                modal.firstElementChild.classList.remove('scale-95'); 
-            }, 10); 
-        }
-        function closeModal() { 
-            modal.firstElementChild.classList.add('scale-95'); 
-            modal.classList.add('opacity-0'); 
-            setTimeout(() => {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-            }, 300); 
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            document.querySelectorAll('.nav-link').forEach(l => {
+                l.classList.remove('bg-blue-50', 'dark:bg-slate-800', 'text-primary', 'dark:text-blue-400', 'font-bold');
+                l.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
+            });
+            el.classList.add('bg-blue-50', 'dark:bg-slate-800', 'text-primary', 'dark:text-blue-400', 'font-bold');
+            el.classList.remove('text-slate-500', 'font-medium');
+            document.getElementById('page-title').innerText = el.innerText.trim();
         }
 
-        let toastTimeout;
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').innerText = message;
-            document.getElementById('toast-title').innerText = type === 'success' ? 'Thành công' : 'Lỗi';
-            document.getElementById('toast-icon').innerText = type === 'success' ? 'check_circle' : 'error';
-            document.getElementById('toast-icon').className = type === 'success' ? 'material-symbols-outlined text-green-500 text-2xl' : 'material-symbols-outlined text-red-500 text-2xl';
-            document.getElementById('toast-progress').className = type === 'success' ? 'absolute bottom-0 left-0 h-1 bg-green-500 rounded-b-2xl w-full' : 'absolute bottom-0 left-0 h-1 bg-red-500 rounded-b-2xl w-full';
-            
-            document.getElementById('toast-progress').style.transition = 'none';
-            document.getElementById('toast-progress').style.width = '100%';
-            
-            toast.classList.remove('toast-enter', 'pointer-events-none');
-            toast.classList.add('toast-active');
-            
-            setTimeout(() => { document.getElementById('toast-progress').style.transition = 'width 3s linear'; document.getElementById('toast-progress').style.width = '0%'; }, 50);
+        function openModal(id) { document.getElementById('modal-' + id).classList.replace('hidden', 'flex'); }
+        function closeModal(id) { document.getElementById('modal-' + id).classList.replace('flex', 'hidden'); }
 
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => { toast.classList.remove('toast-active'); toast.classList.add('toast-enter', 'pointer-events-none'); }, 3000);
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            t.classList.add('toast-active');
+            setTimeout(() => t.classList.remove('toast-active'), 3000);
         }
 
-        let chart1, chart2;
-        function initCharts() {
+        let rChart, cChart;
+        function updateCharts() {
+            if(rChart) rChart.destroy(); if(cChart) cChart.destroy();
             const isDark = document.documentElement.classList.contains('dark');
-            const textColor = isDark ? '#94a3b8' : '#64748b';
-            const gridColor = isDark ? '#1e293b' : '#f1f5f9';
-
-            Chart.defaults.color = textColor;
-            Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
-
-            const ctx1 = document.getElementById('revenueChart').getContext('2d');
-            chart1 = new Chart(ctx1, {
-                type: 'line',
-                data: { labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'], datasets: [{ label: 'Doanh thu (Triệu)', data: [120, 190, 150, 220, 280, 450], borderColor: '#fd6600', backgroundColor: 'rgba(253, 102, 0, 0.1)', borderWidth: 3, fill: true, tension: 0.4 }] },
-                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 2000, easing: 'easeOutQuart' }, scales: { y: { grid: { color: gridColor } }, x: { grid: { color: gridColor } } }, plugins: { legend: { display: false } } }
+            const color = isDark ? '#94a3b8' : '#64748b';
+            rChart = new Chart(document.getElementById('revenueChart'), {
+                type: 'line', data: { labels: ['T1','T2','T3','T4','T5','T6'], datasets: [{ label: 'Doanh thu', data: [120, 190, 150, 220, 280, 450], borderColor: '#fd6600', tension: 0.4 }] },
+                options: { plugins: { legend: { display: false } }, scales: { y: { ticks: { color } }, x: { ticks: { color } } } }
             });
-
-            const ctx2 = document.getElementById('categoryChart').getContext('2d');
-            chart2 = new Chart(ctx2, {
-                type: 'doughnut',
-                data: { labels: ['Biển', 'Núi', 'Văn hóa'], datasets: [{ data: [45, 30, 25], backgroundColor: ['#003580', '#fd6600', '#facc15'], borderWidth: 0 }] },
-                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 2000, animateScale: true, animateRotate: true }, cutout: '75%', plugins: { legend: { position: 'bottom' } } }
+            cChart = new Chart(document.getElementById('categoryChart'), {
+                type: 'doughnut', data: { labels: ['Biển', 'Núi', 'Văn hóa'], datasets: [{ data: [45, 30, 25], backgroundColor: ['#003580', '#fd6600', '#facc15'] }] },
+                options: { plugins: { legend: { position: 'bottom', labels: { color } } } }
             });
         }
-        function updateChartsTheme() { if(chart1) { chart1.destroy(); chart2.destroy(); initCharts(); } }
-        setTimeout(initCharts, 500);
+        updateCharts();
     </script>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi', includedLanguages: 'en,vi,zh-CN,ja,ko,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element'); }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script type="module">
         import { db, auth } from './firebase-config.js';
         import { collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
-        onAuthStateChanged(auth, (user) => {
-            if (!user) { window.location.href = "login.html"; }
-        });
+        onAuthStateChanged(auth, (u) => { if (!user) window.location.href = "login.html"; });
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
-        async function loadAdminTours() {
+        async function loadData() {
+            const snap = await getDocs(collection(db, "tours"));
             const tbody = document.getElementById('admin-tour-list');
-            try {
-                const snap = await getDocs(collection(db, "tours"));
-                document.getElementById('stat-tours').innerText = snap.size;
-                tbody.innerHTML = "";
-                if(snap.empty) { tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400">Chưa có dữ liệu</td></tr>`; return; }
-                
-                snap.forEach((d) => {
-                    const data = d.data();
-                    tbody.innerHTML += `
-                        <tr id="row-${d.id}" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
-                            <td class="p-4 pl-6 font-mono text-xs text-slate-400">${d.id.substring(0,6).toUpperCase()}</td>
-                            <td class="p-4"><img src="${data.imageUrl}" class="w-12 h-12 rounded-lg object-cover shadow-sm"></td>
-                            <td class="p-4 font-bold text-primary dark:text-white">${data.tenTour}</td>
-                            <td class="p-4"><span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-full text-xs font-bold">${data.loaiTour || 'Khác'}</span></td>
-                            <td class="p-4 font-black text-secondary-container">${data.giaTour}</td>
-                            <td class="p-4 pr-6 text-center">
-                                <button onclick="window.removeTour('${d.id}')" class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/20 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center mx-auto opacity-0 group-hover:opacity-100">
-                                    <span class="material-symbols-outlined text-[18px]">delete</span>
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                });
-            } catch(e) { showToast("Lỗi kết nối Firebase", "error"); }
+            document.getElementById('stat-tours').innerText = snap.size;
+            tbody.innerHTML = "";
+            snap.forEach(d => {
+                const tour = d.data();
+                tbody.innerHTML += `
+                    <tr id="row-${d.id}" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                        <td class="p-4 pl-6"><img src="${tour.imageUrl}" class="w-12 h-12 rounded-lg object-cover"></td>
+                        <td class="p-4 font-bold">${tour.tenTour}</td>
+                        <td class="p-4 text-secondary-container font-black">${tour.giaTour}</td>
+                        <td class="p-4 text-center">
+                            <button onclick="window.delTour('${d.id}')" class="text-red-500 material-symbols-outlined">delete</button>
+                        </td>
+                    </tr>`;
+            });
         }
 
-        window.removeTour = async function(id) {
-            if(confirm("Bạn có chắc chắn muốn xóa tour này vĩnh viễn?")) {
-                const row = document.getElementById(`row-${id}`);
-                row.classList.add('row-removing');
-                try {
-                    await deleteDoc(doc(db, "tours", id));
-                    setTimeout(() => { row.remove(); showToast("Đã xóa tour thành công!"); document.getElementById('stat-tours').innerText = parseInt(document.getElementById('stat-tours').innerText) - 1; }, 400);
-                } catch(e) { showToast("Xóa thất bại", "error"); row.classList.remove('row-removing'); }
+        window.delTour = async (id) => {
+            if(confirm('Xóa tour này?')) {
+                const r = document.getElementById(`row-${id}`);
+                r.classList.add('row-removing');
+                await deleteDoc(doc(db, "tours", id));
+                setTimeout(() => { r.remove(); showToast("Đã xóa tour!"); }, 400);
             }
         };
 
-        document.getElementById('add-tour-form').addEventListener('submit', async (e) => {
+        document.getElementById('add-tour-form').onsubmit = async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('btn-save-tour');
-            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Đang lưu...`;
-            btn.disabled = true;
-
-            const newData = {
+            await addDoc(collection(db, "tours"), {
                 tenTour: document.getElementById('t-name').value,
                 giaTour: document.getElementById('t-price').value,
                 loaiTour: document.getElementById('t-type').value,
                 thoiGian: document.getElementById('t-time').value,
                 imageUrl: document.getElementById('t-img').value,
                 moTa: document.getElementById('t-desc').value
-            };
+            });
+            closeModal('tour'); showToast("Đã lưu tour mới!"); loadData();
+        };
 
-            try {
-                await addDoc(collection(db, "tours"), newData);
-                closeModal();
-                showToast("Thêm tour du lịch thành công!");
-                loadAdminTours();
-                document.getElementById('add-tour-form').reset();
-            } catch(error) {
-                showToast("Đã có lỗi xảy ra", "error");
-            } finally {
-                btn.innerHTML = `Lưu dữ liệu`;
-                btn.disabled = false;
-            }
-        });
-
-        loadAdminTours();
+        loadData();
     </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi'}, 'google_translate_element'); }</script>
 </body>
 </html>
