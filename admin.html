@@ -3,530 +3,375 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Quản Trị Cao Cấp - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <title>Quản Trị Hệ Thống - Đạt_Tùng_Đăng_Long</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-    <script id="tailwind-config">
+    <script>
         tailwind.config = { 
+            darkMode: "class",
             theme: { 
                 extend: { 
-                    colors: { "primary": "#004471", "primary-light": "#005da3", "surface": "#f8fafc", "secondary": "#e85d04", "accent": "#fbbf24" }, 
-                    fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } 
+                    colors: { "primary": "#002155", "secondary-container": "#fd6600", "background": "#f1f5f9" }, 
+                    fontFamily: { "headline": ["Be Vietnam Pro"], "body": ["Plus Jakarta Sans"] } 
                 } 
             } 
         }
     </script>
     <style>
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .nav-item-active { background-color: #004471 !important; color: white !important; box-shadow: 0 4px 12px rgba(0, 68, 113, 0.3); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
+        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
+        .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
+        .goog-logo-link, .goog-te-gadget span, .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+        
+        .toast-enter { transform: translateX(100%); opacity: 0; }
+        .toast-active { transform: translateX(0); opacity: 1; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .row-removing { opacity: 0; transform: translateX(-20px); transition: all 0.4s ease; }
     </style>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="bg-surface font-body antialiased min-h-screen flex">
-    <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 z-50 hidden md:flex flex-col">
-        <div class="p-6">
-            <a href="index.html" class="text-xl font-black text-primary tracking-tighter block">Đạt_Tùng_Đăng_Long<span class="text-accent">.</span> Admin</a>
+<body class="bg-background dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen transition-colors duration-500 flex">
+
+    <div id="toast" class="fixed top-6 right-6 z-[9999] bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-slate-200 dark:border-slate-700 shadow-2xl rounded-2xl p-4 flex items-center gap-3 toast-enter pointer-events-none w-80">
+        <span id="toast-icon" class="material-symbols-outlined text-green-500 text-2xl">check_circle</span>
+        <div class="flex-1">
+            <h4 id="toast-title" class="text-sm font-bold text-slate-800 dark:text-white">Thành công</h4>
+            <p id="toast-message" class="text-xs text-slate-500 dark:text-slate-400">Đã cập nhật dữ liệu</p>
         </div>
-        <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto scrollbar-hide">
-            <a href="index.html" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
-                <span class="material-symbols-outlined text-lg">home</span> Trang chủ
+        <div class="absolute bottom-0 left-0 h-1 bg-green-500 rounded-b-2xl w-full" id="toast-progress"></div>
+    </div>
+
+    <aside class="w-20 lg:w-64 fixed h-screen bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shadow-sm flex flex-col transition-all z-40">
+        <div class="h-20 flex items-center justify-center lg:justify-start lg:px-6 border-b border-slate-100 dark:border-slate-800">
+            <span class="material-symbols-outlined text-primary dark:text-blue-400 text-3xl lg:hidden">explore</span>
+            <a class="hidden lg:block text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">AdminPanel<span class="text-secondary-container">.</span></a>
+        </div>
+        <nav class="flex-1 py-6 flex flex-col gap-2 px-3">
+            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 bg-blue-50 dark:bg-slate-800 text-primary dark:text-blue-400 rounded-xl font-bold transition-all">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="hidden lg:block text-sm">Tổng quan</span>
             </a>
-            <button onclick="switchTab('dashboard')" id="btn-tab-dashboard" class="nav-item-active w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold transition-all hover:bg-blue-50 hover:text-primary">
-                <span class="material-symbols-outlined text-lg">dashboard</span> Tổng quan
-            </button>
-            <button onclick="switchTab('tours')" id="btn-tab-tours" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
-                <span class="material-symbols-outlined text-lg">map</span> Quản lý Tour
-            </button>
-            <button onclick="switchTab('blogs')" id="btn-tab-blogs" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
-                <span class="material-symbols-outlined text-lg">article</span> Quản lý Blog
-            </button>
-            <button onclick="switchTab('bookings')" id="btn-tab-bookings" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
-                <span class="material-symbols-outlined text-lg">shopping_cart</span> Đơn Đặt Hàng
-            </button>
-            <button onclick="switchTab('users')" id="btn-tab-users" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-bold text-slate-500 transition-all hover:bg-blue-50 hover:text-primary">
-                <span class="material-symbols-outlined text-lg">group</span> Khách hàng
-            </button>
+            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium transition-all">
+                <span class="material-symbols-outlined">tour</span>
+                <span class="hidden lg:block text-sm">Quản lý Tour</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium transition-all">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="hidden lg:block text-sm">Đơn đặt hàng</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-3 lg:px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-xl font-medium transition-all">
+                <span class="material-symbols-outlined">group</span>
+                <span class="hidden lg:block text-sm">Khách hàng</span>
+            </a>
         </nav>
-        <div class="p-4 border-t border-slate-100">
-            <div class="bg-slate-50 p-4 rounded-2xl flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs font-bold">AD</div>
-                <div class="overflow-hidden">
-                    <p id="sidebar-user-email" class="text-[10px] font-bold text-primary truncate"></p>
-                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-widest hover:text-red-700 transition-colors">Đăng xuất</button>
-                </div>
-            </div>
+        <div class="p-4 border-t border-slate-100 dark:border-slate-800">
+            <button id="btn-logout" class="w-full flex items-center justify-center lg:justify-start gap-3 px-3 lg:px-4 py-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl font-bold transition-all">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="hidden lg:block text-sm">Đăng xuất</span>
+            </button>
         </div>
     </aside>
 
-    <main class="flex-1 md:ml-64 min-h-screen">
-        <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex justify-between items-center">
-            <h2 id="current-tab-title" class="text-xl font-headline font-bold text-slate-800">Dashboard</h2>
+    <main class="flex-1 ml-20 lg:ml-64 p-6 lg:p-10 w-full min-h-screen">
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-2xl lg:text-3xl font-black text-primary dark:text-white font-headline mb-1">Bảng Điều Khiển</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400">Chào mừng bạn quay lại hệ thống quản trị.</p>
+            </div>
             <div class="flex items-center gap-4">
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest" id="current-date"></span>
-                <div class="w-10 h-10 rounded-full bg-blue-100 text-primary flex items-center justify-center font-bold">Admin</div>
+                <div class="hidden md:block"><div id="google_translate_element"></div></div>
+                <button id="theme-toggle" class="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md rounded-full transition-all flex items-center justify-center">
+                    <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400 text-[20px]">dark_mode</span>
+                    <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400 text-[20px]">light_mode</span>
+                </button>
             </div>
         </header>
 
-        <div class="p-6 md:p-10">
-            <div id="section-dashboard" class="space-y-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
-                        <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Tổng số Tour</p><h3 id="stat-tours" class="text-4xl font-black text-primary">0</h3></div>
-                        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">map</span></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">tour</span>
                     </div>
-                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
-                        <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Đơn đặt hàng</p><h3 id="stat-bookings" class="text-4xl font-black text-secondary">0</h3></div>
-                        <div class="w-12 h-12 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">shopping_cart</span></div>
-                    </div>
-                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
-                        <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Bài Blog</p><h3 id="stat-blogs" class="text-4xl font-black text-purple-500">0</h3></div>
-                        <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">article</span></div>
-                    </div>
-                    <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 flex items-center justify-between">
-                        <div><p class="text-xs font-bold text-slate-400 uppercase mb-1">Khách hàng</p><h3 id="stat-users" class="text-4xl font-black text-green-500">0</h3></div>
-                        <div class="w-12 h-12 rounded-2xl bg-green-50 text-green-500 flex items-center justify-center"><span class="material-symbols-outlined text-2xl">group</span></div>
-                    </div>
+                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+12%</span>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
-                        <h3 class="text-lg font-bold text-primary mb-6">Tỉ lệ trạng thái đơn hàng</h3>
-                        <div class="h-64"><canvas id="orderChart"></canvas></div>
-                    </div>
-                    <div class="bg-primary p-8 rounded-[2.5rem] text-white flex flex-col justify-center relative overflow-hidden">
-                        <div class="relative z-10">
-                            <h3 class="text-2xl font-bold mb-4">Chào mừng Admin!</h3>
-                            <p class="text-blue-100 font-light mb-6">Hệ thống của Công Ty Du Lịch Đạt_Tùng_Đăng_Long đang hoạt động ổn định. Hãy quản lý hệ thống ngay!</p>
-                            <div class="flex gap-4">
-                                <button onclick="switchTab('tours')" class="bg-white text-primary px-6 py-3 rounded-full font-bold text-sm shadow-lg">Quản lý Tour</button>
-                                <button onclick="switchTab('blogs')" class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-bold text-sm transition-all border border-white/20">Quản lý Blog</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Tổng số Tour</h3>
+                <p id="stat-tours" class="text-3xl font-black text-primary dark:text-white">0</p>
             </div>
-
-            <div id="section-tours" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <h1 class="text-2xl font-headline font-black text-primary">Quản lý Danh mục Tour</h1>
-                    <div class="flex gap-3 w-full md:w-auto">
-                        <input type="text" id="search-tour" onkeyup="searchTable('search-tour', 'admin-tour-list')" placeholder="Tìm tên tour..." class="bg-white border border-slate-200 rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20">
-                        <button onclick="openModal('add')" class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
-                            <span class="material-symbols-outlined text-sm">add</span> Thêm tour
-                        </button>
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">receipt_long</span>
                     </div>
+                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+5%</span>
                 </div>
-                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="overflow-x-auto scrollbar-hide">
-                        <table class="w-full text-left min-w-[900px]">
-                            <thead>
-                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                    <th class="p-6">Hình ảnh</th><th class="p-6">Tên Tour</th><th class="p-6">Giá</th><th class="p-6">Thời gian</th><th class="p-6 text-center">Hành động</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-tour-list"></tbody>
-                        </table>
-                    </div>
-                </div>
+                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Đơn đặt hàng</h3>
+                <p id="stat-bookings" class="text-3xl font-black text-primary dark:text-white">142</p>
             </div>
-
-            <div id="section-blogs" class="hidden space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                    <h1 class="text-2xl font-headline font-black text-primary">Quản lý Blog & Cẩm Nang</h1>
-                    <div class="flex gap-3 w-full md:w-auto">
-                        <input type="text" id="search-blog" onkeyup="searchTable('search-blog', 'admin-blog-list')" placeholder="Tìm bài viết..." class="bg-white border border-slate-200 rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-primary/20">
-                        <button onclick="openBlogModal('add')" class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow-md flex items-center gap-2 active:scale-95 transition-all">
-                            <span class="material-symbols-outlined text-sm">add</span> Thêm bài viết
-                        </button>
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">payments</span>
                     </div>
+                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+28%</span>
                 </div>
-                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="overflow-x-auto scrollbar-hide">
-                        <table class="w-full text-left min-w-[900px]">
-                            <thead>
-                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                    <th class="p-6">Hình ảnh</th><th class="p-6">Tiêu đề</th><th class="p-6">Danh mục</th><th class="p-6">Ngày đăng</th><th class="p-6 text-center">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-blog-list"></tbody>
-                        </table>
-                    </div>
-                </div>
+                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Doanh thu (Tháng)</h3>
+                <p id="stat-revenue" class="text-3xl font-black text-primary dark:text-white">450M</p>
             </div>
-
-            <div id="section-bookings" class="hidden space-y-6">
-                <h1 class="text-2xl font-headline font-black text-primary">Quản lý Đơn đặt Tour</h1>
-                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="overflow-x-auto scrollbar-hide">
-                        <table class="w-full text-left min-w-[1000px]">
-                            <thead>
-                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                    <th class="p-6">Khách hàng</th><th class="p-6">Liên hệ</th><th class="p-6">Tour</th><th class="p-6">Trạng thái</th><th class="p-6 text-center">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-booking-list"></tbody>
-                        </table>
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 group hover:shadow-xl transition-all">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">group</span>
                     </div>
+                    <span class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded-lg">+18%</span>
                 </div>
+                <h3 class="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Khách hàng mới</h3>
+                <p id="stat-users" class="text-3xl font-black text-primary dark:text-white">1,250</p>
             </div>
+        </div>
 
-            <div id="section-users" class="hidden space-y-6">
-                <h1 class="text-2xl font-headline font-black text-primary">Danh sách Thành viên</h1>
-                <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden">
-                    <div class="overflow-x-auto scrollbar-hide">
-                        <table class="w-full text-left min-w-[800px]">
-                            <thead>
-                                <tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100">
-                                    <th class="p-6">Họ và Tên</th><th class="p-6">Email</th><th class="p-6">Ngày tham gia</th><th class="p-6 text-center">Vai trò</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-user-list"></tbody>
-                        </table>
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+            <div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-primary dark:text-white mb-6 font-headline">Biểu đồ Doanh Thu</h3>
+                <div class="relative h-72 w-full"><canvas id="revenueChart"></canvas></div>
+            </div>
+            <div class="lg:col-span-1 bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-primary dark:text-white mb-6 font-headline">Loại Tour Phổ Biến</h3>
+                <div class="relative h-72 w-full flex justify-center"><canvas id="categoryChart"></canvas></div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <h2 class="text-xl font-bold text-primary dark:text-white font-headline">Danh sách Tour</h2>
+                <button onclick="openModal()" class="bg-primary dark:bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-blue-800 dark:hover:bg-blue-700 transition-all flex items-center gap-2 active:scale-95">
+                    <span class="material-symbols-outlined text-[18px]">add</span> Thêm Tour Mới
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 dark:bg-slate-800/50 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                            <th class="p-4 pl-6">Mã Tour</th>
+                            <th class="p-4">Hình ảnh</th>
+                            <th class="p-4">Tên Tour</th>
+                            <th class="p-4">Danh mục</th>
+                            <th class="p-4">Giá tiền</th>
+                            <th class="p-4 text-center pr-6">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-tour-list" class="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tr><td colspan="6" class="p-10 text-center text-slate-400"><span class="material-symbols-outlined animate-spin text-3xl">progress_activity</span></td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
 
-    <div id="tour-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10">
-        <div class="bg-white rounded-[2.5rem] w-full max-w-lg p-8 md:p-10 shadow-2xl my-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="modal-title" class="text-2xl font-headline font-black text-primary">Thêm Tour Mới</h2>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
+    <div id="tour-modal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center transition-opacity opacity-0">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
+                <h3 class="text-xl font-bold text-primary dark:text-white font-headline">Thêm Tour Du Lịch</h3>
+                <button onclick="closeModal()" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-300 hover:bg-red-500 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">close</span>
+                </button>
             </div>
-            <form id="tour-form" class="space-y-4">
-                <input type="hidden" id="edit-id">
-                <input type="text" id="t-name" placeholder="Tên Tour" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                <div class="grid grid-cols-2 gap-4">
-                    <input type="text" id="t-price" placeholder="Giá (VD: 3.500.000đ)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                    <input type="text" id="t-time" placeholder="Thời gian (VD: 3 Ngày 2 Đêm)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                </div>
-                <input type="text" id="t-type" placeholder="Loại hình (Nghỉ dưỡng/Khám phá...)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                <input type="text" id="t-img" placeholder="URL Hình ảnh bìa" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                <textarea id="t-desc" placeholder="Mô tả chi tiết tour" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-32 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
-                <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
-                    <button type="submit" id="submit-btn" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Xác nhận</button>
-                </div>
-            </form>
+            <div class="p-6">
+                <form id="add-tour-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Tên Tour *</label>
+                            <input type="text" id="t-name" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Giá Tour *</label>
+                            <input type="text" id="t-price" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="VD: 5.000.000đ">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Loại Tour</label>
+                            <select id="t-type" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                                <option>Biển</option><option>Núi</option><option>Văn hóa</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Thời gian</label>
+                            <input type="text" id="t-time" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" placeholder="VD: 3 Ngày 2 Đêm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Đường dẫn Hình ảnh (URL) *</label>
+                        <input type="url" id="t-img" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-1">Mô tả chi tiết</label>
+                        <textarea id="t-desc" rows="3" required class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white"></textarea>
+                    </div>
+                    <div class="pt-4 flex justify-end gap-3 border-t border-slate-100 dark:border-slate-800">
+                        <button type="button" onclick="closeModal()" class="px-6 py-2.5 rounded-xl font-bold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Hủy</button>
+                        <button type="submit" id="btn-save-tour" class="px-6 py-2.5 rounded-xl font-bold text-white bg-primary dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 transition-all flex items-center gap-2 shadow-lg shadow-primary/20">Lưu dữ liệu</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
-    <div id="blog-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10">
-        <div class="bg-white rounded-[2.5rem] w-full max-w-2xl p-8 md:p-10 shadow-2xl my-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 id="blog-modal-title" class="text-2xl font-headline font-black text-primary">Thêm Bài Viết Mới</h2>
-                <button onclick="closeBlogModal()" class="text-slate-400 hover:text-red-500 transition-colors"><span class="material-symbols-outlined">close</span></button>
-            </div>
-            <form id="blog-form" class="space-y-4">
-                <input type="hidden" id="blog-edit-id">
-                <input type="text" id="b-title" placeholder="Tiêu đề bài viết" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                <div class="grid grid-cols-2 gap-4">
-                    <select id="b-category" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                        <option value="" disabled selected>Chọn danh mục</option>
-                        <option value="Điểm đến">Điểm đến</option>
-                        <option value="Cẩm nang">Cẩm nang</option>
-                        <option value="Ẩm thực">Ẩm thực</option>
-                        <option value="Văn hóa">Văn hóa</option>
-                    </select>
-                    <input type="text" id="b-img" placeholder="URL Hình ảnh bìa" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 outline-none focus:ring-2 focus:ring-primary/20" required>
-                </div>
-                <textarea id="b-desc" placeholder="Mô tả ngắn (Hiển thị ở trang danh sách)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-24 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
-                <textarea id="b-content" placeholder="Nội dung chi tiết bài viết (Hỗ trợ xuống dòng)" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-3 h-48 resize-none outline-none focus:ring-2 focus:ring-primary/20" required></textarea>
-                <div class="flex gap-4 pt-4">
-                    <button type="button" onclick="closeBlogModal()" class="flex-1 bg-slate-100 text-slate-500 py-4 rounded-full font-bold">Hủy</button>
-                    <button type="submit" id="blog-submit-btn" class="flex-1 bg-primary text-white py-4 rounded-full font-bold shadow-lg">Lưu Bài Viết</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script src="config-obj.js"></script>
     <script>
-        firebase.initializeApp(globalFirebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
-        let orderChartInstance = null;
-        const ADMIN_EMAIL = "admin@50cntt1.com";
-
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                let isAdmin = (user.email === ADMIN_EMAIL);
-                if (!isAdmin) {
-                    const userDoc = await db.collection("users").doc(user.uid).get();
-                    if (userDoc.exists && userDoc.data().role === "admin") isAdmin = true;
-                }
-                if (isAdmin) {
-                    document.getElementById('sidebar-user-email').innerText = user.email.split('@')[0];
-                    switchTab('dashboard');
-                } else {
-                    alert("⚠️ Bạn không có quyền truy cập!");
-                    window.location.href = "index.html";
-                }
-            } else { 
-                window.location.href = "login.html"; 
-            }
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        if (document.documentElement.classList.contains('dark')) { themeToggleLightIcon.classList.remove('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); }
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); updateChartsTheme(); } 
+            else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); updateChartsTheme(); }
         });
 
-        document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
+        const modal = document.getElementById('tour-modal');
+        function openModal() { modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modal.firstElementChild.classList.remove('scale-95'); }, 10); }
+        function closeModal() { modal.firstElementChild.classList.add('scale-95'); modal.classList.add('opacity-0'); setTimeout(() => modal.classList.add('hidden'), 300); }
 
-        function switchTab(tab) {
-            const sections =['dashboard', 'tours', 'blogs', 'bookings', 'users'];
-            const titles = { 
-                'dashboard': 'Tổng quan hệ thống', 
-                'tours': 'Quản lý Tour', 
-                'blogs': 'Quản lý Bài Viết Blog', 
-                'bookings': 'Quản lý Đặt tour', 
-                'users': 'Danh sách Khách hàng' 
-            };
-            sections.forEach(s => {
-                document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
-                const btn = document.getElementById(`btn-tab-${s}`);
-                if(btn) {
-                    btn.classList.toggle('nav-item-active', s === tab);
-                    btn.classList.toggle('text-slate-500', s !== tab);
-                }
-            });
-            document.getElementById('current-tab-title').innerText = titles[tab];
-            if(tab === 'dashboard') loadDashboard();
-            if(tab === 'tours') loadAdminTours();
-            if(tab === 'blogs') loadAdminBlogs();
-            if(tab === 'bookings') loadBookings();
-            if(tab === 'users') loadUsers();
-        }
-
-        function openModal(type, id = null) {
-            const modal = document.getElementById('tour-modal');
-            modal.classList.remove('hidden');
-            if(type === 'edit') {
-                document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
-                db.collection("tours").doc(id).get().then(doc => {
-                    const data = doc.data();
-                    document.getElementById('edit-id').value = id;
-                    document.getElementById('t-name').value = data.tenTour;
-                    document.getElementById('t-price').value = data.giaTour;
-                    document.getElementById('t-time').value = data.thoiGian;
-                    document.getElementById('t-type').value = data.loaiTour;
-                    document.getElementById('t-img').value = data.imageUrl;
-                    document.getElementById('t-desc').value = data.moTa;
-                });
-            } else {
-                document.getElementById('modal-title').innerText = "Thêm Tour Mới";
-                document.getElementById('tour-form').reset();
-                document.getElementById('edit-id').value = "";
-            }
-        }
-        function closeModal() { document.getElementById('tour-modal').classList.add('hidden'); }
-
-        function openBlogModal(type, id = null) {
-            const modal = document.getElementById('blog-modal');
-            modal.classList.remove('hidden');
-            if(type === 'edit') {
-                document.getElementById('blog-modal-title').innerText = "Chỉnh sửa Bài Viết";
-                db.collection("blog_posts").doc(id).get().then(doc => {
-                    const data = doc.data();
-                    document.getElementById('blog-edit-id').value = id;
-                    document.getElementById('b-title').value = data.title;
-                    document.getElementById('b-category').value = data.category;
-                    document.getElementById('b-img').value = data.imageUrl;
-                    document.getElementById('b-desc').value = data.description;
-                    document.getElementById('b-content').value = data.content || "";
-                });
-            } else {
-                document.getElementById('blog-modal-title').innerText = "Thêm Bài Viết Mới";
-                document.getElementById('blog-form').reset();
-                document.getElementById('blog-edit-id').value = "";
-            }
-        }
-        function closeBlogModal() { document.getElementById('blog-modal').classList.add('hidden'); }
-
-        function searchTable(inputId, tableId) {
-            let input = document.getElementById(inputId).value.toLowerCase();
-            let trs = document.getElementById(tableId).getElementsByTagName("tr");
-            for (let i = 0; i < trs.length; i++) {
-                let text = trs[i].innerText.toLowerCase();
-                trs[i].style.display = text.indexOf(input) > -1 ? "" : "none";
-            }
-        }
-
-        async function loadDashboard() {
-            const toursSnap = await db.collection("tours").get();
-            const usersSnap = await db.collection("users").get();
-            const bookingsSnap = await db.collection("bookings").get();
-            const blogsSnap = await db.collection("blog_posts").get();
+        let toastTimeout;
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            document.getElementById('toast-title').innerText = type === 'success' ? 'Thành công' : 'Lỗi';
+            document.getElementById('toast-icon').innerText = type === 'success' ? 'check_circle' : 'error';
+            document.getElementById('toast-icon').className = type === 'success' ? 'material-symbols-outlined text-green-500 text-2xl' : 'material-symbols-outlined text-red-500 text-2xl';
+            document.getElementById('toast-progress').className = type === 'success' ? 'absolute bottom-0 left-0 h-1 bg-green-500 rounded-b-2xl w-full' : 'absolute bottom-0 left-0 h-1 bg-red-500 rounded-b-2xl w-full';
             
-            document.getElementById('stat-tours').innerText = toursSnap.size;
-            document.getElementById('stat-users').innerText = usersSnap.size;
-            document.getElementById('stat-bookings').innerText = bookingsSnap.size;
-            document.getElementById('stat-blogs').innerText = blogsSnap.size;
+            document.getElementById('toast-progress').style.transition = 'none';
+            document.getElementById('toast-progress').style.width = '100%';
             
-            let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
-            bookingsSnap.forEach(d => {
-                let s = d.data().trangThai || "Chờ xử lý";
-                if(statusCount[s] !== undefined) statusCount[s]++;
+            toast.classList.remove('toast-enter', 'pointer-events-none');
+            toast.classList.add('toast-active');
+            
+            setTimeout(() => { document.getElementById('toast-progress').style.transition = 'width 3s linear'; document.getElementById('toast-progress').style.width = '0%'; }, 50);
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => { toast.classList.remove('toast-active'); toast.classList.add('toast-enter', 'pointer-events-none'); }, 3000);
+        }
+
+        let chart1, chart2;
+        function initCharts() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const textColor = isDark ? '#94a3b8' : '#64748b';
+            const gridColor = isDark ? '#1e293b' : '#f1f5f9';
+
+            Chart.defaults.color = textColor;
+            Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+
+            const ctx1 = document.getElementById('revenueChart').getContext('2d');
+            chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: { labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'], datasets: [{ label: 'Doanh thu (Triệu)', data: [120, 190, 150, 220, 280, 450], borderColor: '#fd6600', backgroundColor: 'rgba(253, 102, 0, 0.1)', borderWidth: 3, fill: true, tension: 0.4 }] },
+                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 2000, easing: 'easeOutQuart' }, scales: { y: { grid: { color: gridColor } }, x: { grid: { color: gridColor } } }, plugins: { legend: { display: false } } }
             });
-            const ctx = document.getElementById('orderChart').getContext('2d');
-            if(orderChartInstance) orderChartInstance.destroy();
-            orderChartInstance = new Chart(ctx, {
+
+            const ctx2 = document.getElementById('categoryChart').getContext('2d');
+            chart2 = new Chart(ctx2, {
                 type: 'doughnut',
-                data: { labels: Object.keys(statusCount), datasets: [{ data: Object.values(statusCount), backgroundColor:['#f59e0b', '#3b82f6', '#10b981', '#ef4444'], borderWidth: 0 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+                data: { labels: ['Biển', 'Núi', 'Văn hóa'], datasets: [{ data: [45, 30, 25], backgroundColor: ['#003580', '#fd6600', '#facc15'], borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 2000, animateScale: true, animateRotate: true }, cutout: '75%', plugins: { legend: { position: 'bottom' } } }
             });
         }
+        function updateChartsTheme() { if(chart1) { chart1.destroy(); chart2.destroy(); initCharts(); } }
+        setTimeout(initCharts, 500);
+    </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi', includedLanguages: 'en,vi,zh-CN,ja,ko,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element'); }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script type="module">
+        import { db, auth } from './firebase-config.js';
+        import { collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) { window.location.href = "login.html"; }
+        });
+        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
 
         async function loadAdminTours() {
             const tbody = document.getElementById('admin-tour-list');
-            const snap = await db.collection("tours").get();
-            tbody.innerHTML = "";
-            snap.forEach(d => {
-                const data = d.data();
-                tbody.innerHTML += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
-                    <td class="p-6"><img src="${data.imageUrl}" class="w-14 h-14 rounded-2xl object-cover shadow-sm"></td>
-                    <td class="p-6 font-bold text-primary">${data.tenTour}</td>
-                    <td class="p-6 font-black text-secondary">${data.giaTour}</td>
-                    <td class="p-6 text-sm font-bold text-slate-400">${data.thoiGian}</td>
-                    <td class="p-6 flex justify-center gap-2">
-                        <button onclick="openModal('edit', '${d.id}')" class="p-2.5 bg-blue-50 text-blue-500 rounded-xl hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
-                        <button onclick="deleteTour('${d.id}')" class="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">delete</span></button>
-                    </td></tr>`;
-            });
+            try {
+                const snap = await getDocs(collection(db, "tours"));
+                document.getElementById('stat-tours').innerText = snap.size;
+                tbody.innerHTML = "";
+                if(snap.empty) { tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400">Chưa có dữ liệu</td></tr>`; return; }
+                
+                snap.forEach((d) => {
+                    const data = d.data();
+                    tbody.innerHTML += `
+                        <tr id="row-${d.id}" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
+                            <td class="p-4 pl-6 font-mono text-xs text-slate-400">${d.id.substring(0,6).toUpperCase()}</td>
+                            <td class="p-4"><img src="${data.imageUrl}" class="w-12 h-12 rounded-lg object-cover shadow-sm"></td>
+                            <td class="p-4 font-bold text-primary dark:text-white">${data.tenTour}</td>
+                            <td class="p-4"><span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-full text-xs font-bold">${data.loaiTour || 'Khác'}</span></td>
+                            <td class="p-4 font-black text-secondary-container">${data.giaTour}</td>
+                            <td class="p-4 pr-6 text-center">
+                                <button onclick="window.removeTour('${d.id}')" class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/20 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center mx-auto opacity-0 group-hover:opacity-100">
+                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch(e) { showToast("Lỗi kết nối Firebase", "error"); }
         }
 
-        async function loadAdminBlogs() {
-            const tbody = document.getElementById('admin-blog-list');
-            const snap = await db.collection("blog_posts").get();
-            tbody.innerHTML = "";
-            snap.forEach(d => {
-                const data = d.data();
-                tbody.innerHTML += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
-                    <td class="p-6"><img src="${data.imageUrl}" class="w-14 h-14 rounded-2xl object-cover shadow-sm"></td>
-                    <td class="p-6 font-bold text-primary truncate max-w-[250px]">${data.title}</td>
-                    <td class="p-6 text-sm font-bold text-slate-500"><span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest">${data.category}</span></td>
-                    <td class="p-6 text-sm text-slate-400">${data.date || '---'}</td>
-                    <td class="p-6 flex justify-center gap-2">
-                        <button onclick="openBlogModal('edit', '${d.id}')" class="p-2.5 bg-purple-50 text-purple-500 rounded-xl hover:bg-primary hover:text-white transition-all"><span class="material-symbols-outlined text-sm">edit</span></button>
-                        <button onclick="deleteBlog('${d.id}')" class="p-2.5 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all"><span class="material-symbols-outlined text-sm">delete</span></button>
-                    </td></tr>`;
-            });
-        }
-
-        async function loadBookings() {
-            const tbody = document.getElementById('admin-booking-list');
-            const snap = await db.collection("bookings").get();
-            tbody.innerHTML = "";
-            snap.forEach(d => {
-                const data = d.data();
-                const s = data.trangThai || "Chờ xử lý";
-                let bc = "bg-orange-50 text-orange-500";
-                if(s === "Đã thanh toán") bc = "bg-blue-50 text-blue-500";
-                if(s === "Hoàn thành") bc = "bg-green-50 text-green-500";
-                if(s === "Đã hủy") bc = "bg-red-50 text-red-500";
-                tbody.innerHTML += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
-                    <td class="p-6 font-bold text-primary">${data.khachHang}</td>
-                    <td class="p-6 text-sm text-slate-500">${data.email}<br>${data.sdt}</td>
-                    <td class="p-6 font-bold text-slate-700 truncate max-w-xs">${data.tenTour}</td>
-                    <td class="p-6"><span class="${bc} px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${s}</span></td>
-                    <td class="p-6 text-center"><select onchange="updateBookingStatus('${d.id}', this.value)" class="text-xs font-bold border border-slate-200 rounded-lg px-2 py-1 outline-none cursor-pointer"><option value="">Đổi trạng thái</option><option value="Chờ xử lý">Chờ xử lý</option><option value="Đã thanh toán">Đã thanh toán</option><option value="Hoàn thành">Hoàn thành</option><option value="Đã hủy">Đã hủy</option></select></td></tr>`;
-            });
-        }
-
-        window.updateBookingStatus = async (id, newStatus) => {
-            if(!newStatus) return;
-            await db.collection("bookings").doc(id).update({ trangThai: newStatus });
-            loadBookings();
+        window.removeTour = async function(id) {
+            if(confirm("Bạn có chắc chắn muốn xóa tour này vĩnh viễn?")) {
+                const row = document.getElementById(`row-${id}`);
+                row.classList.add('row-removing');
+                try {
+                    await deleteDoc(doc(db, "tours", id));
+                    setTimeout(() => { row.remove(); showToast("Đã xóa tour thành công!"); document.getElementById('stat-tours').innerText = parseInt(document.getElementById('stat-tours').innerText) - 1; }, 400);
+                } catch(e) { showToast("Xóa thất bại", "error"); row.classList.remove('row-removing'); }
+            }
         };
 
-        async function loadUsers() {
-            const tbody = document.getElementById('admin-user-list');
-            const snap = await db.collection("users").get();
-            tbody.innerHTML = "";
-            snap.forEach(d => {
-                const data = d.data();
-                tbody.innerHTML += `<tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
-                    <td class="p-6 font-bold text-primary">${data.hoTen || '---'}</td><td class="p-6 text-sm text-slate-500">${data.email}</td><td class="p-6 text-sm text-slate-500">${data.ngayTao || '---'}</td>
-                    <td class="p-6 text-center"><span class="${data.role === 'admin' ? 'bg-red-50 text-red-500' : 'bg-blue-50 text-primary'} px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${data.role === 'admin' ? 'Quản trị viên' : 'Khách hàng'}</span></td></tr>`;
-            });
-        }
-
-        document.getElementById('tour-form').onsubmit = async (e) => {
+        document.getElementById('add-tour-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = "Đang lưu...";
+            const btn = document.getElementById('btn-save-tour');
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Đang lưu...`;
             btn.disabled = true;
+
+            const newData = {
+                tenTour: document.getElementById('t-name').value,
+                giaTour: document.getElementById('t-price').value,
+                loaiTour: document.getElementById('t-type').value,
+                thoiGian: document.getElementById('t-time').value,
+                imageUrl: document.getElementById('t-img').value,
+                moTa: document.getElementById('t-desc').value
+            };
+
             try {
-                const id = document.getElementById('edit-id').value;
-                const data = {
-                    tenTour: document.getElementById('t-name').value,
-                    giaTour: document.getElementById('t-price').value,
-                    thoiGian: document.getElementById('t-time').value,
-                    loaiTour: document.getElementById('t-type').value,
-                    imageUrl: document.getElementById('t-img').value,
-                    moTa: document.getElementById('t-desc').value
-                };
-                if(id) await db.collection("tours").doc(id).update(data);
-                else await db.collection("tours").add(data);
+                await addDoc(collection(db, "tours"), newData);
                 closeModal();
+                showToast("Thêm tour du lịch thành công!");
                 loadAdminTours();
-            } catch(err) {
-                alert("Lỗi: " + err.message);
+                document.getElementById('add-tour-form').reset();
+            } catch(error) {
+                showToast("Đã có lỗi xảy ra", "error");
             } finally {
-                btn.innerText = "Xác nhận";
+                btn.innerHTML = `Lưu dữ liệu`;
                 btn.disabled = false;
             }
-        };
+        });
 
-        document.getElementById('blog-form').onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('blog-submit-btn');
-            btn.innerText = "Đang lưu...";
-            btn.disabled = true;
-            try {
-                const id = document.getElementById('blog-edit-id').value;
-                const now = new Date();
-                const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
-                const data = {
-                    title: document.getElementById('b-title').value,
-                    category: document.getElementById('b-category').value,
-                    imageUrl: document.getElementById('b-img').value,
-                    description: document.getElementById('b-desc').value,
-                    content: document.getElementById('b-content').value,
-                };
-                if(!id) data.date = dateString; 
-                if(id) await db.collection("blog_posts").doc(id).update(data);
-                else await db.collection("blog_posts").add(data);
-                closeBlogModal();
-                loadAdminBlogs();
-            } catch(err) {
-                alert("Lỗi: " + err.message);
-            } finally {
-                btn.innerText = "Lưu Bài Viết";
-                btn.disabled = false;
-            }
-        };
-
-        window.deleteTour = async (id) => { 
-            if(confirm("Xóa tour này?")) { 
-                try {
-                    await db.collection("tours").doc(id).delete(); 
-                    loadAdminTours(); 
-                } catch(e) { alert(e.message); }
-            } 
-        };
-        
-        window.deleteBlog = async (id) => { 
-            if(confirm("Xóa bài viết này?")) { 
-                try {
-                    await db.collection("blog_posts").doc(id).delete(); 
-                    loadAdminBlogs(); 
-                } catch(e) { alert(e.message); }
-            } 
-        };
-
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        loadAdminTours();
     </script>
 </body>
 </html>
