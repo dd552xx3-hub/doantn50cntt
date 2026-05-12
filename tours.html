@@ -1,257 +1,230 @@
 <!DOCTYPE html>
-<html class="light" lang="vi">
+<html lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Danh sách Tour - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-        tailwind.config = {
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Danh Sách Tour - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = { 
             darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#002155", 
                         "secondary-container": "#fd6600",
-                        "tertiary-fixed-dim": "#9ccaff",
-                        "inverse-primary": "#b0c6ff",
-                        "on-secondary-container": "#541d00",
-                        "inverse-on-surface": "#eff1f3",
-                        "error": "#ba1a1a",
-                        "surface-container-high": "#e6e8ea",
-                        "tertiary": "#002542",
-                        "on-primary-fixed": "#001945",
-                        "on-primary-fixed-variant": "#1a438e",
-                        "surface-container-highest": "#e0e3e5",
-                        "primary-fixed-dim": "#b0c6ff",
-                        "on-tertiary-container": "#74a6dd",
-                        "primary-fixed": "#d9e2ff",
-                        "on-tertiary": "#ffffff",
-                        "surface-container-low": "#f2f4f6",
-                        "on-tertiary-fixed-variant": "#03497a",
-                        "secondary": "#a23f00",
-                        "secondary-fixed": "#ffdbcd",
-                        "outline": "#747782",
-                        "error-container": "#ffdad6",
-                        "on-error-container": "#93000a",
-                        "on-secondary-fixed": "#351000",
-                        "surface-dim": "#d8dadc",
-                        "on-secondary": "#ffffff",
-                        "inverse-surface": "#2d3133",
-                        "outline-variant": "#c4c6d3",
-                        "tertiary-fixed": "#d0e4ff",
-                        "surface-container-lowest": "#ffffff",
-                        "on-primary": "#ffffff",
-                        "surface-bright": "#f7f9fb",
-                        "on-surface": "#191c1e",
-                        "secondary-fixed-dim": "#ffb595",
-                        "background": "#f7f9fb",
-                        "on-background": "#191c1e",
-                        "on-secondary-fixed-variant": "#7c2e00",
-                        "primary": "#002155",
-                        "on-primary-container": "#7fa1f2",
-                        "surface-tint": "#375ca8",
-                        "primary-container": "#003580",
-                        "surface-variant": "#e0e3e5",
-                        "surface": "#f7f9fb",
-                        "surface-container": "#eceef0",
-                        "on-tertiary-fixed": "#001d35",
-                        "on-error": "#ffffff",
-                        "on-surface-variant": "#434651",
-                        "tertiary-container": "#003b64"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "container-max": "1280px",
-                        "unit-xl": "64px",
-                        "unit-xs": "4px",
-                        "unit-lg": "32px",
-                        "unit-sm": "8px",
-                        "margin": "32px",
-                        "gutter": "24px",
-                        "unit-md": "16px"
-                    },
-                    "fontFamily": {
-                        "headline-md": ["Be Vietnam Pro"],
-                        "headline-lg": ["Be Vietnam Pro"],
-                        "body-lg": ["Plus Jakarta Sans"],
-                        "headline-xl": ["Be Vietnam Pro"],
-                        "label-md": ["Be Vietnam Pro"],
-                        "label-sm": ["Be Vietnam Pro"],
-                        "body-md": ["Plus Jakarta Sans"]
-                    },
-                    "fontSize": {
-                        "headline-md":["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
-                        "headline-lg":["32px", { "lineHeight": "1.25", "fontWeight": "700" }],
-                        "body-lg":["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-xl":["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "label-md":["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "label-sm":["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
-                        "body-md":["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
-                    }
-                }
-            }
+                        "surface": "#f7f9fb"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Be Vietnam Pro"], 
+                        "body": ["Plus Jakarta Sans"] 
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .tilt-card { transition: transform 0.1s ease-out; transform-style: preserve-3d; will-change: transform; }
+        .tilt-card-inner { transform: translateZ(30px); }
+        
+        .skeleton-box { position: relative; overflow: hidden; background-color: #e2e8f0; border-radius: 0.5rem; }
+        .dark .skeleton-box { background-color: #334155; }
+        .skeleton-box::after {
+            content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0));
+            animation: shimmer 1.5s infinite;
+        }
+        .dark .skeleton-box::after { background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.05) 20%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0)); }
+        @keyframes shimmer { 100% { transform: translateX(100%); } }
+
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
+        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
+        .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+    </style>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
     </script>
 </head>
-<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary">
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/50 shadow-sm font-be-vietnam-pro text-sm font-medium tracking-wide">
-        <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
-            <a class="text-2xl font-black tracking-tighter text-blue-900" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
-            <div class="hidden md:flex space-x-8 items-center font-headline text-sm font-medium tracking-wide">
-                <a class="text-primary border-b-2 border-secondary-container pb-1" href="index.html">Trang Chủ</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="destinations.html">Điểm Đến</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="tours.html">Tour Du Lịch</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="blog.html">Cẩm Nang</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="#trai-nghiem">Trải Nghiệm</a>
+<body class="bg-surface dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen flex flex-col transition-colors duration-500 pt-20">
+
+    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800 shadow-sm transition-all duration-300">
+        <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
+            <a class="text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
+            <div class="hidden md:flex gap-8 font-headline text-sm font-medium">
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="index.html">Trang chủ</a>
+                <a class="text-primary dark:text-blue-400 border-b-2 border-primary dark:border-blue-400 pb-1 transition-all duration-300" href="tours.html">Tour</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="destinations.html">Điểm đến</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="blog.html">Cẩm nang</a>
             </div>
-            <div class="flex items-center space-x-4">
-                <div id="google_translate_element" class="hidden lg:block overflow-hidden rounded-lg opacity-80"></div>
-                <div id="guest-menu" class="flex items-center space-x-4">
-                    <a href="login.html" class="text-slate-600 hover:text-blue-700 transition-colors duration-200">Đăng nhập</a>
-                    <a href="register.html" class="bg-primary-container text-on-primary px-6 py-2 rounded-DEFAULT hover:opacity-90 transition-opacity">Đăng ký</a>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center">
+                    <span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-[20px] mr-1">translate</span>
+                    <div id="google_translate_element"></div>
                 </div>
-                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
-                    <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
+                
+                <button id="theme-toggle" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
+                    <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">dark_mode</span>
+                    <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">light_mode</span>
+                </button>
+
+                <a href="cart.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
+                    <span class="material-symbols-outlined text-primary dark:text-blue-400">shopping_cart</span>
+                </a>
+
+                <div id="guest-menu" class="flex items-center gap-4">
+                    <a href="login.html" class="font-headline text-sm font-medium text-slate-600 dark:text-blue-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hidden md:block">Đăng nhập</a>
+                    <a href="register.html" class="font-headline text-sm font-medium bg-primary dark:bg-blue-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-300">Đăng ký</a>
+                </div>
+                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 dark:bg-slate-800 px-3 py-1.5 rounded-full border border-blue-100 dark:border-slate-700 shadow-sm">
+                    <a href="admin.html" class="text-primary dark:text-blue-400 hover:scale-110 transition-transform">
                         <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
                     </a>
-                    <a href="profile.html" id="user-email" class="text-xs font-bold text-primary truncate max-w-[100px] hover:underline cursor-pointer"></a>
-                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase hover:text-red-700 transition-colors">Thoát</button>
+                    <span id="user-email" class="text-xs font-bold text-primary dark:text-blue-300 truncate max-w-[100px]"></span>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 dark:text-red-400 uppercase hover:text-red-700 transition-colors">Thoát</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="pt-unit-xl mt-unit-xl pb-unit-lg px-margin max-w-container-max mx-auto text-center">
-        <h1 class="font-headline-xl text-headline-xl text-primary mb-unit-sm">Khám Phá Các Chuyến Đi</h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Lựa chọn những hành trình đẳng cấp, mang đậm dấu ấn văn hóa và thiên nhiên Việt Nam.</p>
-    </header>
+    <div class="bg-primary dark:bg-slate-800 py-16 relative overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070')] bg-cover bg-center"></div>
+        <div class="max-w-[1280px] mx-auto px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-headline font-bold text-white mb-6">Khám Phá Hành Trình Của Bạn</h1>
+            <p class="text-blue-100 max-w-2xl mx-auto text-lg mb-10">Lựa chọn hàng trăm tour du lịch hấp dẫn với mức giá tốt nhất cùng trải nghiệm dịch vụ đạt chuẩn 5 sao.</p>
+            
+            <div class="bg-white/10 dark:bg-slate-900/50 backdrop-blur-md p-2 rounded-full max-w-3xl mx-auto flex items-center border border-white/20">
+                <input type="text" id="search-input" placeholder="Tìm kiếm theo tên tour, địa điểm..." class="flex-1 bg-transparent border-none text-white placeholder-blue-200 px-6 py-3 outline-none focus:ring-0">
+                <button id="search-btn" class="bg-secondary-container text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition-all">Tìm Kiếm</button>
+            </div>
+        </div>
+    </div>
 
-    <main class="max-w-container-max mx-auto px-margin pb-unit-xl grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-        <aside class="lg:col-span-3 space-y-unit-lg">
-            <div class="bg-surface-container-lowest border border-surface-container-highest rounded-lg p-unit-md shadow-sm">
-                <div class="flex items-center justify-between mb-unit-md">
-                    <h2 class="font-headline-md text-headline-md text-primary">Bộ Lọc</h2>
-                    <button onclick="resetFilters()" class="text-secondary-container font-label-sm text-label-sm hover:underline">Xóa tất cả</button>
-                </div>
-                <div class="mb-unit-md border-b border-surface-container-highest pb-unit-md">
-                    <h3 class="font-label-md text-label-md text-on-surface mb-unit-sm">Mức Giá</h3>
-                    <div class="space-y-2">
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="low"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">Dưới 5 triệu</span>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="mid"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">5 - 10 triệu</span>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="high"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">Trên 10 triệu</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="mb-unit-md border-b border-surface-container-highest pb-unit-md">
-                    <h3 class="font-label-md text-label-md text-on-surface mb-unit-sm">Thời Gian</h3>
-                    <div class="space-y-2">
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="short"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">1 - 3 ngày</span>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="mid"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">4 - 7 ngày</span>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="long"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">Hơn 7 ngày</span>
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="font-label-md text-label-md text-on-surface mb-unit-sm">Loại Hình Tour</h3>
-                    <div class="space-y-2">
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="Nghỉ dưỡng"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">Nghỉ dưỡng Luxury</span>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="Khám phá"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">Khám phá văn hóa</span>
-                        </label>
-                        <label class="flex items-center space-x-3 cursor-pointer">
-                            <input class="filter-checkbox form-checkbox text-primary-container rounded" type="checkbox" value="Văn hóa"/>
-                            <span class="font-body-md text-body-md text-on-surface-variant">Sinh thái & Thiên nhiên</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </aside>
+    <main class="max-w-[1280px] mx-auto px-8 py-12 flex-1 w-full">
+        
+        <div class="flex flex-wrap gap-4 mb-10 border-b border-slate-200 dark:border-slate-700 pb-6">
+            <button class="filter-btn active px-6 py-2 rounded-full font-bold text-sm bg-primary dark:bg-blue-600 text-white shadow-md transition-all" data-filter="all">Tất cả Tour</button>
+            <button class="filter-btn px-6 py-2 rounded-full font-bold text-sm bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" data-filter="Biển">Du lịch Biển</button>
+            <button class="filter-btn px-6 py-2 rounded-full font-bold text-sm bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" data-filter="Núi">Khám phá Núi</button>
+            <button class="filter-btn px-6 py-2 rounded-full font-bold text-sm bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" data-filter="Văn hóa">Văn hóa - Lịch sử</button>
+        </div>
 
-        <section class="lg:col-span-9">
-            <div class="flex justify-between items-center mb-unit-md">
-                <span class="font-body-md text-body-md text-on-surface-variant">Kết quả tìm kiếm cho hành trình của bạn</span>
-                <div class="flex items-center space-x-unit-sm">
-                    <span class="font-label-sm text-label-sm text-on-surface-variant">Sắp xếp:</span>
-                    <select id="sort-tours" class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT py-1 px-3 font-body-md text-body-md text-on-surface focus:ring-primary-container focus:border-primary-container">
-                        <option value="default">Được đề xuất</option>
-                        <option value="low">Giá thấp - cao</option>
-                        <option value="high">Giá cao - thấp</option>
-                    </select>
+        <div id="tour-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm p-4">
+                <div class="skeleton-box w-full h-64 rounded-2xl mb-4"></div>
+                <div class="skeleton-box w-3/4 h-6 mb-3"></div>
+                <div class="skeleton-box w-full h-4 mb-2"></div>
+                <div class="skeleton-box w-5/6 h-4 mb-6"></div>
+                <div class="flex justify-between">
+                    <div class="skeleton-box w-20 h-6"></div>
+                    <div class="skeleton-box w-24 h-8"></div>
                 </div>
             </div>
-            <div id="all-tours-list" class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-                <div class="col-span-full text-center py-24 text-slate-400 animate-pulse">
-                    <span class="material-symbols-outlined text-5xl mb-4">cloud_download</span>
-                    <p class="font-bold uppercase tracking-widest text-sm">Đang tải dữ liệu tour từ Firebase...</p>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm p-4 hidden md:block">
+                <div class="skeleton-box w-full h-64 rounded-2xl mb-4"></div>
+                <div class="skeleton-box w-3/4 h-6 mb-3"></div>
+                <div class="skeleton-box w-full h-4 mb-2"></div>
+                <div class="skeleton-box w-5/6 h-4 mb-6"></div>
+                <div class="flex justify-between">
+                    <div class="skeleton-box w-20 h-6"></div>
+                    <div class="skeleton-box w-24 h-8"></div>
                 </div>
             </div>
-        </section>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm p-4 hidden lg:block">
+                <div class="skeleton-box w-full h-64 rounded-2xl mb-4"></div>
+                <div class="skeleton-box w-3/4 h-6 mb-3"></div>
+                <div class="skeleton-box w-full h-4 mb-2"></div>
+                <div class="skeleton-box w-5/6 h-4 mb-6"></div>
+                <div class="flex justify-between">
+                    <div class="skeleton-box w-20 h-6"></div>
+                    <div class="skeleton-box w-24 h-8"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="no-result" class="hidden text-center py-20">
+            <span class="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600 mb-4">travel_explore</span>
+            <h3 class="text-xl font-bold text-slate-500 dark:text-slate-400">Không tìm thấy tour phù hợp</h3>
+            <p class="text-slate-400 mt-2">Vui lòng thử lại với từ khóa hoặc bộ lọc khác.</p>
+        </div>
+
     </main>
 
-    <footer class="w-full border-t border-slate-200 bg-slate-50 font-be-vietnam-pro text-sm leading-relaxed">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 py-16 max-w-7xl mx-auto">
-            <div>
-                <a class="text-xl font-bold text-blue-900 mb-4 block" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
-                <p class="text-slate-500 mb-6">Trải nghiệm đẳng cấp, nâng tầm chuyến đi của bạn tại Việt Nam.</p>
-                <p class="text-slate-500">© 2024 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
+    <footer class="bg-slate-50 dark:bg-slate-900 w-full py-12 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-lg font-bold text-primary dark:text-white mb-4">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</div>
+                <p class="text-slate-500 dark:text-slate-400 mb-6">© 2026 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
             </div>
             <div>
-                <h4 class="font-bold text-blue-900 mb-4">Về Chúng Tôi</h4>
-                <ul class="space-y-2">
-                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">About Us</a></li>
-                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">Contact</a></li>
+                <h4 class="font-bold text-primary dark:text-white mb-4">Về Chúng Tôi</h4>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Giới thiệu</a></li>
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Liên hệ</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold text-blue-900 mb-4">Pháp Lý</h4>
-                <ul class="space-y-2">
-                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">Privacy Policy</a></li>
-                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-blue-900 mb-4">Hỗ Trợ</h4>
-                <ul class="space-y-2">
-                    <li><a class="text-slate-500 hover:text-blue-600 underline underline-offset-4" href="#">FAQ</a></li>
+                <h4 class="font-bold text-primary dark:text-white mb-4">Hỗ Trợ</h4>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Câu hỏi thường gặp</a></li>
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Chính sách</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (document.documentElement.classList.contains('dark')) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi', 
+                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script type="module">
         import { db, auth } from './firebase-config.js';
-        import { collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        let allTours = [];
-        let currentFilter = { types:[], price: '', duration: '' };
 
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
@@ -267,96 +240,146 @@
             }
         });
 
-        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.reload());
+        const btnLogout = document.getElementById('btn-logout');
+        if (btnLogout) {
+            btnLogout.onclick = () => signOut(auth).then(() => window.location.reload());
+        }
+
+        let allTours = [];
+
+        async function fetchAllTours() {
+            const grid = document.getElementById('tour-grid');
+            try {
+                const snap = await getDocs(collection(db, "tours"));
+                grid.innerHTML = "";
+                
+                if (snap.empty) {
+                    document.getElementById('no-result').classList.remove('hidden');
+                    return;
+                }
+
+                snap.forEach((doc) => {
+                    allTours.push({ id: doc.id, ...doc.data() });
+                });
+                
+                renderTours(allTours);
+                
+            } catch (e) {
+                grid.innerHTML = `<div class="col-span-full text-center text-red-500 font-bold py-10">Lỗi kết nối CSDL Firebase! Vui lòng kiểm tra lại cấu hình.</div>`;
+            }
+        }
+
+        function initTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10;
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
 
         function renderTours(toursToRender) {
-            const container = document.getElementById("all-tours-list");
-            container.innerHTML = ""; 
-
-            if (toursToRender.length === 0) {
-                container.innerHTML = "<div class='col-span-full text-center py-20'><span class='material-symbols-outlined text-6xl text-slate-300 mb-4'>search_off</span><p class='text-slate-500 font-medium'>Không tìm thấy hành trình nào phù hợp với bộ lọc.</p></div>";
-                return;
+            const grid = document.getElementById('tour-grid');
+            const noResult = document.getElementById('no-result');
+            
+            grid.innerHTML = "";
+            
+            if(toursToRender.length === 0) {
+                noResult.classList.remove('hidden');
+            } else {
+                noResult.classList.add('hidden');
+                toursToRender.forEach((data, index) => {
+                    const delay = index * 100; 
+                    
+                    const cardHTML = `
+                        <article class="tilt-card bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl" style="opacity: 0; transform: translateY(30px); animation: fadeInUp 0.6s ease-out ${delay}ms forwards;">
+                            <a href="tour-detail.html?id=${data.id}" class="block h-full tilt-card-inner">
+                                <div class="relative h-64 overflow-hidden p-3">
+                                    <img src="${data.imageUrl}" class="w-full h-full object-cover rounded-2xl" alt="${data.tenTour}">
+                                    <div class="absolute top-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary dark:text-blue-400 shadow-md">${data.loaiTour || 'Khám phá'}</div>
+                                    <div class="absolute bottom-6 right-6 bg-secondary-container text-white p-2 rounded-full shadow-lg flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-2 flex flex-col justify-between h-[calc(100%-16rem)]">
+                                    <div>
+                                        <h3 class="font-headline font-bold text-xl text-primary dark:text-white mb-2 leading-snug line-clamp-2">${data.tenTour}</h3>
+                                        <p class="text-slate-500 dark:text-slate-400 text-sm line-clamp-2 font-light mb-4">${data.moTa || 'Trải nghiệm hành trình tuyệt vời...'}</p>
+                                    </div>
+                                    <div class="flex justify-between items-end pt-4 border-t border-slate-50 dark:border-slate-700/50 mt-auto">
+                                        <div class="text-[10px] font-bold text-slate-400 flex items-center gap-1 uppercase tracking-widest">
+                                            <span class="material-symbols-outlined text-sm text-secondary-container">schedule</span> ${data.thoiGian || '3 Ngày'}
+                                        </div>
+                                        <div class="text-xl font-black text-secondary-container tracking-tight">${data.giaTour}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    `;
+                    grid.insertAdjacentHTML('beforeend', cardHTML);
+                });
+                
+                setTimeout(initTiltEffect, 100);
             }
-
-            toursToRender.forEach((data) => {
-                container.innerHTML += `
-                    <article class="bg-surface-container-lowest border border-surface-container-highest rounded-xl overflow-hidden shadow-sm group transition-all hover:shadow-lg">
-                        <div class="relative aspect-[4/3] overflow-hidden">
-                            <img src="${data.imageUrl}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="${data.tenTour}"/>
-                            <div class="absolute top-4 left-4 bg-primary-container/90 backdrop-blur text-on-primary px-3 py-1 rounded-DEFAULT font-label-sm text-label-sm flex items-center space-x-1">
-                                <span class="material-symbols-outlined text-[16px]">sailing</span>
-                                <span>${data.loaiTour || 'Luxury'}</span>
-                            </div>
-                        </div>
-                        <div class="p-unit-md flex flex-col">
-                            <div class="flex items-center space-x-1 text-on-surface-variant mb-2">
-                                <span class="material-symbols-outlined text-[16px]">location_on</span>
-                                <span class="font-label-sm text-label-sm">Việt Nam</span>
-                            </div>
-                            <h3 class="font-headline-md text-headline-md text-on-surface mb-2 line-clamp-2">${data.tenTour}</h3>
-                            <div class="flex items-center space-x-4 mb-unit-md text-on-surface-variant">
-                                <div class="flex items-center space-x-1">
-                                    <span class="material-symbols-outlined text-[18px]">schedule</span>
-                                    <span class="font-label-sm text-label-sm">${data.thoiGian || '3 Ngày'}</span>
-                                </div>
-                                <div class="flex items-center text-secondary-container">
-                                    <span class="material-symbols-outlined text-[16px] text-secondary-container" style="font-variation-settings: 'FILL' 1;">star</span>
-                                    <span class="font-label-sm text-label-sm ml-1 text-on-surface-variant"><strong class="text-on-surface">4.9</strong></span>
-                                </div>
-                            </div>
-                            <div class="mt-auto flex justify-between items-end border-t border-surface-container-highest pt-unit-md">
-                                <div>
-                                    <span class="block font-label-sm text-label-sm text-on-surface-variant">Giá từ</span>
-                                    <span class="font-headline-md text-headline-md text-secondary-container">${data.giaTour}</span>
-                                </div>
-                                <a href="tour-detail.html?id=${data.id}" class="bg-primary-container text-on-primary px-4 py-2 rounded-DEFAULT font-label-md text-label-md hover:bg-primary transition-colors">Xem chi tiết</a>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            });
         }
 
-        function applyFilters() {
-            const checkedTypes = Array.from(document.querySelectorAll('.filter-checkbox:checked')).map(el => el.value);
-            const sortValue = document.getElementById('sort-tours').value;
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes fadeInUp {
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
 
-            let filtered = allTours.filter(tour => {
-                if (checkedTypes.length === 0) return true;
-                
-                const typeMatch = checkedTypes.some(type => tour.loaiTour?.toLowerCase().includes(type.toLowerCase()));
-                
-                let priceMatch = true;
-                const price = parseInt(tour.giaTour?.replace(/\D/g, '')) || 0;
-                if (checkedTypes.includes('low') && price > 5000000) priceMatch = false;
-                if (checkedTypes.includes('mid') && (price < 5000000 || price > 10000000)) priceMatch = false;
-                if (checkedTypes.includes('high') && price < 10000000) priceMatch = false;
+        fetchAllTours();
 
-                return typeMatch || priceMatch; 
-            });
-
-            if (sortValue === 'low') filtered.sort((a, b) => parseInt(a.giaTour.replace(/\D/g, '')) - parseInt(b.giaTour.replace(/\D/g, '')));
-            if (sortValue === 'high') filtered.sort((a, b) => parseInt(b.giaTour.replace(/\D/g, '')) - parseInt(a.giaTour.replace(/\D/g, '')));
-
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = allTours.filter(tour => 
+                tour.tenTour.toLowerCase().includes(keyword) || 
+                (tour.moTa && tour.moTa.toLowerCase().includes(keyword))
+            );
             renderTours(filtered);
-        }
-
-        window.resetFilters = () => {
-            document.querySelectorAll('.filter-checkbox').forEach(el => el.checked = false);
-            applyFilters();
-        };
-
-        document.querySelectorAll('.filter-checkbox').forEach(el => {
-            el.addEventListener('change', applyFilters);
-        });
-        document.getElementById('sort-tours').addEventListener('change', applyFilters);
-
-        onSnapshot(collection(db, "tours"), (querySnapshot) => {
-            allTours =[];
-            querySnapshot.forEach((doc) => {
-                allTours.push({ id: doc.id, ...doc.data() });
+            
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-primary', 'text-white', 'dark:bg-blue-600');
+                b.classList.add('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
             });
-            applyFilters();
+            document.querySelector('[data-filter="all"]').classList.add('bg-primary', 'text-white', 'dark:bg-blue-600');
+            document.querySelector('[data-filter="all"]').classList.remove('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+        });
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white', 'dark:bg-blue-600');
+                    b.classList.add('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+                });
+                
+                btn.classList.remove('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-300');
+                btn.classList.add('bg-primary', 'text-white', 'dark:bg-blue-600');
+
+                const filterValue = btn.getAttribute('data-filter');
+                document.getElementById('search-input').value = ""; 
+                
+                if(filterValue === 'all') {
+                    renderTours(allTours);
+                } else {
+                    const filtered = allTours.filter(tour => tour.loaiTour && tour.loaiTour.includes(filterValue));
+                    renderTours(filtered);
+                }
+            });
         });
     </script>
 </body>
