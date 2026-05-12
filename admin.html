@@ -177,7 +177,7 @@
         </div>
     </main>
 
-    <div id="tour-modal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center transition-opacity opacity-0">
+    <div id="tour-modal" class="fixed inset-0 z-[9999] bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center transition-opacity opacity-0">
         <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300">
             <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
                 <h3 class="text-xl font-bold text-primary dark:text-white font-headline">Thêm Tour Du Lịch</h3>
@@ -237,8 +237,24 @@
         });
 
         const modal = document.getElementById('tour-modal');
-        function openModal() { modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modal.firstElementChild.classList.remove('scale-95'); }, 10); }
-        function closeModal() { modal.firstElementChild.classList.add('scale-95'); modal.classList.add('opacity-0'); setTimeout(() => modal.classList.add('hidden'), 300); }
+        
+        // ĐÃ FIX: Toggle linh hoạt giữa display flex và hidden
+        function openModal() { 
+            modal.classList.remove('hidden'); 
+            modal.classList.add('flex');
+            setTimeout(() => { 
+                modal.classList.remove('opacity-0'); 
+                modal.firstElementChild.classList.remove('scale-95'); 
+            }, 10); 
+        }
+        function closeModal() { 
+            modal.firstElementChild.classList.add('scale-95'); 
+            modal.classList.add('opacity-0'); 
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300); 
+        }
 
         let toastTimeout;
         function showToast(message, type = 'success') {
