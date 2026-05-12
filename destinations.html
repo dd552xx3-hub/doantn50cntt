@@ -26,9 +26,16 @@
         .goog-logo-link, .goog-te-gadget span { display: none !important; }
         body { top: 0px !important; }
         
-        
-        .map-pin { transition: all 0.3s ease; }
-        .map-pin:hover { z-index: 50; }
+        .map-mask {
+            -webkit-mask-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d9/Vietnam_blank_map.svg');
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d9/Vietnam_blank_map.svg');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
     </style>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -72,23 +79,10 @@
             
             <div class="lg:col-span-7 relative bg-white dark:bg-slate-900 p-8 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 flex justify-center items-center overflow-hidden min-h-[700px]">
                 
-                <div id="map-container" class="relative w-full max-w-[400px] aspect-[1/2]">
-                    <svg viewBox="0 0 400 800" class="w-full h-full drop-shadow-lg" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M120,50 L160,30 L220,60 L240,110 L280,140 L310,180 L290,220 L330,260 L320,320 L350,380 L380,440 L390,520 L370,600 L340,680 L280,720 L220,740 L160,800 L80,820 L40,780 L90,730 L150,680 L200,640 L220,580 L180,500 L140,420 L110,340 L80,260 L60,180 L90,120 Z" 
-                              class="fill-slate-200 dark:fill-slate-800 stroke-slate-300 dark:stroke-slate-700 stroke-2" />
-                        
-                        <circle cx="360" cy="300" r="4" class="fill-slate-300 dark:fill-slate-700" />
-                        <circle cx="380" cy="320" r="3" class="fill-slate-300 dark:fill-slate-700" />
-                        <circle cx="370" cy="340" r="2" class="fill-slate-300 dark:fill-slate-700" />
-                        <text x="390" y="320" class="text-[10px] fill-slate-400 font-bold" opacity="0.6">Hoàng Sa</text>
+                <div id="map-container" class="relative w-[320px] h-[750px]">
+                    <div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 map-mask transition-colors duration-500 shadow-inner"></div>
 
-                        <circle cx="450" cy="650" r="5" class="fill-slate-300 dark:fill-slate-700" />
-                        <circle cx="470" cy="680" r="4" class="fill-slate-300 dark:fill-slate-700" />
-                        <circle cx="440" cy="700" r="3" class="fill-slate-300 dark:fill-slate-700" />
-                        <text x="480" y="680" class="text-[10px] fill-slate-400 font-bold" opacity="0.6">Trường Sa</text>
-                    </svg>
-
-                    </div>
+                </div>
             </div>
 
             <div class="lg:col-span-5 space-y-6">
@@ -141,7 +135,6 @@
             else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
         });
 
-        
         const locationDB = [
             { id: "Sapa", keywords: ["Sapa", "Lào Cai", "Fansipan"], top: 10, left: 35 },
             { id: "Hà Nội", keywords: ["Hà Nội", "Thủ đô"], top: 18, left: 52 },
@@ -175,7 +168,7 @@
                     const priceStr = minPrice.toLocaleString('vi-VN') + 'đ';
                     
                     const pinHTML = `
-                    <div class="absolute map-pin group cursor-pointer" style="top: ${loc.top}%; left: ${loc.left}%;">
+                    <div class="absolute map-pin group cursor-pointer" style="top: ${loc.top}%; left: ${loc.left}%; z-index: 10;">
                         <span class="relative flex h-5 w-5 -translate-x-1/2 -translate-y-1/2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
                             <span class="inner-dot relative inline-flex rounded-full h-5 w-5 bg-secondary-container border-[3px] border-white dark:border-slate-900 shadow-md transition-colors"></span>
@@ -188,178 +181,6 @@
                             </div>
                             <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-widest">Giá chỉ từ</span>
                             <p class="text-secondary-container font-black text-lg price-text">${priceStr}</p>
-                        </div>
-                    </div>`;
-                    
-                    mapContainer.insertAdjacentHTML('beforeend', pinHTML);
-                }
-            });
-
-            document.getElementById('total-active-spots').innerText = activeSpotsCount;
-
-            document.querySelectorAll('.map-pin').forEach(pin => {
-                pin.addEventListener('mouseenter', function() {
-                    const cityName = this.querySelector('.cityName').innerText;
-                    const countText = this.querySelector('.count-text').innerText;
-                    const count = countText.split(' ')[0];
-                    const price = this.querySelector('.price-text').innerText;
-                    
-                    document.querySelectorAll('.map-pin .inner-dot').forEach(d => d.classList.replace('bg-blue-600', 'bg-secondary-container'));
-                    this.querySelector('.inner-dot').classList.replace('bg-secondary-container', 'bg-blue-600');
-                    
-                    document.getElementById('selected-city').innerText = cityName;
-                    document.getElementById('city-description').innerText = `Hệ thống hiện đang có sẵn ${count} hành trình khám phá ${cityName} với mức giá siêu ưu đãi chỉ từ ${price}.`;
-                    
-                    const actionBox = document.getElementById('action-box');
-                    const viewBtn = document.getElementById('view-tours-btn');
-                    actionBox.classList.remove('hidden');
-                    viewBtn.innerText = `Xem các tour tại ${cityName}`;
-                    viewBtn.href = `tours.html?search=${encodeURIComponent(cityName)}`;
-                });
-            });
-        }
-
-        fetchToursAndSetupMap();
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script>function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi'}, 'google_translate_element'); }</script>
-</body>
-</html>
-<body class="bg-background dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen transition-colors duration-500 pt-20">
-
-    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800 shadow-sm transition-all duration-300">
-        <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
-            <a class="text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">Đạt_Tùng_Đăng_Long<span class="text-secondary-container">.</span></a>
-            <div class="hidden md:flex gap-8 font-headline text-sm font-medium">
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="index.html">Trang chủ</a>
-                <a class="text-primary dark:text-blue-400 border-b-2 border-primary dark:border-blue-400 transition-colors" href="destinations.html">Điểm đến</a>
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="tours.html">Tour</a>
-                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-colors" href="blog.html">Cẩm nang</a>
-            </div>
-            <div class="flex items-center gap-4">
-                <div class="hidden lg:block"><div id="google_translate_element"></div></div>
-                <button id="theme-toggle" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all">
-                    <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">dark_mode</span>
-                    <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">light_mode</span>
-                </button>
-                <a href="cart.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
-                    <span class="material-symbols-outlined text-primary dark:text-blue-400">shopping_cart</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-black text-primary dark:text-white font-headline mb-4 tracking-tighter">Bản Đồ Hành Trình</h1>
-            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg">Chạm vào các điểm sáng trên bản đồ để khám phá giá ưu đãi nhất từ hệ thống.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div class="lg:col-span-7 relative bg-white dark:bg-slate-900 p-8 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 flex justify-center items-center overflow-hidden h-[800px]">
-                <div id="map-container" class="relative w-[320px] h-[750px]">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Vietnam_blank_map.svg" class="w-full h-full object-contain opacity-20 dark:invert dark:opacity-40 pointer-events-none select-none">
-                </div>
-            </div>
-
-            <div class="lg:col-span-5 space-y-6">
-                <div id="city-info-card" class="bg-primary dark:bg-blue-900 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group transition-all duration-300">
-                    <div class="relative z-10">
-                        <span class="material-symbols-outlined text-5xl mb-4 text-secondary-container animate-bounce">location_on</span>
-                        <h2 id="selected-city" class="text-3xl font-black mb-2">Chọn một điểm đến</h2>
-                        <p id="city-description" class="text-blue-100 font-light mb-8">Hệ thống sẽ tự động hiển thị các điểm sáng trên bản đồ nếu có tour du lịch tại địa phương đó.</p>
-                        <div id="action-box" class="hidden">
-                            <a id="view-tours-btn" href="#" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-secondary-container hover:text-white transition-all shadow-lg active:scale-95">
-                                Xem tour tại đây <span class="material-symbols-outlined">arrow_forward</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-                </div>
-
-                <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm">
-                    <h3 class="font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
-                        <span class="w-2 h-6 bg-secondary-container rounded-full"></span> Trạng thái dữ liệu
-                    </h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Hệ thống tìm thấy <span id="total-active-spots" class="font-bold text-secondary-container">0</span> địa phương đang mở bán tour.</p>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-    
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBENGuoNVCBveOfFnGwh2CkhX9ckoB5Gk",
-            authDomain: "doantn50cntt.firebaseapp.com",
-            projectId: "doantn50cntt",
-            storageBucket: "doantn50cntt.firebasestorage.app",
-            messagingSenderId: "705512357448",
-            appId: "1:705512357448:web:844e8f876c489ae27d"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        if (document.documentElement.classList.contains('dark')) { themeToggleLightIcon.classList.remove('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); }
-        themeToggleBtn.addEventListener('click', () => {
-            themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden');
-            if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } 
-            else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
-        });
-
-        const locationDB = [
-            { id: "Sapa", keywords: ["Sapa", "Lào Cai", "Fansipan"], top: 12, left: 32 },
-            { id: "Hà Giang", keywords: ["Hà Giang", "Đồng Văn"], top: 5, left: 38 },
-            { id: "Hà Nội", keywords: ["Hà Nội", "Thủ đô"], top: 18, left: 44 },
-            { id: "Hải Phòng", keywords: ["Hải Phòng", "Cát Bà", "Lan Hạ"], top: 18, left: 50 },
-            { id: "Hạ Long", keywords: ["Hạ Long", "Quảng Ninh"], top: 18, left: 56 },
-            { id: "Ninh Bình", keywords: ["Ninh Bình", "Tràng An", "Bái Đính"], top: 22, left: 42 },
-            { id: "Thanh Hóa", keywords: ["Thanh Hóa", "Sầm Sơn", "Pù Luông"], top: 28, left: 36 },
-            { id: "Quảng Bình", keywords: ["Quảng Bình", "Phong Nha", "Sơn Đoòng"], top: 35, left: 38 },
-            { id: "Huế", keywords: ["Huế", "Cố đô"], top: 43, left: 55 },
-            { id: "Đà Nẵng", keywords: ["Đà Nẵng", "Bà Nà", "Hội An", "Sơn Trà"], top: 46, left: 63 },
-            { id: "Quảng Nam", keywords: ["Quảng Nam", "Cù Lao Chàm"], top: 49, left: 65 },
-            { id: "Quy Nhơn", keywords: ["Quy Nhơn", "Bình Định", "Eo Gió"], top: 62, left: 82 },
-            { id: "Phú Yên", keywords: ["Phú Yên", "Tuy Hòa"], top: 66, left: 85 },
-            { id: "Nha Trang", keywords: ["Nha Trang", "Khánh Hòa", "Vinpearl"], top: 72, left: 86 },
-            { id: "Ninh Thuận", keywords: ["Mũi Né", "Phan Thiết", "Bình Thuận", "Ninh Thuận"], top: 78, left: 78 },
-            { id: "Đà Lạt", keywords: ["Đà Lạt", "Lâm Đồng", "Tây Nguyên"], top: 70, left: 70 },
-            { id: "Vũng Tàu", keywords: ["Vũng Tàu", "Bà Rịa", "Côn Đảo"], top: 83, left: 60 },
-            { id: "TP. Hồ Chí Minh", keywords: ["Hồ Chí Minh", "Sài Gòn", "TP HCM"], top: 82, left: 52 },
-            { id: "Cần Thơ", keywords: ["Cần Thơ", "Miền Tây", "Ninh Kiều"], top: 88, left: 42 },
-            { id: "Phú Quốc", keywords: ["Phú Quốc", "Kiên Giang", "Đảo ngọc"], top: 92, left: 15 }
-        ];
-
-        async function fetchToursAndSetupMap() {
-            const snap = await db.collection("tours").get();
-            const allTours = [];
-            snap.forEach(doc => allTours.push(doc.data()));
-
-            const mapContainer = document.getElementById('map-container');
-            let activeSpotsCount = 0;
-
-            locationDB.forEach(loc => {
-                const cityTours = allTours.filter(t => loc.keywords.some(k => t.tenTour.toLowerCase().includes(k.toLowerCase())));
-                
-                if(cityTours.length > 0) {
-                    activeSpotsCount++;
-                    const minPrice = Math.min(...cityTours.map(t => parseInt(t.giaTour.replace(/\D/g, ''))));
-                    const priceStr = minPrice.toLocaleString('vi-VN') + 'đ';
-                    
-                    const pinHTML = `
-                    <div class="absolute map-pin group cursor-pointer z-10" style="top: ${loc.top}%; left: ${loc.left}%;">
-                        <span class="relative flex h-4 w-4"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span><span class="inner-dot relative inline-flex rounded-full h-4 w-4 bg-secondary-container border-2 border-white shadow-md transition-colors"></span></span>
-                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-all bg-white dark:bg-slate-800 shadow-2xl rounded-2xl p-3 border border-slate-100 dark:border-slate-700 w-40 pointer-events-none transform translate-y-2 group-hover:translate-y-0 z-50">
-                            <h4 class="font-bold text-primary dark:text-white text-sm mb-0.5 cityName">${loc.id}</h4>
-                            <p class="text-[10px] font-bold text-slate-400 mb-1 count-text">${cityTours.length} Tour khả dụng</p>
-                            <span class="text-[10px] font-bold text-slate-400 block uppercase">Giá chỉ từ</span>
-                            <p class="text-secondary-container font-black text-sm price-text">${priceStr}</p>
                         </div>
                     </div>`;
                     
