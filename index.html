@@ -7,6 +7,11 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -40,6 +45,56 @@
 </head>
 <body class="bg-background text-on-background font-body antialiased">
 
+    <div id="splash-screen" class="fixed inset-0 z-[9999] bg-[#f9f9f9] overflow-hidden transition-opacity duration-1000">
+        <style>
+            @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+            @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+            .animate-fade-in-up { animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+            .animate-fade-in-delayed { opacity: 0; animation: fadeIn 1s ease-out 0.8s forwards; }
+            .animate-ken-burns { animation: kenBurns 20s ease-out forwards; }
+            .shimmer-text {
+                background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+                background-size: 200% auto;
+                -webkit-background-clip: text;
+                background-clip: text;
+                animation: shimmer 3s infinite linear;
+                display: inline-block;
+            }
+        </style>
+
+        <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat animate-ken-burns" style="background-image: url('https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop');">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80"></div>
+        </div>
+
+        <button id="btn-skip-splash" class="absolute top-6 right-6 md:top-8 md:right-10 z-50 px-6 py-2 rounded-full border border-white/40 bg-white/10 text-white font-sans text-sm font-medium tracking-wider hover:bg-white/30 transition-all backdrop-blur-md flex items-center gap-2 animate-fade-in-delayed cursor-pointer">
+            Bỏ qua <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </button>
+
+        <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 md:px-16 text-center">
+            <div class="flex flex-col items-center space-y-2 max-w-3xl">
+                <h1 class="font-serif text-3xl md:text-5xl text-white tracking-wide drop-shadow-lg animate-fade-in-up font-bold">
+                    <span class="relative inline-block">
+                        <span aria-hidden="true" class="absolute inset-0 shimmer-text pointer-events-none select-none">Công Ty Du Lịch ĐẠT_Đăng_Tùng_Long</span>
+                        <span class="relative">Công Ty Du Lịch ĐẠT_Đăng_Tùng_Long</span>
+                    </span>
+                </h1>
+                <p class="font-serif text-xl md:text-3xl text-gray-200 opacity-90 drop-shadow-md mt-6 animate-fade-in-delayed">
+                    Khám phá Việt Nam 
+                </p>
+            </div>
+
+            <div class="absolute bottom-24 flex flex-col items-center space-y-4">
+                <div class="w-64 h-1 bg-white/30 rounded-full overflow-hidden backdrop-blur-sm">
+                    <div class="h-full bg-gradient-to-r from-blue-400 via-orange-400 to-blue-400 w-1/3 rounded-full animate-pulse"></div>
+                </div>
+                <p class="font-sans text-xs text-gray-300 uppercase tracking-widest opacity-70 font-medium">
+                    Đang tải...
+                </p>
+            </div>
+        </div>
+    </div>
     <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200/50 transition-all duration-300">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto h-20">
             <a class="text-xl font-black tracking-tighter text-primary font-headline" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long<span class="text-secondary-container">.</span></a>
@@ -441,5 +496,48 @@
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        (function() {
+            function initSplashScreen() {
+                const splashScreen = document.getElementById('splash-screen');
+                if (!splashScreen) return;
+
+                if (!sessionStorage.getItem('hasSeenSplash')) {
+                    document.body.style.overflow = 'hidden';
+
+                    const closeSplash = () => {
+                        if (splashScreen.classList.contains('opacity-0')) return; 
+                        splashScreen.classList.add('opacity-0');
+                        setTimeout(() => {
+                            splashScreen.remove();
+                            document.body.style.overflow = ''; 
+                            sessionStorage.setItem('hasSeenSplash', 'true'); 
+                        }, 1000); 
+                    };
+
+                    const skipBtn = document.getElementById('btn-skip-splash');
+                    if (skipBtn) {
+                        skipBtn.addEventListener('click', closeSplash);
+                    }
+
+                    setTimeout(() => {
+                        if (document.getElementById('splash-screen')) {
+                            closeSplash();
+                        }
+                    }, 3500); 
+
+                } else {
+                    splashScreen.remove();
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSplashScreen);
+            } else {
+                initSplashScreen();
+            }
+        })();
+    </script>
 </body>
 </html>
