@@ -1,165 +1,365 @@
 <!DOCTYPE html>
-<html class="light" lang="vi">
+<html lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Giỏ Hàng - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-    <script>
-        tailwind.config = {
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = { 
             darkMode: "class",
-            theme: {
-                extend: {
-                    colors: { "primary": "#002155", "primary-container": "#003580", "secondary": "#a23f00", "secondary-container": "#fd6600", "background": "#f7f9fb" },
-                    fontFamily: { "headline": ["Be Vietnam Pro"], "body":["Plus Jakarta Sans"] }
-                }
-            }
+            theme: { 
+                extend: { 
+                    colors: { 
+                        "primary": "#002155", 
+                        "secondary-container": "#fd6600",
+                        "surface": "#f7f9fb"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Be Vietnam Pro"], 
+                        "body": ["Plus Jakarta Sans"] 
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .cart-item { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .cart-item.removing { opacity: 0; transform: translateX(100px) scale(0.95); margin-bottom: -120px; }
+        
+        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
+        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
+        .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
+        .goog-logo-link { display: none !important; }
+        .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate { display: none !important; }
+        body { top: 0px !important; }
+    </style>
+    <script>
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
     </script>
 </head>
-<body class="bg-background text-slate-800 font-body antialiased pt-20 flex flex-col min-h-screen">
+<body class="bg-surface dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen flex flex-col transition-colors duration-500">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-slate-200/50 transition-all duration-300">
-        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto h-20">
-            <a class="text-xl font-black tracking-tighter text-primary font-headline" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long<span class="text-secondary-container">.</span></a>
-            <div class="hidden md:flex space-x-8 items-center font-headline text-sm font-medium tracking-wide">
-                <a class="text-slate-600 hover:text-primary transition-colors" href="index.html">Trang Chủ</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="destinations.html">Điểm Đến</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="tours.html">Tour Du Lịch</a>
-                <a class="text-slate-600 hover:text-primary transition-colors" href="blog.html">Cẩm Nang</a>
+    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800 shadow-sm transition-all duration-300">
+        <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
+            <a class="text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</a>
+            <div class="hidden md:flex gap-8 font-headline text-sm font-medium">
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="index.html">Trang chủ</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="tours.html">Tour</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="destinations.html">Điểm đến</a>
+                <a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300" href="blog.html">Cẩm nang</a>
             </div>
-            <div class="flex items-center space-x-4">
-                <a href="cart.html" class="p-2 bg-primary-container text-white rounded-full transition-all relative">
-                    <span class="material-symbols-outlined text-sm">shopping_cart</span>
-                </a>
-                <div id="guest-menu" class="flex items-center gap-3">
-                    <a href="login.html" class="font-medium text-primary hover:text-secondary-container transition-colors">Đăng nhập</a>
-                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-lg font-bold text-sm hover:bg-primary-container transition-all shadow-md">Đăng ký</a>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center">
+                    <span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-[20px] mr-1">translate</span>
+                    <div id="google_translate_element"></div>
                 </div>
-                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
-                    <a href="admin.html" class="text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-lg">admin_panel_settings</span></a>
-                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[100px]"></span>
-                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase hover:text-red-700 transition-colors">Thoát</button>
+                
+                <button id="theme-toggle" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
+                    <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">dark_mode</span>
+                    <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">light_mode</span>
+                </button>
+
+                <a href="cart.html" class="p-2 bg-blue-50 dark:bg-slate-800 rounded-full transition-all relative">
+                    <span class="material-symbols-outlined text-primary dark:text-blue-400">shopping_cart</span>
+                </a>
+
+                <div id="guest-menu" class="flex items-center gap-4">
+                    <a href="login.html" class="font-headline text-sm font-medium text-slate-600 dark:text-blue-300 hover:text-primary dark:hover:text-blue-400 transition-all duration-300 hidden md:block">Đăng nhập</a>
+                    <a href="register.html" class="font-headline text-sm font-medium bg-primary dark:bg-blue-600 text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all duration-300">Đăng ký</a>
+                </div>
+                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 dark:bg-slate-800 px-3 py-1.5 rounded-full border border-blue-100 dark:border-slate-700 shadow-sm">
+                    <a href="admin.html" class="text-primary dark:text-blue-400 hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
+                    </a>
+                    <span id="user-email" class="text-xs font-bold text-primary dark:text-blue-300 truncate max-w-[100px]"></span>
+                    <button id="btn-logout" class="text-[10px] font-black text-red-500 dark:text-red-400 uppercase hover:text-red-700 transition-colors">Thoát</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 mb-24 w-full mt-12 flex-grow">
-        <div id="empty-cart-box" class="hidden bg-white p-12 md:p-24 rounded-[3rem] shadow-xl border border-slate-100 text-center max-w-2xl mx-auto">
-            <div class="w-32 h-32 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 text-slate-300">
-                <span class="material-symbols-outlined text-8xl">remove_shopping_cart</span>
-            </div>
-            <h1 class="text-4xl font-headline font-bold text-primary mb-4">Giỏ hàng trống</h1>
-            <p class="text-slate-500 mb-12 text-lg">Bạn chưa chọn hành trình nào. Hãy khám phá ngay!</p>
-            <a href="tours.html" class="inline-block bg-primary text-white px-12 py-4 rounded-full font-bold shadow-lg hover:bg-primary-container transition-all">Khám phá Tour</a>
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 md:px-8 pt-28 pb-20">
+        <h1 class="text-3xl md:text-4xl font-headline font-bold text-primary dark:text-white mb-8">Giỏ hàng của bạn</h1>
+
+        <div id="empty-state" class="hidden flex flex-col items-center justify-center py-20">
+            <svg class="w-48 h-48 mb-6 animate-bounce" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 20H14M7 8V6C7 4.89543 7.89543 4 9 4H15C16.1046 4 17 4.89543 17 6V8M5 8H19C20.1046 8 21 8.89543 21 10V18C21 19.1046 20.1046 20 19 20H5C3.89543 20 3 19.1046 3 18V10C3 8.89543 3.89543 8 5 8Z" stroke="#94a3b8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="9" cy="14" r="1" fill="#94a3b8"/>
+                <circle cx="15" cy="14" r="1" fill="#94a3b8"/>
+            </svg>
+            <h2 class="text-2xl font-bold text-slate-400 mb-2">Giỏ hàng trống rỗng!</h2>
+            <p class="text-slate-500 mb-8 text-center max-w-md">Có vẻ như bạn chưa chọn hành trình nào. Khám phá ngay các tour du lịch tuyệt vời của chúng tôi nhé.</p>
+            <a href="tours.html" class="bg-primary hover:bg-blue-800 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg">Khám phá Tour ngay</a>
         </div>
 
-        <div id="full-cart-box" class="hidden">
-            <div class="mb-12">
-                <h1 class="text-4xl md:text-5xl font-headline font-bold text-primary mb-3">Giỏ hàng của bạn</h1>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div id="cart-items-container" class="lg:col-span-8 space-y-6"></div>
-
-                <aside class="lg:col-span-4 lg:sticky lg:top-32">
-                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-                        <h3 class="text-xl font-headline font-bold text-primary mb-8 border-b border-slate-100 pb-6 flex items-center gap-2">
-                            <span class="material-symbols-outlined">receipt_long</span> Tóm tắt đơn hàng
-                        </h3>
-                        <div class="space-y-4 mb-8">
-                            <div class="flex justify-between font-medium">
-                                <span class="text-slate-400">Tạm tính</span>
-                                <span id="subtotal" class="text-slate-700 font-bold">0đ</span>
-                            </div>
-                            <div class="h-px bg-slate-100 my-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-base font-bold text-slate-700">Tổng cộng</span>
-                                <p id="cart-total" class="text-3xl font-headline font-black text-secondary-container">0đ</p>
-                            </div>
-                        </div>
-                        <button onclick="checkoutCart()" class="w-full bg-secondary-container text-white py-4 rounded-xl font-bold shadow-lg hover:bg-orange-600 flex justify-center items-center gap-2 transition-all">
-                            Thanh toán <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                        </button>
+        <div id="cart-content" class="grid grid-cols-1 lg:grid-cols-12 gap-8 hidden">
+            <div class="lg:col-span-8">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-800/50">
+                        <h2 class="font-bold text-lg text-primary dark:text-white">Danh sách Tour đã chọn</h2>
+                        <span id="cart-count" class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">0 mục</span>
                     </div>
-                </aside>
+                    <div id="cart-items" class="p-6 space-y-6">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 p-6 sticky top-28">
+                    <h2 class="font-bold text-lg text-primary dark:text-white mb-6 border-b border-slate-100 dark:border-slate-700 pb-4">Tóm tắt đơn hàng</h2>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                            <span>Tạm tính</span>
+                            <span id="summary-subtotal" class="font-medium text-slate-800 dark:text-slate-200">0đ</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                            <span>Giảm giá</span>
+                            <span class="font-medium text-green-500">0đ</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-700 mb-8">
+                        <div class="flex justify-between items-end">
+                            <span class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Tổng cộng</span>
+                            <span id="summary-total" class="text-3xl font-black text-secondary-container tracking-tight">0đ</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 text-right mt-1">Đã bao gồm thuế và phí</p>
+                    </div>
+
+                    <a href="checkout.html" class="w-full bg-secondary-container hover:bg-orange-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all flex justify-center items-center gap-2 block text-center active:scale-95">
+                        Tiến hành Thanh toán <span class="material-symbols-outlined text-xl">payments</span>
+                    </a>
+                    
+                    <div class="mt-6 space-y-3">
+                        <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 p-3 rounded-lg">
+                            <span class="material-symbols-outlined text-green-500">verified_user</span> 
+                            Thanh toán bảo mật SSL 256-bit
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-900 p-3 rounded-lg">
+                            <span class="material-symbols-outlined text-blue-500">support_agent</span> 
+                            Hỗ trợ tư vấn 24/7
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-slate-50 w-full py-8 mt-auto border-t border-slate-200 text-center text-slate-500 text-sm">
-        © 2026 Công Ty Du Lịch Đạt_Tùng_Đăng_Long. Sản phẩm Khoa 50 CNTT.
+    <footer class="bg-slate-50 dark:bg-slate-900 w-full py-12 mt-auto border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-[1280px] mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-lg font-bold text-primary dark:text-white mb-4">Công Ty Du Lịch Đạt_Tùng_Đăng_Long</div>
+                <p class="text-slate-500 dark:text-slate-400 mb-6">© 2026 Đạt_Tùng_Đăng_Long Travel. All rights reserved.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-primary dark:text-white mb-4">Về Chúng Tôi</h4>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Giới thiệu</a></li>
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-primary dark:text-white mb-4">Hỗ Trợ</h4>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Câu hỏi thường gặp</a></li>
+                    <li><a class="text-slate-500 dark:text-slate-400 hover:text-secondary-container transition-colors" href="#">Chính sách</a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (document.documentElement.classList.contains('dark')) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi', 
+                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script type="module">
         import { auth } from './firebase-config.js';
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         onAuthStateChanged(auth, (user) => {
+            const guest = document.getElementById('guest-menu');
+            const userBox = document.getElementById('user-menu');
+            const emailTxt = document.getElementById('user-email');
             if (user) {
-                document.getElementById('guest-menu').style.display = 'none';
-                document.getElementById('user-menu').style.display = 'flex';
-                document.getElementById('user-email').innerText = "Chào, " + user.email.split('@')[0];
+                if(guest) guest.style.display = 'none';
+                if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
+                if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
             } else {
-                document.getElementById('guest-menu').style.display = 'flex';
-                document.getElementById('user-menu').style.display = 'none';
+                if(guest) guest.style.display = 'flex';
+                if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
             }
         });
-        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.reload());
+
+        const btnLogout = document.getElementById('btn-logout');
+        if (btnLogout) {
+            btnLogout.onclick = () => signOut(auth).then(() => window.location.reload());
+        }
+
+        let cartData = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
+        let currentTotal = 0;
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentVal = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = currentVal.toLocaleString('vi-VN') + 'đ';
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = end.toLocaleString('vi-VN') + 'đ';
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function calculateTotal() {
+            let newTotal = 0;
+            cartData.forEach(item => {
+                const price = parseInt(item.giaTour.replace(/\D/g, '')) || 0;
+                const sl = parseInt(item.soLuong) || 1;
+                newTotal += price * sl;
+            });
+            
+            const subEl = document.getElementById('summary-subtotal');
+            const totalEl = document.getElementById('summary-total');
+            
+            animateValue(subEl, currentTotal, newTotal, 500);
+            animateValue(totalEl, currentTotal, newTotal, 500);
+            
+            currentTotal = newTotal;
+            document.getElementById('cart-count').innerText = cartData.length + " mục";
+        }
+
+        window.updateQuantity = function(index, change) {
+            let item = cartData[index];
+            let currentSL = parseInt(item.soLuong);
+            let newSL = currentSL + change;
+            
+            if (newSL >= 1) {
+                item.soLuong = newSL.toString();
+                localStorage.setItem('cart50cntt1', JSON.stringify(cartData));
+                document.getElementById(`sl-${index}`).innerText = newSL;
+                
+                const price = parseInt(item.giaTour.replace(/\D/g, '')) || 0;
+                document.getElementById(`total-${index}`).innerText = (price * newSL).toLocaleString('vi-VN') + 'đ';
+                
+                calculateTotal();
+            }
+        };
+
+        window.removeItem = function(index) {
+            const itemEl = document.getElementById(`cart-item-${index}`);
+            itemEl.classList.add('removing');
+            
+            setTimeout(() => {
+                cartData.splice(index, 1);
+                localStorage.setItem('cart50cntt1', JSON.stringify(cartData));
+                renderCart(); 
+            }, 400); 
+        };
 
         function renderCart() {
-            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) ||[];
-            if(cart.length === 0) {
-                document.getElementById('empty-cart-box').classList.remove('hidden');
-                document.getElementById('full-cart-box').classList.add('hidden');
+            const container = document.getElementById('cart-items');
+            const emptyState = document.getElementById('empty-state');
+            const cartContent = document.getElementById('cart-content');
+
+            if (cartData.length === 0) {
+                emptyState.classList.remove('hidden');
+                cartContent.classList.add('hidden');
                 return;
             }
 
-            document.getElementById('empty-cart-box').classList.add('hidden');
-            document.getElementById('full-cart-box').classList.remove('hidden');
-            const container = document.getElementById('cart-items-container');
+            emptyState.classList.add('hidden');
+            cartContent.classList.remove('hidden');
+            
             container.innerHTML = '';
-            let totalAmount = 0;
-
-            cart.forEach(item => {
-                let priceNum = parseInt(item.giaTour.replace(/\D/g, ''));
-                if(!isNaN(priceNum)) totalAmount += priceNum;
+            
+            cartData.forEach((item, index) => {
+                const price = parseInt(item.giaTour.replace(/\D/g, '')) || 0;
+                const sl = parseInt(item.soLuong) || 1;
+                const itemTotal = price * sl;
 
                 container.innerHTML += `
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center relative hover:shadow-lg transition-all">
-                        <img src="${item.imageUrl}" class="w-full md:w-48 h-32 object-cover rounded-xl">
-                        <div class="flex-1 w-full pr-12">
-                            <span class="bg-blue-50 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">${item.loaiTour}</span>
-                            <h3 class="font-headline font-bold text-xl text-primary mt-2 mb-2">${item.tenTour}</h3>
-                            <p class="text-2xl font-black text-secondary-container">${item.giaTour}</p>
+                    <div id="cart-item-${index}" class="cart-item flex flex-col md:flex-row gap-6 pb-6 border-b border-slate-100 dark:border-slate-700 last:border-0 last:pb-0 relative bg-white dark:bg-slate-800 rounded-xl p-2 z-10">
+                        <img src="${item.imageUrl}" class="w-full md:w-32 h-32 object-cover rounded-xl shadow-sm" alt="Tour">
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div class="pr-8">
+                                <h3 class="font-bold text-lg text-primary dark:text-white leading-tight mb-1">${item.tenTour}</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium mb-3 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[14px]">calendar_month</span> Khởi hành: ${item.ngayDi}
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap justify-between items-end gap-4">
+                                <div class="flex items-center gap-1 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-1">
+                                    <button onclick="updateQuantity(${index}, -1)" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white dark:hover:bg-slate-800 text-slate-500 hover:text-primary transition-colors shadow-sm">
+                                        <span class="material-symbols-outlined text-sm">remove</span>
+                                    </button>
+                                    <span id="sl-${index}" class="w-8 text-center font-bold text-slate-800 dark:text-white text-sm">${sl}</span>
+                                    <button onclick="updateQuantity(${index}, 1)" class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white dark:hover:bg-slate-800 text-slate-500 hover:text-primary transition-colors shadow-sm">
+                                        <span class="material-symbols-outlined text-sm">add</span>
+                                    </button>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Thành tiền</p>
+                                    <p id="total-${index}" class="text-xl font-black text-secondary-container">${itemTotal.toLocaleString('vi-VN')}đ</p>
+                                </div>
+                            </div>
                         </div>
-                        <button onclick="removeFromCart('${item.id}')" class="absolute top-6 right-6 text-slate-300 hover:text-red-500 p-2 bg-slate-50 rounded-full transition-colors">
-                            <span class="material-symbols-outlined">delete</span>
+                        <button onclick="removeItem(${index})" class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-[18px]">delete</span>
                         </button>
-                    </div>`;
+                    </div>
+                `;
             });
 
-            const formattedTotal = totalAmount.toLocaleString('vi-VN') + 'đ';
-            document.getElementById('cart-total').innerText = formattedTotal;
-            document.getElementById('subtotal').innerText = formattedTotal;
+            currentTotal = 0; 
+            calculateTotal();
         }
-
-        window.removeFromCart = function(id) {
-            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) ||[];
-            cart = cart.filter(item => item.id !== id);
-            localStorage.setItem('cart50cntt1', JSON.stringify(cart));
-            renderCart();
-        };
-
-                window.checkoutCart = function() {
-            let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
-            if(cart.length > 0) {
-                window.location.href = `checkout.html`;
-            }
-        };
-
 
         renderCart();
     </script>
