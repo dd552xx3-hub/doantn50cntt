@@ -7,6 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     <script id="tailwind-config">
         tailwind.config = { 
             darkMode: "class",
@@ -25,17 +28,25 @@
         .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
         .goog-logo-link, .goog-te-gadget span { display: none !important; }
         body { top: 0px !important; }
+
+        .leaflet-container { background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; }
+        .leaflet-popup-content-wrapper { border-radius: 1rem; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); padding: 0; overflow: hidden; border: none; }
+        .leaflet-popup-content { margin: 0; line-height: 1.5; }
+        .leaflet-popup-tip-container { display: none; }
+        .leaflet-container a.leaflet-popup-close-button { color: #94a3b8; padding: 12px 12px 0 0; font-weight: bold; }
+        .leaflet-container a.leaflet-popup-close-button:hover { color: #ef4444; background: transparent; }
         
-        .map-mask {
-            -webkit-mask-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d9/Vietnam_blank_map.svg');
-            -webkit-mask-size: contain;
-            -webkit-mask-repeat: no-repeat;
-            -webkit-mask-position: center;
-            mask-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d9/Vietnam_blank_map.svg');
-            mask-size: contain;
-            mask-repeat: no-repeat;
-            mask-position: center;
-        }
+        .dark .leaflet-layer,
+        .dark .leaflet-control-zoom-in,
+        .dark .leaflet-control-zoom-out,
+        .dark .leaflet-control-attribution { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+        
+        .custom-marker { display: flex; justify-content: center; align-items: center; }
+        .marker-pulse { position: absolute; width: 36px; height: 36px; border-radius: 50%; background-color: rgba(253, 102, 0, 0.4); animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        .marker-dot { position: relative; width: 16px; height: 16px; border-radius: 50%; background-color: #fd6600; border: 3px solid white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; }
+        .dark .marker-dot { border-color: #0f172a; }
+        .custom-marker:hover .marker-dot { transform: scale(1.3); background-color: #2563eb; }
+        .custom-marker:hover .marker-pulse { background-color: rgba(37, 99, 235, 0.4); }
     </style>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -45,7 +56,7 @@
         }
     </script>
 </head>
-<body class="bg-background dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen transition-colors duration-500 pt-20">
+<body class="bg-background dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen transition-colors duration-500 pt-20 flex flex-col">
 
     <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800 shadow-sm transition-all duration-300">
         <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
@@ -69,42 +80,57 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-6xl font-black text-primary dark:text-white font-headline mb-4 tracking-tighter">Bản Đồ Hành Trình</h1>
-            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-lg">Chạm vào các điểm sáng trên bản đồ để khám phá giá ưu đãi nhất từ hệ thống.</p>
+    <main class="max-w-7xl mx-auto px-6 py-12 flex-1 w-full flex flex-col">
+        <div class="text-center mb-12 shrink-0">
+            <h1 class="text-4xl md:text-5xl font-black text-primary dark:text-white font-headline mb-4 tracking-tighter">Bản Đồ Hành Trình</h1>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-base">Khám phá các điểm đến hấp dẫn trên bản đồ tương tác và tìm kiếm tour du lịch với giá ưu đãi nhất.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start flex-1 min-h-[600px]">
             
-            <div class="lg:col-span-7 relative bg-white dark:bg-slate-900 p-8 rounded-[3rem] shadow-xl border border-slate-100 dark:border-slate-800 flex justify-center items-center overflow-hidden min-h-[700px]">
-                
-                <div id="map-container" class="relative w-[320px] h-[750px]">
-                    <div class="absolute inset-0 bg-slate-200 dark:bg-slate-800 map-mask transition-colors duration-500 shadow-inner"></div>
-
+            <div class="lg:col-span-8 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden h-[600px] lg:h-full relative flex">
+                <div id="interactive-map" class="w-full h-full z-10"></div>
+                <div class="absolute bottom-6 right-6 z-[20] bg-white/90 dark:bg-slate-800/90 backdrop-blur px-4 py-2 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-2">
+                    <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>
+                    Bản đồ trực tuyến
                 </div>
             </div>
 
-            <div class="lg:col-span-5 space-y-6">
-                <div id="city-info-card" class="bg-primary dark:bg-blue-900 p-10 rounded-[3rem] text-white shadow-2xl relative overflow-hidden group transition-all duration-300">
+            <div class="lg:col-span-4 space-y-6 flex flex-col h-full">
+                <div id="city-info-card" class="bg-primary dark:bg-blue-900 p-8 rounded-[2.5rem] text-white shadow-xl relative overflow-hidden group transition-all duration-500">
                     <div class="relative z-10">
-                        <span class="material-symbols-outlined text-5xl mb-4 text-secondary-container animate-bounce">location_on</span>
-                        <h2 id="selected-city" class="text-3xl font-black mb-2">Chọn một điểm đến</h2>
-                        <p id="city-description" class="text-blue-100 font-light mb-8">Hệ thống sẽ tự động hiển thị các điểm sáng trên bản đồ nếu có tour du lịch tại địa phương đó.</p>
+                        <span class="material-symbols-outlined text-4xl mb-4 text-secondary-container animate-bounce">pin_drop</span>
+                        <h2 id="selected-city" class="text-2xl font-black mb-2">Chọn một điểm đến</h2>
+                        <p id="city-description" class="text-blue-100 font-light mb-8 text-sm">Chạm vào các điểm ghim phát sáng trên bản đồ bên cạnh để xem chi tiết các hành trình có sẵn.</p>
                         <div id="action-box" class="hidden">
-                            <a id="view-tours-btn" href="#" class="inline-flex items-center gap-2 bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-secondary-container hover:text-white transition-all shadow-lg active:scale-95">
-                                Xem tour tại đây <span class="material-symbols-outlined">arrow_forward</span>
+                            <a id="view-tours-btn" href="#" class="inline-flex items-center gap-2 bg-white text-primary px-6 py-3 rounded-full font-bold hover:bg-secondary-container hover:text-white transition-all shadow-lg active:scale-95 text-sm w-full justify-center">
+                                Xem tour tại đây <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                             </a>
                         </div>
                     </div>
                     <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
                 </div>
 
-                <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm">
-                    <h3 class="font-bold text-primary dark:text-white mb-4 flex items-center gap-2">
-                        <span class="w-2 h-6 bg-secondary-container rounded-full"></span> Trạng thái dữ liệu
+                <div class="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm flex-1 flex flex-col">
+                    <h3 class="font-bold text-primary dark:text-white mb-6 flex items-center gap-2 text-lg">
+                        <span class="w-1.5 h-6 bg-secondary-container rounded-full"></span> Trạng thái dữ liệu
                     </h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">Hệ thống tìm thấy <span id="total-active-spots" class="font-bold text-secondary-container text-lg">0</span> địa phương đang mở bán tour.</p>
+                    <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl mb-6">
+                        <div>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Điểm đến có Tour</p>
+                            <p class="text-2xl font-black text-primary dark:text-white"><span id="total-active-spots">0</span> <span class="text-sm font-medium text-slate-400">tỉnh thành</span></p>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                            <span class="material-symbols-outlined">explore</span>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-primary dark:text-white mb-4 text-sm uppercase tracking-widest text-slate-400">Top khu vực nổi bật</h3>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">Miền Bắc</span>
+                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">Duyên hải Miền Trung</span>
+                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">Tây Nguyên</span>
+                        <span class="px-4 py-2 bg-slate-50 dark:bg-slate-800 rounded-full text-xs font-bold text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700">Đồng bằng Sông Cửu Long</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,28 +161,64 @@
             else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
         });
 
+        
         const locationDB = [
-            { id: "Sapa", keywords: ["Sapa", "Lào Cai", "Fansipan"], top: 10, left: 35 },
-            { id: "Hà Nội", keywords: ["Hà Nội", "Thủ đô"], top: 18, left: 52 },
-            { id: "Hạ Long", keywords: ["Hạ Long", "Quảng Ninh"], top: 16, left: 65 },
-            { id: "Ninh Bình", keywords: ["Ninh Bình", "Tràng An"], top: 22, left: 50 },
-            { id: "Quảng Bình", keywords: ["Quảng Bình", "Phong Nha"], top: 38, left: 75 },
-            { id: "Huế", keywords: ["Huế", "Cố đô"], top: 46, left: 85 },
-            { id: "Đà Nẵng", keywords: ["Đà Nẵng", "Bà Nà", "Hội An"], top: 52, left: 92 },
-            { id: "Quy Nhơn", keywords: ["Quy Nhơn", "Bình Định"], top: 68, left: 92 },
-            { id: "Nha Trang", keywords: ["Nha Trang", "Khánh Hòa"], top: 80, left: 88 },
-            { id: "Đà Lạt", keywords: ["Đà Lạt", "Lâm Đồng"], top: 78, left: 70 },
-            { id: "TP. Hồ Chí Minh", keywords: ["Hồ Chí Minh", "Sài Gòn", "TP HCM"], top: 85, left: 55 },
-            { id: "Cần Thơ", keywords: ["Cần Thơ", "Miền Tây"], top: 92, left: 45 },
-            { id: "Phú Quốc", keywords: ["Phú Quốc", "Kiên Giang"], top: 95, left: 15 }
+            { id: "Sapa", keywords: ["Sapa", "Lào Cai", "Fansipan"], lat: 22.3353, lng: 103.8436 },
+            { id: "Hà Nội", keywords: ["Hà Nội", "Thủ đô"], lat: 21.0285, lng: 105.8542 },
+            { id: "Hạ Long", keywords: ["Hạ Long", "Quảng Ninh"], lat: 20.9505, lng: 107.0734 },
+            { id: "Ninh Bình", keywords: ["Ninh Bình", "Tràng An"], lat: 20.2539, lng: 105.9749 },
+            { id: "Quảng Bình", keywords: ["Quảng Bình", "Phong Nha"], lat: 17.4833, lng: 106.5997 },
+            { id: "Huế", keywords: ["Huế", "Cố đô"], lat: 16.4637, lng: 107.5909 },
+            { id: "Đà Nẵng", keywords: ["Đà Nẵng", "Bà Nà", "Hội An"], lat: 16.0471, lng: 108.2062 },
+            { id: "Quy Nhơn", keywords: ["Quy Nhơn", "Bình Định"], lat: 13.7820, lng: 109.2198 },
+            { id: "Nha Trang", keywords: ["Nha Trang", "Khánh Hòa"], lat: 12.2388, lng: 109.1967 },
+            { id: "Đà Lạt", keywords: ["Đà Lạt", "Lâm Đồng"], lat: 11.9404, lng: 108.4583 },
+            { id: "Mũi Né", keywords: ["Mũi Né", "Phan Thiết", "Bình Thuận"], lat: 10.9333, lng: 108.2833 },
+            { id: "TP. Hồ Chí Minh", keywords: ["Hồ Chí Minh", "Sài Gòn", "TP HCM"], lat: 10.8231, lng: 106.6297 },
+            { id: "Vũng Tàu", keywords: ["Vũng Tàu", "Bà Rịa"], lat: 10.3460, lng: 107.0843 },
+            { id: "Cần Thơ", keywords: ["Cần Thơ", "Miền Tây"], lat: 10.0452, lng: 105.7469 },
+            { id: "Phú Quốc", keywords: ["Phú Quốc", "Kiên Giang"], lat: 10.2899, lng: 103.9840 }
         ];
 
-        async function fetchToursAndSetupMap() {
+        
+        const map = L.map('interactive-map', {
+            center: [16.0, 106.0], 
+            zoom: 5.5,
+            zoomControl: false,
+            scrollWheelZoom: true
+        });
+
+        
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+        
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+            maxZoom: 12,
+            minZoom: 5
+        }).addTo(map);
+
+        
+        const southWest = L.latLng(7.0, 100.0);
+        const northEast = L.latLng(24.0, 112.0);
+        const bounds = L.latLngBounds(southWest, northEast);
+        map.setMaxBounds(bounds);
+        map.on('drag', function() { map.panInsideBounds(bounds, { animate: false }); });
+
+        
+        const customIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div class="marker-pulse"></div><div class="marker-dot"></div>',
+            iconSize: [36, 36],
+            iconAnchor: [18, 18],
+            popupAnchor: [0, -18]
+        });
+
+        async function fetchToursAndSetupMarkers() {
             const snap = await db.collection("tours").get();
             const allTours = [];
             snap.forEach(doc => allTours.push(doc.data()));
 
-            const mapContainer = document.getElementById('map-container');
             let activeSpotsCount = 0;
 
             locationDB.forEach(loc => {
@@ -167,52 +229,47 @@
                     const minPrice = Math.min(...cityTours.map(t => parseInt(t.giaTour.replace(/\D/g, ''))));
                     const priceStr = minPrice.toLocaleString('vi-VN') + 'đ';
                     
-                    const pinHTML = `
-                    <div class="absolute map-pin group cursor-pointer" style="top: ${loc.top}%; left: ${loc.left}%; z-index: 10;">
-                        <span class="relative flex h-5 w-5 -translate-x-1/2 -translate-y-1/2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
-                            <span class="inner-dot relative inline-flex rounded-full h-5 w-5 bg-secondary-container border-[3px] border-white dark:border-slate-900 shadow-md transition-colors"></span>
-                        </span>
-                        
-                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white dark:bg-slate-800 shadow-2xl rounded-2xl p-4 border border-slate-100 dark:border-slate-700 w-44 pointer-events-none transform translate-y-4 group-hover:translate-y-0 z-[100]">
-                            <h4 class="font-black text-primary dark:text-white text-base mb-1 cityName">${loc.id}</h4>
+                    const popupContent = `
+                        <div class="p-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 min-w-[200px]">
+                            <h4 class="font-black text-primary dark:text-white text-lg mb-1">${loc.id}</h4>
                             <div class="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-md inline-block mb-3">
-                                <p class="text-[10px] font-bold count-text">${cityTours.length} Tour khả dụng</p>
+                                <p class="text-xs font-bold">${cityTours.length} Tour khả dụng</p>
                             </div>
                             <span class="text-[10px] font-bold text-slate-400 block uppercase tracking-widest">Giá chỉ từ</span>
-                            <p class="text-secondary-container font-black text-lg price-text">${priceStr}</p>
+                            <p class="text-secondary-container font-black text-xl">${priceStr}</p>
+                            <button onclick="selectCity('${loc.id}', ${cityTours.length}, '${priceStr}')" class="mt-3 w-full bg-primary dark:bg-blue-600 text-white py-2 rounded-xl text-xs font-bold hover:bg-blue-800 transition-colors">Xem chi tiết</button>
                         </div>
-                    </div>`;
+                    `;
+
+                    const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(map);
+                    marker.bindPopup(popupContent);
+
                     
-                    mapContainer.insertAdjacentHTML('beforeend', pinHTML);
+                    marker.on('mouseover', function(e) {
+                        this.openPopup();
+                        selectCity(loc.id, cityTours.length, priceStr);
+                    });
                 }
             });
 
             document.getElementById('total-active-spots').innerText = activeSpotsCount;
-
-            document.querySelectorAll('.map-pin').forEach(pin => {
-                pin.addEventListener('mouseenter', function() {
-                    const cityName = this.querySelector('.cityName').innerText;
-                    const countText = this.querySelector('.count-text').innerText;
-                    const count = countText.split(' ')[0];
-                    const price = this.querySelector('.price-text').innerText;
-                    
-                    document.querySelectorAll('.map-pin .inner-dot').forEach(d => d.classList.replace('bg-blue-600', 'bg-secondary-container'));
-                    this.querySelector('.inner-dot').classList.replace('bg-secondary-container', 'bg-blue-600');
-                    
-                    document.getElementById('selected-city').innerText = cityName;
-                    document.getElementById('city-description').innerText = `Hệ thống hiện đang có sẵn ${count} hành trình khám phá ${cityName} với mức giá siêu ưu đãi chỉ từ ${price}.`;
-                    
-                    const actionBox = document.getElementById('action-box');
-                    const viewBtn = document.getElementById('view-tours-btn');
-                    actionBox.classList.remove('hidden');
-                    viewBtn.innerText = `Xem các tour tại ${cityName}`;
-                    viewBtn.href = `tours.html?search=${encodeURIComponent(cityName)}`;
-                });
-            });
         }
 
-        fetchToursAndSetupMap();
+        window.selectCity = function(cityName, count, price) {
+            document.getElementById('selected-city').innerText = cityName;
+            document.getElementById('city-description').innerText = `Hệ thống hiện đang có sẵn ${count} hành trình khám phá ${cityName} với mức giá siêu ưu đãi chỉ từ ${price}.`;
+            
+            const actionBox = document.getElementById('action-box');
+            const viewBtn = document.getElementById('view-tours-btn');
+            actionBox.classList.remove('hidden');
+            viewBtn.innerText = `Xem các tour tại ${cityName}`;
+            viewBtn.href = `tours.html?search=${encodeURIComponent(cityName)}`;
+            
+            document.getElementById('city-info-card').classList.add('scale-[1.02]');
+            setTimeout(() => document.getElementById('city-info-card').classList.remove('scale-[1.02]'), 200);
+        }
+
+        fetchToursAndSetupMarkers();
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi'}, 'google_translate_element'); }</script>
