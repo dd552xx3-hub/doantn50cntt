@@ -3,323 +3,289 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Thanh Toán - 50cntt1</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <title>Thanh Toán - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <script id="tailwind-config">
         tailwind.config = { 
+            darkMode: "class",
             theme: { 
                 extend: { 
-                    colors: { "primary": "#004471", "primary-light": "#005da3", "surface": "#f8fafc", "secondary": "#e85d04", "accent": "#fbbf24" }, 
-                    fontFamily: { "headline": ["Plus Jakarta Sans"], "body": ["Be Vietnam Pro"] } 
+                    colors: { 
+                        "primary": "#002155", 
+                        "secondary-container": "#fd6600",
+                        "surface": "#f7f9fb"
+                    }, 
+                    fontFamily: { 
+                        "headline": ["Be Vietnam Pro"], 
+                        "body": ["Plus Jakarta Sans"] 
+                    } 
                 } 
             } 
         }
     </script>
-    <style>
-        html { scroll-behavior: smooth; }
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-        .goog-te-gadget-simple { background-color: #f8fafc !important; border: 1px solid #e2e8f0 !important; border-radius: 9999px !important; padding: 4px 10px !important; flex-shrink: 0; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+    <script>
+        
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="bg-surface text-slate-800 font-body antialiased pt-20 pb-20">
-    
-    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200/50">
-        <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto">
-            <a href="index.html" class="text-2xl font-black text-primary tracking-tighter">50cntt1<span class="text-accent">.</span></a>
-            <div class="hidden md:flex items-center gap-8 font-semibold text-sm tracking-wide text-slate-600">
-                <a class="hover:text-primary transition-colors" href="destinations.html">Điểm đến</a>
-                <a class="hover:text-primary transition-colors" href="tours.html">Tour du lịch</a>
-                <a class="hover:text-primary transition-colors" href="blog.html">Cẩm nang</a>
-                <a class="hover:text-primary transition-colors" href="index.html#trai-nghiem">Trải nghiệm</a>
-            </div>
-            <div class="flex items-center gap-3">
-                <div id="google_translate_element" class="overflow-hidden rounded-lg opacity-80 hover:opacity-100 transition-opacity flex items-center"></div>
-                <a href="cart.html" class="p-2 hover:bg-slate-100 rounded-full transition-all relative group">
-                    <span class="material-symbols-outlined text-slate-600 group-hover:text-primary">shopping_cart</span>
-                </a>
-                <div id="guest-menu" class="flex items-center gap-2 md:gap-4">
-                    <a href="login.html" class="p-2 hover:bg-slate-100 rounded-full transition-all text-slate-600 hover:text-primary">
-                        <span class="material-symbols-outlined">account_circle</span>
-                    </a>
-                    <a href="register.html" class="bg-primary text-white px-5 py-2 rounded-full font-bold text-sm transition-all hover:bg-primary-light active:scale-95 shadow-lg shadow-primary/20 whitespace-nowrap">Đăng ký</a>
-                </div>
-                <div id="user-menu" class="hidden items-center gap-3 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
-                    <a href="admin.html" class="text-primary hover:scale-110 transition-transform" title="Quản Trị">
-                        <span class="material-symbols-outlined text-lg">admin_panel_settings</span>
-                    </a>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <span id="user-email" class="text-xs font-bold text-primary truncate max-w-[80px] md:max-w-[120px]"></span>
-                    <span class="w-[1px] h-4 bg-blue-200"></span>
-                    <button id="btn-logout" class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:text-red-700 transition-colors">Thoát</button>
-                </div>
-            </div>
+<body class="bg-surface dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen pb-20">
+
+    <nav class="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700 py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a class="text-xl font-black text-primary dark:text-blue-400 font-headline flex items-center gap-2" href="index.html">
+                <span class="material-symbols-outlined">arrow_back</span> Trở về
+            </a>
+            <div class="text-lg font-bold text-slate-800 dark:text-white">Thanh Toán An Toàn <span class="material-symbols-outlined text-green-500 text-sm">lock</span></div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 md:px-12 mt-8">
-        <header class="mb-12">
-            <h1 class="text-4xl md:text-6xl font-headline font-black text-primary mb-8 tracking-tighter">Hoàn tất hành trình</h1>
-            <div class="flex items-center justify-start gap-4 overflow-x-auto pb-6 scrollbar-hide">
-                <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg">1</div><span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Chi tiết Tour</span></div>
-                <div class="w-12 h-[2px] bg-primary/30"></div>
-                <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-primary/20">2</div><span class="text-primary font-bold whitespace-nowrap text-xs uppercase tracking-widest">Thanh toán</span></div>
-                <div class="w-12 h-[2px] bg-slate-200"></div>
-                <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center font-bold">3</div><span class="text-slate-400 font-bold whitespace-nowrap text-xs uppercase tracking-widest">Xác nhận</span></div>
+    <main class="max-w-7xl mx-auto px-4 md:px-6 mt-8">
+        <div class="max-w-3xl mx-auto mb-10">
+            <div class="flex items-center justify-between relative">
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200 dark:bg-slate-700 rounded-full z-0"></div>
+                <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-1 bg-primary dark:bg-blue-500 rounded-full z-0 transition-all duration-500"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-md"><span class="material-symbols-outlined text-sm">check</span></div>
+                    <span class="text-xs font-bold mt-2 text-primary dark:text-blue-400">Giỏ hàng</span>
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-lg ring-4 ring-primary/20">2</div>
+                    <span class="text-xs font-bold mt-2 text-primary dark:text-blue-400">Thanh toán</span>
+                </div>
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-10 h-10 rounded-full bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 text-slate-400 flex items-center justify-center font-bold">3</div>
+                    <span class="text-xs font-medium mt-2 text-slate-400">Hoàn tất</span>
+                </div>
             </div>
-        </header>
-
-        <div id="error-box" class="hidden bg-red-50 text-red-600 p-6 rounded-3xl mb-10 font-bold text-center border border-red-100 flex items-center justify-center gap-3">
-            <span class="material-symbols-outlined">error</span> Cảnh báo: Giỏ hàng đang trống!
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <section class="lg:col-span-8 space-y-10">
-                <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-100">
-                    <h2 class="text-2xl font-headline font-bold text-primary mb-10 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-3xl p-2 bg-blue-50 rounded-xl">person</span> Thông tin khách hàng
-                    </h2>
-                    <form id="checkout-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <div class="lg:col-span-7">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700">
+                    <h2 class="text-2xl font-headline font-bold text-primary dark:text-white mb-6">Thông tin liên hệ</h2>
+                    
+                    <form id="checkout-form" class="space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Họ và tên *</label>
+                                <input type="text" id="cus-name" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="VD: Nguyễn Văn A">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Số điện thoại *</label>
+                                <input type="tel" id="cus-phone" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="09xx xxx xxx">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Email xác nhận *</label>
+                            <input type="email" id="cus-email" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="email@example.com">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Yêu cầu đặc biệt (Tùy chọn)</label>
+                            <textarea id="cus-note" rows="3" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="Ghi chú về ăn uống, người cao tuổi..."></textarea>
+                        </div>
+
+                        <h2 class="text-2xl font-headline font-bold text-primary dark:text-white mt-8 mb-4 pt-6 border-t border-slate-100 dark:border-slate-700">Phương thức thanh toán</h2>
+                        
                         <div class="space-y-3">
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Họ và tên</label>
-                            <div class="relative group">
-                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-sm">badge</span>
-                                </span>
-                                <input type="text" id="input-name" placeholder="Nguyễn Văn A" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium" required/>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Địa chỉ Email</label>
-                            <div class="relative group">
-                                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-sm">mail</span>
-                                </span>
-                                <input type="email" id="input-email" placeholder="email@vi-du.com" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium" required/>
-                            </div>
-                        </div>
-                        <div class="space-y-3 md:col-span-2">
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Số điện thoại</label>
-                            <div class="flex gap-3">
-                                <div class="bg-slate-100 px-5 py-4 rounded-2xl flex items-center gap-2 font-bold text-slate-600 border border-slate-200">
-                                    <span class="material-symbols-outlined text-sm">flag</span> +84
+                            <label class="flex items-center p-4 border border-slate-200 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors group relative overflow-hidden">
+                                <input type="radio" name="payment" value="Chuyển khoản ngân hàng" checked class="w-5 h-5 text-primary focus:ring-primary">
+                                <div class="ml-4 flex-1">
+                                    <span class="block font-bold text-slate-800 dark:text-white">Chuyển khoản ngân hàng (Mã QR)</span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400">Thanh toán nhanh chóng qua ứng dụng ngân hàng</span>
                                 </div>
-                                <div class="relative group flex-1">
-                                    <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-sm">call</span>
-                                    </span>
-                                    <input type="tel" id="input-phone" placeholder="090 123 4567" class="w-full bg-slate-50 border border-slate-100 rounded-2xl pl-11 pr-4 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium" required/>
+                                <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">qr_code_scanner</span>
+                            </label>
+
+                            <label class="flex items-center p-4 border border-slate-200 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors group">
+                                <input type="radio" name="payment" value="Thanh toán tại văn phòng" class="w-5 h-5 text-primary focus:ring-primary">
+                                <div class="ml-4 flex-1">
+                                    <span class="block font-bold text-slate-800 dark:text-white">Thanh toán tại văn phòng</span>
+                                    <span class="text-xs text-slate-500 dark:text-slate-400">Giữ chỗ trước, thanh toán trực tiếp tại công ty</span>
                                 </div>
-                            </div>
+                                <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">storefront</span>
+                            </label>
                         </div>
+
+                        <button type="submit" id="btn-submit" class="w-full mt-8 bg-secondary-container hover:bg-orange-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all flex justify-center items-center gap-2 active:scale-[0.98]">
+                            Xác nhận & Đặt Tour <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                        </button>
                     </form>
                 </div>
+            </div>
 
-                <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl shadow-primary/5 border border-slate-100">
-                    <h2 class="text-2xl font-headline font-bold text-primary mb-10 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-3xl p-2 bg-blue-50 rounded-xl">payments</span> Phương thức thanh toán
-                    </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <label class="relative cursor-pointer group">
-                            <input type="radio" name="payment" checked class="peer sr-only"/>
-                            <div class="h-full border-2 border-slate-100 bg-white p-8 rounded-[2rem] peer-checked:border-primary peer-checked:bg-blue-50 transition-all duration-300 group-hover:border-blue-200">
-                                <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-all group-hover:scale-110">
-                                    <span class="material-symbols-outlined text-3xl">qr_code_scanner</span>
-                                </div>
-                                <p class="font-bold text-primary text-xl mb-2">Chuyển khoản (QR)</p>
-                                <p class="text-sm text-slate-500 leading-relaxed">Thanh toán nhanh chóng và an toàn qua mã QR ngân hàng.</p>
-                            </div>
-                        </label>
-                        <label class="relative cursor-pointer group">
-                            <input type="radio" name="payment" class="peer sr-only"/>
-                            <div class="h-full border-2 border-slate-100 bg-white p-8 rounded-[2rem] peer-checked:border-primary peer-checked:bg-blue-50 transition-all duration-300 group-hover:border-blue-200">
-                                <div class="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6 transition-all group-hover:scale-110">
-                                    <span class="material-symbols-outlined text-3xl">credit_card</span>
-                                </div>
-                                <p class="font-bold text-primary text-xl mb-2">Thẻ tín dụng / Ghi nợ</p>
-                                <p class="text-sm text-slate-500 leading-relaxed">Hỗ trợ Visa, Mastercard và các loại thẻ nội địa.</p>
-                            </div>
-                        </label>
+            <div class="lg:col-span-5">
+                <div class="bg-primary dark:bg-slate-800 rounded-3xl p-8 shadow-xl text-white sticky top-28">
+                    <h3 class="text-xl font-headline font-bold mb-6">Tóm tắt đơn hàng</h3>
+                    
+                    <div id="order-items" class="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                        </div>
+
+                    <div class="border-t border-white/20 pt-4 space-y-3">
+                        <div class="flex justify-between text-blue-100 dark:text-slate-300 text-sm">
+                            <span>Tạm tính</span>
+                            <span id="sub-total" class="font-medium">0đ</span>
+                        </div>
+                        <div class="flex justify-between text-blue-100 dark:text-slate-300 text-sm">
+                            <span>Phí xử lý giao dịch</span>
+                            <span class="font-medium">Miễn phí</span>
+                        </div>
+                        <div class="flex justify-between items-end pt-4 mt-2 border-t border-white/20">
+                            <span class="text-sm font-bold uppercase tracking-wider text-blue-200">Tổng cộng</span>
+                            <span id="grand-total" class="text-3xl font-black text-white tracking-tight">0đ</span>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <aside class="lg:col-span-4 lg:sticky lg:top-28">
-                <div class="bg-white p-8 rounded-[3rem] shadow-2xl shadow-primary/10 border border-slate-100 overflow-hidden relative">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                    <h3 class="text-xl font-headline font-bold text-primary mb-8 border-b border-slate-100 pb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined">receipt</span> Tóm tắt đơn hàng
-                    </h3>
-                    <div class="relative h-56 -mx-8 -mt-8 mb-8 group overflow-hidden">
-                        <img id="check-img" src="" class="w-full h-full object-cover bg-slate-100 group-hover:scale-110 transition-transform duration-700"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                        <div class="absolute bottom-6 left-8 pr-6">
-                            <h4 id="check-title" class="text-white font-headline font-bold text-2xl md:text-3xl leading-tight">Đang tải...</h4>
-                        </div>
-                    </div>
-                    <div class="space-y-6 relative z-10">
-                        <div class="flex justify-between items-center p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-slate-400 text-sm">assignment</span>
-                                <span class="text-sm font-medium text-slate-600">Số lượng</span>
-                            </div>
-                            <p id="check-time" class="font-bold text-primary text-sm">---</p>
-                        </div>
-                        <div class="space-y-3 py-4 border-t border-slate-100">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Tạm tính giỏ hàng</span>
-                                <span id="check-price-small" class="font-bold text-slate-700">---</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-slate-500">Thuế (VAT) & Phí dịch vụ</span>
-                                <span class="font-bold text-green-500">Miễn phí</span>
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-slate-100">
-                            <div class="flex justify-between items-end">
-                                <p class="text-sm font-bold text-slate-400 uppercase tracking-widest">Tổng thanh toán</p>
-                                <p id="check-price" class="text-4xl font-headline font-black text-secondary tracking-tight">---</p>
-                            </div>
-                        </div>
-                        <button onclick="confirmBooking()" id="btn-confirm" class="w-full bg-primary text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:bg-primary-light transition-all active:scale-95 flex items-center justify-center gap-3 group">
-                            Hoàn tất đặt vé
-                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                        </button>
-                    </div>
-                </div>
-            </aside>
         </div>
     </main>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
+    </style>
 
     <script type="module">
         import { db, auth } from './firebase-config.js';
         import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
+        let currentUser = null;
         let cartData = [];
         let totalAmount = 0;
 
+        
         onAuthStateChanged(auth, (user) => {
-            const guestMenu = document.getElementById('guest-menu');
-            const userMenu = document.getElementById('user-menu');
             if (user) {
-                if(guestMenu) guestMenu.style.display = 'none';
-                if(userMenu) {
-                    userMenu.style.display = 'flex';
-                    userMenu.classList.remove('hidden');
-                }
-                document.getElementById('user-email').innerText = "Chào, " + user.email.split('@')[0];
-                const emailInput = document.getElementById('input-email');
-                if(emailInput) emailInput.value = user.email; 
-            } else {
-                if(guestMenu) guestMenu.style.display = 'flex';
-                if(userMenu) {
-                    userMenu.style.display = 'none';
-                    userMenu.classList.add('hidden');
-                }
+                currentUser = user;
+                document.getElementById('cus-email').value = user.email;
+                document.getElementById('cus-email').readOnly = true;
+                document.getElementById('cus-email').classList.add('opacity-70');
             }
         });
 
-        document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
-
-        function loadCheckoutData() {
+        
+        function loadOrderSummary() {
             cartData = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
-            if (cartData.length > 0) {
-                // Lấy ảnh của tour đầu tiên làm ảnh minh họa
-                document.getElementById('check-img').src = cartData[0].imageUrl;
-                
-                // Gộp tên tất cả các tour lại
-                let allTitles = cartData.map(t => t.tenTour).join(' + ');
-                document.getElementById('check-title').innerText = allTitles.length > 50 ? allTitles.substring(0, 50) + '...' : allTitles;
-                
-                document.getElementById('check-time').innerText = cartData.length + " Gói Tour";
-                
-                // Tính tổng tiền của TẤT CẢ các tour trong giỏ
-                totalAmount = 0;
-                cartData.forEach(t => {
-                    let priceNum = parseInt(t.giaTour.replace(/\D/g, ''));
-                    if(!isNaN(priceNum)) {
-                        totalAmount += priceNum;
-                    }
-                });
-                
-                let formattedTotal = totalAmount.toLocaleString('vi-VN') + 'đ';
-                document.getElementById('check-price-small').innerText = formattedTotal;
-                document.getElementById('check-price').innerText = formattedTotal;
-            } else {
-                const errBox = document.getElementById('error-box');
-                const btnConfirm = document.getElementById('btn-confirm');
-                if(errBox) errBox.classList.remove('hidden');
-                if(btnConfirm) {
-                    btnConfirm.disabled = true;
-                    btnConfirm.classList.add('opacity-50', 'cursor-not-allowed');
-                }
-            }
-        }
-        loadCheckoutData();
-
-        window.confirmBooking = async function() {
-            if (cartData.length === 0) return;
-
-            const name = document.getElementById('input-name').value;
-            const email = document.getElementById('input-email').value;
-            const phone = document.getElementById('input-phone').value;
-
-            if (!name || !email || !phone) {
-                alert("Vui lòng điền đầy đủ thông tin Khách hàng (Họ tên, Email, SĐT)!");
+            const container = document.getElementById('order-items');
+            
+            if (cartData.length === 0) {
+                alert("Giỏ hàng của bạn đang trống! Vui lòng chọn tour trước khi thanh toán.");
+                window.location.href = "tours.html";
                 return;
             }
 
-            const btn = document.getElementById('btn-confirm');
-            btn.innerHTML = `Đang xử lý... <span class="material-symbols-outlined animate-spin">sync</span>`;
+            container.innerHTML = '';
+            totalAmount = 0;
+
+            cartData.forEach(item => {
+                const priceNum = parseInt(item.giaTour.replace(/\D/g, '')) || 0;
+                const soLuong = parseInt(item.soLuong) || 1;
+                const itemTotal = priceNum * soLuong;
+                totalAmount += itemTotal;
+
+                container.innerHTML += `
+                    <div class="flex gap-4 bg-white/10 p-3 rounded-2xl">
+                        <img src="${item.imageUrl}" class="w-16 h-16 rounded-xl object-cover">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm leading-tight line-clamp-2">${item.tenTour}</h4>
+                            <div class="flex justify-between items-center mt-2 text-xs text-blue-200">
+                                <span>SL: ${soLuong} | Khởi hành: ${item.ngayDi}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const formatVND = (num) => num.toLocaleString('vi-VN') + 'đ';
+            document.getElementById('sub-total').innerText = formatVND(totalAmount);
+            document.getElementById('grand-total').innerText = formatVND(totalAmount);
+        }
+
+        
+        loadOrderSummary();
+
+        
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            
+            const btn = document.getElementById('btn-submit');
+            
+            
             btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-xl">progress_activity</span> Đang xử lý...`;
+            btn.classList.replace('bg-secondary-container', 'bg-slate-500');
 
             try {
-                const paymentMethods = document.getElementsByName('payment');
-                let selectedPayment = "Chuyển khoản (QR)";
-                if(paymentMethods[1] && paymentMethods[1].checked) selectedPayment = "Thẻ tín dụng / Ghi nợ";
-
-                const now = new Date();
-                const dateString = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
-
-                // Gộp ID và Tên tour để lưu vào Firebase
-                let allTitles = cartData.map(t => t.tenTour).join(' + ');
-                let allIds = cartData.map(t => t.id).join(', ');
-
+                
                 const bookingData = {
-                    khachHang: name,
-                    email: email,
-                    sdt: phone,
-                    tourId: allIds, 
-                    tenTour: allTitles, 
-                    giaTour: totalAmount.toLocaleString('vi-VN') + 'đ', 
-                    imageUrl: cartData[0].imageUrl || "",
-                    phuongThuc: selectedPayment,
-                    ngayDat: dateString,
-                    trangThai: "Chờ xử lý"
+                    uid: currentUser ? currentUser.uid : "GUEST", // Phân biệt khách vãng lai và tài khoản
+                    email: document.getElementById('cus-email').value,
+                    khachHang: {
+                        ten: document.getElementById('cus-name').value,
+                        sdt: document.getElementById('cus-phone').value,
+                        ghiChu: document.getElementById('cus-note').value
+                    },
+                    phuongThucTT: document.querySelector('input[name="payment"]:checked').value,
+                    tongTien: totalAmount,
+                    chiTietTour: cartData,
+                    trangThai: "Chờ xử lý",
+                    ngayDat: new Date().toLocaleString('vi-VN')
                 };
 
-                // Đẩy đơn hàng lên Database
+                
                 await addDoc(collection(db, "bookings"), bookingData);
 
-                // Thanh toán xong thì xóa sạch giỏ hàng
+                
+                var duration = 2.5 * 1000;
+                var animationEnd = Date.now() + duration;
+                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+                function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+                var interval = setInterval(function() {
+                    var timeLeft = animationEnd - Date.now();
+                    if (timeLeft <= 0) { return clearInterval(interval); }
+                    var particleCount = 50 * (timeLeft / duration);
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                    confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                }, 250);
+
+                
+                btn.innerHTML = `<span class="material-symbols-outlined text-xl">check_circle</span> Đặt tour thành công!`;
+                btn.classList.replace('bg-slate-500', 'bg-green-500');
+
+                
                 localStorage.removeItem('cart50cntt1');
 
-                alert("🎉 Đặt tour thành công! Chúc bạn có những chuyến đi vui vẻ.");
-                window.location.href = "profile.html"; 
+                
+                setTimeout(() => {
+                    window.location.href = "profile.html"; 
+                }, 2500);
+
             } catch (error) {
-                console.error("Lỗi đặt tour: ", error);
-                alert("Đã xảy ra lỗi hệ thống, vui lòng thử lại sau.");
-                btn.innerHTML = `Hoàn tất đặt vé <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>`;
+                console.error("Lỗi đặt tour:", error);
+                alert("Rất tiếc! Đã có lỗi xảy ra. Vui lòng thử lại.");
+                
                 btn.disabled = false;
+                btn.innerHTML = `Xác nhận & Đặt Tour <span class="material-symbols-outlined text-xl">arrow_forward</span>`;
+                btn.classList.replace('bg-slate-500', 'bg-secondary-container');
             }
-        };
+        });
     </script>
 </body>
 </html>
