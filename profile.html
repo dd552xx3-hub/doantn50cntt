@@ -3,282 +3,285 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Hồ Sơ Cá Nhân - Đạt_Tùng_Đăng_Long Travel</title>
+    <title>Hồ Sơ Của Tôi - Công Ty Du Lịch Đạt_Tùng_Đăng_Long</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
-    <script>
-        tailwind.config = { 
-            darkMode: "class",
-            theme: { 
-                extend: { 
-                    colors: { "primary": "#002155", "secondary-container": "#fd6600" }, 
-                    fontFamily: { "headline": ["Be Vietnam Pro"], "body": ["Plus Jakarta Sans"] } 
-                } 
-            } 
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#002155", "secondary-container": "#fd6600", "background": "#f7f9fb" }, fontFamily: { "headline": ["Be Vietnam Pro"], "body": ["Plus Jakarta Sans"] } } } }
     </script>
     <style>
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .tab-content { display: none; animation: slideUp 0.4s ease-out forwards; }
-        .tab-content.active { display: block; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
-        .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
-        .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
-        .goog-logo-link, .goog-te-gadget span { display: none !important; }
-        body { top: 0px !important; }
+        .glass-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+        .dark .glass-header { background: rgba(15, 23, 42, 0.85); border-bottom-color: rgba(255,255,255,0.05); }
     </style>
-    <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
+    <script>if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); }</script>
 </head>
-<body class="bg-[#f8fafc] dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen transition-colors duration-500 pt-20">
+<body class="bg-background dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-body antialiased transition-colors duration-500 pb-20">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800 shadow-sm transition-all duration-300">
-        <div class="flex justify-between items-center px-8 h-20 max-w-[1280px] mx-auto">
+    <nav class="fixed top-0 w-full z-50 glass-header transition-all duration-300">
+        <div class="flex justify-between items-center px-6 md:px-8 max-w-7xl mx-auto h-20">
             <a class="text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">Đạt_Tùng_Đăng_Long<span class="text-secondary-container">.</span></a>
             <div class="flex items-center gap-4">
-                <div class="hidden md:flex items-center"><div id="google_translate_element"></div></div>
                 <button id="theme-toggle" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all">
                     <span id="theme-toggle-dark-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">dark_mode</span>
                     <span id="theme-toggle-light-icon" class="hidden material-symbols-outlined text-primary dark:text-blue-400">light_mode</span>
                 </button>
-                <a href="cart.html" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-all relative">
-                    <span class="material-symbols-outlined text-primary dark:text-blue-400">shopping_cart</span>
-                </a>
-                <button id="btn-logout-nav" class="bg-red-50 dark:bg-red-900/20 text-red-500 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-red-500 hover:text-white transition-all">Thoát</button>
+                <button id="btn-logout" class="bg-red-50 hover:bg-red-100 dark:bg-red-900/30 dark:hover:bg-red-900/50 text-red-600 dark:text-red-400 px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">logout</span> Thoát
+                </button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 md:px-8 py-10">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
+    <main class="max-w-7xl mx-auto px-6 mt-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
             <div class="lg:col-span-4">
-                <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-800 text-center relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-32 bg-primary dark:bg-blue-900/50"></div>
-                    <div class="relative z-10">
-                        <div class="w-32 h-32 rounded-full border-4 border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-700 mx-auto mb-4 overflow-hidden shadow-xl">
-                            <div id="user-avatar" class="w-full h-full flex items-center justify-center text-4xl font-black text-primary dark:text-blue-400 uppercase">?</div>
+                <div class="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 sticky top-28 text-center">
+                    <div class="w-32 h-32 mx-auto bg-gradient-to-tr from-primary to-blue-400 rounded-full p-1 shadow-xl mb-6 relative">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" class="w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800">
+                        <button class="absolute bottom-0 right-0 w-10 h-10 bg-secondary-container text-white rounded-full flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-md hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-[18px]">photo_camera</span>
+                        </button>
+                    </div>
+                    <h2 id="prof-name" class="text-2xl font-black font-headline text-primary dark:text-white mb-1">Đang tải...</h2>
+                    <p id="prof-email" class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-8">...</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-slate-700 pt-8">
+                        <div class="text-center p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl">
+                            <div class="text-3xl font-black text-primary dark:text-blue-400 mb-1" id="stat-tours">0</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tour đã đi</div>
                         </div>
-                        <h2 id="display-name" class="text-2xl font-black text-primary dark:text-white mb-1">Đang tải...</h2>
-                        <p id="display-email" class="text-sm text-slate-500 dark:text-slate-400 mb-6 font-medium">...</p>
-                        
-                        <div class="flex flex-col gap-2">
-                            <button onclick="switchTab('info')" class="tab-btn active w-full flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-primary text-white font-bold transition-all shadow-lg shadow-primary/20" data-tab="info">
-                                <span class="material-symbols-outlined text-[20px]">person</span> Thông tin cá nhân
-                            </button>
-                            <button onclick="switchTab('history')" class="tab-btn w-full flex items-center gap-3 px-6 py-3.5 rounded-2xl text-slate-600 dark:text-slate-300 font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" data-tab="history">
-                                <span class="material-symbols-outlined text-[20px]">history</span> Lịch sử đặt tour
-                            </button>
+                        <div class="text-center p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl">
+                            <div class="text-3xl font-black text-secondary-container mb-1">0</div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Điểm thưởng</div>
                         </div>
                     </div>
-                </div>
-
-                <div id="countdown-card" class="hidden mt-6 bg-secondary-container rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden group">
-                    <div class="relative z-10">
-                        <p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-80 mb-2">Hành trình sắp tới</p>
-                        <h3 id="next-tour-name" class="text-lg font-bold leading-tight mb-4">...</h3>
-                        <div class="flex gap-3 text-center">
-                            <div class="flex-1 bg-white/20 backdrop-blur-md rounded-xl py-2">
-                                <span id="cd-days" class="block text-xl font-black">00</span>
-                                <span class="text-[9px] uppercase font-bold opacity-70">Ngày</span>
-                            </div>
-                            <div class="flex-1 bg-white/20 backdrop-blur-md rounded-xl py-2">
-                                <span id="cd-hours" class="block text-xl font-black">00</span>
-                                <span class="text-[9px] uppercase font-bold opacity-70">Giờ</span>
-                            </div>
-                            <div class="flex-1 bg-white/20 backdrop-blur-md rounded-xl py-2">
-                                <span id="cd-mins" class="block text-xl font-black">00</span>
-                                <span class="text-[9px] uppercase font-bold opacity-70">Phút</span>
-                            </div>
-                        </div>
-                    </div>
-                    <span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl opacity-10 rotate-12 group-hover:rotate-0 transition-transform duration-700">flight_takeoff</span>
                 </div>
             </div>
 
             <div class="lg:col-span-8">
-                
-                <div id="tab-info" class="tab-content active space-y-6">
-                    <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-800">
-                        <h3 class="text-xl font-black text-primary dark:text-white mb-8 flex items-center gap-2">
-                            <span class="w-2 h-8 bg-secondary-container rounded-full"></span> Chi tiết hồ sơ
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Địa chỉ Email</label>
-                                <p id="info-email" class="text-lg font-bold text-slate-700 dark:text-slate-200">...</p>
+                <div id="next-trip-card" class="hidden bg-gradient-to-r from-primary to-blue-800 rounded-[2.5rem] p-8 shadow-xl text-white mb-10 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 text-blue-200 text-sm font-bold uppercase tracking-widest mb-4">
+                            <span class="material-symbols-outlined animate-pulse text-secondary-container">flight_takeoff</span> Chuyến đi tiếp theo
+                        </div>
+                        <h3 id="next-trip-name" class="text-2xl md:text-3xl font-black font-headline mb-8 line-clamp-1">...</h3>
+                        <div class="grid grid-cols-4 gap-4 max-w-md">
+                            <div class="bg-white/10 backdrop-blur rounded-2xl p-3 text-center border border-white/20">
+                                <div id="cd-days" class="text-3xl font-black">00</div>
+                                <div class="text-[9px] uppercase tracking-widest opacity-80 mt-1">Ngày</div>
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mã định danh (UID)</label>
-                                <p id="info-uid" class="text-xs font-mono text-slate-400 break-all">...</p>
+                            <div class="bg-white/10 backdrop-blur rounded-2xl p-3 text-center border border-white/20">
+                                <div id="cd-hours" class="text-3xl font-black">00</div>
+                                <div class="text-[9px] uppercase tracking-widest opacity-80 mt-1">Giờ</div>
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Ngày tham gia</label>
-                                <p id="info-created" class="text-lg font-bold text-slate-700 dark:text-slate-200">...</p>
+                            <div class="bg-white/10 backdrop-blur rounded-2xl p-3 text-center border border-white/20">
+                                <div id="cd-mins" class="text-3xl font-black">00</div>
+                                <div class="text-[9px] uppercase tracking-widest opacity-80 mt-1">Phút</div>
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Loại tài khoản</label>
-                                <p class="flex items-center gap-2 text-lg font-bold text-blue-600">
-                                    <span class="material-symbols-outlined text-[20px]">verified</span> Member Premium
-                                </p>
+                            <div class="bg-white/10 backdrop-blur rounded-2xl p-3 text-center border border-white/20">
+                                <div id="cd-secs" class="text-3xl font-black">00</div>
+                                <div class="text-[9px] uppercase tracking-widest opacity-80 mt-1">Giây</div>
                             </div>
                         </div>
                     </div>
+                    <span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] text-white/5 rotate-12">luggage</span>
                 </div>
 
-                <div id="tab-history" class="tab-content space-y-6">
-                    <div class="flex justify-between items-center mb-2 px-4">
-                        <h3 class="text-xl font-black text-primary dark:text-white">Lịch sử chuyến đi</h3>
-                        <span id="booking-count" class="text-xs font-bold bg-white dark:bg-slate-800 px-4 py-1.5 rounded-full border border-slate-100 dark:border-slate-800 shadow-sm text-slate-500">0 đơn hàng</span>
-                    </div>
-
-                    <div id="booking-list" class="space-y-4">
-                        <div class="bg-white dark:bg-slate-900 p-12 rounded-[2.5rem] text-center border border-dashed border-slate-200 dark:border-slate-800">
-                            <span class="material-symbols-outlined text-5xl text-slate-200 mb-4">receipt_long</span>
-                            <p class="text-slate-400 font-medium">Bạn chưa có lịch sử đặt tour nào.</p>
-                        </div>
-                    </div>
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-3xl font-black font-headline text-primary dark:text-white">Lịch sử đặt Tour</h2>
                 </div>
 
+                <div id="booking-list" class="space-y-6">
+                    <div class="text-center py-20 text-slate-400 bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 border-dashed">
+                        <span class="material-symbols-outlined animate-spin text-4xl mb-3">progress_activity</span>
+                        <p class="font-medium">Đang tải dữ liệu chuyến đi...</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <script>
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import { collection, query, where, getDocs, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+        let countdownInterval;
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                document.getElementById('prof-email').innerText = user.email;
+                try {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    if (userDoc.exists()) { document.getElementById('prof-name').innerText = userDoc.data().name; } 
+                    else { document.getElementById('prof-name').innerText = user.email.split('@')[0]; }
+                } catch (e) { document.getElementById('prof-name').innerText = user.email.split('@')[0]; }
+                loadBookings(user.email);
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        document.getElementById('btn-logout').addEventListener('click', () => { signOut(auth); });
+
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         if (document.documentElement.classList.contains('dark')) { themeToggleLightIcon.classList.remove('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); }
-        themeToggleBtn.addEventListener('click', function() {
-            themeToggleDarkIcon.classList.toggle('hidden');
-            themeToggleLightIcon.classList.toggle('hidden');
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark');
-            }
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden');
+            if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } 
+            else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
         });
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById('tab-' + tabId).classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('bg-primary', 'text-white', 'shadow-lg');
-                b.classList.add('text-slate-600', 'dark:text-slate-300');
-            });
-            const activeBtn = document.querySelector(`[data-tab="${tabId}"]`);
-            activeBtn.classList.add('bg-primary', 'text-white', 'shadow-lg');
-            activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
-        }
-    </script>
-
-    <script type="module">
-        import { auth, db } from './firebase-config.js';
-        import { collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-        onAuthStateChanged(auth, async (user) => {
-            if (!user) { window.location.href = "login.html"; return; }
-            
-            const email = user.email;
-            document.getElementById('display-name').innerText = email.split('@')[0];
-            document.getElementById('display-email').innerText = email;
-            document.getElementById('user-avatar').innerText = email.charAt(0);
-            document.getElementById('info-email').innerText = email;
-            document.getElementById('info-uid').innerText = user.uid;
-            document.getElementById('info-created').innerText = new Date(user.metadata.creationTime).toLocaleDateString('vi-VN');
-
-            loadBookings(user.uid, email);
-        });
-
-        async function loadBookings(uid, email) {
-            const list = document.getElementById('booking-list');
+        async function loadBookings(email) {
+            const container = document.getElementById('booking-list');
             try {
                 const q = query(collection(db, "bookings"), where("email", "==", email));
                 const snap = await getDocs(q);
                 
-                if (snap.empty) return;
+                container.innerHTML = "";
+                document.getElementById('stat-tours').innerText = snap.size;
 
-                list.innerHTML = "";
-                document.getElementById('booking-count').innerText = snap.size + " đơn hàng";
-                
-                let tours = [];
-                snap.forEach(doc => {
-                    const data = doc.data();
-                    const statusColor = data.trangThai === "Đã xác nhận" ? "bg-green-500" : "bg-orange-500";
-                    const statusTextClass = data.trangThai === "Đã xác nhận" ? "text-green-600 dark:text-green-400" : "text-orange-600 dark:text-orange-400";
+                if (snap.empty) {
+                    container.innerHTML = `
+                        <div class="text-center py-20 bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <span class="material-symbols-outlined text-6xl text-slate-300 mb-4">explore</span>
+                            <h3 class="text-xl font-bold mb-2">Bạn chưa có chuyến đi nào</h3>
+                            <p class="text-slate-500 mb-6">Hãy bắt đầu hành trình đầu tiên cùng chúng tôi!</p>
+                            <a href="tours.html" class="inline-flex bg-primary text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-colors shadow-lg">Khám phá Tour ngay</a>
+                        </div>`;
+                    return;
+                }
+
+                let nextTripDate = null;
+                let nextTripName = "";
+
+                snap.forEach(docSnap => {
+                    const data = docSnap.data();
+                    const bId = docSnap.id;
+                    const items = data.chiTietTour || [];
+                    const firstTour = items[0] || {};
                     
-                    data.chiTietTour.forEach(tour => {
-                        tours.push({ ...tour, status: data.trangThai, bookingDate: data.ngayDat });
-                        list.innerHTML += `
-                            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-sm border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row gap-6 hover:shadow-xl transition-all group">
-                                <img src="${tour.imageUrl}" class="w-full md:w-32 h-32 object-cover rounded-2xl group-hover:scale-105 transition-transform">
-                                <div class="flex-1">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-lg dark:text-white">${tour.tenTour}</h4>
-                                        <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-slate-800">
-                                            <span class="relative flex h-2 w-2">
-                                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full ${statusColor} opacity-75"></span>
-                                                <span class="relative inline-flex rounded-full h-2 w-2 ${statusColor}"></span>
-                                            </span>
-                                            <span class="text-[10px] font-black uppercase tracking-wider ${statusTextClass}">${data.trangThai}</span>
-                                        </div>
-                                    </div>
-                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs font-medium text-slate-500">
-                                        <p class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">calendar_month</span> ${tour.ngayDi}</p>
-                                        <p class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">group</span> ${tour.soLuong} khách</p>
-                                        <p class="flex items-center gap-1 text-primary dark:text-blue-400 font-bold"><span class="material-symbols-outlined text-sm">payments</span> ${tour.giaTour}</p>
-                                    </div>
-                                    <p class="mt-4 text-[10px] text-slate-300">Mã đơn: #${doc.id.substring(0,8).toUpperCase()} | Ngày đặt: ${data.ngayDat}</p>
+                    let statusColor = "bg-yellow-100 text-yellow-700";
+                    let statusIcon = "schedule";
+                    if(data.trangThai === "Đã xác nhận") { statusColor = "bg-green-100 text-green-700"; statusIcon = "check_circle"; }
+                    if(data.trangThai === "Đã hoàn thành") { statusColor = "bg-blue-100 text-blue-700"; statusIcon = "verified"; }
+                    if(data.trangThai === "Đã hủy" || data.trangThai === "Yêu cầu hủy") { statusColor = "bg-red-100 text-red-700"; statusIcon = "cancel"; }
+
+                    // Logic TÌM CHUYẾN ĐI TIẾP THEO (cho Countdown)
+                    if(data.trangThai === "Đã xác nhận" && firstTour.ngayDi) {
+                        const parts = firstTour.ngayDi.split('/');
+                        if(parts.length === 3) {
+                            const tripD = new Date(`${parts[2]}-${parts[1]}-${parts[0]}T00:00:00`);
+                            if(tripD > new Date()) {
+                                if(!nextTripDate || tripD < nextTripDate) {
+                                    nextTripDate = tripD;
+                                    nextTripName = firstTour.tenTour;
+                                }
+                            }
+                        }
+                    }
+
+                    // HIỂN THỊ NÚT "YÊU CẦU HỦY" TÍNH NĂNG MỚI (Chỉ hiện khi đang Chờ xử lý / Chờ xác nhận)
+                    let cancelBtnHtml = "";
+                    if(data.trangThai === "Chờ xử lý" || data.trangThai === "Chờ xác nhận") {
+                        cancelBtnHtml = `<button onclick="requestCancel('${bId}')" class="text-xs font-bold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1 border border-red-200 bg-red-50 px-3 py-1.5 rounded-lg"><span class="material-symbols-outlined text-[14px]">close</span> Yêu cầu hủy</button>`;
+                    }
+
+                    let itemsHtml = items.map(i => `
+                        <div class="flex items-center gap-4 py-3 border-t border-slate-50 dark:border-slate-700/50 mt-3">
+                            <img src="${i.imageUrl}" class="w-16 h-16 rounded-xl object-cover shadow-sm">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-slate-800 dark:text-white line-clamp-1">${i.tenTour}</h4>
+                                <p class="text-xs text-slate-500">Khởi hành: ${i.ngayDi}</p>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-primary dark:text-blue-400">${i.giaTour}</div>
+                                <div class="text-xs text-slate-400">x${i.soLuong} khách</div>
+                            </div>
+                        </div>`).join('');
+
+                    container.innerHTML += `
+                        <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-6 shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md transition-shadow">
+                            <div class="flex flex-wrap justify-between items-center mb-4 gap-4">
+                                <div>
+                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Mã Đơn</span>
+                                    <div class="font-mono font-bold text-sm">#${bId.substring(0,8).toUpperCase()}</div>
                                 </div>
-                            </div>`;
-                    });
+                                <div class="${statusColor} px-4 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[16px]">${statusIcon}</span> ${data.trangThai}
+                                </div>
+                            </div>
+                            ${itemsHtml}
+                            <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-700 flex flex-wrap justify-between items-center gap-4">
+                                <div>
+                                    <span class="text-xs text-slate-500 block mb-1">Tổng thanh toán</span>
+                                    <span class="text-2xl font-black text-secondary-container">${data.tongTien.toLocaleString('vi-VN')}đ</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    ${cancelBtnHtml}
+                                    <button class="bg-primary hover:bg-blue-800 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md transition-colors">Xem chi tiết</button>
+                                </div>
+                            </div>
+                        </div>`;
                 });
 
-                startCountdown(tours);
-            } catch (e) { console.error(e); }
+                if(nextTripDate) { startCountdown(nextTripDate, nextTripName); } 
+                else { document.getElementById('next-trip-card').classList.add('hidden'); clearInterval(countdownInterval); }
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = "<p class='text-center py-10 text-red-500 font-bold'>Lỗi tải dữ liệu. Vui lòng thử lại.</p>";
+            }
         }
 
-        function startCountdown(tours) {
-            const confirmedTours = tours.filter(t => t.status === "Đã xác nhận");
-            if (confirmedTours.length === 0) return;
+        // HÀM XỬ LÝ YÊU CẦU HỦY TÍNH NĂNG MỚI
+        window.requestCancel = async function(bookingId) {
+            if(confirm("Bạn có chắc chắn muốn gửi yêu cầu hủy Tour này? (Admin sẽ xét duyệt yêu cầu)")) {
+                try {
+                    await updateDoc(doc(db, "bookings", bookingId), { trangThai: "Yêu cầu hủy" });
+                    alert("Đã gửi yêu cầu hủy thành công!");
+                    loadBookings(auth.currentUser.email); // Reload lại danh sách
+                } catch (error) {
+                    alert("Lỗi khi gửi yêu cầu hủy!");
+                }
+            }
+        };
 
-            const nextTour = confirmedTours.sort((a,b) => new Date(a.ngayDi) - new Date(b.ngayDi))[0];
-            const targetDate = new Date(nextTour.ngayDi).getTime();
+        function startCountdown(targetDate, tourName) {
+            document.getElementById('next-trip-card').classList.remove('hidden');
+            document.getElementById('next-trip-name').innerText = tourName;
             
-            document.getElementById('countdown-card').classList.remove('hidden');
-            document.getElementById('next-tour-name').innerText = nextTour.tenTour;
+            if(countdownInterval) clearInterval(countdownInterval);
 
-            const timer = setInterval(() => {
+            countdownInterval = setInterval(() => {
                 const now = new Date().getTime();
-                const gap = targetDate - now;
-                if (gap < 0) { clearInterval(timer); return; }
-                
-                const d = Math.floor(gap / (1000 * 60 * 60 * 24));
-                const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+                const distance = targetDate.getTime() - now;
 
-                document.getElementById('cd-days').innerText = d < 10 ? '0' + d : d;
-                document.getElementById('cd-hours').innerText = h < 10 ? '0' + h : h;
-                document.getElementById('cd-mins').innerText = m < 10 ? '0' + m : m;
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('next-trip-name').innerText = "Hành trình đang diễn ra!";
+                    document.getElementById('cd-days').innerText = "00";
+                    document.getElementById('cd-hours').innerText = "00";
+                    document.getElementById('cd-mins').innerText = "00";
+                    document.getElementById('cd-secs').innerText = "00";
+                    return;
+                }
+
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = d.toString().padStart(2, '0');
+                document.getElementById('cd-hours').innerText = h.toString().padStart(2, '0');
+                document.getElementById('cd-mins').innerText = m.toString().padStart(2, '0');
+                document.getElementById('cd-secs').innerText = s.toString().padStart(2, '0');
             }, 1000);
         }
-
-        document.getElementById('btn-logout-nav').onclick = () => signOut(auth).then(() => window.location.href = "index.html");
     </script>
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'vi', includedLanguages: 'en,vi,zh-CN,ja,ko,fr', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
