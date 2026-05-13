@@ -7,35 +7,11 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
     <script id="tailwind-config">
-        tailwind.config = { 
-            darkMode: "class",
-            theme: { 
-                extend: { 
-                    colors: { 
-                        "primary": "#002155", 
-                        "secondary-container": "#fd6600",
-                        "surface": "#f7f9fb"
-                    }, 
-                    fontFamily: { 
-                        "headline": ["Be Vietnam Pro"], 
-                        "body": ["Plus Jakarta Sans"] 
-                    } 
-                } 
-            } 
-        }
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#002155", "secondary-container": "#fd6600", "surface": "#f7f9fb" }, fontFamily: { "headline": ["Be Vietnam Pro"], "body": ["Plus Jakarta Sans"] } } } }
     </script>
-    <script>
-        
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
+    <script>if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); }</script>
 </head>
 <body class="bg-surface dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-body antialiased min-h-screen pb-20">
 
@@ -53,7 +29,6 @@
             <div class="flex items-center justify-between relative">
                 <div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-200 dark:bg-slate-700 rounded-full z-0"></div>
                 <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-1 bg-primary dark:bg-blue-500 rounded-full z-0 transition-all duration-500"></div>
-                
                 <div class="relative z-10 flex flex-col items-center">
                     <div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold shadow-md"><span class="material-symbols-outlined text-sm">check</span></div>
                     <span class="text-xs font-bold mt-2 text-primary dark:text-blue-400">Giỏ hàng</span>
@@ -70,11 +45,9 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
             <div class="lg:col-span-7">
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 shadow-sm border border-slate-100 dark:border-slate-700">
                     <h2 class="text-2xl font-headline font-bold text-primary dark:text-white mb-6">Thông tin liên hệ</h2>
-                    
                     <form id="checkout-form" class="space-y-5">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div>
@@ -86,19 +59,16 @@
                                 <input type="tel" id="cus-phone" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="09xx xxx xxx">
                             </div>
                         </div>
-                        
                         <div>
                             <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Email xác nhận *</label>
                             <input type="email" id="cus-email" required class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="email@example.com">
                         </div>
-
                         <div>
                             <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-2">Yêu cầu đặc biệt (Tùy chọn)</label>
                             <textarea id="cus-note" rows="3" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white transition-all" placeholder="Ghi chú về ăn uống, người cao tuổi..."></textarea>
                         </div>
 
                         <h2 class="text-2xl font-headline font-bold text-primary dark:text-white mt-8 mb-4 pt-6 border-t border-slate-100 dark:border-slate-700">Phương thức thanh toán</h2>
-                        
                         <div class="space-y-3">
                             <label class="flex items-center p-4 border border-slate-200 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors group relative overflow-hidden">
                                 <input type="radio" name="payment" value="Chuyển khoản ngân hàng" checked class="w-5 h-5 text-primary focus:ring-primary">
@@ -108,7 +78,6 @@
                                 </div>
                                 <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">qr_code_scanner</span>
                             </label>
-
                             <label class="flex items-center p-4 border border-slate-200 dark:border-slate-600 rounded-xl cursor-pointer hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors group">
                                 <input type="radio" name="payment" value="Thanh toán tại văn phòng" class="w-5 h-5 text-primary focus:ring-primary">
                                 <div class="ml-4 flex-1">
@@ -118,7 +87,6 @@
                                 <span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">storefront</span>
                             </label>
                         </div>
-
                         <button type="submit" id="btn-submit" class="w-full mt-8 bg-secondary-container hover:bg-orange-600 text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-orange-500/30 transition-all flex justify-center items-center gap-2 active:scale-[0.98]">
                             Xác nhận & Đặt Tour <span class="material-symbols-outlined text-xl">arrow_forward</span>
                         </button>
@@ -129,18 +97,13 @@
             <div class="lg:col-span-5">
                 <div class="bg-primary dark:bg-slate-800 rounded-3xl p-8 shadow-xl text-white sticky top-28">
                     <h3 class="text-xl font-headline font-bold mb-6">Tóm tắt đơn hàng</h3>
-                    
-                    <div id="order-items" class="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                        </div>
-
+                    <div id="order-items" class="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar"></div>
                     <div class="border-t border-white/20 pt-4 space-y-3">
                         <div class="flex justify-between text-blue-100 dark:text-slate-300 text-sm">
-                            <span>Tạm tính</span>
-                            <span id="sub-total" class="font-medium">0đ</span>
+                            <span>Tạm tính</span><span id="sub-total" class="font-medium">0đ</span>
                         </div>
                         <div class="flex justify-between text-blue-100 dark:text-slate-300 text-sm">
-                            <span>Phí xử lý giao dịch</span>
-                            <span class="font-medium">Miễn phí</span>
+                            <span>Phí xử lý giao dịch</span><span class="font-medium">Miễn phí</span>
                         </div>
                         <div class="flex justify-between items-end pt-4 mt-2 border-t border-white/20">
                             <span class="text-sm font-bold uppercase tracking-wider text-blue-200">Tổng cộng</span>
@@ -149,14 +112,44 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
+
+    <div id="qr-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" id="qr-backdrop"></div>
+        <div class="relative w-full max-w-sm bg-white dark:bg-slate-800 rounded-3xl shadow-2xl p-8 flex flex-col items-center animate-[chatPop_0.3s_ease-out]">
+            <button id="qr-close" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-primary dark:text-blue-400 text-3xl">qr_code_scanner</span>
+            </div>
+            <h3 class="text-xl font-headline font-bold text-slate-800 dark:text-white mb-2 text-center">Quét mã để thanh toán</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mb-6 text-center">Mở ứng dụng ngân hàng và quét mã QR bên dưới.</p>
+            <div class="bg-slate-50 dark:bg-slate-900 p-4 rounded-2xl w-full flex justify-center mb-6">
+                <img id="qr-img" src="" alt="Mã QR Thanh Toán" class="w-48 h-48 object-cover rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+            </div>
+            <div class="w-full space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                <div class="flex justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
+                    <span class="font-medium">Số tiền:</span>
+                    <span id="qr-amount" class="font-bold text-primary dark:text-blue-400">0đ</span>
+                </div>
+                <div class="flex justify-between pt-2">
+                    <span class="font-medium">Nội dung:</span>
+                    <span id="qr-content" class="font-bold text-slate-800 dark:text-white"></span>
+                </div>
+            </div>
+            <button id="btn-qr-done" class="w-full mt-6 bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-sm">check_circle</span> Tôi đã chuyển khoản
+            </button>
+        </div>
+    </div>
 
     <style>
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
+        @keyframes chatPop { 0% { transform: scale(0.9) translateY(10px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
     </style>
 
     <script type="module">
@@ -167,37 +160,27 @@
         let currentUser = null;
         let cartData = [];
         let totalAmount = 0;
+        let pendingBookingData = null; // Biến chờ lưu data nếu chọn QR
 
-        
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUser = user;
-                document.getElementById('cus-email').value = user.email;
-                document.getElementById('cus-email').readOnly = true;
-                document.getElementById('cus-email').classList.add('opacity-70');
+                const emailInput = document.getElementById('cus-email');
+                emailInput.value = user.email;
+                emailInput.readOnly = true;
+                emailInput.classList.add('opacity-70', 'cursor-not-allowed');
             }
         });
 
-        
         function loadOrderSummary() {
             cartData = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
             const container = document.getElementById('order-items');
-            
-            if (cartData.length === 0) {
-                alert("Giỏ hàng của bạn đang trống! Vui lòng chọn tour trước khi thanh toán.");
-                window.location.href = "tours.html";
-                return;
-            }
-
-            container.innerHTML = '';
-            totalAmount = 0;
-
+            if (cartData.length === 0) { alert("Giỏ hàng trống!"); window.location.href = "tours.html"; return; }
+            container.innerHTML = ''; totalAmount = 0;
             cartData.forEach(item => {
                 const priceNum = parseInt(item.giaTour.replace(/\D/g, '')) || 0;
                 const soLuong = parseInt(item.soLuong) || 1;
-                const itemTotal = priceNum * soLuong;
-                totalAmount += itemTotal;
-
+                totalAmount += (priceNum * soLuong);
                 container.innerHTML += `
                     <div class="flex gap-4 bg-white/10 p-3 rounded-2xl">
                         <img src="${item.imageUrl}" class="w-16 h-16 rounded-xl object-cover">
@@ -207,56 +190,75 @@
                                 <span>SL: ${soLuong} | Khởi hành: ${item.ngayDi}</span>
                             </div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
-
             const formatVND = (num) => num.toLocaleString('vi-VN') + 'đ';
             document.getElementById('sub-total').innerText = formatVND(totalAmount);
             document.getElementById('grand-total').innerText = formatVND(totalAmount);
         }
-
-        
         loadOrderSummary();
 
-        
+        // Xử lý Gửi Form
         document.getElementById('checkout-form').addEventListener('submit', async (e) => {
             e.preventDefault(); 
-            
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            const phone = document.getElementById('cus-phone').value;
+
+            pendingBookingData = {
+                uid: currentUser ? currentUser.uid : "GUEST",
+                email: document.getElementById('cus-email').value,
+                khachHang: { ten: document.getElementById('cus-name').value, sdt: phone, ghiChu: document.getElementById('cus-note').value },
+                phuongThucTT: paymentMethod,
+                tongTien: totalAmount,
+                chiTietTour: cartData,
+                trangThai: paymentMethod === "Chuyển khoản ngân hàng" ? "Chờ xác nhận" : "Chờ xử lý",
+                ngayDat: new Date().toLocaleString('vi-VN')
+            };
+
+            if (paymentMethod === "Chuyển khoản ngân hàng") {
+                // LOGIC API VIETQR
+                const orderId = 'DTDL' + Math.floor(Math.random() * 100000);
+                const qrContent = orderId + " " + phone;
+                
+                // Config API (Bạn có thể đổi số tài khoản ở dòng này)
+                const bankID = "MB"; 
+                const accountNo = "0987654321"; 
+                const accountName = "CONG TY DU LICH DTDL"; 
+                const qrUrl = `https://img.vietqr.io/image/${bankID}-${accountNo}-compact2.png?amount=${totalAmount}&addInfo=${encodeURIComponent(qrContent)}&accountName=${encodeURIComponent(accountName)}`;
+                
+                document.getElementById('qr-img').src = qrUrl;
+                document.getElementById('qr-amount').innerText = totalAmount.toLocaleString('vi-VN') + 'đ';
+                document.getElementById('qr-content').innerText = qrContent;
+                document.getElementById('qr-modal').classList.remove('hidden');
+            } else {
+                processOrderToDB(); // Tiền mặt thì lưu luôn
+            }
+        });
+
+        // Đóng/Mở Modal QR
+        const qrModal = document.getElementById('qr-modal');
+        const closeQR = () => { qrModal.classList.add('hidden'); }
+        document.getElementById('qr-close').addEventListener('click', closeQR);
+        document.getElementById('qr-backdrop').addEventListener('click', closeQR);
+
+        // Bấm hoàn tất chuyển khoản
+        document.getElementById('btn-qr-done').addEventListener('click', () => {
+            qrModal.classList.add('hidden');
+            processOrderToDB();
+        });
+
+        // Hàm Đẩy Firebase và Bắn Pháo Hoa
+        async function processOrderToDB() {
             const btn = document.getElementById('btn-submit');
-            
-            
             btn.disabled = true;
             btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-xl">progress_activity</span> Đang xử lý...`;
             btn.classList.replace('bg-secondary-container', 'bg-slate-500');
 
             try {
-                
-                const bookingData = {
-                    uid: currentUser ? currentUser.uid : "GUEST", // Phân biệt khách vãng lai và tài khoản
-                    email: document.getElementById('cus-email').value,
-                    khachHang: {
-                        ten: document.getElementById('cus-name').value,
-                        sdt: document.getElementById('cus-phone').value,
-                        ghiChu: document.getElementById('cus-note').value
-                    },
-                    phuongThucTT: document.querySelector('input[name="payment"]:checked').value,
-                    tongTien: totalAmount,
-                    chiTietTour: cartData,
-                    trangThai: "Chờ xử lý",
-                    ngayDat: new Date().toLocaleString('vi-VN')
-                };
+                await addDoc(collection(db, "bookings"), pendingBookingData);
 
-                
-                await addDoc(collection(db, "bookings"), bookingData);
-
-                
-                var duration = 2.5 * 1000;
-                var animationEnd = Date.now() + duration;
-                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
-
+                var duration = 2.5 * 1000; var animationEnd = Date.now() + duration; var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
                 function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-
                 var interval = setInterval(function() {
                     var timeLeft = animationEnd - Date.now();
                     if (timeLeft <= 0) { return clearInterval(interval); }
@@ -265,27 +267,15 @@
                     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
                 }, 250);
 
-                
                 btn.innerHTML = `<span class="material-symbols-outlined text-xl">check_circle</span> Đặt tour thành công!`;
                 btn.classList.replace('bg-slate-500', 'bg-green-500');
-
-                
                 localStorage.removeItem('cart50cntt1');
-
-                
-                setTimeout(() => {
-                    window.location.href = "profile.html"; 
-                }, 2500);
-
+                setTimeout(() => { window.location.href = "profile.html"; }, 2500);
             } catch (error) {
-                console.error("Lỗi đặt tour:", error);
-                alert("Rất tiếc! Đã có lỗi xảy ra. Vui lòng thử lại.");
-                
-                btn.disabled = false;
-                btn.innerHTML = `Xác nhận & Đặt Tour <span class="material-symbols-outlined text-xl">arrow_forward</span>`;
-                btn.classList.replace('bg-slate-500', 'bg-secondary-container');
+                alert("Lỗi kết nối CSDL!"); btn.disabled = false;
+                btn.innerHTML = `Xác nhận & Đặt Tour`; btn.classList.replace('bg-slate-500', 'bg-secondary-container');
             }
-        });
+        }
     </script>
 </body>
 </html>
