@@ -52,6 +52,17 @@
         .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
+                /* HIỆU ỨNG CHATBOT */
+        @keyframes chatPop { 0% { transform: scale(0.8) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
+        .chat-pop { animation: chatPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; transform-origin: bottom right; }
+        
+        @keyframes msgSlide { 0% { transform: translateY(15px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+        .msg-slide { animation: msgSlide 0.3s ease-out forwards; }
+        
+        .typing-dot { animation: typingBounce 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typingBounce { 0%, 80%, 100% { transform: scale(0); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
     </style>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -470,7 +481,7 @@
         }
         getTours();
 
-        // LOGIC CHATBOT
+        
         window.botReply = async function(text) {
             try {
                 const toursSnap = await getDocs(collection(db, "tours"));
@@ -494,7 +505,7 @@
             }
         };
 
-        // LOGIC PHẦN ĐÁNH GIÁ (REVIEWS REAL-TIME)
+        
         function generateStars(count) {
             let starsHtml = '';
             for (let i = 0; i < 5; i++) {
