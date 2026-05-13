@@ -44,7 +44,7 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
         .counter-val { font-variant-numeric: tabular-nums; }
         
-        /* Tùy chỉnh hiển thị thẻ Google Translate cho gọn đẹp */
+        
         .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
         .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
         .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
@@ -118,13 +118,13 @@
                         <span class="shimmer-text">ĐẠT_TÙNG_ĐĂNG_LONG</span>
                     </h1>
                     <p class="font-sans text-slate-300 text-xs md:text-sm uppercase tracking-[0.3em] opacity-80">
-                        Hành Trình Di Sản Việt
+                        Hành trình di sản Việt được tạo bởi lớp 50 Khoa CNTT Trường Cao Đẳng Điện Tử Điện Lạnh Hà Nội
                     </p>
                 </div>
 
                 <div class="w-full max-w-xs md:max-w-sm mt-2">
                     <div class="flex justify-between text-[10px] md:text-xs text-slate-400 font-bold uppercase tracking-widest mb-3 px-1">
-                        <span>Đang khởi tạo</span>
+                        <span>50CNTT1 ĐẠT_ĐĂNG_TÙNG_LONG Xin Chào</span>
                         <span id="loading-percent" class="text-white">0%</span>
                     </div>
                     <div class="w-full h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
@@ -553,7 +553,7 @@
                     document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C`;
                     document.getElementById('w-icon').innerText = data.weather[0].main.toLowerCase().includes('cloud') ? 'cloud' : 'sunny';
                 } else {
-                    // Không alert
+                    
                 }
             } catch(e) {}
         }
