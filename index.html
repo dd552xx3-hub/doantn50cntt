@@ -72,25 +72,74 @@
 </head>
 <body class="bg-background dark:bg-slate-900 text-on-background dark:text-slate-100 font-body antialiased transition-colors duration-500">
 
-    <div id="splash-screen" class="fixed inset-0 z-[9999] bg-[#0f172a] overflow-hidden transition-all duration-1000 ease-in-out transform origin-center">
+        <div id="splash-screen" class="fixed inset-0 z-[9999] bg-[#020617] overflow-hidden transition-all duration-[1200ms] ease-[cubic-bezier(0.77,0,0.175,1)] origin-bottom">
         <style>
-            @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-            @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
-            @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-            @keyframes fillProgress { 0% { width: 0%; } 100% { width: 100%; } }
-            @keyframes floatOrb { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+            @keyframes kenBurnsUltra { 0% { transform: scale(1.05) translateZ(0); filter: brightness(0.6); } 100% { transform: scale(1.15) translateZ(0); filter: brightness(1); } }
+            @keyframes letterReveal { 0% { opacity: 0; transform: translateY(40px) rotateX(-45deg); filter: blur(5px); } 100% { opacity: 1; transform: translateY(0) rotateX(0); filter: blur(0); } }
+            @keyframes particleFloat { 0% { transform: translateY(0) translateX(0); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-100px) translateX(20px); opacity: 0; } }
+            @keyframes fillProgressSlow { 0% { width: 0%; } 100% { width: 100%; } }
             
-            .animate-fade-in-up { animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-            .animate-ken-burns { animation: kenBurns 20s ease-out forwards; }
-            .animate-float { animation: floatOrb 6s ease-in-out infinite; }
+            .animate-ken-ultra { animation: kenBurnsUltra 8s ease-out forwards; }
+            .split-door-exit { transform: scaleY(0) !important; opacity: 0; pointer-events: none; }
             
-            .shimmer-text { background: linear-gradient(90deg, #fff 0%, #facc15 50%, #fff 100%); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s infinite linear; }
-            .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-            .splash-exit { opacity: 0 !important; transform: scale(1.15) !important; filter: blur(10px) !important; pointer-events: none; }
+            
+            .letter-reveal span {
+                display: inline-block;
+                opacity: 0;
+                animation: letterReveal 1.2s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
+            }
+            .letter-reveal span:nth-child(1) { animation-delay: 0.1s; }
+            .letter-reveal span:nth-child(2) { animation-delay: 0.2s; }
+            .letter-reveal span:nth-child(3) { animation-delay: 0.3s; }
+            .letter-reveal span:nth-child(4) { animation-delay: 0.4s; }
+            .letter-reveal span:nth-child(5) { animation-delay: 0.5s; }
+            .letter-reveal span:nth-child(6) { animation-delay: 0.6s; }
+
+            .shimmer-text-luxury {
+                background: linear-gradient(to right, #ffffff 20%, #facc15 50%, #ffffff 80%);
+                background-size: 200% auto;
+                color: #000;
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: shimmer 4s infinite linear;
+            }
         </style>
-        <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat animate-ken-burns" style="background-image: url('https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop');">
-            <div class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/80 to-slate-900/95"></div>
+
+        <div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat animate-ken-ultra" style="background-image: url('https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop');">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent"></div>
         </div>
+
+        <div class="absolute inset-0 z-0 pointer-events-none" id="particles-container"></div>
+
+        <button id="btn-skip-splash" class="absolute top-8 right-8 md:top-10 md:right-12 z-50 px-6 py-2 rounded-full border border-white/20 bg-white/5 text-white/70 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white/20 hover:text-white transition-all flex items-center gap-2 group cursor-pointer backdrop-blur-md">
+            Bỏ qua <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">east</span>
+        </button>
+
+        <div class="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-16 perspective-[1000px]">
+                    <h1 class="font-serif text-3xl md:text-6xl font-black tracking-[0.15em] mb-6 letter-reveal shimmer-text-luxury">
+                        <span>ĐẠT_</span><span>TÙNG_</span><span>ĐĂNG_</span><span>LONG</span>
+                    </h1>
+                    <p class="font-sans text-slate-400 text-xs md:text-sm uppercase tracking-[0.4em] opacity-0" style="animation: letterReveal 1.2s forwards 1.2s;">
+                        Hành trình khám phá vòng quanh Việt Nam được tạo bởi lớp 50 Khoa CNTT Trường Cao Đẳng Điện Tử Điện Lạnh Hà Nội
+                    </p>
+                </div>
+
+                <div class="w-full max-w-xs md:max-w-md mt-8 opacity-0" style="animation: letterReveal 1.2s forwards 1.5s;">
+                    <div class="flex justify-between text-[9px] md:text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em] mb-4 px-2">
+                        <span>Đang khởi tạo</span>
+                        <span id="loading-percent" class="text-yellow-400">0%</span>
+                    </div>
+                    <div class="w-full h-[2px] bg-slate-800 rounded-full overflow-hidden relative">
+                        <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-200 shadow-[0_0_10px_rgba(250,204,21,0.6)]" style="animation: fillProgressSlow 4.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
         <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-[80px] animate-float"></div>
         <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-orange-500/20 rounded-full blur-[100px] animate-float" style="animation-delay: -3s;"></div>
 
