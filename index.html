@@ -44,7 +44,6 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
         .counter-val { font-variant-numeric: tabular-nums; }
         
-        
         .goog-te-gadget { font-family: 'Plus Jakarta Sans', sans-serif !important; color: transparent !important; }
         .goog-te-gadget .goog-te-combo { margin: 0; padding: 4px 8px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 12px; outline: none; background: white; color: #1e293b; cursor: pointer; }
         .dark .goog-te-gadget .goog-te-combo { background: #1e293b; color: white; border-color: #334155; }
@@ -52,6 +51,7 @@
         .goog-te-gadget span { display: none !important; }
         .goog-te-banner-frame.skiptranslate { display: none !important; }
         body { top: 0px !important; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
     </style>
     <script>
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -134,6 +134,7 @@
             </div>
         </div>
     </div>
+    
     <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-sm border-b border-slate-200/50 dark:border-slate-800 transition-all duration-300">
         <div class="flex justify-between items-center px-6 md:px-8 py-4 max-w-7xl mx-auto h-20">
             <a class="text-xl font-black tracking-tighter text-primary dark:text-blue-400 font-headline" href="index.html">Công Ty Du Lịch Đạt_Tùng_Đăng_Long<span class="text-secondary-container">.</span></a>
@@ -273,56 +274,45 @@
     </section>
 
     <section id="trai-nghiem" class="max-w-7xl mx-auto px-6 mb-24 reveal">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-5xl font-black text-primary dark:text-white font-headline mb-4 tracking-tighter">Đánh Giá Từ Khách Hàng</h2>
-        <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Chia sẻ trải nghiệm của bạn và xem những du khách khác nói gì về chúng tôi.</p>
-    </div>
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black text-primary dark:text-white font-headline mb-4 tracking-tighter">Đánh Giá Từ Khách Hàng</h2>
+            <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Chia sẻ trải nghiệm của bạn và xem những du khách khác nói gì về chúng tôi.</p>
+        </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-4 bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-700 sticky top-28 z-10">
-            <h3 class="text-2xl font-bold text-primary dark:text-white font-headline mb-6">Viết đánh giá</h3>
-            <form id="review-form" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Họ và Tên *</label>
-                    <input type="text" id="rv-name" required placeholder="Nhập tên của bạn" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 dark:text-white rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium">
-                </div>
-                <div>
-                    <label class="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Mức độ hài lòng *</label>
-                    <select id="rv-rating" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 dark:text-white rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium cursor-pointer">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div class="lg:col-span-4 bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-xl border border-slate-100 dark:border-slate-700 sticky top-28 z-10">
+                <h3 class="text-2xl font-bold text-primary dark:text-white font-headline mb-6">Viết đánh giá</h3>
+                <form id="review-form" class="space-y-5">
+                    <input type="text" id="rv-name" required placeholder="Họ và Tên *" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 dark:text-white rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20">
+                    <select id="rv-rating" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 dark:text-white rounded-xl px-4 py-3 outline-none cursor-pointer focus:ring-2 focus:ring-primary/20">
                         <option value="5" class="dark:bg-slate-900">⭐⭐⭐⭐⭐ Tuyệt vời</option>
                         <option value="4" class="dark:bg-slate-900">⭐⭐⭐⭐ Rất tốt</option>
                         <option value="3" class="dark:bg-slate-900">⭐⭐⭐ Bình thường</option>
                         <option value="2" class="dark:bg-slate-900">⭐⭐ Kém</option>
                         <option value="1" class="dark:bg-slate-900">⭐ Tệ</option>
                     </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Cảm nhận của bạn *</label>
-                    <textarea id="rv-content" required rows="4" placeholder="Chia sẻ trải nghiệm của bạn..." class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 dark:text-white rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-primary/20 transition-all font-medium resize-none"></textarea>
-                </div>
-                <button type="submit" id="btn-submit-rv" class="w-full bg-secondary-container hover:bg-orange-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">send</span> Gửi đánh giá
-                </button>
-            </form>
-        </div>
-
-        <div class="lg:col-span-8">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold text-slate-800 dark:text-white">Đánh giá mới nhất</h3>
-                <div class="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2">
-                    <span class="material-symbols-outlined text-[18px]">verified</span> Real-time
-                </div>
+                    <textarea id="rv-content" required rows="4" placeholder="Cảm nhận của bạn *" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600 dark:text-white rounded-xl px-4 py-3 outline-none resize-none focus:ring-2 focus:ring-primary/20"></textarea>
+                    <button type="submit" id="btn-submit-rv" class="w-full bg-secondary-container hover:bg-orange-600 text-white py-4 rounded-xl font-bold text-lg transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">send</span> Gửi đánh giá
+                    </button>
+                </form>
             </div>
-            
-            <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto pr-2 scrollbar-hide">
-                <div class="col-span-full py-10 text-center text-slate-400">
-                    <span class="material-symbols-outlined animate-spin text-4xl mb-2">progress_activity</span>
-                    <p>Đang tải dữ liệu...</p>
+            <div class="lg:col-span-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white">Đánh giá mới nhất</h3>
+                    <div class="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">verified</span> Real-time
+                    </div>
+                </div>
+                <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto pr-2 scrollbar-hide">
+                    <div class="col-span-full py-10 text-center text-slate-400">
+                        <span class="material-symbols-outlined animate-spin text-4xl mb-2">progress_activity</span>
+                        <p>Đang tải dữ liệu...</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <section class="max-w-7xl mx-auto px-6 mb-24 reveal">
         <div class="bg-primary dark:bg-slate-800 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary/40 dark:shadow-slate-900/50">
@@ -395,6 +385,8 @@
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
     <script>
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -422,7 +414,7 @@
 
     <script type="module">
         import { db, auth } from './firebase-config.js';
-        import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { collection, getDocs, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         onAuthStateChanged(auth, (user) => {
@@ -440,6 +432,7 @@
         });
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.reload());
 
+        // LOGIC HIỂN THỊ TOUR
         async function getTours() {
             const container = document.getElementById('tour-list');
             try {
@@ -477,6 +470,7 @@
         }
         getTours();
 
+        // LOGIC CHATBOT
         window.botReply = async function(text) {
             try {
                 const toursSnap = await getDocs(collection(db, "tours"));
@@ -499,6 +493,92 @@
                 setTimeout(() => { window.appendMessage('bot', "Dạ mạng hơi yếu, vui lòng gọi Hotline ạ!"); }, 500);
             }
         };
+
+        // LOGIC PHẦN ĐÁNH GIÁ (REVIEWS REAL-TIME)
+        function generateStars(count) {
+            let starsHtml = '';
+            for (let i = 0; i < 5; i++) {
+                if (i < count) {
+                    starsHtml += `<span class="material-symbols-outlined text-yellow-400 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>`;
+                } else {
+                    starsHtml += `<span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>`;
+                }
+            }
+            return starsHtml;
+        }
+
+        async function loadReviews() {
+            const container = document.getElementById('reviews-container');
+            if (!container) return;
+            try {
+                const q = query(collection(db, "reviews"), orderBy("date", "desc"));
+                const querySnapshot = await getDocs(q);
+                
+                container.innerHTML = '';
+                if (querySnapshot.empty) {
+                    container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400 font-medium">Chưa có đánh giá nào. Hãy là người đầu tiên!</div>`;
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const card = `
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all duration-300 h-fit">
+                            <div class="flex gap-1 mb-4">${generateStars(data.rating)}</div>
+                            <p class="text-slate-600 dark:text-slate-300 italic mb-6 leading-relaxed text-sm">"${data.content}"</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <img src="${data.avatar}" class="w-10 h-10 rounded-full object-cover border-2 border-slate-100 dark:border-slate-700">
+                                    <div>
+                                        <h4 class="font-bold text-primary dark:text-white text-sm">${data.name}</h4>
+                                        <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest">${data.dateStr}</p>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-blue-500 opacity-20 text-4xl">format_quote</span>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+            } catch (error) {
+                console.error("Lỗi tải Review:", error);
+            }
+        }
+
+        const rvForm = document.getElementById('review-form');
+        if (rvForm) {
+            rvForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('btn-submit-rv');
+                const originalText = btn.innerHTML;
+                
+                btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Đang gửi...`;
+                btn.disabled = true;
+
+                const name = document.getElementById('rv-name').value;
+                const rating = parseInt(document.getElementById('rv-rating').value);
+                const content = document.getElementById('rv-content').value;
+                
+                const now = new Date();
+                const dateStr = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+                const randomAvatar = `https://i.pravatar.cc/150?u=${Date.now()}`;
+
+                try {
+                    await addDoc(collection(db, "reviews"), {
+                        name: name, rating: rating, content: content, date: now.getTime(), dateStr: dateStr, avatar: randomAvatar
+                    });
+                    rvForm.reset();
+                    alert("Cảm ơn bạn đã gửi đánh giá!");
+                    loadReviews();
+                } catch (error) {
+                    alert("Có lỗi xảy ra, vui lòng thử lại!");
+                } finally {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            });
+            loadReviews(); // Tải data ngay khi mở trang
+        }
     </script>
 
     <script>
@@ -544,8 +624,6 @@
                     document.getElementById('w-city').innerText = `Thời tiết ${data.name}`;
                     document.getElementById('w-temp').innerText = `${Math.round(data.main.temp)}°C`;
                     document.getElementById('w-icon').innerText = data.weather[0].main.toLowerCase().includes('cloud') ? 'cloud' : 'sunny';
-                } else {
-                    
                 }
             } catch(e) {}
         }
