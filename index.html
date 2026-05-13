@@ -380,8 +380,10 @@
 
     <script type="module">
         import { db, auth } from './firebase-config.js';
-        import { collection, getDocs, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { collection, getDocs, addDoc, query, orderBy, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
         import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+
+        let isAdminUser = false;
 
         onAuthStateChanged(auth, (user) => {
             const guest = document.getElementById('guest-menu');
@@ -391,10 +393,13 @@
                 if(guest) guest.style.display = 'none';
                 if(userBox) { userBox.style.display = 'flex'; userBox.classList.remove('hidden'); }
                 if(emailTxt) emailTxt.innerText = "Chào, " + user.email.split('@')[0];
+                isAdminUser = (user.email === 'admin@50cntt1.com');
             } else {
                 if(guest) guest.style.display = 'flex';
                 if(userBox) { userBox.style.display = 'none'; userBox.classList.add('hidden'); }
+                isAdminUser = false;
             }
+            loadReviews();
         });
         document.getElementById('btn-logout').onclick = () => signOut(auth).then(() => window.location.reload());
 
@@ -407,11 +412,11 @@
                     container.innerHTML = "<p class='col-span-full text-center py-20 text-slate-500 font-bold uppercase tracking-widest'>Dữ liệu tour hiện đang trống.</p>";
                     return;
                 }
-                snap.forEach((doc) => {
-                    const data = doc.data();
+                snap.forEach((document) => {
+                    const data = document.data();
                     container.innerHTML += `
                         <article class="group bg-white dark:bg-slate-800 rounded-[2.5rem] overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
-                            <a href="tour-detail.html?id=${doc.id}" class="block">
+                            <a href="tour-detail.html?id=${document.id}" class="block">
                                 <div class="relative h-72 overflow-hidden">
                                     <img src="${data.imageUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
                                     <div class="absolute top-6 left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary dark:text-blue-400 shadow-lg">${data.loaiTour || 'Khám phá'}</div>
@@ -451,13 +456,22 @@
                 const q = query(collection(db, "reviews"), orderBy("date", "desc"));
                 const querySnapshot = await getDocs(q);
                 container.innerHTML = '';
-                if (querySnapshot.empty) { container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400 font-medium">Chưa có đánh giá nào. Hãy là người đầu tiên!</div>`; return; }
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
+                if (querySnapshot.empty) { 
+                    container.innerHTML = `<div class="col-span-full py-10 text-center text-slate-400 font-medium">Chưa có đánh giá nào. Hãy là người đầu tiên!</div>`; 
+                    return; 
+                }
+                querySnapshot.forEach((documentSnapshot) => {
+                    const data = documentSnapshot.data();
+                    const docId = documentSnapshot.id;
+                    const deleteBtnHtml = isAdminUser ? 
+                        `<button onclick="deleteReview('${docId}')" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-red-50 dark:bg-red-900/30 text-red-500 rounded-full hover:bg-red-500 hover:text-white transition-all shadow-sm">
+                            <span class="material-symbols-outlined text-[16px]">delete</span>
+                        </button>` : '';
                     container.innerHTML += `
-                        <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all duration-300 h-fit">
+                        <div class="bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-all duration-300 h-fit relative">
+                            ${deleteBtnHtml}
                             <div class="flex gap-1 mb-4">${generateStars(data.rating)}</div>
-                            <p class="text-slate-600 dark:text-slate-300 italic mb-6 leading-relaxed text-sm">"${data.content}"</p>
+                            <p class="text-slate-600 dark:text-slate-300 italic mb-6 leading-relaxed text-sm pr-6">"${data.content}"</p>
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
                                     <img src="${data.avatar}" class="w-10 h-10 rounded-full object-cover border-2 border-slate-100 dark:border-slate-700">
@@ -472,6 +486,17 @@
                 });
             } catch (error) { console.error(error); }
         }
+
+        window.deleteReview = async function(docId) {
+            if(confirm("Bạn có chắc chắn muốn xóa bài đánh giá này?")) {
+                try {
+                    await deleteDoc(doc(db, "reviews", docId));
+                    loadReviews();
+                } catch(error) {
+                    alert("Lỗi: Không thể xóa! Có thể bạn chưa đủ quyền Admin.");
+                }
+            }
+        };
 
         const rvForm = document.getElementById('review-form');
         if (rvForm) {
@@ -490,7 +515,6 @@
                     rvForm.reset(); alert("Cảm ơn bạn đã gửi đánh giá!"); loadReviews();
                 } catch (error) { alert("Có lỗi xảy ra, vui lòng thử lại!"); } finally { btn.innerHTML = originalText; btn.disabled = false; }
             });
-            loadReviews(); 
         }
 
         const chatToggle = document.getElementById('chatbot-toggle');
