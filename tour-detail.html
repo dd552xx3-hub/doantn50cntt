@@ -337,7 +337,7 @@
                 if (docSnap.exists()) {
                     const data = docSnap.data();
                     
-                    // Nạp thông tin text
+          
                     document.getElementById('detail-title').innerText = data.tenTour;
                     document.getElementById('breadcrumb-title').innerText = data.tenTour;
                     document.getElementById('detail-price').innerText = data.giaTour;
@@ -345,33 +345,28 @@
                     document.getElementById('detail-time').innerText = data.thoiGian;
                     document.getElementById('detail-desc').innerText = data.moTa;
                     document.getElementById('detail-type').innerText = data.loaiTour;
-                    
-                    // ==========================================
-                    // ĐOẠN CODE ĐÃ SỬA ĐỂ LẤY ẢNH TỪ MẢNG (Array)
-                    // ==========================================
-                    // 1. Nạp ảnh to (ảnh chính)
+               
                     const imgEl = document.getElementById('detail-image');
                     imgEl.src = data.imageUrl;
                     imgEl.parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                    // 2. Lấy mảng 4 ảnh nhỏ từ Firebase
+                  
                     const gallery = data.galleryImages || []; 
                     const gridImages = document.querySelectorAll('.grid-cols-4 img');
                     
                     if(gridImages.length >= 5) {
-                        // Ảnh thứ 2 (index 1)
+                      
                         gridImages[1].src = gallery[0] || "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80";
                         gridImages[1].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                        // Ảnh thứ 3 (index 2)
                         gridImages[2].src = gallery[1] || "https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=800&q=80";
                         gridImages[2].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                        // Ảnh thứ 4 (index 3)
+                      
                         gridImages[3].src = gallery[2] || "https://images.unsplash.com/photo-1559592442-7e182c9405db?w=800&q=80";
                         gridImages[3].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                        // Ảnh thứ 5 (index 4)
+
                         gridImages[4].src = gallery[3] || "https://images.unsplash.com/photo-1589782182703-2aad67281b22?w=800&q=80";
                         gridImages[4].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
                     }
