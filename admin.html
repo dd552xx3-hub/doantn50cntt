@@ -221,6 +221,7 @@
         </div>
     </main>
 
+    <!-- Tour Modal -->
     <div id="tour-modal" class="hidden fixed inset-0 bg-slate-900/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10 transition-opacity opacity-0">
         <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] w-full max-w-2xl p-8 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300">
             <div class="flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
@@ -236,6 +237,15 @@
                 </div>
                 <input type="text" id="t-type" placeholder="Loại hình (Biển/Núi...) *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
                 <input type="url" id="t-img" placeholder="URL Hình ảnh bìa *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
+                
+                <!-- 4 Ảnh nhỏ chi tiết -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="url" id="t-img-1" placeholder="Ảnh chi tiết 1 (URL)" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                    <input type="url" id="t-img-2" placeholder="Ảnh chi tiết 2 (URL)" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                    <input type="url" id="t-img-3" placeholder="Ảnh chi tiết 3 (URL)" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                    <input type="url" id="t-img-4" placeholder="Ảnh chi tiết 4 (URL)" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
+                </div>
+
                 <textarea id="t-desc" placeholder="Mô tả chi tiết tour *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 h-32 resize-none outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required></textarea>
                 <div class="flex gap-4 pt-4 mt-2">
                     <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300 py-3.5 rounded-full font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Hủy bỏ</button>
@@ -377,6 +387,19 @@
                     document.getElementById('t-type').value = data.loaiTour;
                     document.getElementById('t-img').value = data.imageUrl;
                     document.getElementById('t-desc').value = data.moTa;
+
+                    // Đổ dữ liệu ảnh nhỏ từ mảng galleryImages
+                    if (data.galleryImages && Array.isArray(data.galleryImages)) {
+                        document.getElementById('t-img-1').value = data.galleryImages[0] || "";
+                        document.getElementById('t-img-2').value = data.galleryImages[1] || "";
+                        document.getElementById('t-img-3').value = data.galleryImages[2] || "";
+                        document.getElementById('t-img-4').value = data.galleryImages[3] || "";
+                    } else {
+                        document.getElementById('t-img-1').value = "";
+                        document.getElementById('t-img-2').value = "";
+                        document.getElementById('t-img-3').value = "";
+                        document.getElementById('t-img-4').value = "";
+                    }
                 });
             } else {
                 document.getElementById('modal-title').innerText = "Thêm Tour Mới";
@@ -554,7 +577,21 @@
             const btn = document.getElementById('submit-btn'); btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span>`; btn.disabled = true;
             try {
                 const id = document.getElementById('edit-id').value;
-                const data = { tenTour: document.getElementById('t-name').value, giaTour: document.getElementById('t-price').value, thoiGian: document.getElementById('t-time').value, loaiTour: document.getElementById('t-type').value, imageUrl: document.getElementById('t-img').value, moTa: document.getElementById('t-desc').value };
+                const data = { 
+                    tenTour: document.getElementById('t-name').value, 
+                    giaTour: document.getElementById('t-price').value, 
+                    thoiGian: document.getElementById('t-time').value, 
+                    loaiTour: document.getElementById('t-type').value, 
+                    imageUrl: document.getElementById('t-img').value, 
+                    // Lưu 4 ảnh chi tiết vào một mảng
+                    galleryImages: [
+                        document.getElementById('t-img-1').value,
+                        document.getElementById('t-img-2').value,
+                        document.getElementById('t-img-3').value,
+                        document.getElementById('t-img-4').value
+                    ],
+                    moTa: document.getElementById('t-desc').value 
+                };
                 if(id) { await db.collection("tours").doc(id).update(data); showToast("Cập nhật thành công!"); } else { await db.collection("tours").add(data); showToast("Thêm mới thành công!"); }
                 closeModal(); loadAdminTours(); loadDashboard();
             } catch(err) { showToast("Lỗi xử lý", "error"); } finally { btn.innerText = "Xác nhận Lưu"; btn.disabled = false; }
