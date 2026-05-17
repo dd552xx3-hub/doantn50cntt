@@ -137,6 +137,7 @@
             </div>
         </div>
 
+        <!-- Grid hình ảnh -->
         <div class="grid grid-cols-4 grid-rows-2 gap-2 h-[500px] mb-12 rounded-xl overflow-hidden relative group">
             <div class="col-span-2 row-span-2 relative overflow-hidden bg-slate-100 dark:bg-slate-800">
                 <img id="detail-image" alt="Tour Image" class="w-full h-full object-cover transition-transform duration-[2000ms] hover:scale-110" src=""/>
@@ -238,19 +239,7 @@
                         <button onclick="confirmBooking()" class="w-full bg-secondary-container hover:bg-orange-600 text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 flex justify-center items-center gap-2 mb-2 shadow-lg active:scale-[0.98]">
                             Đặt ngay <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
                         </button>
-                        
-                            <div id="addon-section" class="mt-4 mb-6 hidden border-t border-b border-gray-200 dark:border-slate-700 py-4">
-                                <h3 class="font-bold text-gray-700 dark:text-gray-200 mb-3">Tùy chọn nâng cấp dịch vụ:</h3>
-                                <div class="mb-3">
-                                    <label class="block text-sm font-medium mb-1 text-gray-600 dark:text-gray-400">Khách sạn lưu trú:</label>
-                                    <select id="hotel-select" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2.5 focus:ring-primary focus:border-primary transition-all"></select>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium mb-1 text-gray-600 dark:text-gray-400">Phương tiện di chuyển:</label>
-                                    <select id="transport-select" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2.5 focus:ring-primary focus:border-primary transition-all"></select>
-                                </div>
-                            </div>
-                            <button id="btn-add-cart" onclick="addToCart(false)" class="w-full bg-white dark:bg-slate-800 border-2 border-primary/10 dark:border-slate-600 text-primary dark:text-white py-3.5 rounded-xl font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex justify-center items-center gap-2 active:scale-[0.98]">
+                        <button onclick="addToCart(false)" class="w-full bg-white dark:bg-slate-800 border-2 border-primary/10 dark:border-slate-600 text-primary dark:text-white py-3.5 rounded-xl font-bold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex justify-center items-center gap-2 active:scale-[0.98]">
                             <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span> Thêm vào giỏ
                         </button>
                     </div>
@@ -348,7 +337,7 @@
                 if (docSnap.exists()) {
                     const data = docSnap.data();
                     
-                    // Nạp thông tin text
+          
                     document.getElementById('detail-title').innerText = data.tenTour;
                     document.getElementById('breadcrumb-title').innerText = data.tenTour;
                     document.getElementById('detail-price').innerText = data.giaTour;
@@ -356,33 +345,29 @@
                     document.getElementById('detail-time').innerText = data.thoiGian;
                     document.getElementById('detail-desc').innerText = data.moTa;
                     document.getElementById('detail-type').innerText = data.loaiTour;
-                    
-                    // ==========================================
-                    // ĐOẠN CODE XỬ LÝ ẢNH MỚI
-                    // ==========================================
-                    // 1. Nạp ảnh to (ảnh chính)
+               
                     const imgEl = document.getElementById('detail-image');
                     imgEl.src = data.imageUrl;
                     imgEl.parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                    // 2. Lấy 4 ảnh nhỏ trong HTML
+                  
+                    const gallery = data.galleryImages || []; 
                     const gridImages = document.querySelectorAll('.grid-cols-4 img');
                     
                     if(gridImages.length >= 5) {
-                        // Nạp ảnh nhỏ 1 từ Firebase (Nếu không có thì dùng ảnh dự phòng mặc định)
-                        gridImages[1].src = data.imageUrl1 || "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80";
+                      
+                        gridImages[1].src = gallery[0] || "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80";
                         gridImages[1].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                        // Nạp ảnh nhỏ 2
-                        gridImages[2].src = data.imageUrl2 || "https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=800&q=80";
+                        gridImages[2].src = gallery[1] || "https://images.unsplash.com/photo-1504457047772-27faf1c00561?w=800&q=80";
                         gridImages[2].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                        // Nạp ảnh nhỏ 3
-                        gridImages[3].src = data.imageUrl3 || "https://images.unsplash.com/photo-1559592442-7e182c9405db?w=800&q=80";
+                      
+                        gridImages[3].src = gallery[2] || "https://images.unsplash.com/photo-1559592442-7e182c9405db?w=800&q=80";
                         gridImages[3].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
 
-                        // Nạp ảnh nhỏ 4
-                        gridImages[4].src = data.imageUrl4 || "https://images.unsplash.com/photo-1589782182703-2aad67281b22?w=800&q=80";
+
+                        gridImages[4].src = gallery[3] || "https://images.unsplash.com/photo-1589782182703-2aad67281b22?w=800&q=80";
                         gridImages[4].parentElement.classList.remove('bg-slate-100', 'dark:bg-slate-800');
                     }
                     // ==========================================
@@ -425,50 +410,7 @@
             let cart = JSON.parse(localStorage.getItem('cart50cntt1')) || [];
             
             if(!cart.find(item => item.id === id)) {
-                // --- CODE CŨ ĐƯỢC COMMENT LẠI ĐỂ KHÔNG BỊ XÓA ---
-                // cart.push({
-                //     id: tourId,
-                //     tenTour: currentTourData.tenTour,
-                //     giaTour: currentTourData.giaTour,
-                //     imageUrl: currentTourData.imageUrl,
-                //     ngayDi: document.getElementById('tour-date').value,
-                //     soLuong: quantity
-                // });
-                
-                // --- BẮT ĐẦU BỔ SUNG CODE LƯU ADD-ONS VÀO GIỎ HÀNG ---
-                const hotelSelect = document.getElementById('hotel-select');
-                const transportSelect = document.getElementById('transport-select');
-                const addonSection = document.getElementById('addon-section');
-                
-                let selectedHotel = "Tiêu chuẩn";
-                let selectedTransport = "Tiêu chuẩn";
-                let extraFee = 0;
-
-                if (addonSection && !addonSection.classList.contains('hidden')) {
-                    selectedHotel = hotelSelect.options[hotelSelect.selectedIndex].getAttribute('data-name');
-                    selectedTransport = transportSelect.options[transportSelect.selectedIndex].getAttribute('data-name');
-                    extraFee = parseInt(hotelSelect.value) + parseInt(transportSelect.value);
-                }
-
-                let finalPrice = currentTourData.giaTour;
-                if(extraFee > 0) {
-                     const baseP = parseInt(currentTourData.giaTour.replace(/\D/g, '')) || 0;
-                     finalPrice = (baseP + extraFee).toLocaleString('vi-VN') + "đ";
-                }
-
-                cart.push({
-                    id: tourId + "_" + new Date().getTime(), // Thêm thời gian vào ID để phân biệt các tùy chọn
-                    tourId: tourId, 
-                    tenTour: currentTourData.tenTour,
-                    giaTour: finalPrice, // Đã cộng tiền phụ thu
-                    khachSan: selectedHotel, // Ghi nhận khách sạn
-                    phuongTien: selectedTransport, // Ghi nhận phương tiện
-                    imageUrl: currentTourData.imageUrl,
-                    ngayDi: document.getElementById('tour-date').value,
-                    soLuong: quantity
-                });
-                // --- KẾT THÚC BỔ SUNG ---
-
+                cart.push(tour);
                 localStorage.setItem('cart50cntt1', JSON.stringify(cart));
                 if(!isBuyNow) {
                     alert('Đã thêm tour vào giỏ hàng thành công!');
