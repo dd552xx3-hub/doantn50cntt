@@ -221,7 +221,6 @@
         </div>
     </main>
 
-    <!-- Tour Modal -->
     <div id="tour-modal" class="hidden fixed inset-0 bg-slate-900/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10 transition-opacity opacity-0">
         <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] w-full max-w-2xl p-8 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300">
             <div class="flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
@@ -238,7 +237,6 @@
                 <input type="text" id="t-type" placeholder="Loại hình (Biển/Núi...) *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
                 <input type="url" id="t-img" placeholder="URL Hình ảnh bìa *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
                 
-                <!-- 4 Ảnh nhỏ chi tiết -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input type="url" id="t-img-1" placeholder="Ảnh chi tiết 1 (URL)" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
                     <input type="url" id="t-img-2" placeholder="Ảnh chi tiết 2 (URL)" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white">
@@ -247,74 +245,64 @@
                 </div>
 
                 <textarea id="t-desc" placeholder="Mô tả chi tiết tour *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 h-32 resize-none outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required></textarea>
-                <div class="flex gap-4 pt-4 mt-2">
+                
+                        <div class="border-t border-gray-200 dark:border-slate-600 pt-4 mt-4">
+                            <h4 class="font-bold text-gray-700 dark:text-gray-200 mb-2">Cấu hình Dịch vụ đính kèm (Add-ons):</h4>
+                            <div class="grid grid-cols-2 gap-4 mb-3">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Khách sạn nâng cấp (Tên):</label>
+                                    <input type="text" id="add-hotel-4" value="Khách sạn 4 sao (Có hồ bơi)" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2 text-sm focus:ring-primary focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Phụ thu Khách sạn nâng cấp (đ):</label>
+                                    <input type="number" id="add-hotel-4-price" value="500000" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2 text-sm focus:ring-primary focus:border-primary">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Di chuyển nâng cấp (Tên):</label>
+                                    <input type="text" id="add-trans-plane" value="Vé máy bay Vietnam Airlines" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2 text-sm focus:ring-primary focus:border-primary">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Phụ thu Di chuyển nâng cấp (đ):</label>
+                                    <input type="number" id="add-trans-plane-price" value="1200000" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2 text-sm focus:ring-primary focus:border-primary">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-end gap-3 mt-8">
                     <button type="button" onclick="closeModal()" class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300 py-3.5 rounded-full font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Hủy bỏ</button>
-                    <button type="submit" id="submit-btn" class="flex-1 bg-primary dark:bg-blue-600 text-white py-3.5 rounded-full font-bold shadow-lg hover:bg-blue-800 transition-colors">Xác nhận Lưu</button>
+                    <button type="submit" id="submit-btn" class="flex-1 bg-primary dark:bg-blue-600 text-white py-3.5 rounded-full font-bold shadow-lg hover:shadow-xl active:scale-95 transition-all">Lưu Tour</button>
                 </div>
             </form>
         </div>
     </div>
 
     <div id="blog-modal" class="hidden fixed inset-0 bg-slate-900/60 z-[100] flex items-center justify-center backdrop-blur-sm px-4 overflow-y-auto py-10 transition-opacity opacity-0">
-        <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] w-full max-w-3xl p-8 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300">
+        <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] w-full max-w-2xl p-8 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-95 transition-transform duration-300">
             <div class="flex justify-between items-center mb-6 border-b border-slate-100 dark:border-slate-800 pb-4">
-                <h2 id="blog-modal-title" class="text-2xl font-headline font-black text-primary dark:text-white">Thêm Bài Viết Mới</h2>
+                <h2 id="blog-modal-title" class="text-2xl font-headline font-black text-secondary-container">Đăng Bài Viết Mới</h2>
                 <button onclick="closeBlogModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center hover:bg-red-500 hover:text-white transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
             </div>
             <form id="blog-form" class="space-y-4">
-                <input type="hidden" id="blog-edit-id">
-                <input type="text" id="b-title" placeholder="Tiêu đề bài viết *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
+                <input type="hidden" id="b-edit-id">
+                <input type="text" id="b-title" placeholder="Tiêu đề bài viết *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-orange-500/20 dark:text-white" required>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <select id="b-category" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
-                        <option value="" disabled selected>Chọn danh mục *</option>
-                        <option value="Điểm đến">Điểm đến</option>
-                        <option value="Cẩm nang">Cẩm nang</option>
-                        <option value="Ẩm thực">Ẩm thực</option>
-                        <option value="Văn hóa">Văn hóa</option>
+                    <select id="b-category" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-orange-500/20 dark:text-white cursor-pointer">
+                        <option value="Kinh nghiệm">Kinh nghiệm du lịch</option>
+                        <option value="Tin tức">Tin tức & Khuyến mãi</option>
+                        <option value="Văn hóa">Văn hóa & Ẩm thực</option>
                     </select>
-                    <input type="url" id="b-img" placeholder="URL Hình ảnh bìa *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required>
+                    <input type="url" id="b-img" placeholder="URL Hình thu nhỏ *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 outline-none focus:ring-2 focus:ring-orange-500/20 dark:text-white" required>
                 </div>
-                <textarea id="b-desc" placeholder="Mô tả tóm tắt *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 h-20 resize-none outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required></textarea>
-                <textarea id="b-content" placeholder="Nội dung chi tiết *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 h-40 resize-none outline-none focus:ring-2 focus:ring-primary/20 dark:text-white" required></textarea>
+                <textarea id="b-desc" placeholder="Mô tả ngắn (Hiển thị ngoài thẻ) *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 h-20 resize-none outline-none focus:ring-2 focus:ring-orange-500/20 dark:text-white" required></textarea>
+                <textarea id="b-content" placeholder="Nội dung chi tiết (Có thể dùng thẻ HTML cơ bản hoặc xuống dòng) *" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-2xl px-5 py-3.5 h-40 resize-none outline-none focus:ring-2 focus:ring-orange-500/20 dark:text-white" required></textarea>
                 <div class="flex gap-4 pt-4 mt-2">
                     <button type="button" onclick="closeBlogModal()" class="flex-1 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-300 py-3.5 rounded-full font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Hủy bỏ</button>
-                    <button type="submit" id="blog-submit-btn" class="flex-1 bg-secondary-container text-white py-3.5 rounded-full font-bold shadow-lg hover:bg-orange-600 transition-colors">Lưu Bài Viết</button>
+                    <button type="submit" id="blog-submit-btn" class="flex-1 bg-secondary-container hover:bg-orange-600 text-white py-3.5 rounded-full font-bold shadow-lg hover:shadow-xl active:scale-95 transition-all">Đăng Bài</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <script>
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-        if (document.documentElement.classList.contains('dark')) { themeToggleLightIcon.classList.remove('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); }
-        themeToggleBtn.addEventListener('click', () => {
-            themeToggleDarkIcon.classList.toggle('hidden'); themeToggleLightIcon.classList.toggle('hidden');
-            if (document.documentElement.classList.contains('dark')) { document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light'); } 
-            else { document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark'); }
-            if(window.updateChartsTheme) window.updateChartsTheme();
-        });
-
-        let toastTimeout;
-        window.showToast = (msg, type = 'success') => {
-            const t = document.getElementById('toast');
-            document.getElementById('toast-message').innerText = msg;
-            document.getElementById('toast-title').innerText = type === 'success' ? 'Thành công' : 'Lỗi';
-            document.getElementById('toast-icon').innerText = type === 'success' ? 'check_circle' : 'error';
-            document.getElementById('toast-icon').className = type === 'success' ? 'material-symbols-outlined text-green-500 text-2xl' : 'material-symbols-outlined text-red-500 text-2xl';
-            document.getElementById('toast-progress').className = type === 'success' ? 'absolute bottom-0 left-0 h-1 bg-green-500 rounded-b-2xl w-full transition-none' : 'absolute bottom-0 left-0 h-1 bg-red-500 rounded-b-2xl w-full transition-none';
-            t.classList.remove('toast-enter', 'pointer-events-none'); t.classList.add('toast-active');
-            setTimeout(() => { document.getElementById('toast-progress').style.transition = 'width 3s linear'; document.getElementById('toast-progress').style.width = '0%'; }, 50);
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => { t.classList.remove('toast-active'); t.classList.add('toast-enter', 'pointer-events-none'); }, 3000);
-        };
-    </script>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element'); }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         const firebaseConfig = {
@@ -328,143 +316,184 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
         const auth = firebase.auth();
-        
+
         let orderChartInstance = null;
         let activityChartInstance = null;
-        const ADMIN_EMAIL = "admin@50cntt1.com";
+        const d = new Date();
+        document.getElementById('current-date').innerText = d.toLocaleDateString('vi-VN', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
 
-        auth.onAuthStateChanged(async (user) => {
-            if (user) {
-                let isAdmin = (user.email === ADMIN_EMAIL);
-                if (!isAdmin) {
-                    const userDoc = await db.collection("users").doc(user.uid).get();
-                    if (userDoc.exists && userDoc.data().role === "admin") isAdmin = true;
-                }
-                if (isAdmin) {
-                    document.getElementById('sidebar-user-email').innerText = user.email;
-                    switchTab('dashboard');
-                } else {
+        // Check Auth Middleware
+        auth.onAuthStateChanged(user => {
+            if (!user) { window.location.href = "login.html"; return; }
+            db.collection("users").doc(user.uid).get().then(doc => {
+                if(!doc.exists || doc.data().role !== "admin") {
+                    alert("Truy cập bị từ chối! Bạn không phải là Quản trị viên.");
                     window.location.href = "index.html";
-                }
-            } else { 
-                window.location.href = "login.html"; 
-            }
-        });
-
-        document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "index.html");
-
-        window.switchTab = function(tab) {
-            const sections =['dashboard', 'tours', 'blogs', 'bookings', 'users'];
-            const titles = { 'dashboard': 'Tổng quan', 'tours': 'Quản lý Tour', 'blogs': 'Quản lý Bài Viết', 'bookings': 'Quản lý Đặt tour', 'users': 'Thành viên' };
-            sections.forEach(s => {
-                document.getElementById(`section-${s}`).classList.toggle('hidden', s !== tab);
-                const btn = document.getElementById(`btn-tab-${s}`);
-                if(btn) {
-                    if(s === tab) { btn.classList.add('nav-item-active'); btn.classList.remove('text-slate-500', 'dark:text-slate-400'); }
-                    else { btn.classList.remove('nav-item-active'); btn.classList.add('text-slate-500', 'dark:text-slate-400'); }
+                } else {
+                    document.getElementById('sidebar-user-email').innerText = user.email;
+                    initAdmin();
                 }
             });
-            document.getElementById('current-tab-title').innerText = titles[tab];
-            if(tab === 'dashboard') loadDashboard();
-            if(tab === 'tours') loadAdminTours();
-            if(tab === 'blogs') loadAdminBlogs();
-            if(tab === 'bookings') loadBookings();
-            if(tab === 'users') loadUsers();
+        });
+
+        document.getElementById('btn-logout').onclick = () => auth.signOut().then(() => window.location.href = "login.html");
+
+        // Theme Toggle Logic for Chart update
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (document.documentElement.classList.contains('dark')) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+            if(orderChartInstance) initAdmin(); // redraw charts with new theme colors
+        });
+
+        // Toast Notification System
+        window.showToast = function(msg, type="success") {
+            const t = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const title = document.getElementById('toast-title');
+            const prog = document.getElementById('toast-progress');
+            
+            title.innerText = type === 'success' ? 'Thành công' : 'Có lỗi xảy ra';
+            document.getElementById('toast-message').innerText = msg;
+            
+            if(type === 'error') {
+                icon.innerText = 'error'; icon.classList.replace('text-green-500', 'text-red-500');
+                prog.classList.replace('bg-green-500', 'bg-red-500');
+            } else {
+                icon.innerText = 'check_circle'; icon.classList.replace('text-red-500', 'text-green-500');
+                prog.classList.replace('bg-red-500', 'bg-green-500');
+            }
+            
+            t.classList.add('toast-active');
+            setTimeout(() => t.classList.remove('toast-active'), 3000);
         };
 
-        window.openModal = function(type, id = null) {
-            const modal = document.getElementById('tour-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); modal.firstElementChild.classList.remove('scale-95'); }, 10);
-            if(type === 'edit') {
-                document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
-                db.collection("tours").doc(id).get().then(doc => {
-                    const data = doc.data();
-                    document.getElementById('edit-id').value = id;
-                    document.getElementById('t-name').value = data.tenTour;
-                    document.getElementById('t-price').value = data.giaTour;
-                    document.getElementById('t-time').value = data.thoiGian;
-                    document.getElementById('t-type').value = data.loaiTour;
-                    document.getElementById('t-img').value = data.imageUrl;
-                    document.getElementById('t-desc').value = data.moTa;
+        // Tab Switching Logic
+        window.switchTab = function(tabId) {
+            ['dashboard', 'tours', 'blogs', 'bookings', 'users'].forEach(id => {
+                document.getElementById(`section-${id}`).classList.add('hidden');
+                document.getElementById(`btn-tab-${id}`).classList.remove('nav-item-active');
+            });
+            document.getElementById(`section-${tabId}`).classList.remove('hidden');
+            document.getElementById(`btn-tab-${tabId}`).classList.add('nav-item-active');
+            
+            const titles = { dashboard: "Tổng quan Hệ thống", tours: "Quản lý Hành trình", blogs: "Quản lý Cẩm nang", bookings: "Quản lý Đơn hàng", users: "Danh sách Khách hàng" };
+            document.getElementById('current-tab-title').innerText = titles[tabId];
+        };
 
-                    // Đổ dữ liệu ảnh nhỏ từ mảng galleryImages
-                    if (data.galleryImages && Array.isArray(data.galleryImages)) {
-                        document.getElementById('t-img-1').value = data.galleryImages[0] || "";
-                        document.getElementById('t-img-2').value = data.galleryImages[1] || "";
-                        document.getElementById('t-img-3').value = data.galleryImages[2] || "";
-                        document.getElementById('t-img-4').value = data.galleryImages[3] || "";
-                    } else {
-                        document.getElementById('t-img-1').value = "";
-                        document.getElementById('t-img-2').value = "";
-                        document.getElementById('t-img-3').value = "";
-                        document.getElementById('t-img-4').value = "";
-                    }
-                });
-            } else {
+        // Modal Logic
+        window.openModal = function(mode, id='') {
+            const m = document.getElementById('tour-modal');
+            const c = m.querySelector('div');
+            m.classList.remove('hidden');
+            setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
+            
+            document.getElementById('edit-id').value = id;
+            if(mode==='add') {
                 document.getElementById('modal-title').innerText = "Thêm Tour Mới";
                 document.getElementById('tour-form').reset();
-                document.getElementById('edit-id').value = "";
-            }
-        };
-        window.closeModal = function() { 
-            const modal = document.getElementById('tour-modal');
-            modal.firstElementChild.classList.add('scale-95'); modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        };
-
-        window.openBlogModal = function(type, id = null) {
-            const modal = document.getElementById('blog-modal');
-            modal.classList.remove('hidden');
-            setTimeout(() => { modal.classList.remove('opacity-0'); modal.firstElementChild.classList.remove('scale-95'); }, 10);
-            if(type === 'edit') {
-                document.getElementById('blog-modal-title').innerText = "Chỉnh sửa Bài Viết";
-                db.collection("blog_posts").doc(id).get().then(doc => {
-                    const data = doc.data();
-                    document.getElementById('blog-edit-id').value = id;
-                    document.getElementById('b-title').value = data.title;
-                    document.getElementById('b-category').value = data.category;
-                    document.getElementById('b-img').value = data.imageUrl;
-                    document.getElementById('b-desc').value = data.description;
-                    document.getElementById('b-content').value = data.content || "";
-                });
             } else {
-                document.getElementById('blog-modal-title').innerText = "Thêm Bài Viết Mới";
+                document.getElementById('modal-title').innerText = "Chỉnh sửa Tour";
+                db.collection("tours").doc(id).get().then(d => {
+                    const dt = d.data();
+                    document.getElementById('t-name').value = dt.tenTour;
+                    document.getElementById('t-price').value = dt.giaTour;
+                    document.getElementById('t-time').value = dt.thoiGian;
+                    document.getElementById('t-type').value = dt.loaiTour;
+                    document.getElementById('t-img').value = dt.imageUrl;
+                    document.getElementById('t-desc').value = dt.moTa || "";
+                    document.getElementById('t-img-1').value = dt.imageUrl1 || "";
+                    document.getElementById('t-img-2').value = dt.imageUrl2 || "";
+                    document.getElementById('t-img-3').value = dt.imageUrl3 || "";
+                    document.getElementById('t-img-4').value = dt.imageUrl4 || "";
+                });
+            }
+        };
+        window.closeModal = function() {
+            const m = document.getElementById('tour-modal');
+            const c = m.querySelector('div');
+            m.classList.add('opacity-0'); c.classList.add('scale-95');
+            setTimeout(() => { m.classList.add('hidden'); }, 300);
+        };
+
+        window.openBlogModal = function(mode, id='') {
+            const m = document.getElementById('blog-modal');
+            const c = m.querySelector('div');
+            m.classList.remove('hidden');
+            setTimeout(() => { m.classList.remove('opacity-0'); c.classList.remove('scale-95'); }, 10);
+            
+            document.getElementById('b-edit-id').value = id;
+            if(mode==='add') {
+                document.getElementById('blog-modal-title').innerText = "Đăng Bài Viết Mới";
                 document.getElementById('blog-form').reset();
-                document.getElementById('blog-edit-id').value = "";
+            } else {
+                document.getElementById('blog-modal-title').innerText = "Sửa Bài Viết";
+                db.collection("blog_posts").doc(id).get().then(d => {
+                    const dt = d.data();
+                    document.getElementById('b-title').value = dt.title;
+                    document.getElementById('b-category').value = dt.category;
+                    document.getElementById('b-img').value = dt.imageUrl;
+                    document.getElementById('b-desc').value = dt.description || "";
+                    document.getElementById('b-content').value = dt.content || "";
+                });
             }
         };
-        window.closeBlogModal = function() { 
-            const modal = document.getElementById('blog-modal');
-            modal.firstElementChild.classList.add('scale-95'); modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
+        window.closeBlogModal = function() {
+            const m = document.getElementById('blog-modal');
+            const c = m.querySelector('div');
+            m.classList.add('opacity-0'); c.classList.add('scale-95');
+            setTimeout(() => { m.classList.add('hidden'); }, 300);
         };
 
+        // Search Logic
         window.searchTable = function(inputId, tableId) {
-            let input = document.getElementById(inputId).value.toLowerCase();
-            let trs = document.getElementById(tableId).getElementsByTagName("tr");
-            for (let i = 0; i < trs.length; i++) {
-                let text = trs[i].innerText.toLowerCase();
-                trs[i].style.display = text.indexOf(input) > -1 ? "" : "none";
+            let filter = document.getElementById(inputId).value.toLowerCase();
+            let trs = document.getElementById(tableId).getElementsByTagName('tr');
+            for(let i=0; i<trs.length; i++) {
+                trs[i].style.display = trs[i].innerText.toLowerCase().indexOf(filter) > -1 ? "" : "none";
             }
         };
 
-        window.updateChartsTheme = function() { loadDashboard(); };
+        // Main Init Function
+        async function initAdmin() {
+            switchTab('dashboard');
+            loadDashboard();
+            loadAdminTours();
+            loadAdminBlogs();
+            loadAdminBookings();
+            loadAdminUsers();
+        }
 
         async function loadDashboard() {
-            const toursSnap = await db.collection("tours").get();
-            const usersSnap = await db.collection("users").get();
-            const bookingsSnap = await db.collection("bookings").get();
-            const blogsSnap = await db.collection("blog_posts").get();
-            
-            document.getElementById('stat-tours').innerText = toursSnap.size;
-            document.getElementById('stat-users').innerText = usersSnap.size;
-            document.getElementById('stat-bookings').innerText = bookingsSnap.size;
-            document.getElementById('stat-blogs').innerText = blogsSnap.size;
-            
-            let statusCount = { "Chờ xử lý": 0, "Đã thanh toán": 0, "Hoàn thành": 0, "Đã hủy": 0 };
-            bookingsSnap.forEach(d => { let s = d.data().trangThai || "Chờ xử lý"; if(statusCount[s] !== undefined) statusCount[s]++; });
-            
+            const sT = await db.collection("tours").get();
+            const sU = await db.collection("users").get();
+            const sB = await db.collection("bookings").get();
+            const sP = await db.collection("blog_posts").get();
+
+            document.getElementById('stat-tours').innerText = sT.size;
+            document.getElementById('stat-users').innerText = sU.size;
+            document.getElementById('stat-bookings').innerText = sB.size;
+            document.getElementById('stat-blogs').innerText = sP.size;
+
+            let stC = { "Chờ xử lý":0, "Đã thanh toán":0, "Hoàn thành":0, "Đã hủy":0 };
+            sB.forEach(d => { let s = d.data().trangThai || "Chờ xử lý"; if(stC[s]!==undefined) stC[s]++; });
+
             const isDark = document.documentElement.classList.contains('dark');
             Chart.defaults.color = isDark ? '#94a3b8' : '#64748b';
             Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
@@ -472,148 +501,202 @@
             if(orderChartInstance) orderChartInstance.destroy();
             orderChartInstance = new Chart(document.getElementById('orderChart').getContext('2d'), {
                 type: 'doughnut',
-                data: { labels: Object.keys(statusCount), datasets: [{ data: Object.values(statusCount), backgroundColor:['#f59e0b', '#3b82f6', '#10b981', '#ef4444'], borderWidth: 0 }] },
-                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 1500, animateScale: true }, cutout: '70%', plugins: { legend: { position: 'bottom' } } }
+                data: { labels: Object.keys(stC), datasets: [{ data: Object.values(stC), backgroundColor:['#f59e0b', '#3b82f6', '#10b981', '#ef4444'], borderWidth: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 1500, animateScale: true }, cutout: '75%', plugins: { legend: { position: 'bottom', labels: { padding: 20, usePointStyle: true } } } }
             });
 
             if(activityChartInstance) activityChartInstance.destroy();
             activityChartInstance = new Chart(document.getElementById('activityChart').getContext('2d'), {
-                type: 'line',
-                data: { labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'], datasets: [{ label: 'Khách truy cập', data: [320, 450, 410, 580], borderColor: '#002155', backgroundColor: 'rgba(0, 33, 85, 0.1)', fill: true, tension: 0.4, borderWidth: 3 }] },
-                options: { responsive: true, maintainAspectRatio: false, animation: { duration: 1500, easing: 'easeOutQuart' }, plugins: { legend: { display: false } }, scales: { y: { grid: { color: isDark ? '#1e293b' : '#f1f5f9' } }, x: { grid: { color: isDark ? '#1e293b' : '#f1f5f9' } } } }
+                type: 'bar',
+                data: {
+                    labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                    datasets: [
+                        { label: 'Truy cập', data: [120, 190, 150, 220, 180, 250, 300], backgroundColor: '#3b82f6', borderRadius: 6 },
+                        { label: 'Đơn hàng', data: [20, 35, 25, 45, 30, 50, 65], backgroundColor: '#fd6600', borderRadius: 6 }
+                    ]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { x: { grid: { display: false } }, y: { border: { dash: [4, 4] }, grid: { color: isDark ? '#334155' : '#e2e8f0' } } }, plugins: { legend: { position: 'bottom', labels: { usePointStyle: true } } } }
             });
         }
 
         async function loadAdminTours() {
-            const tbody = document.getElementById('admin-tour-list');
-            const snap = await db.collection("tours").get();
-            tbody.innerHTML = "";
-            if(snap.empty) tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">Chưa có dữ liệu</td></tr>`;
-            snap.forEach(d => {
-                const data = d.data();
-                tbody.innerHTML += `<tr id="row-t-${d.id}" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
-                    <td class="p-4 pl-6"><img src="${data.imageUrl}" class="w-16 h-12 rounded-xl object-cover shadow-sm"></td>
-                    <td class="p-4 font-bold text-primary dark:text-white">${data.tenTour}</td>
-                    <td class="p-4 font-black text-secondary-container">${data.giaTour}</td>
-                    <td class="p-4 text-xs font-bold text-slate-500 dark:text-slate-400">${data.thoiGian}</td>
-                    <td class="p-4 pr-6">
-                        <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="openModal('edit', '${d.id}')" class="w-8 h-8 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">edit</span></button>
-                            <button onclick="deleteTour('${d.id}')" class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/30 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">delete</span></button>
-                        </div>
-                    </td></tr>`;
-            });
+            const list = document.getElementById('admin-tour-list');
+            try {
+                const snap = await db.collection("tours").get();
+                let h = "";
+                snap.forEach(d => {
+                    const t = d.data();
+                    h += `<tr id="row-t-${d.id}" class="transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <td class="p-4"><img src="${t.imageUrl}" class="w-16 h-12 object-cover rounded-lg shadow-sm border border-slate-200 dark:border-slate-700"></td>
+                        <td class="p-4 font-bold text-slate-800 dark:text-white">${t.tenTour}</td>
+                        <td class="p-4 text-secondary-container font-black">${t.giaTour}</td>
+                        <td class="p-4 text-sm text-slate-500 dark:text-slate-400">${t.thoiGian}</td>
+                        <td class="p-4 text-center">
+                            <button onclick="openModal('edit', '${d.id}')" class="text-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800 p-2 rounded-full transition-colors mr-2"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+                            <button onclick="deleteTour('${d.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-slate-800 p-2 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+                        </td></tr>`;
+                });
+                list.innerHTML = h;
+            } catch(e) { list.innerHTML = `<tr><td colspan="5" class="text-center text-red-500 p-4">Lỗi tải dữ liệu</td></tr>`; }
         }
 
         async function loadAdminBlogs() {
-            const tbody = document.getElementById('admin-blog-list');
-            const snap = await db.collection("blog_posts").get();
-            tbody.innerHTML = "";
-            if(snap.empty) tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">Chưa có bài viết</td></tr>`;
-            snap.forEach(d => {
-                const data = d.data();
-                tbody.innerHTML += `<tr id="row-b-${d.id}" class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors group">
-                    <td class="p-4 pl-6"><img src="${data.imageUrl}" class="w-16 h-12 rounded-xl object-cover shadow-sm"></td>
-                    <td class="p-4 font-bold text-primary dark:text-white truncate max-w-[200px] block mt-2">${data.title}</td>
-                    <td class="p-4"><span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-md text-[10px] font-bold uppercase">${data.category}</span></td>
-                    <td class="p-4 text-xs text-slate-500 dark:text-slate-400">${data.date || '---'}</td>
-                    <td class="p-4 pr-6">
-                        <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="openBlogModal('edit', '${d.id}')" class="w-8 h-8 rounded-full bg-purple-50 dark:bg-purple-900/30 text-purple-500 hover:bg-purple-500 hover:text-white transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">edit</span></button>
-                            <button onclick="deleteBlog('${d.id}')" class="w-8 h-8 rounded-full bg-red-50 dark:bg-red-900/30 text-red-500 hover:bg-red-500 hover:text-white transition-colors flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">delete</span></button>
-                        </div>
-                    </td></tr>`;
-            });
+            const list = document.getElementById('admin-blog-list');
+            try {
+                const snap = await db.collection("blog_posts").orderBy("date", "desc").get();
+                let h = "";
+                snap.forEach(d => {
+                    const t = d.data();
+                    h += `<tr id="row-b-${d.id}" class="transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <td class="p-4"><img src="${t.imageUrl}" class="w-16 h-12 object-cover rounded-lg shadow-sm border border-slate-200 dark:border-slate-700"></td>
+                        <td class="p-4 font-bold text-slate-800 dark:text-white max-w-xs truncate" title="${t.title}">${t.title}</td>
+                        <td class="p-4 text-sm"><span class="bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-bold">${t.category}</span></td>
+                        <td class="p-4 text-sm text-slate-500 dark:text-slate-400">${t.date}</td>
+                        <td class="p-4 text-center">
+                            <button onclick="openBlogModal('edit', '${d.id}')" class="text-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800 p-2 rounded-full transition-colors mr-2"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+                            <button onclick="deleteBlog('${d.id}')" class="text-red-500 hover:bg-red-50 dark:hover:bg-slate-800 p-2 rounded-full transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+                        </td></tr>`;
+                });
+                list.innerHTML = h;
+            } catch(e) { list.innerHTML = `<tr><td colspan="5" class="text-center text-red-500 p-4">Lỗi tải dữ liệu</td></tr>`; }
         }
 
-        async function loadBookings() {
-            const tbody = document.getElementById('admin-booking-list');
-            const snap = await db.collection("bookings").get();
-            tbody.innerHTML = "";
-            if(snap.empty) tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-400">Chưa có đơn hàng</td></tr>`;
-            snap.forEach(d => {
-                const data = d.data();
-                const s = data.trangThai || "Chờ xử lý";
-                let bc = "bg-orange-50 text-orange-500 dark:bg-orange-900/30 dark:text-orange-400";
-                if(s === "Đã thanh toán") bc = "bg-blue-50 text-blue-500 dark:bg-blue-900/30 dark:text-blue-400";
-                if(s === "Hoàn thành") bc = "bg-green-50 text-green-500 dark:bg-green-900/30 dark:text-green-400";
-                if(s === "Đã hủy") bc = "bg-red-50 text-red-500 dark:bg-red-900/30 dark:text-red-400";
-                
-                tbody.innerHTML += `<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="p-4 pl-6 font-bold text-primary dark:text-white">${data.khachHang ? data.khachHang.ten : data.email.split('@')[0]}</td>
-                    <td class="p-4 text-xs text-slate-500 dark:text-slate-400">${data.email}<br><span class="font-bold">${data.khachHang ? data.khachHang.sdt : ''}</span></td>
-                    <td class="p-4 font-bold text-slate-700 dark:text-slate-200 truncate max-w-[200px] block mt-1">${data.chiTietTour ? data.chiTietTour[0].tenTour : ''}</td>
-                    <td class="p-4"><span class="${bc} px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest">${s}</span></td>
-                    <td class="p-4 pr-6 text-center"><select onchange="updateBookingStatus('${d.id}', this.value)" class="text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 dark:text-white rounded-lg px-2 py-1.5 outline-none cursor-pointer focus:ring-2 focus:ring-primary/20"><option value="">Đổi TT</option><option value="Chờ xử lý">Chờ xử lý</option><option value="Đã thanh toán">Đã thanh toán</option><option value="Hoàn thành">Hoàn thành</option><option value="Đã hủy">Đã hủy</option></select></td>
-                </tr>`;
-            });
+        async function loadAdminBookings() {
+            const list = document.getElementById('admin-booking-list');
+            try {
+                const snap = await db.collection("bookings").orderBy("ngayDat", "desc").get();
+                let h = "";
+                snap.forEach(d => {
+                    const t = d.data();
+                    let color = t.trangThai === 'Hoàn thành' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 
+                                t.trangThai === 'Đã thanh toán' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 
+                                t.trangThai === 'Đã hủy' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' : 
+                                'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400';
+                    let selectHtml = `<select onchange="updateBookingStatus('${d.id}', this.value)" class="text-xs border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded px-2 py-1 outline-none dark:text-white">
+                        <option value="Chờ xử lý" ${t.trangThai==='Chờ xử lý'?'selected':''}>Chờ xử lý</option>
+                        <option value="Đã thanh toán" ${t.trangThai==='Đã thanh toán'?'selected':''}>Đã thanh toán</option>
+                        <option value="Hoàn thành" ${t.trangThai==='Hoàn thành'?'selected':''}>Hoàn thành</option>
+                        <option value="Đã hủy" ${t.trangThai==='Đã hủy'?'selected':''}>Đã hủy</option>
+                    </select>`;
+
+                    h += `<tr class="transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <td class="p-4"><div class="font-bold text-sm text-slate-800 dark:text-white">${t.thongTinLienHe.hoTen}</div><div class="text-xs text-slate-500">${t.email}</div></td>
+                        <td class="p-4 text-sm text-slate-600 dark:text-slate-300">${t.thongTinLienHe.sdt}</td>
+                        <td class="p-4"><div class="text-xs font-bold text-primary dark:text-blue-300 max-w-[200px] truncate">${t.cart[0].tenTour}</div><div class="text-[10px] text-slate-400">${t.cart.length} sản phẩm | ${t.tongTien}</div></td>
+                        <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${color}">${t.trangThai || 'Chờ xử lý'}</span></td>
+                        <td class="p-4 text-center">${selectHtml}</td>
+                    </tr>`;
+                });
+                list.innerHTML = h;
+            } catch(e) { list.innerHTML = `<tr><td colspan="5" class="text-center text-red-500 p-4">Lỗi tải dữ liệu</td></tr>`; }
         }
 
-        window.updateBookingStatus = async (id, newStatus) => {
-            if(!newStatus) return;
-            try { await db.collection("bookings").doc(id).update({ trangThai: newStatus }); showToast("Đã cập nhật trạng thái"); loadBookings(); loadDashboard(); } 
-            catch(e) { showToast("Cập nhật lỗi", "error"); }
+        async function loadAdminUsers() {
+            const list = document.getElementById('admin-user-list');
+            try {
+                const snap = await db.collection("users").get();
+                let h = "";
+                snap.forEach(d => {
+                    const t = d.data();
+                    const roleColor = t.role === 'admin' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300';
+                    h += `<tr class="transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <td class="p-4 font-bold text-slate-800 dark:text-white flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs">${t.hoTen.charAt(0)}</div>${t.hoTen}</td>
+                        <td class="p-4 text-sm text-slate-600 dark:text-slate-300">${t.email}</td>
+                        <td class="p-4 text-sm text-slate-500 dark:text-slate-400">${t.ngayTao || 'N/A'}</td>
+                        <td class="p-4 text-center"><span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${roleColor}">${t.role}</span></td>
+                    </tr>`;
+                });
+                list.innerHTML = h;
+            } catch(e) { list.innerHTML = `<tr><td colspan="4" class="text-center text-red-500 p-4">Lỗi tải dữ liệu</td></tr>`; }
+        }
+
+        window.updateBookingStatus = async (id, status) => {
+            try { await db.collection("bookings").doc(id).update({trangThai: status}); showToast("Cập nhật đơn hàng thành công!"); loadAdminBookings(); loadDashboard(); } 
+            catch(err) { showToast("Lỗi cập nhật", "error"); }
         };
 
-        async function loadUsers() {
-            const tbody = document.getElementById('admin-user-list');
-            const snap = await db.collection("users").get();
-            tbody.innerHTML = "";
-            if(snap.empty) tbody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-400">Không có dữ liệu</td></tr>`;
-            snap.forEach(d => {
-                const data = d.data();
-                const roleClass = data.role === 'admin' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300';
-                tbody.innerHTML += `<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                    <td class="p-4 pl-6 font-bold text-primary dark:text-white">${data.hoTen || data.displayName || data.email.split('@')[0]}</td>
-                    <td class="p-4 text-sm text-slate-500 dark:text-slate-400">${data.email}</td>
-                    <td class="p-4 text-sm text-slate-500 dark:text-slate-400">${data.ngayTao || '---'}</td>
-                    <td class="p-4 text-center"><span class="${roleClass} px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-widest">${data.role === 'admin' ? 'Admin' : 'Thành viên'}</span></td>
-                </tr>`;
-            });
-        }
-
-        document.getElementById('tour-form').onsubmit = async (e) => {
+        // Form Submit Handlers
+        document.getElementById('tour-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submit-btn'); btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span>`; btn.disabled = true;
+            const btn = document.getElementById('submit-btn');
+            btn.innerText = "Đang lưu..."; btn.disabled = true;
             try {
                 const id = document.getElementById('edit-id').value;
-                const data = { 
-                    tenTour: document.getElementById('t-name').value, 
-                    giaTour: document.getElementById('t-price').value, 
-                    thoiGian: document.getElementById('t-time').value, 
-                    loaiTour: document.getElementById('t-type').value, 
-                    imageUrl: document.getElementById('t-img').value, 
-                    // Lưu 4 ảnh chi tiết vào một mảng
-                    galleryImages: [
-                        document.getElementById('t-img-1').value,
-                        document.getElementById('t-img-2').value,
-                        document.getElementById('t-img-3').value,
-                        document.getElementById('t-img-4').value
-                    ],
-                    moTa: document.getElementById('t-desc').value 
-                };
-                if(id) { await db.collection("tours").doc(id).update(data); showToast("Cập nhật thành công!"); } else { await db.collection("tours").add(data); showToast("Thêm mới thành công!"); }
-                closeModal(); loadAdminTours(); loadDashboard();
-            } catch(err) { showToast("Lỗi xử lý", "error"); } finally { btn.innerText = "Xác nhận Lưu"; btn.disabled = false; }
-        };
 
-        document.getElementById('blog-form').onsubmit = async (e) => {
+                // --- BẮT ĐẦU: GIỮ NGUYÊN CODE CŨ, BỔ SUNG LOGIC ADD-ONS ---
+                const hotel4Name = document.getElementById('add-hotel-4') ? document.getElementById('add-hotel-4').value : "Khách sạn 4 sao";
+                const hotel4Price = document.getElementById('add-hotel-4-price') ? parseInt(document.getElementById('add-hotel-4-price').value) || 0 : 500000;
+                const transPlaneName = document.getElementById('add-trans-plane') ? document.getElementById('add-trans-plane').value : "Vé máy bay";
+                const transPlanePrice = document.getElementById('add-trans-plane-price') ? parseInt(document.getElementById('add-trans-plane-price').value) || 0 : 1200000;
+
+                const data = {
+                    tenTour: document.getElementById('t-name').value,
+                    giaTour: document.getElementById('t-price').value,
+                    thoiGian: document.getElementById('t-time').value,
+                    diaDiem: document.getElementById('t-loc').value ? document.getElementById('t-loc').value : "Việt Nam",
+                    phuongTien: document.getElementById('t-trans') ? document.getElementById('t-trans').value : "Ô tô",
+                    imageUrl: document.getElementById('t-img').value,
+                    imageUrl1: document.getElementById('t-img-1') ? document.getElementById('t-img-1').value : "",
+                    imageUrl2: document.getElementById('t-img-2') ? document.getElementById('t-img-2').value : "",
+                    imageUrl3: document.getElementById('t-img-3') ? document.getElementById('t-img-3').value : "",
+                    imageUrl4: document.getElementById('t-img-4') ? document.getElementById('t-img-4').value : "",
+                    moTa: document.getElementById('t-desc') ? document.getElementById('t-desc').value : "",
+                    loaiTour: document.getElementById('t-type').value,
+                    trangThai: "Mở bán",
+                    
+                    // --- ĐÂY LÀ 2 MẢNG BỔ SUNG CHO TÍNH NĂNG MỚI (Không xóa code cũ) ---
+                    tuyChonKhachSan: [
+                        { loai: "Khách sạn 3 sao (Tiêu chuẩn)", phuThu: 0 },
+                        { loai: hotel4Name, phuThu: hotel4Price }
+                    ],
+                    tuyChonPhuongTien: [
+                        { loai: "Xe giường nằm (Tiêu chuẩn)", phuThu: 0 },
+                        { loai: transPlaneName, phuThu: transPlanePrice }
+                    ]
+                };
+                // --- KẾT THÚC LOGIC ADD-ONS ---
+
+                if(id) { await db.collection("tours").doc(id).update(data); showToast("Cập nhật Tour thành công!"); } 
+                else { await db.collection("tours").add(data); showToast("Thêm Tour mới thành công!"); }
+                closeModal(); loadAdminTours(); loadDashboard();
+            } catch(err) { showToast("Lỗi xử lý", "error"); } finally { btn.innerText = "Lưu Tour"; btn.disabled = false; }
+        });
+
+        document.getElementById('blog-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('blog-submit-btn'); btn.innerHTML = `<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span>`; btn.disabled = true;
+            const btn = document.getElementById('blog-submit-btn');
+            btn.innerText = "Đang xử lý..."; btn.disabled = true;
             try {
-                const id = document.getElementById('blog-edit-id').value;
-                const now = new Date(); const ds = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()}`;
+                const id = document.getElementById('b-edit-id').value;
+                const d = new Date();
+                const ds = d.toLocaleDateString('vi-VN');
                 const data = { title: document.getElementById('b-title').value, category: document.getElementById('b-category').value, imageUrl: document.getElementById('b-img').value, description: document.getElementById('b-desc').value, content: document.getElementById('b-content').value };
                 if(!id) data.date = ds; 
                 if(id) { await db.collection("blog_posts").doc(id).update(data); showToast("Cập nhật bài viết thành công!"); } else { await db.collection("blog_posts").add(data); showToast("Đăng bài viết mới thành công!"); }
                 closeBlogModal(); loadAdminBlogs(); loadDashboard();
             } catch(err) { showToast("Lỗi xử lý", "error"); } finally { btn.innerText = "Lưu Bài Viết"; btn.disabled = false; }
-        };
+        });
 
         window.deleteTour = async (id) => { if(confirm("Xóa vĩnh viễn Tour này?")) { try { const r = document.getElementById(`row-t-${id}`); r.classList.add('row-removing'); await db.collection("tours").doc(id).delete(); setTimeout(()=>{r.remove(); showToast("Đã xóa Tour!"); loadDashboard();}, 400); } catch(e) { showToast("Lỗi xóa", "error"); } } };
         window.deleteBlog = async (id) => { if(confirm("Xóa vĩnh viễn Bài viết này?")) { try { const r = document.getElementById(`row-b-${id}`); r.classList.add('row-removing'); await db.collection("blog_posts").doc(id).delete(); setTimeout(()=>{r.remove(); showToast("Đã xóa Bài viết!"); loadDashboard();}, 400); } catch(e) { showToast("Lỗi xóa", "error"); } } };
 
-        document.getElementById('current-date').innerText = new Date().toLocaleDateString('vi-VN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                if(!document.getElementById('tour-modal').classList.contains('hidden')) closeModal();
+                if(!document.getElementById('blog-modal').classList.contains('hidden')) closeBlogModal();
+            }
+        });
     </script>
+    
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi', 
+                includedLanguages: 'en,vi,zh-CN,ja,ko,fr', 
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
